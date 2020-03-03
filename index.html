@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+    <div id="main1">
+        <div id="workArea" name="workArea">
+        	<div id="header">
+        	    <input type="button" value="?" style="font-weight: bold;" id="question" class="button"> 
+        	    <p id="para" class="line">
+                    <em>
+                        Габариты: 
+                        <span id="gabarites" class="line">
+                            0,0 x 0,0м.
+                        </span>
+                        Сумма заказа:
+                        <span id="summ" class="line"> 
+                            0 руб.
+                        </span>
+                    </em>
+                </p>
+        	    <input type="button" value="Оформить" id="sell" class="button">
+        	    <input type="button" value="Очистить" id="clear" class="button" onclick="clearCanvas()">
+        	    <input type="button" id="scalePlus" name="scalePlus" onclick="scalePlusClick()" value="+" style="background-image: url(img/+.png)" class="button">
+        	    <input type="button" id="scaleMinus" name="scaleMinus" onclick="scaleMinusClick()" value="-" style="font-weight: bold;" class="button">
+        	    <input type="button" name="visibleWeb" id="visibleWeb" onclick="visibleWebClick()" value="Выключить сетку" class="button">
+        	    <input type="button" name="fullScreen" id="fullScreen" onclick="fullScreenClick()" value="Полный экран" class="button"> 
+        	</div>
+            <div id="scrollCanvas" onscroll="onScrollCanvas()" style="max-height: 450px;max-width:100%;overflow: scroll;">
+                <canvas id='main' width="3000px" height="3000px"></canvas>
+            </div>
+        </div>
+        <div id="footer">
+           <div class="hell">
+                    <div id="shetpont" class="shetpont line">
+                         0
+                    </div>
+                    <div onclick="model1onClick()" class="object line">
+                        <span class="t-obj">
+                                Понтон <br> модульный
+                        </span>
+                        <input type="image" alt=" Модуль понтона"  src="img/pontoon.png" width="100px" height="100px">
+                    </div>
+                    <div class="shetpont line">
+                        0
+                   </div>
+                    <div onclick="model2onClick()" class="object line">
+                        <span class="t-obj">
+                            Сходня <br>с переходником
+                        </span>
+                        <input type="image" alt="Сходня на берег с переходником и соединителями" src="img/gangway.png" width="100px" height="100px">
+                    </div>
+                    <div class="shetpont line">
+                        0
+                   </div>
+                    <div onclick="model3onClick()" class="object line">
+                        <span class="t-obj">
+                            Лестница с соединителями
+                        </span>
+                        <input type="image" alt="Лестница для спуска в воду с соединителями"  src="img/stairs.png" width="100px" height="100px">
+                    </div>
+                    <div class="shetpont line">
+                        0
+                   </div>
+                    <div onclick="model4onClick()" class="object line">
+                        <span class="t-obj">
+                            Соединитель<br>понтона
+                        </span>
+                        <input type="image" alt="Соединитель понтона"  src="img/connector.png" width="100px" height="100px">
+                    </div>
+                    <div class="shetpont line">
+                        0
+                   </div>
+                    <div onclick="model5onClick()" class="object line">
+                        <span class="t-obj">
+                            Стойка <br> с соединителями
+                        </span>
+                        <input type="image" alt=" Стойка ограждения с соединителями"  src="img/rack.png" width="100px" height="100px">
+                    </div>
+                    <div class="shetpont">
+                        0
+                   </div>
+                    <div onclick="model6onClick()" class="object line">
+                        <span class="t-obj">
+                            Лавочка с соединителями
+                        </span> <input type="image" alt="Лавочка с соединителями"  src="img/bench.png" width="100px" height="100px">
+                    </div>
+                    <div class="shetpont line">
+                        0
+                   </div>
+                    <div onclick="model7onClick()" class="object line">
+                        <span class="t-obj">
+                            Швартовая <br>утка <br>
+                        </span> 
+                        <input type="image" alt="Швартовая утка с соединителем"  src="img/connector.png" width="100px" height="100px" >
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
