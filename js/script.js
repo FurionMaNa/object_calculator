@@ -144,8 +144,8 @@ function isArrange(x,y,model,direction){
 	switch (model){
 		case 1:
 			switch (direction){
-				case 0:case 2:countX=4;countY=8;break;
-				case 1:case 3:countX=8;countY=4;break;
+				case 0:case 2:countX=2;countY=4;break;
+				case 1:case 3:countX=4;countY=2;break;
 			}
 			break;
 		case 2:
@@ -187,8 +187,8 @@ function canvasClick(evt){
 				ponton.col++;
 				switch (direction){
 					case 0:
-						for (var i=y;i<y+8;i++){
-							for(var j=x;j<x+4;j++){
+						for (var i=y;i<y+4;i++){
+							for(var j=x;j<x+2;j++){
 								maps[i][j]=11;
 							}
 						}
@@ -201,8 +201,8 @@ function canvasClick(evt){
 						}
 						break;
 					case 1:
-						for (var i=y;i<y+4;i++){
-							for(var j=x;j<x+8;j++){
+						for (var i=y;i<y+2;i++){
+							for(var j=x;j<x+4;j++){
 								maps[i][j]=11;
 							}
 						}
@@ -215,8 +215,8 @@ function canvasClick(evt){
 						}
 						break;
 					case 2:
-						for (var i=y;i<y+8;i++){
-							for(var j=x;j<x+4;j++){
+						for (var i=y;i<y+4;i++){
+							for(var j=x;j<x+2;j++){
 								maps[i][j]=11;
 							}
 						}
@@ -229,8 +229,8 @@ function canvasClick(evt){
 						}
 						break;
 					case 3:
-						for (var i=y;i<y+4;i++){
-							for(var j=x;j<x+8;j++){
+						for (var i=y;i<y+2;i++){
+							for(var j=x;j<x+4;j++){
 								maps[i][j]=11;
 							}
 						}
@@ -247,32 +247,32 @@ function canvasClick(evt){
 			case 2:
 				switch (direction){
 					case 0:
-						for (var i=y;i<y+8;i++){
-							for(var j=x;j<x+4;j++){
+						for (var i=y;i<y+4;i++){
+							for(var j=x;j<x+2;j++){
 								maps[i][j]=11;
 							}
 						}
 						maps[y][x]=2;
 						break;
 					case 1:
-						for (var i=y;i<y+4;i++){
-							for(var j=x;j<x+8;j++){
+						for (var i=y;i<y+2;i++){
+							for(var j=x;j<x+4;j++){
 								maps[i][j]=11;
 							}
 						}
 						maps[y][x]=-20;
 						break;
 					case 2:
-						for (var i=y;i<y+8;i++){
-							for(var j=x;j<x+4;j++){
+						for (var i=y;i<y+4;i++){
+							for(var j=x;j<x+2;j++){
 								maps[i][j]=11;
 							}
 						}
 						maps[y][x]=-2;
 						break;
 					case 3:
-						for (var i=y;i<y+4;i++){
-							for(var j=x;j<x+8;j++){
+						for (var i=y;i<y+2;i++){
+							for(var j=x;j<x+4;j++){
 								maps[i][j]=11;
 							}
 						}
@@ -477,6 +477,7 @@ function canvasMoveMouse(evt){
 		case 1:
 			ctx.save();
 			ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+			console.log('mouse',evt.offsetX,evt.offsetY)
 			switch (color){
 				case 'red':imgMouse.src = 'img/pontoon-red.png';break;
 				case 'blue':imgMouse.src = 'img/pontoonbutton.png';break;
@@ -485,21 +486,13 @@ function canvasMoveMouse(evt){
 				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
 			switch (direction){
-				case 0:
+				case 0:case 2:
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);
+					ctx.drawImage(imgMouse, 0, 0, (45+scale)*2, (45+scale)*4);
 					break;
-				case 2:
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);
-					break;
-				case 1:
+				case 1:case 3:
 					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);
-					break;
-				case 3:
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);
+					ctx.drawImage(imgMouse, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 					break;
 			} 
 			ctx.restore();
@@ -589,27 +582,55 @@ function draw(){
 					case 1:case -1:
 						imgMaps.src = 'img/pontoonbutton.png'; 
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);
-						if(arrayI.length!=0){
-							for(var ii=0;ii<arrayI.length-1;ii++){
-								if(Math.abs(i-arrayI[ii])<=8){
-									if(Math.abs(j-arrayI[jj])<=4){
-										console.log("Push")
-									}else{
-										arrayI.push(i);
-										arrayJ.push(J);
-									}
-								}else{
-									arrayI.push(i);
-									arrayJ.push(J);
-								}
-							}
-						}else{
-							arrayI.push(i);
-							arrayJ.push(J);
-						}
+						ctx.drawImage(imgMaps, 0, 0, (45+scale)*2, (45+scale)*4);
+ 						imgMaps.src = 'img/connector.png';
+						//for (var ii=i;ii<i+4;ii++){
+						//	if(maps[ii][j-1]==11){
+						//		ctx.restore();
+						//		ctx.save();
+						//		ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+						//		ctx.rotate(90*Math.PI/180);
+ 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+//
+						//	}
+						//}
+						//for (var jj=j;jj<j+2;jj++){
+						//	if(maps[i-1][jj]==11){
+						//		ctx.restore();
+						//		ctx.save();
+						//		ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+						//		ctx.rotate(180*Math.PI/180);
+ 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+//
+						//	}
+						//}
 						break;
-					case 10:case -10: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 10:case -10: 
+						imgMaps.src = 'img/pontoonbutton.png'; 
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						//imgMaps.src = 'img/connector.png';
+						//for (var ii=i;ii<i+2;ii++){
+						//	if(maps[ii][j-1]==11){
+						//		ctx.restore();
+						//		ctx.save();
+						//		ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+						//		ctx.rotate(90*Math.PI/180);
+ 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+//
+						//	}
+						//}
+						//for (var jj=j;jj<j+4;jj++){
+						//	if(maps[i-1][jj]==11){
+						//		ctx.restore();
+						//		ctx.save();
+						//		ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+						//		ctx.rotate(180*Math.PI/180);
+ 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+//
+						//	}
+						//}
+						break;
 					case 12:case -12: imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
 					case 102:case -102:imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
 					case 13:case -13: imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
@@ -649,7 +670,67 @@ function draw(){
 			}catch(e){}
 		}
 	}
-	
+	for(var i=iStart-10;i<iEnd;i++){
+		for(var j=jStart-10;j<jEnd;j++){
+			try {
+				if(maps[i][j]!=0){
+					ctx.save();
+					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+				}
+				switch(maps[i][j]){
+					case 1:case -1:
+ 						imgMaps.src = 'img/connector.png';
+						for (var ii=i;ii<i+4;ii++){
+							if(maps[ii][j-1]==11){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+								ctx.rotate(90*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+
+							}
+						}
+						for (var jj=j;jj<j+2;jj++){
+							if(maps[i-1][jj]==11){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+
+							}
+						}
+						break;
+					case 10:case -10: 
+						imgMaps.src = 'img/connector.png';
+						for (var ii=i;ii<i+2;ii++){
+							if(maps[ii][j-1]==11){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+								ctx.rotate(90*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+
+							}
+						}
+						for (var jj=j;jj<j+4;jj++){
+							if(maps[i-1][jj]==11){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+
+							}
+						}
+						break;
+				}
+				if(maps[i][j]!=0){
+					ctx.restore();
+				}
+			}catch(e){}
+		}
+	}
 } 
 
 function visibleWebClick(){ 
