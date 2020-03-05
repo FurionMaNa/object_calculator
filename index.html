@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конструктор 2.0</title>
+    <title>Конструктор</title>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </head>
@@ -27,26 +27,42 @@
                 </p>
         	    <input type="button" value="Оформить" id="sell" class="button">
         	    <input type="button" value="Очистить" id="clear" class="button" onclick="clearCanvas()">
-        	    <input type="button" id="scalePlus" name="scalePlus" onclick="scalePlusClick()" value="+" style="background-image: url(img/+.png)" class="button">
-        	    <input type="button" id="scaleMinus" name="scaleMinus" onclick="scaleMinusClick()" value="-" style="font-weight: bold;" class="button">
-        	    <input type="button" name="visibleWeb" id="visibleWeb" onclick="visibleWebClick()" value="Выключить сетку" class="button">
-        	    <input type="button" name="fullScreen" id="fullScreen" onclick="fullScreenClick()" value="Полный экран" class="button"> 
-        	</div>
-            <div id="scrollCanvas" onscroll="onScrollCanvas()" style="max-height: 450px;max-width:100%;overflow: scroll;">
+        	    <div class="border_zoom line">
+                    <input type="image" src="img/zoom+.png" style="width: 16px; position:relative; top:2px; height:16px;" id="scalePlus" name="scalePlus" onclick="scalePlusClick()" class="button">
+        	        <input type="image" src="img/zoom-.png" style="width: 16px; position:relative; top:2px; height:16px; margin-left: 10px;" id="scaleMinus" name="scaleMinus" onclick="scaleMinusClick()" style="font-weight: bold;" class="button">
+                </div>
+                <div class="other_buttons line">
+                    <input type="image" src="img/set.jpg" style="width: 16px; position:relative; top:10px; height:16px;" name="visibleWeb" id="visibleWeb" onclick="visibleWebClick()"  class="button">
+        	        <input type="image" src="img/fullscr.png" style="width: 16px; position:relative; top:10px; height:16px; margin-left: 10px;" name="fullScreen" id="fullScreen" onclick="fullScreenClick()" class="button"> 
+                </div>
+            </div>
+            <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 450px;max-width:100%;overflow: scroll;">
                 <canvas id='main' width="3000px" height="3000px"></canvas>
             </div>
         </div>
         <div id="footer">
            <div class="hell">
-                    <div id="shetpont" class="shetpont line">
+                   <div class="sub">
+                        <div class="shetpont line" id="shetpon">
                          0
-                    </div>
-                    <div onclick="model1onClick()" class="object line">
-                        <span class="t-obj">
+                        </div>
+                        <div onclick="model1onClick()" class="object line">
+                            <span class="t-obj">
                                 Понтон <br> модульный
-                        </span>
-                        <input type="image" alt=" Модуль понтона"  src="img/pontoon.png" width="100px" height="100px">
-                    </div>
+                            </span>
+                            <input type="image" alt=" Модуль понтона"  src="img/pontoon.png" id="red" width="100px" height="100px">
+                        </div>
+                        <div class="color_el"  id="ch_c">
+                            0 
+                            <div class="pod_menu">
+                                <div class="colors" style="background: #1a92fb; " onclick="change_color_blue()" ><a href="#" style="color:#1a92fb;">0</a></div>
+                                <div class="colors" style="background: #c00; " onclick="change_color_red()"><a href="#" style="color:#c00;">0</a></div>
+                                <div class="colors" style="background: #393; " onclick="change_color_green()"><a href="#" style="color:#393; ">0</a></div>
+                                <div class="colors" style="background: #ffffff; " onclick="change_color_white()"><a href="#" style="color:#ffffff;">0</a></div>
+                                <div class="colors" style="background: #666; " onclick="change_color_gray()"><a href="#" style="color:#666;">0</a></div>
+                            </div>
+                        </div>
+                   </div>
                     <div class="shetpont line">
                         0
                    </div>
