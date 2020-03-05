@@ -15,6 +15,8 @@ var ponton = new Object();
 var color='blue';
 var mouseX=0;
 var mouseY=0;
+var arrayI=new Array();
+var arrayJ=new Array();
 ponton.width = 1000;
 ponton.height = 2000;
 ponton.price = 16800;
@@ -39,7 +41,6 @@ sitconnect.col = 0;
 var duck = new Object();
 duck.col = 0;
 duck.price = 0;
-//let time=setInterval(function(){draw();},10);
 
 function init(){ 
 	workArea = document.getElementById('workArea'); 
@@ -104,7 +105,6 @@ function change_color_white(){
 }
 
 function onScrollCanvas(){
-	console.log("|scroll|")
 	draw();
 }
 
@@ -555,6 +555,10 @@ function canvasMoveMouse(evt){
 	}
 }
 
+function checkConnectorRight(currentI,currentJ,width,height){
+	
+}
+
 function draw(){ 
 	ctx.clearRect(0, 0, width, height); 
 	var sizeX=45+scale; 
@@ -563,16 +567,17 @@ function draw(){
 	var jStart=Math.trunc(scrollCanvas.scrollLeft/(45+scale));
 	var iEnd=Math.trunc((scrollCanvas.clientHeight+scrollCanvas.scrollTop)/(45+scale));
 	var jEnd=Math.trunc((scrollCanvas.clientWidth+scrollCanvas.scrollLeft)/(45+scale));
-	console.log('draw');
-	for(var i=iStart-10;i<iEnd+10;i++){
-		for(var j=jStart-10;j<jEnd+10;j++){
+	for(var i=iStart-10;i<iEnd;i++){
+		for(var j=jStart-10;j<jEnd;j++){
 			try {
 				if(maps[i][j]!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
 				}
 				switch(maps[i][j]){
-					case 11:break;
+					case 11:
+
+					break;
 					case 0:
 						if(visibleWeb){
 							ctx.beginPath();
@@ -581,26 +586,38 @@ function draw(){
 							ctx.stroke(); 
 						}
 						break;
-					case 1:   imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case -1:  imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 10:  imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case -10: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 12:  imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case -12: imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 102: imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case -102:imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 13:  imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case -13: imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 103: imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case -103:imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 14:  imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case -14: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 104: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case -104:imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 15:  imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case -15: imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 105: imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case -105:imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 1:case -1:
+						imgMaps.src = 'img/pontoonbutton.png'; 
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);
+						if(arrayI.length!=0){
+							for(var ii=0;ii<arrayI.length-1;ii++){
+								if(Math.abs(i-arrayI[ii])<=8){
+									if(Math.abs(j-arrayI[jj])<=4){
+										console.log("Push")
+									}else{
+										arrayI.push(i);
+										arrayJ.push(J);
+									}
+								}else{
+									arrayI.push(i);
+									arrayJ.push(J);
+								}
+							}
+						}else{
+							arrayI.push(i);
+							arrayJ.push(J);
+						}
+						break;
+					case 10:case -10: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 12:case -12: imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
+					case 102:case -102:imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 13:case -13: imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
+					case 103:case -103:imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 14:case -14: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
+					case 104:case -104:imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 15:case -15: imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
+					case 105:case -105:imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
 					case 2:   imgMaps.src = 'img/test2.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*4, sizeY*8);break;
 					case -2:  imgMaps.src = 'img/test2Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*4, sizeY*8);break;
 					case 20:  imgMaps.src = 'img/test2Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*8, sizeY*4);break;
@@ -659,17 +676,15 @@ function fullScreenStart(element) {
 	} 
 } 
 
-
 function fullScreenClick(){ 
 	fullScreen=!fullScreen; 
 	if(fullScreen){ 
 		fullScreenStart(workArea); 
-		workArea.style.backgroundColor="#FFF"; 
-		draw(); 
+		workArea.style.backgroundColor="#FFF";  
 	}else{ 
 		document.exitFullscreen(); 
-		draw(); 
 	} 
+	draw(); 
 } 
 
 function scaleMinusClick(){ 
