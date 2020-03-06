@@ -11,9 +11,9 @@
 <body>
     <div id="main1">
         <div id="workArea" name="workArea">
-            <div id="header">
-                <input type="button" value="?" style="font-weight: bold;" id="question" class="button"> 
-                <p id="para" class="line">
+        	<div id="header">
+        	    <input type="button" value="?" style="font-weight: bold;" id="question" class="button"> 
+        	    <p id="para" class="line">
                     <em>
                         Габариты: 
                         <span id="gabarites" class="line">
@@ -25,15 +25,15 @@
                         </span>
                     </em>
                 </p>
-                <input type="button" value="Оформить" id="sell" class="button">
-                <input type="button" value="Очистить" id="clear" class="button" onclick="clearCanvas()">
-                <div class="border_zoom line">
+        	    <input type="button" value="Оформить" id="sell" class="button">
+        	    <input type="button" value="Очистить" id="clear" class="button" onclick="clearCanvas()">
+        	    <div class="border_zoom line">
                     <input type="image" src="img/zoom+.png" style="width: 16px; position:relative; top:2px; height:16px;" id="scalePlus" name="scalePlus" onclick="scalePlusClick()" class="button">
-                    <input type="image" src="img/zoom-.png" style="width: 16px; position:relative; top:2px; height:16px; margin-left: 10px;" id="scaleMinus" name="scaleMinus" onclick="scaleMinusClick()" style="font-weight: bold;" class="button">
+        	        <input type="image" src="img/zoom-.png" style="width: 16px; position:relative; top:2px; height:16px; margin-left: 10px;" id="scaleMinus" name="scaleMinus" onclick="scaleMinusClick()" style="font-weight: bold;" class="button">
                 </div>
                 <div class="other_buttons line">
                     <input type="image" src="img/set.jpg" style="width: 16px; position:relative; top:10px; height:16px;" name="visibleWeb" id="visibleWeb" onclick="visibleWebClick()"  class="button">
-                    <input type="image" src="img/fullscr.png" style="width: 16px; position:relative; top:10px; height:16px; margin-left: 10px;" name="fullScreen" id="fullScreen" onclick="fullScreenClick()" class="button"> 
+        	        <input type="image" src="img/fullscr.png" style="width: 16px; position:relative; top:10px; height:16px; margin-left: 10px;" name="fullScreen" id="fullScreen" onclick="fullScreenClick()" class="button"> 
                 </div>
             </div>
             <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 450px;max-width:100%;overflow: scroll;">
@@ -50,21 +50,21 @@
                              <span class="t-obj">
                                  Понтон <br> модульный
                              </span>
-                             <input type="image" alt=" Модуль понтона"  src="img/pontoon.png" id="red" width="100px" height="100px">
+                             <input type="image" alt=" Модуль понтона"  src="img/pontoon-blue.png" id="red" width="100px" height="100px">
                          </div>
                          <div class="color_el"  id="ch_c">
                              0 
                              <div class="pod_menu">
-                                 <div class="colors" style="background: #1a92fb; " onclick="change_color_blue()" ><a href="#" style="color:#1a92fb;">0</a></div>
-                                 <div class="colors" style="background: #c00; " onclick="change_color_red()"><a href="#" style="color:#c00;">0</a></div>
-                                 <div class="colors" style="background: #393; " onclick="change_color_green()"><a href="#" style="color:#393; ">0</a></div>
-                                 <div class="colors" style="background: #ffffff; " onclick="change_color_white()"><a href="#" style="color:#ffffff;">0</a></div>
-                                 <div class="colors" style="background: #666; " onclick="change_color_gray()"><a href="#" style="color:#666;">0</a></div>
+                                 <div class="colors" style="background: #1a92fb; " onclick="change_color('blue', '#1a92fb')" ><a href="#" style="color:#1a92fb;">0</a></div>
+                                 <div class="colors" style="background: #c00; " onclick="change_color('red', '#c00')"><a href="#" style="color:#c00;">0</a></div>
+                                 <div class="colors" style="background: #393; " onclick="change_color('green', '#393')"><a href="#" style="color:#393; ">0</a></div>
+                                 <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff')"><a href="#" style="color:#ffffff;">0</a></div>
+                                 <div class="colors" style="background: #666; " onclick="change_color('gray', '#666')"><a href="#" style="color:#666;">0</a></div>
                              </div>
                          </div>
                     </div>
                     <div class="sub">
-                     <div class="shetpont line">
+                     <div class="shetpont line" id="gangway">
                          0
                     </div>
                      <div onclick="model2onClick()" class="object line">
@@ -85,7 +85,7 @@
                      </div>
                  </div>
                  <div class="sub">
-                     <div class="shetpont line">
+                     <div class="shetpont line" id="stairs">
                          0
                     </div>
                      <div onclick="model3onClick()" class="object line">
@@ -106,10 +106,10 @@
                      </div>
                  </div>
                  <div class="sub">
-                     <div class="shetpont line">
+                     <div class="shetpont line" id="connector">
                          0
                     </div>
-                     <div onclick="model4onClick()" class="object line">
+                     <div onclick="model4onClick()" class="object line" >
                          <span class="t-obj">
                              Соединитель<br>понтона
                          </span>
@@ -127,7 +127,7 @@
                      </div>
                  </div>
                  <div class="sub">
-                     <div class="shetpont line">
+                     <div class="shetpont line" id="stays">
                          0
                     </div>
                      <div onclick="model5onClick()" class="object line">
@@ -150,7 +150,7 @@
             
                 
              <div class="sub">
-                 <div class="shetpont">
+                 <div class="shetpont line" id="duck">
                      0
                 </div>
                  <div onclick="model7onClick()" class="object line">

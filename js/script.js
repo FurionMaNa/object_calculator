@@ -69,39 +69,11 @@ function init(){
 	};
 } 
 
-function change_color_red(){
-	document.getElementById('red').src = "img/pontoon-red.png";
-	color='red';
-	document.getElementById('ch_c').style.background = '#c00';
-	document.getElementById('ch_c').style.color = '#c00';
-}
-
-function change_color_blue(){
-	document.getElementById('red').src = "img/pontoon.png";
-	color='blue';
-	document.getElementById('ch_c').style.background = '#1a92fb';
-	document.getElementById('ch_c').style.color = '#1a92fb';
-}
-
-function change_color_green(){
-	color='green';
-	document.getElementById('red').src = "img/pontoon-green.png";
-	document.getElementById('ch_c').style.background = '#393';
-	document.getElementById('ch_c').style.color = '#393';
-}
-
-function change_color_gray(){
-	color='gray';
-	document.getElementById('red').src = "img/pontoon-gray.png";
-	document.getElementById('ch_c').style.background = '#666';
-	document.getElementById('ch_c').style.color = '#666';
-}
-
-function change_color_white(){
-	color='white';
-	document.getElementById('red').src = "img/pontoon-red.png";
-	document.getElementById('ch_c').style.background = '#fff';
-	document.getElementById('ch_c').style.color = '#fff';
+function change_color(id, color){
+	adress = "img/pontoon-" + id + ".png";
+	document.getElementById('red').src = adress;
+	document.getElementById('ch_c').style.background = color;
+	document.getElementById('ch_c').style.color = color;
 }
 
 function onScrollCanvas(){
@@ -110,7 +82,7 @@ function onScrollCanvas(){
 
 function sum(){
 	var sum = ponton.price * ponton.col + gangway.price * gangway.col + stairs.price * stairs.col + connector.price * connector.col + stays.price * stays.col + sitconnect.price * sitconnect.col;
-	document.getElementById('summ').innerHTML = sum;
+	document.getElementById('summ').innerHTML = sum ,'руб.';
 }
 
 function area(){
@@ -121,11 +93,14 @@ function area(){
 
 function quantity(){
 	document.getElementById('shetpon').innerHTML = ponton.col;
+	document.getElementById('connector').innerHTML = connector.col;
+	document.getElementById('gangway').innerHTML = gangway.col;
+	document.getElementById('stays').innerHTML = stays.col;
+	//document.getElementById('sitconnect').innerHTML = sitconnect.col;
+	document.getElementById('duck').innerHTML = duck.col;
+	document.getElementById('stairs').innerHTML = stairs.col;
 }
 
-function menu() {
-	document.getElementsByClassName('pod_menu').style.visibility = 'visible';
-}
 
 function clearCanvas(){
 	for(var i=0;i<200;i++){ 
@@ -245,6 +220,7 @@ function canvasClick(evt){
 				}
 				break;
 			case 2:
+				gangway.col++;
 				switch (direction){
 					case 0:
 						for (var i=y;i<y+4;i++){
@@ -281,6 +257,7 @@ function canvasClick(evt){
 				}
 				break;
 			case 3:
+				stairs.col++;
 				switch (direction){
 					case 0:
 						for (var i=y;i<y+2;i++){
@@ -317,6 +294,7 @@ function canvasClick(evt){
 				}
 				break;
 			case 4:
+				connector.col++;
 				switch (direction){
 					case 0:
 						for (var i=y;i<y+2;i++){
@@ -353,6 +331,7 @@ function canvasClick(evt){
 				}
 				break;
 			case 5:
+				stays.col++;
 				switch (direction){
 					
 					case 0:
@@ -390,6 +369,7 @@ function canvasClick(evt){
 				}
 				break;
 			case 6:
+				sitconnect.col++;
 				switch (direction){
 					
 					case 0:
@@ -427,6 +407,7 @@ function canvasClick(evt){
 				}
 				break;
 			case 7:
+				duck.col++;
 				switch (direction){
 					
 					case 0:
@@ -562,15 +543,13 @@ function draw(){
 	var jEnd=Math.trunc((scrollCanvas.clientWidth+scrollCanvas.scrollLeft)/(45+scale));
 	for(var i=iStart-10;i<iEnd;i++){
 		for(var j=jStart-10;j<jEnd;j++){
-			try {
+			if((i>=0)&&(j>=0)){
 				if(maps[i][j]!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
 				}
 				switch(maps[i][j]){
-					case 11:
-
-					break;
+					case 11:break;
 					case 0:
 						if(visibleWeb){
 							ctx.beginPath();
@@ -583,56 +562,14 @@ function draw(){
 						imgMaps.src = 'img/pontoonbutton.png'; 
 						ctx.rotate(180*Math.PI/180);
 						ctx.drawImage(imgMaps, 0, 0, (45+scale)*2, (45+scale)*4);
- 						imgMaps.src = 'img/connector.png';
-						//for (var ii=i;ii<i+4;ii++){
-						//	if(maps[ii][j-1]==11){
-						//		ctx.restore();
-						//		ctx.save();
-						//		ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
-						//		ctx.rotate(90*Math.PI/180);
- 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
-//
-						//	}
-						//}
-						//for (var jj=j;jj<j+2;jj++){
-						//	if(maps[i-1][jj]==11){
-						//		ctx.restore();
-						//		ctx.save();
-						//		ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
-						//		ctx.rotate(180*Math.PI/180);
- 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
-//
-						//	}
-						//}
 						break;
 					case 10:case -10: 
 						imgMaps.src = 'img/pontoonbutton.png'; 
 						ctx.rotate(90*Math.PI/180);
 						ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-						//imgMaps.src = 'img/connector.png';
-						//for (var ii=i;ii<i+2;ii++){
-						//	if(maps[ii][j-1]==11){
-						//		ctx.restore();
-						//		ctx.save();
-						//		ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
-						//		ctx.rotate(90*Math.PI/180);
- 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
-//
-						//	}
-						//}
-						//for (var jj=j;jj<j+4;jj++){
-						//	if(maps[i-1][jj]==11){
-						//		ctx.restore();
-						//		ctx.save();
-						//		ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
-						//		ctx.rotate(180*Math.PI/180);
- 						//		ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
-//
-						//	}
-						//}
 						break;
-					case 12:case -12: imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 102:case -102:imgMaps.src = 'img/pontoon-red.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
+					case 12:case -12: imgMaps.src = 'img/pontoon-redbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
+					case 102:case -102:imgMaps.src = 'img/pontoon-redbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
 					case 13:case -13: imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
 					case 103:case -103:imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
 					case 14:case -14: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
@@ -667,12 +604,12 @@ function draw(){
 				if(maps[i][j]!=0){
 					ctx.restore();
 				}
-			}catch(e){}
+			}
 		}
 	}
 	for(var i=iStart-10;i<iEnd;i++){
 		for(var j=jStart-10;j<jEnd;j++){
-			try {
+			if((i>=0)&&(j>=0)){
 				if(maps[i][j]!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
@@ -687,11 +624,10 @@ function draw(){
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
 								ctx.rotate(90*Math.PI/180);
  								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
-
 							}
 						}
 						for (var jj=j;jj<j+2;jj++){
-							if(maps[i-1][jj]==11){
+							if((i>0)&&(maps[i-1][jj*1]==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
@@ -728,7 +664,7 @@ function draw(){
 				if(maps[i][j]!=0){
 					ctx.restore();
 				}
-			}catch(e){}
+			}
 		}
 	}
 } 
