@@ -700,10 +700,10 @@ function fullScreenClick(){
 	if(fullScreen){ 
 		fullScreenStart(workArea); 
 		workArea.style.backgroundColor="#FFF"; 
-		scrollCanvas.style.height=document.body.clientHeight-(document.getElementById('footer').clientHeight+document.getElementById('header').clientHeight)+'px';
+		scrollCanvas.style.maxHeight=screen.height-(document.getElementById('footer').clientHeight+document.getElementById('header').clientHeight)+'px';
 	}else{ 
 		document.exitFullscreen(); 
-		scrollCanvas.style.height=450+'px';
+		scrollCanvas.style.maxHeight=450+'px';
 	} 
 	draw(); 
 } 
