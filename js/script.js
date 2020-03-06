@@ -96,7 +96,7 @@ function quantity(){
 	document.getElementById('connector').innerHTML = connector.col;
 	document.getElementById('gangway').innerHTML = gangway.col;
 	document.getElementById('stays').innerHTML = stays.col;
-	//document.getElementById('sitconnect').innerHTML = sitconnect.col;
+	document.getElementById('connector').innerHTML = sitconnect.col;
 	document.getElementById('duck').innerHTML = duck.col;
 	document.getElementById('stairs').innerHTML = stairs.col;
 }
@@ -541,6 +541,7 @@ function draw(){
 	var jStart=Math.trunc(scrollCanvas.scrollLeft/(45+scale));
 	var iEnd=Math.trunc((scrollCanvas.clientHeight+scrollCanvas.scrollTop)/(45+scale));
 	var jEnd=Math.trunc((scrollCanvas.clientWidth+scrollCanvas.scrollLeft)/(45+scale));
+	sitconnect.col=0;
 	for(var i=iStart-10;i<iEnd+10;i++){
 		for(var j=jStart-10;j<jEnd+10;j++){
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
@@ -624,6 +625,7 @@ function draw(){
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
 								ctx.rotate(90*Math.PI/180);
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
+								sitconnect.col++;
 							}
 						}
 						for (var jj=j;jj<j+2;jj++){
@@ -632,8 +634,8 @@ function draw(){
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
 								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
-
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
+								sitconnect.col++;
 							}
 						}
 						break;
@@ -645,8 +647,8 @@ function draw(){
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
 								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
-
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
+								sitconnect.col++;
 							}
 						}
 						for (var jj=j;jj<j+4;jj++){
@@ -656,7 +658,7 @@ function draw(){
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
 								ctx.rotate(180*Math.PI/180);
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
-
+								sitconnect.col++;
 							}
 						}
 						break;
@@ -697,9 +699,11 @@ function fullScreenClick(){
 	fullScreen=!fullScreen; 
 	if(fullScreen){ 
 		fullScreenStart(workArea); 
-		workArea.style.backgroundColor="#FFF";  
+		workArea.style.backgroundColor="#FFF"; 
+		scrollCanvas.style.height=document.body.clientHeight-(document.getElementById('footer').clientHeight+document.getElementById('header').clientHeight)+'px';
 	}else{ 
 		document.exitFullscreen(); 
+		scrollCanvas.style.height=450+'px';
 	} 
 	draw(); 
 } 
