@@ -541,9 +541,9 @@ function draw(){
 	var jStart=Math.trunc(scrollCanvas.scrollLeft/(45+scale));
 	var iEnd=Math.trunc((scrollCanvas.clientHeight+scrollCanvas.scrollTop)/(45+scale));
 	var jEnd=Math.trunc((scrollCanvas.clientWidth+scrollCanvas.scrollLeft)/(45+scale));
-	for(var i=iStart-10;i<iEnd;i++){
-		for(var j=jStart-10;j<jEnd;j++){
-			if((i>=0)&&(j>=0)){
+	for(var i=iStart-10;i<iEnd+10;i++){
+		for(var j=jStart-10;j<jEnd+10;j++){
+			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 				if(maps[i][j]!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
@@ -607,9 +607,9 @@ function draw(){
 			}
 		}
 	}
-	for(var i=iStart-10;i<iEnd;i++){
-		for(var j=jStart-10;j<jEnd;j++){
-			if((i>=0)&&(j>=0)){
+	for(var i=iStart-10;i<iEnd+10;i++){
+		for(var j=jStart-10;j<jEnd+10;j++){
+			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 				if(maps[i][j]!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
@@ -623,7 +623,7 @@ function draw(){
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
 								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 							}
 						}
 						for (var jj=j;jj<j+2;jj++){
@@ -632,7 +632,7 @@ function draw(){
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
 								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 
 							}
 						}
@@ -645,7 +645,7 @@ function draw(){
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
 								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 
 							}
 						}
@@ -655,7 +655,7 @@ function draw(){
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
 								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/10, 0-sizeY/2, 30, 30);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 
 							}
 						}
