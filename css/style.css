@@ -21,8 +21,13 @@
         border-radius: 10px;
         border:2px solid #b6e0f6;
         padding:2px;
+        left:200px;
+        top:200px;
     }
-    .button:hover,.menu_object:hover{
+    .block{
+        display:block;
+    }
+    .button:hover{
         transition:1s;
         background:#3949bf;
        
