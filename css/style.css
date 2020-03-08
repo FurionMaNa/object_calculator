@@ -12,10 +12,41 @@
     height: 100%; 
     box-sizing: border-box;
     }
+    #object__changer{
+        z-index:1000;
+        display:block;
+        position: absolute;
+        text-align: center;
+        background:white;
+        border-radius: 10px;
+        border:2px solid #b6e0f6;
+        padding:2px;
+    }
+    .button:hover,.menu_object:hover{
+        transition:1s;
+        background:#3949bf;
+       
+    }
+    #Change_object_color:hover .pod_menu{
+        visibility: visible;
+    }
+    .menu_object{
+        margin-top: 10px;
+        font-size: 14px;
+        background: #397dbf;
+        color:#fff;
+        border-radius:5px;
+        padding: 6px;
+        font-style: italic;
+    }
+    #musor:hover{
+        transition:0.5s;
+        border:2px solid #1a92fb;}
+        
     body {
     margin:0;
     padding:0;
-    background:gray;
+    background:#b6e0f6;
     font-family: 'Neo Sans Pro Regular';}
     .pod_menu{
         display: flex;
@@ -186,8 +217,6 @@ input:active{
     background-color:#6cf;
     }
     
-   
-    
     ::-webkit-resizer{
     background-image:url('');
     background-repeat:no-repeat;
@@ -200,8 +229,7 @@ input:active{
     width: 7px;
     height:7px;
     }
-    .object{
-        
+    .object{ 
         position:relative;
         width: 120px;
         text-align:center;

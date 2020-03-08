@@ -9,7 +9,8 @@
     <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
-    <div id="main1">
+    <img src="img/fon.jpg" alt="">
+      <div id="main1">
         <div id="workArea" name="workArea">
         	<div id="header">
         	    <input type="button" value="?" style="font-weight: bold;" id="question" class="button"> 
@@ -39,6 +40,20 @@
             <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 450px;max-width:100%;overflow: scroll;">
                 <canvas id='main' width="3000px" height="3000px"></canvas>
             </div>
+            <div id="object__changer">
+                <div id="remove" class="menu_object">Убрать</div>
+                <div id="move" class="menu_object">Переместить</div>
+                <div id="Change_object_color" class="menu_object">Цвет
+                    <div class="pod_menu" style="top:60px;">
+                        <div class="colors" style="background: #1a92fb; " onclick="change_color('blue', '#1a92fb')" ><a href="#" style="color:#1a92fb;">0</a></div>
+                        <div class="colors" style="background: #c00; " onclick="change_color('red', '#c00')"><a href="#" style="color:#c00;">0</a></div>
+                        <div class="colors" style="background: #393; " onclick="change_color('green', '#393')"><a href="#" style="color:#393; ">0</a></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff')"><a href="#" style="color:#ffffff;">0</a></div>
+                        <div class="colors" style="background: #666; " onclick="change_color('gray', '#666')"><a href="#" style="color:#666;">0</a></div>
+                    </div>
+                </div>
+            </div>
+            <img src="img/musor.png" id="musor" onclick="deleteObjectFromMouse()" style= "position:absolute; width:60px;height:60px; z-index:102; left:93%; background:white;border-radius:10px;top:57%;padding:5px;"alt="">
             <div id="footer">
             <div class="hell">
                     <div class="sub">
@@ -49,7 +64,7 @@
                              <span class="t-obj">
                                  Понтон <br> модульный
                              </span>
-                             <input type="image" alt=" Модуль понтона"  src="img/pontoon-blue.png" id="red" width="100px" height="100px">
+                             <input type="image" alt=" Модуль понтона"  src="img/footer-photo/pontoon-blue.png" id="red" width="100px" height="100px">
                          </div>
                          <div class="color_el"  id="ch_c">
                              0 
@@ -70,7 +85,7 @@
                          <span class="t-obj">
                              Сходня <br>с переходником
                          </span>
-                         <input type="image" alt="Сходня на берег с переходником и соединителями" src="img/gangway.png" width="100px" height="100px">
+                         <input type="image" alt="Сходня на берег с переходником и соединителями" src="img/footer-photo/gangway.png" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:303px;"  id="ch_c">
                          0 
@@ -91,7 +106,7 @@
                          <span class="t-obj">
                              Лестница с соединителями
                          </span>
-                         <input type="image" alt="Лестница для спуска в воду с соединителями"  src="img/stairs.png" width="100px" height="100px">
+                         <input type="image" alt="Лестница для спуска в воду с соединителями"  src="img/footer-photo/stairs.png" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:467px;" id="ch_c">
                          0 
@@ -112,7 +127,7 @@
                          <span class="t-obj">
                              Соединитель<br>понтона
                          </span>
-                         <input type="image" alt="Соединитель понтона"  src="img/connector.png" width="100px" height="100px">
+                         <input type="image" alt="Соединитель понтона"  src="img/footer-photo/connector.png" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:631px;" id="ch_c">
                          0 
@@ -133,7 +148,7 @@
                          <span class="t-obj">
                              Стойка <br> с соединителями
                          </span>
-                         <input type="image" alt=" Стойка ограждения с соединителями"  src="img/rack.png" width="100px" height="100px">
+                         <input type="image" alt=" Стойка ограждения с соединителями"  src="img/footer-photo/rack.png" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:795px;" id="ch_c">
                          0 
@@ -156,7 +171,7 @@
                      <span class="t-obj">
                          Швартовая <br>утка <br>
                      </span> 
-                     <input type="image" alt="Швартовая утка с соединителем"  src="img/connector.png" width="100px" height="100px" >
+                     <input type="image" alt="Швартовая утка с соединителем"  src="img/footer-photo/connector.png" width="100px" height="100px" >
                  </div>
                  <div class="color_el" style="left:959px;" id="ch_c">
                      0 
@@ -175,12 +190,11 @@
                 <div onclick="model6onClick()" class="object line">
                     <span class="t-obj">
                         Лавочка с соединителями
-                    </span> <input type="image" alt="Лавочка с соединителями"  src="img/bench.png" width="100px" height="100px">
+                    </span> <input type="image" alt="Лавочка с соединителями"  src="img/footer-photo/bench.png" width="100px" height="100px">
                 </div>
              </div>
          </div>
         </div>
-        
     </div>
 </body>
 </html>

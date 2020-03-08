@@ -8,6 +8,7 @@ var visibleWeb=true;
 var fullScreen=false; 
 var imgMouse = new Image();
 var imgMaps=new Image(); 
+var imgGhost=new Image(); 
 var maps=new Array();
 var direction=0;
 var model=0;
@@ -15,8 +16,6 @@ var ponton = new Object();
 var color='blue';
 var mouseX=0;
 var mouseY=0;
-var arrayI=new Array();
-var arrayJ=new Array();
 ponton.width = 1000;
 ponton.height = 2000;
 ponton.price = 16800;
@@ -119,8 +118,8 @@ function isArrange(x,y,model,direction){
 	switch (model){
 		case 1:
 			switch (direction){
-				case 0:case 2:countX=2;countY=4;break;
-				case 1:case 3:countX=4;countY=2;break;
+				case 0:case 2:x--;y-=2;countX=2;countY=4;break;
+				case 1:case 3:x-=2;countX=4;countY=2;break;
 			}
 			break;
 		case 2:
@@ -162,6 +161,7 @@ function canvasClick(evt){
 				ponton.col++;
 				switch (direction){
 					case 0:
+						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
 								maps[i][j]=11;
@@ -176,6 +176,8 @@ function canvasClick(evt){
 						}
 						break;
 					case 1:
+						x-=2;
+						console.log(x,y);
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
 								maps[i][j]=11;
@@ -190,6 +192,7 @@ function canvasClick(evt){
 						}
 						break;
 					case 2:
+						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
 								maps[i][j]=11;
@@ -204,6 +207,7 @@ function canvasClick(evt){
 						}
 						break;
 					case 3:
+						x-=2;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
 								maps[i][j]=11;
@@ -456,27 +460,43 @@ function canvasMoveMouse(evt){
 	draw();
 	switch (model){
 		case 1:
-			ctx.save();
-			ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+			var x,y;
+			x=Math.trunc((evt.offsetX)/(45+scale))*(45+scale);
+			y=Math.trunc((evt.offsetY)/(45+scale))*(45+scale);
 			console.log('mouse',evt.offsetX,evt.offsetY)
 			switch (color){
 				case 'red':imgMouse.src = 'img/pontoon-red.png';break;
-				case 'blue':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'blue':imgGhost.src='img/photo-objects-png/ponton/blue-opacity.png';imgMouse.src = 'img/pontoonbutton.png';break;
 				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
 				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
 				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
 			switch (direction){
 				case 0:case 2:
+					ctx.save();
+					ctx.translate(x,y);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0, 0, (45+scale)*2, (45+scale)*4);
+					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					ctx.save();
+					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
 					break;
 				case 1:case 3:
+					ctx.save();
+					ctx.translate(x,y);
 					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					ctx.save();
+					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
 					break;
 			} 
-			ctx.restore();
 			break;
 		case 2:
 			switch (direction){
@@ -529,8 +549,9 @@ function canvasMoveMouse(evt){
 	}
 }
 
-function checkConnectorRight(currentI,currentJ,width,height){
-	
+function deleteObjectFromMouse(){
+	model=0;
+	draw();
 }
 
 function draw(){ 
@@ -619,7 +640,7 @@ function draw(){
 					case 1:case -1:
  						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+4;ii++){
-							if(maps[ii][j-1]==11){
+							if((j>0)&&(maps[ii][j-1]==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -629,7 +650,7 @@ function draw(){
 							}
 						}
 						for (var jj=j;jj<j+2;jj++){
-							if((i>0)&&(maps[i-1][jj*1]==11)){
+							if((i>0)&&(maps[i-1][jj]==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
@@ -642,7 +663,7 @@ function draw(){
 					case 10:case -10: 
 						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+2;ii++){
-							if(maps[ii][j-1]==11){
+							if((j>0)&&(maps[ii][j-1]==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -652,7 +673,7 @@ function draw(){
 							}
 						}
 						for (var jj=j;jj<j+4;jj++){
-							if(maps[i-1][jj]==11){
+							if((i>0)&&(maps[i-1][jj]==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
