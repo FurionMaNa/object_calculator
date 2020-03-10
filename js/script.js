@@ -68,11 +68,12 @@ function init(){
 	};
 } 
 
-function change_color(id, color){
+function change_color(id, colors){
 	adress = "img/pontoon-" + id + ".png";
+	color=id;
 	document.getElementById('red').src = adress;
-	document.getElementById('ch_c').style.background = color;
-	document.getElementById('ch_c').style.color = color;
+	document.getElementById('ch_c').style.background = colors;
+	document.getElementById('ch_c').style.color = colors;
 }
 
 function onScrollCanvas(){
@@ -124,8 +125,8 @@ function isArrange(x,y,model,direction){
 			break;
 		case 2:
 			switch (direction){
-				case 0:case 2:countX=4;countY=8;break;
-				case 1:case 3:countX=8;countY=4;break;
+				case 0:case 2:x--;y-=2;countX=2;countY=4;break;
+				case 1:case 3:x-=2;countX=4;countY=2;break;
 			}
 			break;
 		case 3:
@@ -227,35 +228,44 @@ function canvasClick(evt){
 				gangway.col++;
 				switch (direction){
 					case 0:
+						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
+								maps[i][j]=22;
 							}
 						}
 						maps[y][x]=2;
+						maps[y][x+1]=1222;
 						break;
 					case 1:
+						x-=2;y--;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
-								maps[i][j]=11;
+								maps[i][j]=22;
 							}
 						}
+
+						maps[y+1][x]=1222;
 						maps[y][x]=-20;
 						break;
 					case 2:
+						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
+								maps[i][j]=22;
 							}
 						}
+						maps[y][x+1]=1222;
 						maps[y][x]=-2;
 						break;
 					case 3:
+						x-=2;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
-								maps[i][j]=11;
+								maps[i][j]=22;
 							}
 						}
+						maps[y+1][x]=1222;
 						maps[y][x]=20;
 						break;
 				}
@@ -458,14 +468,14 @@ function canvasClick(evt){
 
 function canvasMoveMouse(evt){
 	draw();
+	var x,y;
+	x=Math.trunc((evt.offsetX)/(45+scale))*(45+scale);
+	y=Math.trunc((evt.offsetY)/(45+scale))*(45+scale);
+	//console.log('mouse',evt.offsetX,evt.offsetY,color);
 	switch (model){
 		case 1:
-			var x,y;
-			x=Math.trunc((evt.offsetX)/(45+scale))*(45+scale);
-			y=Math.trunc((evt.offsetY)/(45+scale))*(45+scale);
-			console.log('mouse',evt.offsetX,evt.offsetY)
 			switch (color){
-				case 'red':imgMouse.src = 'img/pontoon-red.png';break;
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
 				case 'blue':imgGhost.src='img/photo-objects-png/ponton/blue-opacity.png';imgMouse.src = 'img/pontoonbutton.png';break;
 				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
 				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
@@ -499,12 +509,64 @@ function canvasMoveMouse(evt){
 			} 
 			break;
 		case 2:
-			switch (direction){
-				case 0:imgMouse.src = 'img/test2.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*4, (45+scale)*8); break;
-				case 2:imgMouse.src = 'img/test2Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*4, (45+scale)*8); break;
-				case 1:imgMouse.src = 'img/test2Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*8, (45+scale)*4);break;
-				case 3:imgMouse.src = 'img/test2Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*8, (45+scale)*4);break;
+			
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/photo-objects-png/skhodnya/skhodnya_blue_ghost.png';imgMouse.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
+			switch (direction){
+				case 0:
+					ctx.save();
+					ctx.translate(x,y);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					ctx.save();
+					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)*3, 0-(45+scale)*6, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					break;
+				case 2:
+					ctx.save();
+					ctx.translate(x,y);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					ctx.save();
+					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					break;
+				case 1:
+					ctx.save();
+					ctx.translate(x,y);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					ctx.save();
+					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0+(45+scale)*3,0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					break;
+				case 3:
+					ctx.save();
+					ctx.translate(x,y);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					ctx.save();
+					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
+					ctx.restore();
+					break;
+			} 
 			break;
 		case 3:
 			switch (direction){
@@ -598,10 +660,26 @@ function draw(){
 					case 104:case -104:imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
 					case 15:case -15: imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
 					case 105:case -105:imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 2:   imgMaps.src = 'img/test2.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*4, sizeY*8);break;
-					case -2:  imgMaps.src = 'img/test2Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*4, sizeY*8);break;
-					case 20:  imgMaps.src = 'img/test2Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*8, sizeY*4);break;
-					case -20: imgMaps.src = 'img/test2Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*8, sizeY*4);break;	
+					case 2:   
+						imgMaps.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
+						break;
+					case -2:  
+						imgMaps.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMaps, 0, 0, (45+scale)*2, (45+scale)*4);
+						break;
+					case 20:  
+						imgMaps.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						break;
+					case -20: 
+						imgMaps.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMaps, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						break;	
 					case 3:   imgMaps.src = 'img/test3.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
 					case -3:  imgMaps.src = 'img/test3Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
 					case 30:  imgMaps.src = 'img/test3Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
@@ -648,12 +726,45 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 								sitconnect.col++;
 							}
+							if((j>3)&&(((maps[ii][j-4]==20)||(maps[ii][j-4]==1222))&&((maps[ii+1][j-4]==20)||(maps[ii+1][j-4]==1222)||(maps[ii-1][j-4]==1222)||(maps[ii-1][j-4]==20)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+								ctx.rotate(90*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
+								sitconnect.col++;
+							}
+							if((j<199)&&(((maps[ii][j+2]==-20)||(maps[ii][j+2]==1222))&&((maps[ii+2][j+1]==-20)||(maps[ii+1][j+2]==1222)||(maps[ii-1][j+2]==1222)||(maps[ii-1][j+2]==-20)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+2),sizeY*(i+(ii-i)));
+								ctx.rotate(90*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
+								sitconnect.col++;
+							}
+
 						}
 						for (var jj=j;jj<j+2;jj++){
 							if((i>0)&&(maps[i-1][jj]==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
+								sitconnect.col++;
+							}
+							if((i>3)&&(((maps[i-4][jj]==-2)||(maps[i-4][jj]==1222))&&((maps[i-4][jj-1]==-2)||(maps[i-4][jj-1]==1222)||(maps[i-4][jj+1]==1222)||(maps[i-4][jj+1]==-2)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
+								sitconnect.col++;
+							}
+							if((i<199)&&(((maps[i+4][jj]==2)||(maps[i+4][jj]==1222))&&((maps[i+4][jj-1]==2)||(maps[i+4][jj-1]==1222)||(maps[i+4][jj+1]==1222)||(maps[i+4][jj+1]==2)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i+4));
 								ctx.rotate(180*Math.PI/180);
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
@@ -671,6 +782,22 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
 							}
+							if((j<199)&&(((maps[ii][j+4]==-20)||(maps[ii][j+4]==1222))&&((maps[ii+2][j+4]==-20)||(maps[ii+1][j+4]==1222)||(maps[ii-1][j+4]==1222)||(maps[ii-1][j+4]==-20)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
+								ctx.rotate(90*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
+								sitconnect.col++;
+							}
+							if((j<199)&&(((maps[ii][j-4]==20)||(maps[ii][j-4]==1222))&&((maps[ii+2][j-4]==20)||(maps[ii+1][j-4]==1222)||(maps[ii-1][j-4]==1222)||(maps[ii-1][j-4]==20)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+								ctx.rotate(90*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
+								sitconnect.col++;
+							}
 						}
 						for (var jj=j;jj<j+4;jj++){
 							if((i>0)&&(maps[i-1][jj]==11)){
@@ -679,6 +806,22 @@ function draw(){
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
 								ctx.rotate(180*Math.PI/180);
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
+								sitconnect.col++;
+							}
+							if((i>3)&&(((maps[i+2][jj]==2)||(maps[i+2][jj]==1222))&&((maps[i+2][jj-1]==2)||(maps[i+2][jj-1]==1222)||(maps[i+2][jj+1]==1222)||(maps[i+2][jj+1]==2)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+2));
+								ctx.rotate(180*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
+								sitconnect.col++;
+							}
+							if((i<199)&&(i>3)&&(((maps[i-4][jj]==-2)||(maps[i-4][jj]==1222))&&((maps[i-4][jj-1]==-2)||(maps[i-4][jj-1]==1222)||(maps[i-4][jj+1]==1222)||(maps[i-4][jj+1]==-2)))){
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i));
+								ctx.rotate(180*Math.PI/180);
+ 								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
 							}
 						}
