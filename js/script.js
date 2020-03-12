@@ -162,7 +162,7 @@ function canvasClick(evt){
 	var x,y;
 	x=Math.trunc((evt.offsetX)/(45+scale));
 	y=Math.trunc((evt.offsetY)/(45+scale));
-	if(isArrange(x,y,model,direction)){
+	if((isArrange(x,y,model,direction))||(model==3)){
 		console.log("past");
 		switch (model){
 			case 1:
@@ -280,36 +280,14 @@ function canvasClick(evt){
 				stairs.col++;
 				switch (direction){
 					case 0:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=3;
+						console.log(maps);
+						isArrangeStairs(x,y);
 						break;
 					case 1:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-30;
 						break;
 					case 2:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-3;
 						break;
 					case 3:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=30;
 						break;
 				}
 				break;
@@ -487,11 +465,13 @@ function canvasMoveMouse(evt){
 			}
 			switch (direction){
 				case 0:case 2:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(180*Math.PI/180);
@@ -499,11 +479,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 1:case 3:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(90*Math.PI/180);
@@ -523,11 +505,13 @@ function canvasMoveMouse(evt){
 			}
 			switch (direction){
 				case 0:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(0*Math.PI/180);
@@ -535,11 +519,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 2:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(180*Math.PI/180);
@@ -547,11 +533,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 1:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(270*Math.PI/180);
@@ -559,11 +547,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 3:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(90*Math.PI/180);
@@ -573,12 +563,43 @@ function canvasMoveMouse(evt){
 			} 
 			break;
 		case 3:
-			switch (direction){
-				case 0:imgMouse.src = 'img/test3.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 2:imgMouse.src = 'img/test3Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 1:imgMouse.src = 'img/test3Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
-				case 3:imgMouse.src = 'img/test3Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/photo-objects-png/stairs/stairs-blue.png';imgMouse.src = 'img/photo-objects-png/stairs/stairs-blue.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
+			switch (direction){
+				case 0:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+				case 2:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+				case 1:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+				case 3:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+			} 
 			break;
 		case 4:
 			switch (direction){
@@ -615,6 +636,23 @@ function canvasMoveMouse(evt){
 	}
 }
 
+function isArrangeStairs(x,y){
+	console.log(y,x);
+	if((maps[y][x]==11)&&(((maps[y][x-1]==0)||(maps[y][x+1]==11))&&((maps[y][x-1]==11)||(maps[y][x+1]==0)))){
+		if((maps[y][x]!=1)||(maps[y][x]!=-1)||(maps[y][x]!=10)||(maps[y][x]!=-10)){
+			maps[y][x]=555;
+		}
+		maps[y][x+1]=555
+	}else{
+		if((maps[y][x]==11)&&((maps[y-1][x]==11)||(maps[y+1][x]==11))){
+			if((maps[y][x]!=1)||(maps[y][x]!=-1)||(maps[y][x]!=10)||(maps[y][x]!=-10)){
+				maps[y][x]=555;
+			}
+			maps[y+1][x]=555
+		}
+	}
+}
+
 function deleteObjectFromMouse(){
 	model=0;
 	draw();
@@ -638,6 +676,8 @@ function draw(){
 				}
 				switch(maps[i][j]){
 					case 11:break;
+					case 555:
+						break;
 					case 0:
 						if(visibleWeb){
 							ctx.beginPath();
