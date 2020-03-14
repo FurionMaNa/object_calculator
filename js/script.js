@@ -10,7 +10,8 @@ var imgMouse = new Image();
 var imgMaps=new Image(); 
 var imgGhost=new Image(); 
 var imgMapsPonton=new Image();
-var imgMapsSkhodnya=new Image;
+var imgMapsSkhodnya=new Image();
+var imgMapsStairs=new Image();
 var maps=new Array();
 var direction=0;
 var model=0;
@@ -62,6 +63,7 @@ function init(){
     } 
 	imgMapsPonton.src = 'img/pontoonbutton.png'; 
 	imgMapsSkhodnya.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+	imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';
 	draw(); 
 	canvas.onmousemove = function(evt) {canvasMoveMouse(evt)};
 	canvas.onclick=function(evt){canvasClick(evt)};
@@ -278,18 +280,9 @@ function canvasClick(evt){
 				break;
 			case 3:
 				stairs.col++;
-				switch (direction){
-					case 0:
-						console.log(maps);
-						isArrangeStairs(x,y);
-						break;
-					case 1:
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
-				}
+				console.log(maps);
+				isArrangeStairs(x,y,direction);
+				
 				break;
 			case 4:
 				connector.col++;
@@ -636,20 +629,19 @@ function canvasMoveMouse(evt){
 	}
 }
 
-function isArrangeStairs(x,y){
-	console.log(y,x);
-	if((maps[y][x]==11)&&(((maps[y][x-1]==0)||(maps[y][x+1]==11))&&((maps[y][x-1]==11)||(maps[y][x+1]==0)))){
-		if((maps[y][x]!=1)||(maps[y][x]!=-1)||(maps[y][x]!=10)||(maps[y][x]!=-10)){
-			maps[y][x]=555;
-		}
-		maps[y][x+1]=555
-	}else{
-		if((maps[y][x]==11)&&((maps[y-1][x]==11)||(maps[y+1][x]==11))){
-			if((maps[y][x]!=1)||(maps[y][x]!=-1)||(maps[y][x]!=10)||(maps[y][x]!=-10)){
-				maps[y][x]=555;
+function isArrangeStairs(x,y,direction){
+	if((maps[y][x]==11)||(maps[y][x]==1)||(maps[y][x]==-1)||(maps[y][x]==10)||(maps[y][x]==-10)){
+		if((maps[y][x+1]==11)&&(maps[y+1][x]==11)&&(maps[y][x-1]==0)&&(maps[y+1][x-1]==0)){
+			maps[y][x-1]=555;
+			maps[y+1][x-1]=-555;
+		}else{
+			if(((maps[y][x-1]==1)||(maps[y][x-1]==11))&&(maps[y+1][x]==11)&&(maps[y][x+1]==0)&&(maps[y+1][x+1]==0)){
+				maps[y][x+1]=556;
+				maps[y+1][x+1]=-556;
 			}
-			maps[y+1][x]=555
 		}
+	}else{
+
 	}
 }
 
@@ -676,8 +668,6 @@ function draw(){
 				}
 				switch(maps[i][j]){
 					case 11:break;
-					case 555:
-						break;
 					case 0:
 						if(visibleWeb){
 							ctx.beginPath();
@@ -689,6 +679,13 @@ function draw(){
 					case 1:case -1: 
 						ctx.rotate(180*Math.PI/180);
 						ctx.drawImage(imgMapsPonton, 0, 0, (45+scale)*2, (45+scale)*4);
+						if((j>0)&&(maps[i][j-1]==555)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0+(45+scale), (45+scale)+15, (45+scale)+15);
+						}
 						break;
 					case 10:case -10: 
 						ctx.rotate(90*Math.PI/180);
@@ -718,10 +715,14 @@ function draw(){
 						ctx.rotate(270*Math.PI/180);
 						ctx.drawImage(imgMapsSkhodnya, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						break;	
-					case 3:   imgMaps.src = 'img/test3.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case -3:  imgMaps.src = 'img/test3Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case 30:  imgMaps.src = 'img/test3Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case -30: imgMaps.src = 'img/test3Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
+					case 555:
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0, (45+scale)+15, (45+scale)+15);
+						break;
+					case 556:
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMapsStairs, 0+(45+scale)*2, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);
+						break;
 					case 4:   imgMaps.src = 'img/test4.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
 					case -4:  imgMaps.src = 'img/test4Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
 					case 40:  imgMaps.src = 'img/test4Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
