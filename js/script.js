@@ -697,6 +697,63 @@ function isArrangeStairs(x,y,direction,mX,mY){
 			}
 		}	
 	}
+
+	if((maps[y][x]==2)||((maps[y][x]==1222)&&(maps[y][x-1]==2))){
+		if((y>0)&&(maps[y-1][x]==0)){
+			switch (maps[y][x]){
+				case 2:
+					maps[y-1][x]=557;
+					maps[y-1][x+1]=-557;
+					break;
+				case 1222:
+					maps[y-1][x-1]=557;
+					maps[y-1][x]=-557;
+					break;
+			}
+		}
+	}
+	if((maps[y][x]==-20)||((maps[y][x]==1222)&&(maps[y-1][x]==-20))){
+		if((x>0)&&(maps[y][x-1]==0)){
+			switch (maps[y][x]){
+				case -20:
+					maps[y][x-1]=555;
+					maps[y+1][x-1]=-555;
+					break;
+				case 1222:
+					maps[y-1][x-1]=555;
+					maps[y][x-1]=-555;
+					break;
+			}
+		}
+	}
+	if((maps[y-3][x]==-2)||((maps[y-3][x]==1222)&&(maps[y-3][x-1]==-2))){
+		if((y<199)&&(maps[y+1][x]==0)){
+			switch (maps[y-3][x]){
+				case -2:
+					maps[y+1][x]=558;
+					maps[y+1][x+1]=-558;
+					break;
+				case 1222:
+					maps[y+1][x-1]=558;
+					maps[y+1][x]=-558;
+					break;
+			}
+		}
+	}
+	if((maps[y][x-3]==20)||((maps[y][x-3]==1222)&&(maps[y-1][x-3]==20))){
+		if((x<199)&&(maps[y][x+1]==0)){
+			switch (maps[y][x-3]){
+				case 20:
+					maps[y][x+1]=556;
+					maps[y+1][x+1]=-555;
+					break;
+				case 1222:
+					maps[y-1][x+1]=555;
+					maps[y][x+1]=-555;
+					break;
+			}
+		}
+	}
 }
 
 function deleteObjectFromMouse(){
@@ -777,6 +834,13 @@ function draw(){
 					case 2:   
 						ctx.rotate(0*Math.PI/180);
 						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
+						if((i>0)&&(maps[i-1][j]==557)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
+						}
 						break;
 					case -2:  
 						ctx.rotate(180*Math.PI/180);
@@ -785,6 +849,13 @@ function draw(){
 					case 20:   
 						ctx.rotate(90*Math.PI/180);
 						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						if((j>0)&&(maps[i][j-1]==555)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0+(45+scale), (45+scale)+15, (45+scale)+15);
+						}
 						break;
 					case -20: 
 						ctx.rotate(270*Math.PI/180);
