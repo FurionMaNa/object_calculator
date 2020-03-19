@@ -166,6 +166,74 @@ function isArrange(x,y,model,direction){
 	return true;
 }
 
+function CutObjMaps(x,y){
+	var i=y;
+	var j=x;
+	var leftI=0;
+	var leftJ=0;
+	var sizeObjX=0;
+	var sizeObjY=0;
+	while(j<200){
+		if((j!=x)&&((maps[i][j]==0)||(maps[i][j]==1)||(maps[i][j]==2)||((i>0)&&(maps[i-1][j]==1))||((i>0)&&(maps[i-1][j]==2))||((i>1)&&(maps[i-2][j]==1))||((i>1)&&(maps[i-2][j]==2))||((i>2)&&(maps[i-3][j]==1))||((i>2)&&(maps[i-3][j]==2))||(maps[i][j]==-1)||(maps[i][j]==-2)||((i>0)&&(maps[i-1][j]==-1))||((i>0)&&(maps[i-1][j]==-2))||((i>1)&&(maps[i-2][j]==-1))||((i>1)&&(maps[i-2][j]==-2))||((i>2)&&(maps[i-3][j]==-1))||((i>2)&&(maps[i-3][j]==-2)))){
+			break;
+		}
+		if((j!=x)&&((maps[i][j]==0)||(maps[i][j]==10)||(maps[i][j]==20)||((i>0)&&(maps[i-1][j]==10))||((i>0)&&(maps[i-1][j]==20))||(maps[i][j]==-10)||(maps[i][j]==-20)||((i>0)&&(maps[i-1][j]==-10))||((i>0)&&(maps[i-1][j]==-20)))){
+			break;
+		}
+		j++;
+	}
+	j--;
+	if((j<200)&&(((maps[i][j+1]!=11)&&(maps[i][j+1]!=22)&&(maps[i][j+1]!=0)&&(maps[i][j+1]!=1)&&(maps[i][j+1]!=-1)&&(maps[i][j+1]!=10)&&(maps[i][j+1]!=-10)&&(maps[i][j+1]!=2)&&(maps[i][j+1]!=-2)&&(maps[i][j+1]!=20)&&(maps[i][j+1]!=-20))||((maps[i-3][j+1]!=11)&&(maps[i-3][j+1]!=22)&&(maps[i-3][j+1]!=0)&&(maps[i-3][j+1]!=1)&&(maps[i-3][j+1]!=-1)&&(maps[i-3][j+1]!=10)&&(maps[i-3][j+1]!=-10))||((maps[i-2][j+1]!=11)&&(maps[i-2][j+1]!=22)&&(maps[i-2][j+1]!=0)&&(maps[i-2][j+1]!=1)&&(maps[i-2][j+1]!=-1)&&(maps[i-2][j+1]!=10)&&(maps[i-2][j+1]!=-10))||((maps[i-1][j+1]!=11)&&(maps[i-1][j+1]!=22)&&(maps[i-1][j+1]!=0)&&(maps[i-1][j+1]!=1)&&(maps[i-1][j+1]!=-1)&&(maps[i-1][j+1]!=10)&&(maps[i-1][j+1]!=-10)))){
+		j++;
+	}
+	while(j>=0){
+		sizeObjX++;
+		if((maps[i][j]==1)||(maps[i][j]==2)||((i>0)&&(maps[i-1][j]==1))||((i>0)&&(maps[i-1][j]==2))||((i>1)&&(maps[i-2][j]==1))||((i>1)&&(maps[i-2][j]==2))||((i>2)&&(maps[i-3][j]==1))||((i>2)&&(maps[i-3][j]==2))||(maps[i][j]==-1)||(maps[i][j]==-2)||((i>0)&&(maps[i-1][j]==-1))||((i>0)&&(maps[i-1][j]==-2))||((i>1)&&(maps[i-2][j]==-1))||((i>1)&&(maps[i-2][j]==-2))||((i>2)&&(maps[i-3][j]==-1))||((i>2)&&(maps[i-3][j]==-2))){
+			break;
+		}
+		if((maps[i][j]==10)||(maps[i][j]==20)||((i>0)&&(maps[i-1][j]==10))||((i>0)&&(maps[i-1][j]==20))||(maps[i][j]==-10)||(maps[i][j]==-20)||((i>0)&&(maps[i-1][j]==-10))||((i>0)&&(maps[i-1][j]==-20))){
+			break;
+		}
+		j--;
+	}
+	if((j>0)&&(((maps[i][j-1]!=11)&&(maps[i][j-1]!=22)&&(maps[i][j-1]!=0)&&(maps[i][j-1]!=1)&&(maps[i][j-1]!=-1)&&(maps[i][j-1]!=10)&&(maps[i][j-1]!=-10)&&(maps[i][j-1]!=2)&&(maps[i][j-1]!=-2)&&(maps[i][j-1]!=20)&&(maps[i][j-1]!=-20))||((maps[i-3][j-1]!=11)&&(maps[i-3][j-1]!=22)&&(maps[i-3][j-1]!=0)&&(maps[i-3][j-1]!=1)&&(maps[i-3][j-1]!=-1)&&(maps[i-3][j-1]!=10)&&(maps[i-3][j-1]!=-10))||((maps[i-2][j-1]!=11)&&(maps[i-2][j-1]!=22)&&(maps[i-2][j-1]!=0)&&(maps[i-2][j-1]!=1)&&(maps[i-2][j-1]!=-1)&&(maps[i-2][j-1]!=10)&&(maps[i-2][j-1]!=-10))||((maps[i-1][j-1]!=11)&&(maps[i-1][j-1]!=22)&&(maps[i-1][j-1]!=0)&&(maps[i-1][j-1]!=1)&&(maps[i-1][j-1]!=-1)&&(maps[i-1][j-1]!=10)&&(maps[i-1][j-1]!=-10)))){
+		j--;
+		sizeObjX++;
+	}
+	leftJ=j;
+	
+	while(i<200){
+		if((i!=y)&&((maps[i][j]==0)||(maps[i][j]==1)||((j>0)&&(maps[i][j-1]==1))||((j>1)&&(maps[i][j-2]==1))||((j>2)&&(maps[i][j-3]==1))||(maps[i][j]==-1)||((j>0)&&(maps[i][j-1]==-1))||((j>1)&&(maps[i][j-2]==-1))||((j>2)&&(maps[i][j-3]==-1)))){
+			break;
+		}
+		if((i!=y)&&((maps[i][j]==0)||(maps[i][j]==10)||((j>0)&&(maps[i][j-1]==10))||(maps[i][j]==-10)||((j>0)&&(maps[i][j-1]==-10)))){
+			break;
+		}
+		i++;
+	}
+	i--;
+	if((i<200)&&((maps[i+1][j]!=11)&&(maps[i+1][j]!=22)&&(maps[i+1][j]!=0)&&(maps[i+1][j]!=1)&&(maps[i+1][j]!=-1)&&(maps[i+1][j]!=10)&&(maps[i+1][j]!=-10))){
+		i++;
+	}
+	while(i>=0){
+		sizeObjY++;
+		if((maps[i][j]==1)||((j>0)&&(maps[i][j-1]==1))||((j>1)&&(maps[i][j-2]==1))||((j>2)&&(maps[i][j-3]==1))||(maps[i][j]==-1)||((j>0)&&(maps[i][j-1]==-1))||((j>1)&&(maps[i][j-2]==-1))||((j>2)&&(maps[i][j-3]==-1))){
+			break;
+		}
+		if((maps[i][j]==10)||((j>0)&&(maps[i][j-1]==10))||(maps[i][j]==-10)||((j>0)&&(maps[i][j-1]==-10))){
+			break;
+		}
+		i--;
+	}
+	if((i>0)&&((maps[i-1][j]!=11)&&(maps[i-1][j]!=22)&&(maps[i-1][j]!=0)&&(maps[i-1][j]!=1)&&(maps[i-1][j]!=-1)&&(maps[i-1][j]!=10)&&(maps[i-1][j]!=-10))){
+		i--;
+		sizeObjY++;
+	}
+	leftI=i;
+	alert(sizeObjX);
+	alert(sizeObjY);
+}
+
 function canvasClick(evt){
 	var x,y;
 	x=Math.trunc((evt.offsetX)/(45+scale));
@@ -173,6 +241,9 @@ function canvasClick(evt){
 	if((isArrange(x,y,model,direction))||(model==3)||(model==7)||(model==4)){
 		console.log("past");
 		switch (model){
+			case 0:
+				CutObjMaps(x,y);
+				break;
 			case 1:
 				ponton.col++;
 				switch (direction){
