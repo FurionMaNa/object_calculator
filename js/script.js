@@ -58,6 +58,8 @@ function init(){
 	ctx.lineWidth = 2;
 	visibleWeb=true; 
 	fullScreen=false; 
+	scrollCanvas.scrollTop=1200; 
+	scrollCanvas.scrollLeft=900;
 	ctx.strokeStyle = 'white';
 	for(var i=0;i<200;i++){ 
         maps[i]=new Array(); 
@@ -99,8 +101,51 @@ function sum(){
 }
 
 function area(){
-	var width = ponton.width * ponton.col;
-	var height = ponton.height *ponton.col;
+	var up=0;
+	for(var i=0;i<200;i++){
+		for(var j=0;j<200;j++){
+			if(maps[i][j]!=0){
+				up=i;
+				i=300;
+				break;
+			}		
+		}
+	}
+	var left=0;
+	for(var i=0;i<200;i++){
+		for(var j=0;j<200;j++){
+			if(maps[j][i]!=0){
+				left=i;
+				i=300;
+				break;
+			}		
+		}
+	}
+	var bottom=0;
+	for(var i=199;i>=0;i--){
+		for(var j=199;j>=0;j--){
+			if(maps[i][j]!=0){
+				bottom=i;
+				i=0;
+				break;
+			}		
+		}
+	}
+	var right=0;
+	for(var j=199;j>=0;j--){
+		for(var i=0;i<200;i++){
+			if(maps[i][j]!=0){
+				right=j;
+				j=0;
+				break;
+			}		
+		}
+	}
+	console.log("up",up,"left",left,"botton",bottom,"right",right);
+	//var width = ponton.width * ponton.col;
+	//var height = ponton.height *ponton.col;
+	var width = (right/2-left/2)+0.5;
+	var height = ((bottom-up)+1)/2;
 	document.getElementById('gabarites').innerHTML = width + ' x ' + height +' м.';
 }
 
@@ -184,7 +229,7 @@ function CutObjMaps(x,y){
 		j++;
 	}
 	j--;
-	if((j<200)&&(((maps[i][j+1]!=11)&&(maps[i][j+1]!=22)&&(maps[i][j+1]!=0)&&(maps[i][j+1]!=1)&&(maps[i][j+1]!=-1)&&(maps[i][j+1]!=10)&&(maps[i][j+1]!=-10)&&(maps[i][j+1]!=2)&&(maps[i][j+1]!=-2)&&(maps[i][j+1]!=20)&&(maps[i][j+1]!=-20))||((maps[i-3][j+1]!=11)&&(maps[i-3][j+1]!=22)&&(maps[i-3][j+1]!=0)&&(maps[i-3][j+1]!=1)&&(maps[i-3][j+1]!=-1)&&(maps[i-3][j+1]!=10)&&(maps[i-3][j+1]!=-10))||((maps[i-2][j+1]!=11)&&(maps[i-2][j+1]!=22)&&(maps[i-2][j+1]!=0)&&(maps[i-2][j+1]!=1)&&(maps[i-2][j+1]!=-1)&&(maps[i-2][j+1]!=10)&&(maps[i-2][j+1]!=-10))||((maps[i-1][j+1]!=11)&&(maps[i-1][j+1]!=22)&&(maps[i-1][j+1]!=0)&&(maps[i-1][j+1]!=1)&&(maps[i-1][j+1]!=-1)&&(maps[i-1][j+1]!=10)&&(maps[i-1][j+1]!=-10)) ||((maps[i+3][j+1]!=11)&&(maps[i+3][j+1]!=22)&&(maps[i+3][j+1]!=0)&&(maps[i+3][j+1]!=1)&&(maps[i+3][j+1]!=-1)&&(maps[i+3][j+1]!=10)&&(maps[i+3][j+1]!=-10))||((maps[i+2][j+1]!=11)&&(maps[i+2][j+1]!=22)&&(maps[i+2][j+1]!=0)&&(maps[i+2][j+1]!=1)&&(maps[i+2][j+1]!=-1)&&(maps[i+2][j+1]!=10)&&(maps[i+2][j+1]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
+	if((j<200)&&(((maps[i][j+1]!=11)&&(maps[i][j+1]!=22)&&(maps[i][j+1]!=0)&&(maps[i][j+1]!=1)&&(maps[i][j+1]!=-1)&&(maps[i][j+1]!=10)&&(maps[i][j+1]!=-10)&&(maps[i][j+1]!=2)&&(maps[i][j+1]!=-2)&&(maps[i][j+1]!=20)&&(maps[i][j+1]!=-20))||((i>2)&&(maps[i-3][j+1]!=11)&&(maps[i-3][j+1]!=22)&&(maps[i-3][j+1]!=0)&&(maps[i-3][j+1]!=1)&&(maps[i-3][j+1]!=-1)&&(maps[i-3][j+1]!=10)&&(maps[i-3][j+1]!=-10))||((maps[i-2][j+1]!=11)&&(maps[i-2][j+1]!=22)&&(maps[i-2][j+1]!=0)&&(maps[i-2][j+1]!=1)&&(maps[i-2][j+1]!=-1)&&(maps[i-2][j+1]!=10)&&(maps[i-2][j+1]!=-10))||((maps[i-1][j+1]!=11)&&(maps[i-1][j+1]!=22)&&(maps[i-1][j+1]!=0)&&(maps[i-1][j+1]!=1)&&(maps[i-1][j+1]!=-1)&&(maps[i-1][j+1]!=10)&&(maps[i-1][j+1]!=-10)) ||((maps[i+3][j+1]!=11)&&(maps[i+3][j+1]!=22)&&(maps[i+3][j+1]!=0)&&(maps[i+3][j+1]!=1)&&(maps[i+3][j+1]!=-1)&&(maps[i+3][j+1]!=10)&&(maps[i+3][j+1]!=-10))||((maps[i+2][j+1]!=11)&&(maps[i+2][j+1]!=22)&&(maps[i+2][j+1]!=0)&&(maps[i+2][j+1]!=1)&&(maps[i+2][j+1]!=-1)&&(maps[i+2][j+1]!=10)&&(maps[i+2][j+1]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
 		j++;
 	}
 	while(j>=0){
@@ -197,7 +242,7 @@ function CutObjMaps(x,y){
 		}
 		j--;
 	}
-	if((j>0)&&(((maps[i][j-1]!=11)&&(maps[i][j-1]!=22)&&(maps[i][j-1]!=0)&&(maps[i][j-1]!=1)&&(maps[i][j-1]!=-1)&&(maps[i][j-1]!=10)&&(maps[i][j-1]!=-10)&&(maps[i][j-1]!=2)&&(maps[i][j-1]!=-2)&&(maps[i][j-1]!=20)&&(maps[i][j-1]!=-20))||((maps[i-3][j-1]!=11)&&(maps[i-3][j-1]!=22)&&(maps[i-3][j-1]!=0)&&(maps[i-3][j-1]!=1)&&(maps[i-3][j-1]!=-1)&&(maps[i-3][j-1]!=10)&&(maps[i-3][j-1]!=-10))||((maps[i-2][j-1]!=11)&&(maps[i-2][j-1]!=22)&&(maps[i-2][j-1]!=0)&&(maps[i-2][j-1]!=1)&&(maps[i-2][j-1]!=-1)&&(maps[i-2][j-1]!=10)&&(maps[i-2][j-1]!=-10))||((maps[i-1][j-1]!=11)&&(maps[i-1][j-1]!=22)&&(maps[i-1][j-1]!=0)&&(maps[i-1][j-1]!=1)&&(maps[i-1][j-1]!=-1)&&(maps[i-1][j-1]!=10)&&(maps[i-1][j-1]!=-10)) ||((maps[i+3][j+1]!=11)&&(maps[i+3][j+1]!=22)&&(maps[i+3][j+1]!=0)&&(maps[i+3][j+1]!=1)&&(maps[i+3][j+1]!=-1)&&(maps[i+3][j+1]!=10)&&(maps[i+3][j+1]!=-10))||((maps[i+2][j+1]!=11)&&(maps[i+2][j+1]!=22)&&(maps[i+2][j+1]!=0)&&(maps[i+2][j+1]!=1)&&(maps[i+2][j+1]!=-1)&&(maps[i+2][j+1]!=10)&&(maps[i+2][j+1]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
+	if((j>0)&&(((maps[i][j-1]!=11)&&(maps[i][j-1]!=22)&&(maps[i][j-1]!=0)&&(maps[i][j-1]!=1)&&(maps[i][j-1]!=-1)&&(maps[i][j-1]!=10)&&(maps[i][j-1]!=-10)&&(maps[i][j-1]!=2)&&(maps[i][j-1]!=-2)&&(maps[i][j-1]!=20)&&(maps[i][j-1]!=-20))||((i>2)&&(maps[i-3][j-1]!=11)&&(maps[i-3][j-1]!=22)&&(maps[i-3][j-1]!=0)&&(maps[i-3][j-1]!=1)&&(maps[i-3][j-1]!=-1)&&(maps[i-3][j-1]!=10)&&(maps[i-3][j-1]!=-10))||((maps[i-2][j-1]!=11)&&(maps[i-2][j-1]!=22)&&(maps[i-2][j-1]!=0)&&(maps[i-2][j-1]!=1)&&(maps[i-2][j-1]!=-1)&&(maps[i-2][j-1]!=10)&&(maps[i-2][j-1]!=-10))||((maps[i-1][j-1]!=11)&&(maps[i-1][j-1]!=22)&&(maps[i-1][j-1]!=0)&&(maps[i-1][j-1]!=1)&&(maps[i-1][j-1]!=-1)&&(maps[i-1][j-1]!=10)&&(maps[i-1][j-1]!=-10)) ||((maps[i+3][j+1]!=11)&&(maps[i+3][j+1]!=22)&&(maps[i+3][j+1]!=0)&&(maps[i+3][j+1]!=1)&&(maps[i+3][j+1]!=-1)&&(maps[i+3][j+1]!=10)&&(maps[i+3][j+1]!=-10))||((maps[i+2][j+1]!=11)&&(maps[i+2][j+1]!=22)&&(maps[i+2][j+1]!=0)&&(maps[i+2][j+1]!=1)&&(maps[i+2][j+1]!=-1)&&(maps[i+2][j+1]!=10)&&(maps[i+2][j+1]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
 		j--;
 		sizeObjX++;
 	}
@@ -271,6 +316,9 @@ function PastObjMaps(x,y){
 			}
 			ii++;
 		}
+		return true;
+	}else{
+		return false;
 	}
 }
 
@@ -285,8 +333,9 @@ function canvasClick(evt){
 				if(mapsBuff.length==0){
 					CutObjMaps(x,y);
 				}else{
-					PastObjMaps(x-1,y-1);
-					mapsBuff=new Array();
+					if(!PastObjMaps(x,y)){
+						mapsBuff=new Array();
+					}
 				}
 				break;
 			case 1:
@@ -1272,6 +1321,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 }
 
 function deleteObjectFromMouse(){
+	mapsBuff=new Array();
 	model=0;
 	draw();
 }
