@@ -65,7 +65,7 @@ function init(){
 	for(var i=0;i<200;i++){ 
         maps[i]=new Array(); 
         for(var j=0;j<200;j++){ 
-        	maps[i][j]=new Object( {code:0, id:0} );
+        	maps[i][j]=new Object( {code:0, id:-1} );
         }
     } 
 	imgMapsPonton.src = 'img/pontoonbutton.png'; 
@@ -215,84 +215,23 @@ function isArrange(x,y,model,direction){
 }
 
 function CutObjMaps(x,y){
-	var i=y;
-	var j=x;
-	var leftI=0;
-	var leftJ=0;
-	var sizeObjX=0;
-	var sizeObjY=0;
-	if(maps[i][j]!=0){
-		while(j<200){
-			if((j!=x)&&((maps[i][j]==0)||(maps[i][j]==1)||(maps[i][j]==2)||((i>0)&&(maps[i-1][j]==1))||((i>0)&&(maps[i-1][j]==2))||((i>1)&&(maps[i-2][j]==1))||((i>1)&&(maps[i-2][j]==2))||((i>2)&&(maps[i-3][j]==1))||((i>2)&&(maps[i-3][j]==2))||(maps[i][j]==-1)||(maps[i][j]==-2)||((i>0)&&(maps[i-1][j]==-1))||((i>0)&&(maps[i-1][j]==-2))||((i>1)&&(maps[i-2][j]==-1))||((i>1)&&(maps[i-2][j]==-2))||((i>2)&&(maps[i-3][j]==-1))||((i>2)&&(maps[i-3][j]==-2)))){
-				break;
+	var ii=-1;
+	console.log(maps[y][x].code,maps[y][x].id);
+	for(var i=0;i<200;i++){
+		var f=true;
+		var jj=0;
+		for(var j=0;j<200;j++){
+			if(maps[y][x].id==maps[i][j].id){
+				if(f){
+					ii++;
+					mapsBuff[ii]=new Array();
+				}
+				f=false;
+				mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j} );
+				jj++;
 			}
-			if((j!=x)&&((maps[i][j]==0)||(maps[i][j]==10)||(maps[i][j]==20)||((i>0)&&(maps[i-1][j]==10))||((i>0)&&(maps[i-1][j]==20))||(maps[i][j]==-10)||(maps[i][j]==-20)||((i>0)&&(maps[i-1][j]==-10))||((i>0)&&(maps[i-1][j]==-20)))){
-				break;
-			}
-			j++;
 		}
-		j--;
-		if((j<200)&&(((maps[i][j+1]!=11)&&(maps[i][j+1]!=22)&&(maps[i][j+1]!=0)&&(maps[i][j+1]!=1)&&(maps[i][j+1]!=-1)&&(maps[i][j+1]!=10)&&(maps[i][j+1]!=-10)&&(maps[i][j+1]!=2)&&(maps[i][j+1]!=-2)&&(maps[i][j+1]!=20)&&(maps[i][j+1]!=-20))||((i>2)&&(maps[i-3][j+1]!=11)&&(maps[i-3][j+1]!=22)&&(maps[i-3][j+1]!=0)&&(maps[i-3][j+1]!=1)&&(maps[i-3][j+1]!=-1)&&(maps[i-3][j+1]!=10)&&(maps[i-3][j+1]!=-10))||((maps[i-2][j+1]!=11)&&(maps[i-2][j+1]!=22)&&(maps[i-2][j+1]!=0)&&(maps[i-2][j+1]!=1)&&(maps[i-2][j+1]!=-1)&&(maps[i-2][j+1]!=10)&&(maps[i-2][j+1]!=-10))||((maps[i-1][j+1]!=11)&&(maps[i-1][j+1]!=22)&&(maps[i-1][j+1]!=0)&&(maps[i-1][j+1]!=1)&&(maps[i-1][j+1]!=-1)&&(maps[i-1][j+1]!=10)&&(maps[i-1][j+1]!=-10)) ||((maps[i+3][j+1]!=11)&&(maps[i+3][j+1]!=22)&&(maps[i+3][j+1]!=0)&&(maps[i+3][j+1]!=1)&&(maps[i+3][j+1]!=-1)&&(maps[i+3][j+1]!=10)&&(maps[i+3][j+1]!=-10))||((maps[i+2][j+1]!=11)&&(maps[i+2][j+1]!=22)&&(maps[i+2][j+1]!=0)&&(maps[i+2][j+1]!=1)&&(maps[i+2][j+1]!=-1)&&(maps[i+2][j+1]!=10)&&(maps[i+2][j+1]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
-			j++;
-		}
-		while(j>=0){
-			sizeObjX++;
-			if((maps[i][j]==1)||(maps[i][j]==2)||((i>0)&&(maps[i-1][j]==1))||((i>0)&&(maps[i-1][j]==2))||((i>1)&&(maps[i-2][j]==1))||((i>1)&&(maps[i-2][j]==2))||((i>2)&&(maps[i-3][j]==1))||((i>2)&&(maps[i-3][j]==2))||(maps[i][j]==-1)||(maps[i][j]==-2)||((i>0)&&(maps[i-1][j]==-1))||((i>0)&&(maps[i-1][j]==-2))||((i>1)&&(maps[i-2][j]==-1))||((i>1)&&(maps[i-2][j]==-2))||((i>2)&&(maps[i-3][j]==-1))||((i>2)&&(maps[i-3][j]==-2))){
-				break;
-			}
-			if((maps[i][j]==10)||(maps[i][j]==20)||((i>0)&&(maps[i-1][j]==10))||((i>0)&&(maps[i-1][j]==20))||(maps[i][j]==-10)||(maps[i][j]==-20)||((i>0)&&(maps[i-1][j]==-10))||((i>0)&&(maps[i-1][j]==-20))){
-				break;
-			}
-			j--;
-		}
-		if((j>0)&&(((maps[i][j-1]!=11)&&(maps[i][j-1]!=22)&&(maps[i][j-1]!=0)&&(maps[i][j-1]!=1)&&(maps[i][j-1]!=-1)&&(maps[i][j-1]!=10)&&(maps[i][j-1]!=-10)&&(maps[i][j-1]!=2)&&(maps[i][j-1]!=-2)&&(maps[i][j-1]!=20)&&(maps[i][j-1]!=-20))||((i>2)&&(maps[i-3][j-1]!=11)&&(maps[i-3][j-1]!=22)&&(maps[i-3][j-1]!=0)&&(maps[i-3][j-1]!=1)&&(maps[i-3][j-1]!=-1)&&(maps[i-3][j-1]!=10)&&(maps[i-3][j-1]!=-10))||((maps[i-2][j-1]!=11)&&(maps[i-2][j-1]!=22)&&(maps[i-2][j-1]!=0)&&(maps[i-2][j-1]!=1)&&(maps[i-2][j-1]!=-1)&&(maps[i-2][j-1]!=10)&&(maps[i-2][j-1]!=-10))||((maps[i-1][j-1]!=11)&&(maps[i-1][j-1]!=22)&&(maps[i-1][j-1]!=0)&&(maps[i-1][j-1]!=1)&&(maps[i-1][j-1]!=-1)&&(maps[i-1][j-1]!=10)&&(maps[i-1][j-1]!=-10)) ||((maps[i+3][j+1]!=11)&&(maps[i+3][j+1]!=22)&&(maps[i+3][j+1]!=0)&&(maps[i+3][j+1]!=1)&&(maps[i+3][j+1]!=-1)&&(maps[i+3][j+1]!=10)&&(maps[i+3][j+1]!=-10))||((maps[i+2][j+1]!=11)&&(maps[i+2][j+1]!=22)&&(maps[i+2][j+1]!=0)&&(maps[i+2][j+1]!=1)&&(maps[i+2][j+1]!=-1)&&(maps[i+2][j+1]!=10)&&(maps[i+2][j+1]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
-			j--;
-			sizeObjX++;
-		}
-		leftJ=j;
-		j=x;
-		while(i<200){
-			if((i!=y)&&((maps[i][j]==0)||(maps[i][j]==1)||(maps[i][j]==2)||((j>0)&&(maps[i][j-1]==1))||((j>0)&&(maps[i][j-1]==2))||(maps[i][j]==-1)||(maps[i][j]==-2)||((j>0)&&(maps[i][j-1]==-1))||((j>0)&&(maps[i][j-1]==-2)))){
-				break;
-			}
-			if((i!=y)&&((maps[i][j]==0)||(maps[i][j]==10)||(maps[i][j]==20)||((j>0)&&(maps[i][j-1]==10))||((j>0)&&(maps[i][j-1]==20))||(maps[i][j]==-10)||(maps[i][j]==-20)||((j>0)&&(maps[i][j-1]==-10))||((j>0)&&(maps[i][j-1]==-20)) ||((j>1)&&(maps[i][j-2]==10))||((j>1)&&(maps[i][j-2]==20))||((j>1)&&(maps[i][j-2]==-10))||((j>1)&&(maps[i][j-2]==-20)) ||((j>2)&&(maps[i][j-3]==10))||((j>2)&&(maps[i][j-3]==20))||((j>2)&&(maps[i][j-3]==-10))||((j>2)&&(maps[i][j-3]==-20)))){
-				break;
-			}
-			i++;
-		}
-		i--;
-		if((i<200)&&(((maps[i+1][j]!=11)&&(maps[i+1][j]!=22)&&(maps[i+1][j]!=0)&&(maps[i+1][j]!=1)&&(maps[i+1][j]!=-1)&&(maps[i+1][j]!=10)&&(maps[i+1][j]!=-10)&&(maps[i+1][j]!=2)&&(maps[i+1][j]!=-2)&&(maps[i+1][j]!=20)&&(maps[i+1][j]!=-20))||((maps[i+1][j-3]!=11)&&(maps[i+1][j-3]!=22)&&(maps[i+1][j-3]!=0)&&(maps[i+1][j-3]!=1)&&(maps[i+1][j-3]!=-1)&&(maps[i+1][j-3]!=10)&&(maps[i+1][j-3]!=-10))||((maps[i+1][j-2]!=11)&&(maps[i+1][j-2]!=22)&&(maps[i+1][j-2]!=0)&&(maps[i+1][j-2]!=1)&&(maps[i+1][j-2]!=-1)&&(maps[i+1][j-2]!=10)&&(maps[i+1][j-2]!=-10))||((maps[i+1][j-1]!=11)&&(maps[i+1][j-1]!=22)&&(maps[i+1][j-1]!=0)&&(maps[i+1][j-1]!=1)&&(maps[i+1][j-1]!=-1)&&(maps[i+1][j-1]!=10)&&(maps[i+1][j-1]!=-10)) ||((maps[i+1][j+3]!=11)&&(maps[i+1][j+3]!=22)&&(maps[i+1][j+3]!=0)&&(maps[i+1][j+3]!=1)&&(maps[i+1][j+3]!=-1)&&(maps[i+1][j+3]!=10)&&(maps[i+1][j+3]!=-10))||((maps[i+1][j+2]!=11)&&(maps[i+1][j+2]!=22)&&(maps[i+1][j+2]!=0)&&(maps[i+1][j+2]!=1)&&(maps[i+1][j+2]!=-1)&&(maps[i+1][j+2]!=10)&&(maps[i+1][j+2]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)))){
-			i++;
-		}
-		while(i>=0){
-			sizeObjY++;
-			if((maps[i][j]==1)||(maps[i][j]==2)||((j>0)&&(maps[i][j-1]==1))||((j>0)&&(maps[i][j-1]==2))||(maps[i][j]==-1)||(maps[i][j]==-2)||((j>0)&&(maps[i][j-1]==-1))||((j>0)&&(maps[i][j-1]==-2))){
-				break;
-			}
-			if((maps[i][j]==10)||(maps[i][j]==20)||((j>0)&&(maps[i][j-1]==10))||((j>0)&&(maps[i][j-1]==20))||(maps[i][j]==-10)||(maps[i][j]==-20)||((j>0)&&(maps[i][j-1]==-10))||((j>0)&&(maps[i][j-1]==-20)) ||((j>1)&&(maps[i][j-2]==10))||((j>1)&&(maps[i][j-2]==20))||((j>1)&&(maps[i][j-2]==-10))||((j>1)&&(maps[i][j-2]==-20)) ||((j>2)&&(maps[i][j-3]==10))||((j>2)&&(maps[i][j-3]==20))||((j>2)&&(maps[i][j-3]==-10))||((j>2)&&(maps[i][j-3]==-20))){
-				break;
-			}
-			i--;
-		}
-		if((i>0)&&(((maps[i-1][j]!=11)&&(maps[i-1][j]!=22)&&(maps[i-1][j]!=0)&&(maps[i-1][j]!=1)&&(maps[i-1][j]!=-1)&&(maps[i-1][j]!=10)&&(maps[i-1][j]!=-10)&&(maps[i-1][j]!=2)&&(maps[i-1][j]!=-2)&&(maps[i-1][j]!=20)&&(maps[i-1][j]!=-20))||((maps[i-1][j-3]!=11)&&(maps[i-1][j-3]!=22)&&(maps[i-1][j-3]!=0)&&(maps[i-1][j-3]!=1)&&(maps[i-1][j-3]!=-1)&&(maps[i-1][j-3]!=10)&&(maps[i-1][j-3]!=-10))||((maps[i-1][j-2]!=11)&&(maps[i-1][j-2]!=22)&&(maps[i-1][j-2]!=0)&&(maps[i-1][j-2]!=1)&&(maps[i-1][j-2]!=-1)&&(maps[i-1][j-2]!=10)&&(maps[i-1][j-2]!=-10))||((maps[i-1][j-1]!=11)&&(maps[i-1][j-1]!=22)&&(maps[i-1][j-1]!=0)&&(maps[i-1][j-1]!=1)&&(maps[i-1][j-1]!=-1)&&(maps[i-1][j-1]!=10)&&(maps[i-1][j-1]!=-10)) ||((maps[i+1][j+3]!=11)&&(maps[i+1][j+3]!=22)&&(maps[i+1][j+3]!=0)&&(maps[i+1][j+3]!=1)&&(maps[i+1][j+3]!=-1)&&(maps[i+1][j+3]!=10)&&(maps[i+1][j+3]!=-10))||((maps[i+1][j+2]!=11)&&(maps[i+1][j+2]!=22)&&(maps[i+1][j+2]!=0)&&(maps[i+1][j+2]!=1)&&(maps[i+1][j+2]!=-1)&&(maps[i+1][j+2]!=10)&&(maps[i+1][j+2]!=-10))||((maps[i+1][j+1]!=11)&&(maps[i+1][j+1]!=22)&&(maps[i+1][j+1]!=0)&&(maps[i+1][j+1]!=1)&&(maps[i+1][j+1]!=-1)&&(maps[i+1][j+1]!=10)&&(maps[i+1][j+1]!=-10)) ||((maps[i-1][j+3]!=11)&&(maps[i-1][j+3]!=22)&&(maps[i-1][j+3]!=0)&&(maps[i-1][j+3]!=1)&&(maps[i-1][j+3]!=-1)&&(maps[i-1][j+3]!=10)&&(maps[i-1][j+3]!=-10))||((maps[i-1][j+2]!=11)&&(maps[i-1][j+2]!=22)&&(maps[i-1][j+2]!=0)&&(maps[i-1][j+2]!=1)&&(maps[i-1][j+2]!=-1)&&(maps[i-1][j+2]!=10)&&(maps[i-1][j+2]!=-10))||((maps[i-1][j+1]!=11)&&(maps[i-1][j+1]!=22)&&(maps[i-1][j+1]!=0)&&(maps[i-1][j+1]!=1)&&(maps[i-1][j+1]!=-1)&&(maps[i-1][j+1]!=10)&&(maps[i-1][j+1]!=-10)))){
-			i--;
-			sizeObjY++;
-		}
-		leftI=i;
-		
-		var b=leftJ;
-		mapsBuff=new Array();
-		for(var i=0;i<sizeObjY;i++){
-			mapsBuff[i]=new Array();
-			leftJ=b;
-			for(var j=0;j<sizeObjX;j++){
-				mapsBuff[i][j]=maps[leftI][leftJ];
-				maps[leftI][leftJ]=0;
-				leftJ++;
-			}
-			leftI++;
-		}
-	}
+	}	
 }
 
 function PastObjMaps(x,y){
