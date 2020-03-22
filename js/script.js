@@ -215,52 +215,74 @@ function isArrange(x,y,model,direction){
 }
 
 function CutObjMaps(x,y){
-	var ii=-1;
-	console.log(maps[y][x].code,maps[y][x].id);
-	for(var i=0;i<200;i++){
-		var f=true;
-		var jj=0;
-		for(var j=0;j<200;j++){
-			if(maps[y][x].id==maps[i][j].id){
-				if(f){
-					ii++;
-					mapsBuff[ii]=new Array();
+	if(maps[y][x].code!=0){
+		var ii=-1;
+		var idM=maps[y][x].id;
+		console.log(maps[y][x].code,maps[y][x].id);
+		for(var i=0;i<200;i++){
+			var f=true;
+			var jj=0;
+			for(var j=0;j<200;j++){
+				if(idM==maps[i][j].id){
+					if(f){
+						ii++;
+						mapsBuff[ii]=new Array();
+					}
+					f=false;
+					mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j} );
+					jj++;
+					maps[i][j]=new Object( {code:0, id:-1} );
 				}
-				f=false;
-				mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j} );
-				jj++;
 			}
-		}
-	}	
+		}	
+	}
 }
 
 function PastObjMaps(x,y){
-	var f=true;
-	for(var i=y;i<y+mapsBuff.length;i++){
-		for(var j=x;j<x+mapsBuff[0].length;j++){
-			try{
-				if(maps[i][j]!=0){
-					f=false;
+	var maxWidth=0;
+	var startJ=0;
+	for(var i=0;i<mapsBuff.length;i++){
+		if(mapsBuff[i].length>maxWidth){
+			maxWidth=mapsBuff[i].length
+			startJ=mapsBuff[i][0].j;
+		}
+	}
+	var xx=x;
+	var yy=y;
+	for(var i=0;i<mapsBuff.length;i++){
+		var j=0;
+		var xx=x;
+		var s=startJ;
+		while(j<mapsBuff[i].length){
+			if(mapsBuff[i][j].j==s){
+				if(maps[yy][xx].code!=0){
+					return true;
 				}
-			}catch{
-				f=false;
+				j++;
 			}
+			xx++;
+			s++;
 		}
+		yy++;
 	}
-	if(f){
-		var ii=0;
-		for(var i=y;i<y+mapsBuff.length;i++){
-			var jj=0;
-			for(var j=x;j<x+mapsBuff[0].length;j++){
-				maps[i][j]=mapsBuff[ii][jj];
-				jj++;
+	var xx=x;
+	var yy=y;
+	for(var i=0;i<mapsBuff.length;i++){
+		var j=0;
+		var xx=x;
+		var s=startJ;
+		while(j<mapsBuff[i].length){
+			if(mapsBuff[i][j].j==s){
+				maps[yy][xx].code=mapsBuff[i][j].code;
+				maps[yy][xx].id=mapsBuff[i][j].id;
+				j++;
 			}
-			ii++;
+			xx++;
+			s++;
 		}
-		return true;
-	}else{
-		return false;
+		yy++;
 	}
+	return false;
 }
 
 function canvasClick(evt){
