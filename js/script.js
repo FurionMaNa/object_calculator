@@ -860,12 +860,15 @@ function ArrangeRack(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=857;
+				maps[y-1][x].id=maps[y][x].id;
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
 				}else{
 					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=856;
+						maps[y][x+1].id=maps[y][x].id;
 					}
 				}
 			}
@@ -873,13 +876,16 @@ function ArrangeRack(x,y,direction,mX,mY){
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
 				}
 				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
 				}
 			}else{
 				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			maps[y+1][x].code=858;
+		 			maps[y+1][x].id=maps[y][x].id;
 		 		}
 			}
 		}	
@@ -887,12 +893,15 @@ function ArrangeRack(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=857;
+				maps[y-1][x].id=maps[y][x].id;
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
 				}else{
 					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=856;
+						maps[y][x+1].id=maps[y][x].id;
 					}
 				}
 			}
@@ -900,13 +909,16 @@ function ArrangeRack(x,y,direction,mX,mY){
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
 				}
 				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
 				}
 			}else{
 				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			maps[y+1][x].code=858;
+		 			maps[y+1][x].id=maps[y][x].id;
 		 		}
 			}
 		}	
@@ -916,9 +928,11 @@ function ArrangeRack(x,y,direction,mX,mY){
 			switch (maps[y][x].code){
 				case 2:
 					maps[y-1][x].code=857;
+					maps[y-1][x].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y-1][x].code=857;
+					maps[y-1][x].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -928,9 +942,11 @@ function ArrangeRack(x,y,direction,mX,mY){
 			switch (maps[y][x].code){
 				case -20:
 					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -940,9 +956,11 @@ function ArrangeRack(x,y,direction,mX,mY){
 			switch (maps[y-3][x].code){
 				case -2:
 					maps[y+1][x].code=858;
+					maps[y+1][x].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y+1][x].code=858;
+					maps[y+1][x].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -952,9 +970,11 @@ function ArrangeRack(x,y,direction,mX,mY){
 			switch (maps[y][x-3].code){
 				case 20:
 					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
 					break;
 			}
 		}
