@@ -980,19 +980,22 @@ function ArrangeRack(x,y,direction,mX,mY){
 		}
 	}
 }
-/////////////////////
+
 function ArrangeConnector(x,y,direction,mX,mY){
 	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=757;
+				maps[y-1][x].id=maps[y][x].id;
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
 				}else{
 					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=756;
+						maps[y][x+1].id=maps[y][x].id;
 					}
 				}
 			}
@@ -1000,13 +1003,16 @@ function ArrangeConnector(x,y,direction,mX,mY){
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
 				}
 				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
 				}
 			}else{
 				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			maps[y+1][x].code=758;
+		 			maps[y+1][x].id=maps[y][x].id;
 		 		}
 			}
 		}	
@@ -1014,12 +1020,15 @@ function ArrangeConnector(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=757;
+				maps[y-1][x].id=maps[y][x].id;
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
 				}else{
 					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=756;
+						maps[y][x+1].id=maps[y][x].id;
 					}
 				}
 			}
@@ -1027,13 +1036,16 @@ function ArrangeConnector(x,y,direction,mX,mY){
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
 					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
 				}
 				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
 				}
 			}else{
 				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			maps[y+1][x].code=758;
+		 			maps[y+1][x].id=maps[y][x].id;
 		 		}
 			}
 		}	
@@ -1043,9 +1055,11 @@ function ArrangeConnector(x,y,direction,mX,mY){
 			switch (maps[y][x].code){
 				case 2:
 					maps[y-1][x].code=757;
+					maps[y-1][x].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y-1][x].code=757;
+					maps[y-1][x].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -1055,9 +1069,11 @@ function ArrangeConnector(x,y,direction,mX,mY){
 			switch (maps[y][x].code){
 				case -20:
 					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -1067,9 +1083,11 @@ function ArrangeConnector(x,y,direction,mX,mY){
 			switch (maps[y-3][x].code){
 				case -2:
 					maps[y+1][x].code=758;
+					maps[y+1][x].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y+1][x].code=758;
+					maps[y+1][x].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -1079,9 +1097,11 @@ function ArrangeConnector(x,y,direction,mX,mY){
 			switch (maps[y][x-3].code){
 				case 20:
 					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
 					break;
 				case 1222:
 					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
 					break;
 			}
 		}
@@ -1093,14 +1113,20 @@ function ArrangeStairs(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if((maps[y][x+1].code==11)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
 				maps[y-1][x].code=557;
+				maps[y-1][x].id=maps[y][x].id;
+				maps[y-1][x+1].id=maps[y][x].id;
 				maps[y-1][x+1].code=-557;
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
 					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
 					maps[y+1][x-1].code=-555;
 				}else{
 					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&(maps[y-1][x].code!=-557)&&(maps[y+2][x].code!=-558)&&(maps[y-1][x].code!=-657)&&(maps[y+2][x].code!=-658)){
 						maps[y][x+1].code=556;
+						maps[y][x+1].id=maps[y][x].id;
+						maps[y+1][x+1].id=maps[y][x].id;
 						maps[y+1][x+1].code=-556;
 					}
 				}
@@ -1109,15 +1135,21 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
 				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==1)||(maps[y][x-1].code==-1))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
 					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
 					maps[y+1][x-1].code=-555;
 				}
 				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
 					maps[y][x+1].code=556;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
 					maps[y+1][x+1].code=-556;
 				}
 			}else{
 				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x-1].code!=-556)&&(maps[y][x-1].code!=-656)){
 		 			maps[y+1][x].code=558;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 			maps[y+1][x+1].id=maps[y][x].id;
 		 			maps[y+1][x+1].code=-558;
 		 		}
 			}
@@ -1126,14 +1158,20 @@ function ArrangeStairs(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if((maps[y][x+1].code==11)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
 				maps[y-1][x].code=557;
+				maps[y-1][x].id=maps[y][x].id;
+				maps[y-1][x+1].id=maps[y][x].id;
 				maps[y-1][x+1].code=-557;
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=657))&&((y==0)||(maps[y-1][x].code!=557))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
 					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
 					maps[y+1][x-1].code=-555;
 				}else{
 					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&(maps[y-1][x].code!=-557)&&(maps[y+2][x].code!=-558)&&(maps[y-1][x].code!=-657)&&(maps[y+2][x].code!=-658)){
 						maps[y][x+1].code=556;
+						maps[y][x+1].id=maps[y][x].id;
+						maps[y][x+1].id=maps[y][x].id;
 						maps[y+1][x+1].code=-556;
 					}
 				}
@@ -1142,15 +1180,21 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
 				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==10)||(maps[y][x-1].code==-10))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
 					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
 					maps[y+1][x-1].code=-555;
 				}
 				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-658))){
 					maps[y][x+1].code=556;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
 					maps[y+1][x+1].code=-556;
 				}
 			}else{
 				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-556)&&(maps[y][x-1].code!=-655)&&(maps[y][x-1].code!=-656)){
 		 			maps[y+1][x].code=558;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 			maps[y+1][x+1].id=maps[y][x].id;
 		 			maps[y+1][x+1].code=-558;
 		 		}
 			}
@@ -1161,10 +1205,14 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			switch (maps[y][x].code){
 				case 2:
 					maps[y-1][x].code=557;
+					maps[y-1][x].id=maps[y][x].id;
+					maps[y-1][x+1].id=maps[y][x].id;
 					maps[y-1][x+1].code=-557;
 					break;
 				case 1222:
 					maps[y-1][x-1].code=557;
+					maps[y-1][x-1].id=maps[y][x].id;
+					maps[y-1][x].id=maps[y][x].id;
 					maps[y-1][x].code=-557;
 					break;
 			}
@@ -1175,10 +1223,14 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			switch (maps[y][x].code){
 				case -20:
 					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
 					maps[y+1][x-1].code=-555;
 					break;
 				case 1222:
 					maps[y-1][x-1].code=555;
+					maps[y-1][x-1].id=maps[y][x].id;
+					maps[y][x-1].id=maps[y][x].id;
 					maps[y][x-1].code=-555;
 					break;
 			}
@@ -1189,10 +1241,14 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			switch (maps[y-3][x].code){
 				case -2:
 					maps[y+1][x].code=558;
+					maps[y+1][x].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
 					maps[y+1][x+1].code=-558;
 					break;
 				case 1222:
 					maps[y+1][x-1].code=558;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x].id=maps[y][x].id;
 					maps[y+1][x].code=-558;
 					break;
 			}
@@ -1203,10 +1259,14 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			switch (maps[y][x-3].code){
 				case 20:
 					maps[y][x+1].code=556;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
 					maps[y+1][x+1].code=-555;
 					break;
 				case 1222:
 					maps[y-1][x+1].code=555;
+					maps[y-1][x+1].id=maps[y][x].id;
+					maps[y][x+1].id=maps[y][x].id;
 					maps[y][x+1].code=-555;
 					break;
 			}
