@@ -10,14 +10,20 @@ var imgMouse = new Image();
 var imgMaps=new Image(); 
 var imgGhost=new Image(); 
 var imgMapsPonton=new Image();
-var imgMapsSkhodnya=new Image;
+var imgMapsSkhodnya=new Image();
+var imgMapsStairs=new Image();
+var imgMapsBench=new Image();
+var imgMapsRack=new Image();
+var imgMapsDuck=new Image();
 var maps=new Array();
+var mapsBuff=new Array();
 var direction=0;
 var model=0;
 var ponton = new Object();
 var color='blue';
 var mouseX=0;
 var mouseY=0;
+var id=0;
 ponton.width = 1000;
 ponton.height = 2000;
 ponton.price = 16800;
@@ -53,15 +59,21 @@ function init(){
 	ctx.lineWidth = 2;
 	visibleWeb=true; 
 	fullScreen=false; 
+	scrollCanvas.scrollTop=1200; 
+	scrollCanvas.scrollLeft=900;
 	ctx.strokeStyle = 'white';
 	for(var i=0;i<200;i++){ 
         maps[i]=new Array(); 
         for(var j=0;j<200;j++){ 
-        	maps[i][j]=0;
+        	maps[i][j]=new Object( {code:0, id:-1} );
         }
     } 
 	imgMapsPonton.src = 'img/pontoonbutton.png'; 
 	imgMapsSkhodnya.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+	imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';
+	imgMapsBench.src='img/bench.png';
+	imgMapsRack.src='img/rack.png';
+	imgMapsDuck.src='img/connector.png';
 	draw(); 
 	canvas.onmousemove = function(evt) {canvasMoveMouse(evt)};
 	canvas.onclick=function(evt){canvasClick(evt)};
@@ -90,8 +102,51 @@ function sum(){
 }
 
 function area(){
-	var width = ponton.width * ponton.col;
-	var height = ponton.height *ponton.col;
+	var up=0;
+	for(var i=0;i<200;i++){
+		for(var j=0;j<200;j++){
+			if(maps[i][j].code!=0){
+				up=i;
+				i=300;
+				break;
+			}		
+		}
+	}
+	var left=0;
+	for(var i=0;i<200;i++){
+		for(var j=0;j<200;j++){
+			if(maps[j][i].code!=0){
+				left=i;
+				i=300;
+				break;
+			}		
+		}
+	}
+	var bottom=0;
+	for(var i=199;i>=0;i--){
+		for(var j=199;j>=0;j--){
+			if(maps[i][j].code!=0){
+				bottom=i;
+				i=0;
+				break;
+			}		
+		}
+	}
+	var right=0;
+	for(var j=199;j>=0;j--){
+		for(var i=0;i<200;i++){
+			if(maps[i][j].code!=0){
+				right=j;
+				j=0;
+				break;
+			}		
+		}
+	}
+	console.log("up",up,"left",left,"botton",bottom,"right",right);
+	//var width = ponton.width * ponton.col;
+	//var height = ponton.height *ponton.col;
+	var width = (right/2-left/2)+0.5;
+	var height = ((bottom-up)+1)/2;
 	document.getElementById('gabarites').innerHTML = width + ' x ' + height +' м.';
 }
 
@@ -109,7 +164,8 @@ function quantity(){
 function clearCanvas(){
 	for(var i=0;i<200;i++){ 
         for(var j=0;j<200;j++){ 
-        	maps[i][j]=0;
+        	maps[i][j].code=0;
+        	maps[i][j].id=0;
         }
 	} 
 	document.getElementById('summ').innerHTML = '0 руб.';
@@ -150,7 +206,7 @@ function isArrange(x,y,model,direction){
 	}
 	for(var i=y;i<countY+y;i++){
 		for(var j=x;j<countX+x;j++){
-			if(maps[i][j]!=0){ 
+			if(maps[i][j].code!=0){ 
 				return false;
 			}
 		}
@@ -158,13 +214,93 @@ function isArrange(x,y,model,direction){
 	return true;
 }
 
+function CutObjMaps(x,y){
+	if(maps[y][x].code!=0){
+		var ii=-1;
+		var idM=maps[y][x].id;
+		console.log(maps[y][x].code,maps[y][x].id);
+		for(var i=0;i<200;i++){
+			var f=true;
+			var jj=0;
+			for(var j=0;j<200;j++){
+				if(idM==maps[i][j].id){
+					if(f){
+						ii++;
+						mapsBuff[ii]=new Array();
+					}
+					f=false;
+					mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j} );
+					jj++;
+					maps[i][j]=new Object( {code:0, id:-1} );
+				}
+			}
+		}	
+	}
+}
+
+function PastObjMaps(x,y){
+	var maxWidth=0;
+	var startJ=0;
+	for(var i=0;i<mapsBuff.length;i++){
+		if(mapsBuff[i].length>maxWidth){
+			maxWidth=mapsBuff[i].length
+			startJ=mapsBuff[i][0].j;
+		}
+	}
+	var xx=x;
+	var yy=y;
+	for(var i=0;i<mapsBuff.length;i++){
+		var j=0;
+		var xx=x;
+		var s=startJ;
+		while(j<mapsBuff[i].length){
+			if(mapsBuff[i][j].j==s){
+				if(maps[yy][xx].code!=0){
+					return true;
+				}
+				j++;
+			}
+			xx++;
+			s++;
+		}
+		yy++;
+	}
+	var xx=x;
+	var yy=y;
+	for(var i=0;i<mapsBuff.length;i++){
+		var j=0;
+		var xx=x;
+		var s=startJ;
+		while(j<mapsBuff[i].length){
+			if(mapsBuff[i][j].j==s){
+				maps[yy][xx].code=mapsBuff[i][j].code;
+				maps[yy][xx].id=mapsBuff[i][j].id;
+				j++;
+			}
+			xx++;
+			s++;
+		}
+		yy++;
+	}
+	return false;
+}
+
 function canvasClick(evt){
 	var x,y;
 	x=Math.trunc((evt.offsetX)/(45+scale));
 	y=Math.trunc((evt.offsetY)/(45+scale));
-	if(isArrange(x,y,model,direction)){
+	if((isArrange(x,y,model,direction))||(model==3)||(model==7)||(model==4)){
 		console.log("past");
 		switch (model){
+			case 0:
+				if(mapsBuff.length==0){
+					CutObjMaps(x,y);
+				}else{
+					if(!PastObjMaps(x,y)){
+						mapsBuff=new Array();
+					}
+				}
+				break;
 			case 1:
 				ponton.col++;
 				switch (direction){
@@ -172,61 +308,69 @@ function canvasClick(evt){
 						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
+								maps[i][j].code=11;
+								maps[i][j].id=id;
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x]=12;break;
-							case 'blue':maps[y][x]=1;break;
-							case 'green':maps[y][x]=13;break;
-							case 'white':maps[y][x]=14;break;
-							case 'gray':maps[y][x]=15;break;
+							case 'red':maps[y][x].code=12;break;
+							case 'blue':maps[y][x].code=1;break;
+							case 'green':maps[y][x].code=13;break;
+							case 'white':maps[y][x].code=14;break;
+							case 'gray':maps[y][x].code=15;break;
 						}
+						id++;
 						break;
 					case 1:
 						x-=2;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
-								maps[i][j]=11;
+								maps[i][j].code=11;
+								maps[i][j].id=id;
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x]=-102;break;
-							case 'blue':maps[y][x]=-10;break;
-							case 'green':maps[y][x]=-103;break;
-							case 'white':maps[y][x]=-104;break;
-							case 'gray':maps[y][x]=-105;break;
+							case 'red':maps[y][x].code=-102;break;
+							case 'blue':maps[y][x].code=-10;break;
+							case 'green':maps[y][x].code=-103;break;
+							case 'white':maps[y][x].code=-104;break;
+							case 'gray':maps[y][x].code=-105;break;
 						}
 						break;
 					case 2:
 						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
+								maps[i][j].code=11;
+								maps[i][j].id=id;
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x]=-12;break;
-							case 'blue':maps[y][x]=-1;break;
-							case 'green':maps[y][x]=-13;break;
-							case 'white':maps[y][x]=-14;break;
-							case 'gray':maps[y][x]=-15;break;
+							case 'red':maps[y][x].code=-12;break;
+							case 'blue':maps[y][x].code=-1;break;
+							case 'green':maps[y][x].code=-13;break;
+							case 'white':maps[y][x].code=-14;break;
+							case 'gray':maps[y][x].code=-15;break;
 						}
+						id++;
 						break;
 					case 3:
 						x-=2;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
-								maps[i][j]=11;
+								maps[i][j].code=11;
+								maps[i][j].id=id;
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x]=102;break;
-							case 'blue':maps[y][x]=10;break;
-							case 'green':maps[y][x]=103;break;
-							case 'white':maps[y][x]=104;break;
-							case 'gray':maps[y][x]=105;break;
+							case 'red':maps[y][x].code=102;break;
+							case 'blue':maps[y][x].code=10;break;
+							case 'green':maps[y][x].code=103;break;
+							case 'white':maps[y][x].code=104;break;
+							case 'gray':maps[y][x].code=105;break;
 						}
+
+						id++;
 						break;
 				}
 				break;
@@ -237,231 +381,74 @@ function canvasClick(evt){
 						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
-								maps[i][j]=22;
+								maps[i][j].code=22;
+								maps[i][j].id=id;
 							}
 						}
-						maps[y][x]=2;
-						maps[y][x+1]=1222;
+						maps[y][x].code=2;
+						maps[y][x+1].code=1222;
+						id++;
 						break;
 					case 1:
 						x-=2;y--;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
-								maps[i][j]=22;
+								maps[i][j].code=22;
+								maps[i][j].id=id;
 							}
 						}
 
-						maps[y+1][x]=1222;
-						maps[y][x]=-20;
+						maps[y+1][x].code=1222;
+						maps[y][x].code=-20;
+
+						id++;
 						break;
 					case 2:
 						x--;y-=2;
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
-								maps[i][j]=22;
+								maps[i][j].code=22;
+								maps[i][j].id=id;
 							}
 						}
-						maps[y][x+1]=1222;
-						maps[y][x]=-2;
+						maps[y][x+1].code=1222;
+						maps[y][x].code=-2;
+
+						id++;
 						break;
 					case 3:
 						x-=2;
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
-								maps[i][j]=22;
+								maps[i][j].code=22;
+								maps[i][j].id=id;
 							}
 						}
-						maps[y+1][x]=1222;
-						maps[y][x]=20;
+						maps[y+1][x].code=1222;
+						maps[y][x].code=20;
+						id++;
 						break;
 				}
 				break;
 			case 3:
 				stairs.col++;
-				switch (direction){
-					case 0:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=3;
-						break;
-					case 1:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-30;
-						break;
-					case 2:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-3;
-						break;
-					case 3:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=30;
-						break;
-				}
+				ArrangeStairs(x,y,direction,evt.offsetX,evt.offsetY);
 				break;
 			case 4:
 				connector.col++;
-				switch (direction){
-					case 0:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=4;
-						break;
-					case 1:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-40;
-						break;
-					case 2:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-4;
-						break;
-					case 3:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=40;
-						break;
-				}
+				ArrangeConnector(x,y,direction,evt.offsetX,evt.offsetY);
 				break;
 			case 5:
 				stays.col++;
-				switch (direction){
-					
-					case 0:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=5;
-						break;
-					case 1:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-50;
-						break;
-					case 2:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-5;
-						break;
-					case 3:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=50;
-						break;
-				}
+				ArrangeRack(x,y,direction,evt.offsetX,evt.offsetY);
 				break;
 			case 6:
 				sitconnect.col++;
-				switch (direction){
-					
-					case 0:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=6;
-						break;
-					case 1:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-60;
-						break;
-					case 2:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-6;
-						break;
-					case 3:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=60;
-						break;
-				}
+				ArrangeBench(x,y,direction,evt.offsetX,evt.offsetY);
 				break;
 			case 7:
 				duck.col++;
-				switch (direction){
-					case 0:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=7;
-						break;
-					case 1:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-70;
-						break;
-					case 2:
-						for (var i=y;i<y+2;i++){
-							for(var j=x;j<x+1;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=-7;
-						break;
-					case 3:
-						for (var i=y;i<y+1;i++){
-							for(var j=x;j<x+2;j++){
-								maps[i][j]=11;
-							}
-						}
-						maps[y][x]=70;
-						break;
-				}
+				ArrangeDuck(x,y,direction,evt.offsetX,evt.offsetY);
 				break;
 		}
 	}
@@ -487,11 +474,13 @@ function canvasMoveMouse(evt){
 			}
 			switch (direction){
 				case 0:case 2:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(180*Math.PI/180);
@@ -499,11 +488,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 1:case 3:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(90*Math.PI/180);
@@ -523,11 +514,13 @@ function canvasMoveMouse(evt){
 			}
 			switch (direction){
 				case 0:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(0*Math.PI/180);
@@ -535,11 +528,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 2:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(180*Math.PI/180);
@@ -547,11 +542,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 1:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(270*Math.PI/180);
@@ -559,11 +556,13 @@ function canvasMoveMouse(evt){
 					ctx.restore();
 					break;
 				case 3:
-					ctx.save();
-					ctx.translate(x,y);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
+					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						ctx.save();
+						ctx.translate(x,y);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+					}
 					ctx.save();
 					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 					ctx.rotate(90*Math.PI/180);
@@ -573,49 +572,837 @@ function canvasMoveMouse(evt){
 			} 
 			break;
 		case 3:
-			switch (direction){
-				case 0:imgMouse.src = 'img/test3.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 2:imgMouse.src = 'img/test3Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 1:imgMouse.src = 'img/test3Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
-				case 3:imgMouse.src = 'img/test3Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/photo-objects-png/stairs/stairs-blue.png';imgMouse.src = 'img/photo-objects-png/stairs/stairs-blue.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
+			switch (direction){
+				case 0:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+				case 2:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+				case 1:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+				case 3:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
+					break;
+			} 
 			break;
 		case 4:
-			switch (direction){
-				case 0:imgMouse.src = 'img/test4.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 2:imgMouse.src = 'img/test4Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 1:imgMouse.src = 'img/test4Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
-				case 3:imgMouse.src = 'img/test4Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/connector.png';imgMouse.src = 'img/connector.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
+			switch (direction){
+				case 2:case 0:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+				case 3:case 1:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+			} 
 			break;
 		case 5:
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/rack.png';imgMouse.src = 'img/rack.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
+			}
 			switch (direction){
-				case 0:imgMouse.src = 'img/test5.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 2:imgMouse.src = 'img/test5Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 1:imgMouse.src = 'img/test5Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
-				case 3:imgMouse.src = 'img/test5Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
+				case 2:case 0:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+				case 3:case 1:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
 			} 
 			break;
 		case 6:
-			switch (direction){
-				case 0:imgMouse.src = 'img/test6.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 2:imgMouse.src = 'img/test6Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 1:imgMouse.src = 'img/test6Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
-				case 3:imgMouse.src = 'img/test6Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/photo-objects-png/stairs/stairs-blue.png';imgMouse.src = 'img/bench.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
+			switch (direction){
+				case 0:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+					ctx.restore();
+					break;
+				case 2:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+					ctx.restore();
+					break;
+				case 1:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale), (45+scale)*2);
+					ctx.restore();
+					break;
+				case 3:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+					ctx.restore();
+					break;
+			} 
 			break;
 		case 7:
-			switch (direction){
-				case 0:imgMouse.src = 'img/test7.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 2:imgMouse.src = 'img/test7Up.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale), (45+scale)*2); break;
-				case 1:imgMouse.src = 'img/test7Left.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
-				case 3:imgMouse.src = 'img/test7Right.png'; ctx.drawImage(imgMouse, evt.offsetX, evt.offsetY, (45+scale)*2, (45+scale));break;
+			switch (color){
+				case 'red':imgMouse.src = 'img/pontoon-redbutton.png';break;
+				case 'blue':imgGhost.src='img/connector.png';imgMouse.src = 'img/connector.png';break;
+				case 'green':imgMouse.src = 'img/pontoon-green.png';break;
+				case 'white':imgMouse.src = 'img/pontoonbutton.png';break;
+				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
+			switch (direction){
+				case 2:case 0:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+				case 3:case 1:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+			} 
 			break;
 	}
 }
 
+function ArrangeDuck(x,y,direction,mX,mY){
+	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+		console.log(mY-y*(45+scale)<(45+scale)/2);
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+				maps[y-1][x].code=957;
+				maps[y-1][x].id=maps[y][x].id;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=955;
+					maps[y][x-1].id=maps[y][x].id;
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+						maps[y][x+1].code=956;
+						maps[y][x+1].id=maps[y][x].id;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=955;
+					maps[y][x-1].id=maps[y][x].id;
+				}
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					maps[y][x+1].code=956;
+					maps[y][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+		 			maps[y+1][x].code=958;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 		}
+			}
+		}	
+	}else{
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+				maps[y-1][x].code=957;
+				maps[y-1][x].id=maps[y][x].id;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=955;
+					maps[y][x-1].id=maps[y][x].id;
+				}else{
+					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+						maps[y][x+1].code=956;
+						maps[y][x+1].id=maps[y][x].id;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x]!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=955;
+					maps[y][x-1].id=maps[y][x].id;
+				}
+				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					maps[y][x+1].code=956;
+					maps[y][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+		 			maps[y+1][x].code=958;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 		}
+			}
+		}	
+	}
+	if((maps[y][x].code==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
+		if((y>0)&&(maps[y-1][x].code==0)){
+			switch (maps[y][x].code){
+				case 2:
+					maps[y-1][x].code=957;
+					maps[y-1][x].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y-1][x].code=957;
+					maps[y-1][x].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
+		if((x>0)&&(maps[y][x-1].code==0)){
+			switch (maps[y][x].code){
+				case -20:
+					maps[y][x-1].code=955;
+					maps[y][x-1].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y][x-1].code=955;
+					maps[y][x-1].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
+		if((y<199)&&(maps[y+1][x].code==0)){
+			switch (maps[y-3][x].code){
+				case -2:
+					maps[y+1][x].code=958;
+					maps[y+1][x].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y+1][x].code=958;
+					maps[y+1][x].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
+		if((x<199)&&(maps[y][x+1].code==0)){
+			switch (maps[y][x-3].code){
+				case 20:
+					maps[y][x+1].code=956;
+					maps[y][x+1].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y][x+1].code=956;
+					maps[y][x+1].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+}
+
+function ArrangeRack(x,y,direction,mX,mY){
+	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+		console.log(mY-y*(45+scale)<(45+scale)/2);
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+				maps[y-1][x].code=857;
+				maps[y-1][x].id=maps[y][x].id;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+						maps[y][x+1].code=856;
+						maps[y][x+1].id=maps[y][x].id;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
+				}
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+		 			maps[y+1][x].code=858;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 		}
+			}
+		}	
+	}else{
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+				maps[y-1][x].code=857;
+				maps[y-1][x].id=maps[y][x].id;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
+				}else{
+					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+						maps[y][x+1].code=856;
+						maps[y][x+1].id=maps[y][x].id;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
+				}
+				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+		 			maps[y+1][x].code=858;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 		}
+			}
+		}	
+	}
+	if((maps[y][x].code==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
+		if((y>0)&&(maps[y-1][x].code==0)){
+			switch (maps[y][x].code){
+				case 2:
+					maps[y-1][x].code=857;
+					maps[y-1][x].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y-1][x].code=857;
+					maps[y-1][x].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
+		if((x>0)&&(maps[y][x-1].code==0)){
+			switch (maps[y][x].code){
+				case -20:
+					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y][x-1].code=855;
+					maps[y][x-1].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
+		if((y<199)&&(maps[y+1][x].code==0)){
+			switch (maps[y-3][x].code){
+				case -2:
+					maps[y+1][x].code=858;
+					maps[y+1][x].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y+1][x].code=858;
+					maps[y+1][x].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
+		if((x<199)&&(maps[y][x+1].code==0)){
+			switch (maps[y][x-3].code){
+				case 20:
+					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y][x+1].code=856;
+					maps[y][x+1].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+}
+
+function ArrangeConnector(x,y,direction,mX,mY){
+	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+		console.log(mY-y*(45+scale)<(45+scale)/2);
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+				maps[y-1][x].code=757;
+				maps[y-1][x].id=maps[y][x].id;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+						maps[y][x+1].code=756;
+						maps[y][x+1].id=maps[y][x].id;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
+				}
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+		 			maps[y+1][x].code=758;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 		}
+			}
+		}	
+	}else{
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+				maps[y-1][x].code=757;
+				maps[y-1][x].id=maps[y][x].id;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
+				}else{
+					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+						maps[y][x+1].code=756;
+						maps[y][x+1].id=maps[y][x].id;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
+					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
+				}
+				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+		 			maps[y+1][x].code=758;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 		}
+			}
+		}	
+	}
+	if((maps[y][x]==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
+		if((y>0)&&(maps[y-1][x].code==0)){
+			switch (maps[y][x].code){
+				case 2:
+					maps[y-1][x].code=757;
+					maps[y-1][x].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y-1][x].code=757;
+					maps[y-1][x].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
+		if((x>0)&&(maps[y][x-1].code==0)){
+			switch (maps[y][x].code){
+				case -20:
+					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y][x-1].code=755;
+					maps[y][x-1].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
+		if((y<199)&&(maps[y+1][x].code==0)){
+			switch (maps[y-3][x].code){
+				case -2:
+					maps[y+1][x].code=758;
+					maps[y+1][x].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y+1][x].code=758;
+					maps[y+1][x].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
+		if((x<199)&&(maps[y][x+1].code==0)){
+			switch (maps[y][x-3].code){
+				case 20:
+					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
+					break;
+				case 1222:
+					maps[y][x+1].code=756;
+					maps[y][x+1].id=maps[y][x].id;
+					break;
+			}
+		}
+	}
+}
+
+function ArrangeStairs(x,y,direction,mX,mY){
+	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if((maps[y][x+1].code==11)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
+				maps[y-1][x].code=557;
+				maps[y-1][x].id=maps[y][x].id;
+				maps[y-1][x+1].id=maps[y][x].id;
+				maps[y-1][x+1].code=-557;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
+					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].code=-555;
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&(maps[y-1][x].code!=-557)&&(maps[y+2][x].code!=-558)&&(maps[y-1][x].code!=-657)&&(maps[y+2][x].code!=-658)){
+						maps[y][x+1].code=556;
+						maps[y][x+1].id=maps[y][x].id;
+						maps[y+1][x+1].id=maps[y][x].id;
+						maps[y+1][x+1].code=-556;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==1)||(maps[y][x-1].code==-1))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
+					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].code=-555;
+				}
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+					maps[y][x+1].code=556;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].code=-556;
+				}
+			}else{
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x-1].code!=-556)&&(maps[y][x-1].code!=-656)){
+		 			maps[y+1][x].code=558;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 			maps[y+1][x+1].id=maps[y][x].id;
+		 			maps[y+1][x+1].code=-558;
+		 		}
+			}
+		}	
+	}else{
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if((maps[y][x+1].code==11)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
+				maps[y-1][x].code=557;
+				maps[y-1][x].id=maps[y][x].id;
+				maps[y-1][x+1].id=maps[y][x].id;
+				maps[y-1][x+1].code=-557;
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=657))&&((y==0)||(maps[y-1][x].code!=557))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
+					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].code=-555;
+				}else{
+					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&(maps[y-1][x].code!=-557)&&(maps[y+2][x].code!=-558)&&(maps[y-1][x].code!=-657)&&(maps[y+2][x].code!=-658)){
+						maps[y][x+1].code=556;
+						maps[y][x+1].id=maps[y][x].id;
+						maps[y][x+1].id=maps[y][x].id;
+						maps[y+1][x+1].code=-556;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==10)||(maps[y][x-1].code==-10))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
+					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].code=-555;
+				}
+				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-658))){
+					maps[y][x+1].code=556;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].code=-556;
+				}
+			}else{
+				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-556)&&(maps[y][x-1].code!=-655)&&(maps[y][x-1].code!=-656)){
+		 			maps[y+1][x].code=558;
+		 			maps[y+1][x].id=maps[y][x].id;
+		 			maps[y+1][x+1].id=maps[y][x].id;
+		 			maps[y+1][x+1].code=-558;
+		 		}
+			}
+		}	
+	}
+	if((maps[y][x].code==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
+		if((y>0)&&(maps[y-1][x].code==0)){
+			switch (maps[y][x].code){
+				case 2:
+					maps[y-1][x].code=557;
+					maps[y-1][x].id=maps[y][x].id;
+					maps[y-1][x+1].id=maps[y][x].id;
+					maps[y-1][x+1].code=-557;
+					break;
+				case 1222:
+					maps[y-1][x-1].code=557;
+					maps[y-1][x-1].id=maps[y][x].id;
+					maps[y-1][x].id=maps[y][x].id;
+					maps[y-1][x].code=-557;
+					break;
+			}
+		}
+	}
+	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
+		if((x>0)&&(maps[y][x-1].code==0)){
+			switch (maps[y][x].code){
+				case -20:
+					maps[y][x-1].code=555;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x-1].code=-555;
+					break;
+				case 1222:
+					maps[y-1][x-1].code=555;
+					maps[y-1][x-1].id=maps[y][x].id;
+					maps[y][x-1].id=maps[y][x].id;
+					maps[y][x-1].code=-555;
+					break;
+			}
+		}
+	}
+	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
+		if((y<199)&&(maps[y+1][x].code==0)){
+			switch (maps[y-3][x].code){
+				case -2:
+					maps[y+1][x].code=558;
+					maps[y+1][x].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].code=-558;
+					break;
+				case 1222:
+					maps[y+1][x-1].code=558;
+					maps[y+1][x-1].id=maps[y][x].id;
+					maps[y+1][x].id=maps[y][x].id;
+					maps[y+1][x].code=-558;
+					break;
+			}
+		}
+	}
+	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
+		if((x<199)&&(maps[y][x+1].code==0)){
+			switch (maps[y][x-3].code){
+				case 20:
+					maps[y][x+1].code=556;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].id=maps[y][x].id;
+					maps[y+1][x+1].code=-555;
+					break;
+				case 1222:
+					maps[y-1][x+1].code=555;
+					maps[y-1][x+1].id=maps[y][x].id;
+					maps[y][x+1].id=maps[y][x].id;
+					maps[y][x+1].code=-555;
+					break;
+			}
+		}
+	}
+}
+
+function ArrangeBench(x,y,direction,mX,mY){//Требуется изменение
+	if(((y<1)||(maps[y][x-2]!=11))&&((y<1)||(maps[y][x-2]!=11))&&((y<1)||(maps[y][x-2]!=1))&&((y<1)||(maps[y][x-2]!=-1))&&((y<1)||(maps[y][x-2]!=-10))&&((y<1)||(maps[y][x-2]!=10))&&((y<1)||(maps[y][x-2]!=2))&&((y<1)||(maps[y][x-2]!=-2))&&((y<1)||(maps[y][x-2]!=-20))&&((y<1)||(maps[y][x-2]!=20))&&((y<1)||(maps[y][x-2]!=22))&&((y<1)||(maps[y][x+2]!=11))&&((y>198)||(maps[y][x+2]!=1))&&((y>198)||(maps[y][x+2]!=-1))&&((y>198)||(maps[y][x+2]!=-10))&&((y>198)||(maps[y][x+2]!=10))&&((y>198)||(maps[y][x+2]!=2))&&((y>198)||(maps[y][x+2]!=-2))&&((y>198)||(maps[y][x+2]!=-20))&&((y>198)||(maps[y][x+2]!=20))&&((y>198)||(maps[y][x+2]!=22))){
+		if((y>0)&&(maps[y-1][x]==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if((maps[y][x+1]==11)&&(maps[y+1][x]==11)&&(maps[y-1][x+1]==0)&&(maps[y][x-1]!=555)&&(maps[y][x+2]!=556)&&(maps[y][x-1]!=655)&&(maps[y][x+2]!=656)){
+				maps[y-1][x]=657;
+				maps[y-1][x+1]=-657;
+			}else{
+				if((maps[y][x+1]==11)&&((maps[y+1][x]==11)||(maps[y+1][x]==1)||(maps[y+1][x]==-1)||(maps[y+1][x]==10)||(maps[y+1][x]==-10))&&(maps[y+1][x-1]==0)&&(maps[y][x-1]==0)&&((y==0)||(maps[y-1][x]!=557))&&((y==0)||(maps[y-1][x]!=657))&&(maps[y+2][x]!=558)&&(maps[y+2][x]!=658)){
+					maps[y][x-1]=655;
+					maps[y+1][x-1]=-655;
+				}else{
+					if(((maps[y][x-1]==1)||(maps[y][x-1]==-1)||(maps[y][x-1]==11))&&(maps[y+1][x]==11)&&(maps[y][x+1]==0)&&(maps[y+1][x+1]==0)&&(maps[y-1][x]!=-557)&&(maps[y+2][x]!=-558)&&(maps[y-1][x]!=-657)&&(maps[y+2][x]!=-658)){
+						
+						maps[y][x+1]=656;
+						maps[y+1][x+1]=-656;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x]!=0)||(maps[y+1][x]!=0))&&(maps[y+1][x]!=0)){
+				if(((maps[y][x+1]==11)||(maps[y-1][x]==1)||(maps[y][x-1]==-1))&&((maps[y+1][x]==11)||(maps[y+1][x]==1)||(maps[y+1][x]==-1)||(maps[y+1][x]==10)||(maps[y+1][x]==-10))&&(maps[y+1][x-1]==0)&&(maps[y][x-1]==0)&&((y==0)||(maps[y-1][x]!=557))&&((y==0)||(maps[y-1][x]!=657))&&((y==199)||(maps[y+2][x]!=558))&&((y==199)||(maps[y+2][x]!=658))){
+					maps[y][x-1]=655;
+					maps[y+1][x-1]=-655;
+				}
+				if(((maps[y][x-1]==1)||(maps[y][x-1]==-1)||(maps[y][x-1]==11))&&(maps[y+1][x]==11)&&(maps[y][x+1]==0)&&(maps[y+1][x+1]==0)&&((y==0)||(maps[y-1][x]!=-557))&&((y==0)||(maps[y-1][x]!=-657))&&((y==199)||(maps[y+2][x]!=-558))&&((y==199)||(maps[y+2][x]!=-658))){
+					maps[y][x+1]=656;
+					maps[y+1][x+1]=-656;
+				}
+			}else{
+				if(((maps[y-4][x]==1)||(maps[y-4][x]==-1)||(maps[y][x+1]==11))&&(maps[y][x+1]==11)&&(maps[y+1][x+1]==0)&&(maps[y+1][x]==0)&&(maps[y][x-1]!=-555)&&(maps[y][x-1]!=-655)&&(maps[y][x-1]!=-556)&&(maps[y][x-1]!=-656)){
+		 			maps[y+1][x]=658;
+		 			maps[y+1][x+1]=-658;
+		 		}
+			}
+		}	
+	}else{
+		if((y>0)&&(maps[y-1][x]==0)&&(mY-y*(45+scale)<(45+scale)/2)){
+			if((maps[y][x+1]==11)&&(maps[y+1][x]==11)&&(maps[y-1][x+1]==0)&&(maps[y][x-1]!=555)&&(maps[y][x+2]!=556)&&(maps[y][x-1]!=655)&&(maps[y][x+2]!=656)){
+				maps[y-1][x]=657;
+				maps[y-1][x+1]=-657;
+			}else{
+				if((maps[y][x+1]==11)&&((maps[y+1][x]==11)||(maps[y+1][x]==1)||(maps[y+1][x]==-1)||(maps[y+1][x]==10)||(maps[y+1][x]==-10))&&(maps[y+1][x-1]==0)&&(maps[y][x-1]==0)&&(maps[y+1][x-1]==0)&&((y==0)||(maps[y-1][x]!=657))&&((y==0)||(maps[y-1][x]!=557))&&(maps[y+2][x]!=558)&&(maps[y+2][x]!=658)){
+					maps[y][x-1]=655;
+					maps[y+1][x-1]=-655;
+				}else{
+					if(((maps[y][x-1]==10)||(maps[y][x-1]==-10)||(maps[y][x-1]==11))&&(maps[y+1][x]==11)&&(maps[y][x+1]==0)&&(maps[y+1][x+1]==0)&&(maps[y-1][x]!=-557)&&(maps[y+2][x]!=-558)&&(maps[y-1][x]!=-657)&&(maps[y+2][x]!=-658)){
+						maps[y][x+1]=656;
+						maps[y+1][x+1]=-656;
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x]!=0)||(maps[y+1][x]!=0))&&(maps[y+1][x]!=0)){
+				if(((maps[y][x+1]==11)||(maps[y-1][x]==10)||(maps[y][x-1]==-10))&&((maps[y+1][x]==11)||(maps[y+1][x]==1)||(maps[y+1][x]==-1)||(maps[y+1][x]==10)||(maps[y+1][x]==-10))&&(maps[y+1][x-1]==0)&&(maps[y][x-1]==0)&&(maps[y+1][x-1]==0)&&((y==0)||(maps[y-1][x]!=557))&&((y==0)||(maps[y-1][x]!=657))&&((y==199)||(maps[y+2][x]!=558))&&((y==199)||(maps[y+2][x]!=658))){
+					maps[y][x-1]=655;
+					maps[y+1][x-1]=-655;
+				}
+				if(((maps[y][x-1]==10)||(maps[y][x-1]==-10)||(maps[y][x-1]==11))&&(maps[y+1][x]==11)&&(maps[y][x+1]==0)&&(maps[y+1][x+1]==0)&&((y==0)||(maps[y-1][x]!=-557))&&((y==199)||(maps[y+2][x]!=-558))&&((y==0)||(maps[y-1][x]!=-657))&&((y==199)||(maps[y+2][x]!=-658))){
+					maps[y][x+1]=656;
+					maps[y+1][x+1]=-656;
+				}
+			}else{
+				if(((maps[y-4][x]==10)||(maps[y-4][x]==-10)||(maps[y][x+1]==11))&&(maps[y][x+1]==11)&&(maps[y+1][x+1]==0)&&(maps[y+1][x]==0)&&(maps[y][x-1]!=-555)&&(maps[y][x-1]!=-556)&&(maps[y][x-1]!=-655)&&(maps[y][x-1]!=-656)){
+		 			maps[y+1][x]=658;
+		 			maps[y+1][x+1]=-658;
+		 		}
+			}
+		}	
+	}
+	if((maps[y][x]==2)||((maps[y][x]==1222)&&(maps[y][x-1]==2))){
+		if((y>0)&&(maps[y-1][x]==0)){
+			switch (maps[y][x]){
+				case 2:
+					maps[y-1][x]=657;
+					maps[y-1][x+1]=-657;
+					break;
+				case 1222:
+					maps[y-1][x-1]=657;
+					maps[y-1][x]=-657;
+					break;
+			}
+		}
+	}
+	if((maps[y][x]==-20)||((maps[y][x]==1222)&&(maps[y-1][x]==-20))){
+		if((x>0)&&(maps[y][x-1]==0)){
+			switch (maps[y][x]){
+				case -20:
+					maps[y][x-1]=655;
+					maps[y+1][x-1]=-655;
+					break;
+				case 1222:
+					maps[y-1][x-1]=655;
+					maps[y][x-1]=-655;
+					break;
+			}
+		}
+	}
+	if((maps[y-3][x]==-2)||((maps[y-3][x]==1222)&&(maps[y-3][x-1]==-2))){
+		if((y<199)&&(maps[y+1][x]==0)){
+			switch (maps[y-3][x]){
+				case -2:
+					maps[y+1][x]=658;
+					maps[y+1][x+1]=-658;
+					break;
+				case 1222:
+					maps[y+1][x-1]=658;
+					maps[y+1][x]=-658;
+					break;
+			}
+		}
+	}
+	if((maps[y][x-3]==20)||((maps[y][x-3]==1222)&&(maps[y-1][x-3]==20))){
+		if((x<199)&&(maps[y][x+1]==0)){
+			switch (maps[y][x-3]){
+				case 20:
+					maps[y][x+1]=656;
+					maps[y+1][x+1]=-655;
+					break;
+				case 1222:
+					maps[y-1][x+1]=655;
+					maps[y][x+1]=-655;
+					break;
+			}
+		}
+	}
+}
+
 function deleteObjectFromMouse(){
+	mapsBuff=new Array();
 	model=0;
 	draw();
 }
@@ -632,11 +1419,11 @@ function draw(){
 	for(var i=iStart-10;i<iEnd+10;i++){
 		for(var j=jStart-10;j<jEnd+10;j++){
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
-				if(maps[i][j]!=0){
+				if(maps[i][j].code!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
 				}
-				switch(maps[i][j]){
+				switch(maps[i][j].code){
 					case 11:break;
 					case 0:
 						if(visibleWeb){
@@ -649,10 +1436,66 @@ function draw(){
 					case 1:case -1: 
 						ctx.rotate(180*Math.PI/180);
 						ctx.drawImage(imgMapsPonton, 0, 0, (45+scale)*2, (45+scale)*4);
+						if((j>0)&&(maps[i][j-1].code==555)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0+(45+scale), (45+scale)+15, (45+scale)+15);
+						}
+						if((i>0)&&(maps[i-1][j].code==557)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
+						}
+						if((j>0)&&(maps[i][j-1].code==655)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(0*Math.PI/180);
+							ctx.drawImage(imgMapsBench, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale), (45+scale)*2);
+						}
+						if((i>0)&&(maps[i-1][j].code==657)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsBench, 0-(45+scale)*4, 0, (45+scale), (45+scale)*2);
+						}
 						break;
 					case 10:case -10: 
 						ctx.rotate(90*Math.PI/180);
 						ctx.drawImage(imgMapsPonton, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						if((j>0)&&(maps[i][j-1].code==555)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0+(45+scale), (45+scale)+15, (45+scale)+15);
+						}
+						if((i>0)&&(maps[i+1][j].code==557)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
+						}
+						if((j>0)&&(maps[i][j-1].code==655)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(0*Math.PI/180);
+							ctx.drawImage(imgMapsBench, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale), (45+scale)*2);
+						}
+						if((i>0)&&(maps[i+1][j].code==657)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsBench, 0-(45+scale)*4, 0, (45+scale), (45+scale)*2);
+						}
 						break;
 					case 12:case -12: imgMaps.src = 'img/pontoon-redbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
 					case 102:case -102:imgMaps.src = 'img/pontoon-redbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
@@ -665,6 +1508,21 @@ function draw(){
 					case 2:   
 						ctx.rotate(0*Math.PI/180);
 						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
+						if((i>0)&&(maps[i-1][j].code==557)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
+						}
+
+						if((i>0)&&(maps[i-1][j].code==657)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsBench, 0-(45+scale)*4, 0, (45+scale), (45+scale)*2);
+						}
 						break;
 					case -2:  
 						ctx.rotate(180*Math.PI/180);
@@ -673,15 +1531,18 @@ function draw(){
 					case 20:   
 						ctx.rotate(90*Math.PI/180);
 						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						if((j>0)&&(maps[i][j-1].code==555)){
+							ctx.restore();
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0+(45+scale), (45+scale)+15, (45+scale)+15);
+						}
 						break;
 					case -20: 
 						ctx.rotate(270*Math.PI/180);
 						ctx.drawImage(imgMapsSkhodnya, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						break;	
-					case 3:   imgMaps.src = 'img/test3.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case -3:  imgMaps.src = 'img/test3Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case 30:  imgMaps.src = 'img/test3Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case -30: imgMaps.src = 'img/test3Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
 					case 4:   imgMaps.src = 'img/test4.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
 					case -4:  imgMaps.src = 'img/test4Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
 					case 40:  imgMaps.src = 'img/test4Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
@@ -699,7 +1560,7 @@ function draw(){
 					case 70:  imgMaps.src = 'img/test7Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
 					case -70: imgMaps.src = 'img/test7Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
 				}
-				if(maps[i][j]!=0){
+				if(maps[i][j].code!=0){
 					ctx.restore();
 				}
 			}
@@ -708,15 +1569,15 @@ function draw(){
 	for(var i=iStart-10;i<iEnd+10;i++){
 		for(var j=jStart-10;j<jEnd+10;j++){
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
-				if(maps[i][j]!=0){
+				if(maps[i][j].code!=0){
 					ctx.save();
 					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
 				}
-				switch(maps[i][j]){
+				switch(maps[i][j].code){
 					case 1:case -1:
  						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+4;ii++){
-							if((j>0)&&(maps[ii][j-1]==11)){
+							if((j>0)&&(maps[ii][j-1].code==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -724,7 +1585,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 								sitconnect.col++;
 							}
-							if((j>3)&&(((maps[ii][j-4]==20)||(maps[ii][j-4]==1222))&&((maps[ii+1][j-4]==20)||(maps[ii+1][j-4]==1222)||(maps[ii-1][j-4]==1222)||(maps[ii-1][j-4]==20)))){
+							if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+1][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -732,7 +1593,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 								sitconnect.col++;
 							}
-							if((j<199)&&(((maps[ii][j+2]==-20)||(maps[ii][j+2]==1222))&&((maps[ii+2][j+1]==-20)||(maps[ii+1][j+2]==1222)||(maps[ii-1][j+2]==1222)||(maps[ii-1][j+2]==-20)))){
+							if((j<199)&&(((maps[ii][j+2].code==-20)||(maps[ii][j+2].code==1222))&&((maps[ii+2][j+1].code==-20)||(maps[ii+1][j+2].code==1222)||(maps[ii-1][j+2].code==1222)||(maps[ii-1][j+2].code==-20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+2),sizeY*(i+(ii-i)));
@@ -743,7 +1604,7 @@ function draw(){
 
 						}
 						for (var jj=j;jj<j+2;jj++){
-							if((i>0)&&(maps[i-1][jj]==11)){
+							if((i>0)&&(maps[i-1][jj].code==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
@@ -751,7 +1612,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
 							}
-							if((i>3)&&(((maps[i-4][jj]==-2)||(maps[i-4][jj]==1222))&&((maps[i-4][jj-1]==-2)||(maps[i-4][jj-1]==1222)||(maps[i-4][jj+1]==1222)||(maps[i-4][jj+1]==-2)))){
+							if((i>3)&&(((maps[i-4][jj].code==-2)||(maps[i-4][jj].code==1222))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
@@ -759,7 +1620,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
 							}
-							if((i<199)&&(((maps[i+4][jj]==2)||(maps[i+4][jj]==1222))&&((maps[i+4][jj-1]==2)||(maps[i+4][jj-1]==1222)||(maps[i+4][jj+1]==1222)||(maps[i+4][jj+1]==2)))){
+							if((i<199)&&(((maps[i+4][jj].code==2)||(maps[i+4][jj].code==1222))&&((maps[i+4][jj-1].code==2)||(maps[i+4][jj-1].code==1222)||(maps[i+4][jj+1].code==1222)||(maps[i+4][jj+1].code==2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i+4));
@@ -772,7 +1633,7 @@ function draw(){
 					case 10:case -10: 
 						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+2;ii++){
-							if((j>0)&&(maps[ii][j-1]==11)){
+							if((j>0)&&(maps[ii][j-1].code==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -780,7 +1641,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
 							}
-							if((j<199)&&(((maps[ii][j+4]==-20)||(maps[ii][j+4]==1222))&&((maps[ii+2][j+4]==-20)||(maps[ii+1][j+4]==1222)||(maps[ii-1][j+4]==1222)||(maps[ii-1][j+4]==-20)))){
+							if((j<199)&&(((maps[ii][j+4].code==-20)||(maps[ii][j+4].code==1222))&&((maps[ii+2][j+4].code==-20)||(maps[ii+1][j+4].code==1222)||(maps[ii-1][j+4].code==1222)||(maps[ii-1][j+4].code==-20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
@@ -788,7 +1649,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
 								sitconnect.col++;
 							}
-							if((j<199)&&(((maps[ii][j-4]==20)||(maps[ii][j-4]==1222))&&((maps[ii+2][j-4]==20)||(maps[ii+1][j-4]==1222)||(maps[ii-1][j-4]==1222)||(maps[ii-1][j-4]==20)))){
+							if((j<199)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -798,7 +1659,7 @@ function draw(){
 							}
 						}
 						for (var jj=j;jj<j+4;jj++){
-							if((i>0)&&(maps[i-1][jj]==11)){
+							if((i>0)&&(maps[i-1][jj].code==11)){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
@@ -806,7 +1667,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);
 								sitconnect.col++;
 							}
-							if((i<198)&&(((maps[i+2][jj]==2)||((maps[i+2][jj]==1222)&&(maps[i+2][jj-1]==2)))&&((maps[i+2][jj-1]==2)||(maps[i+2][jj-1]==1222)||(maps[i+2][jj+1]==1222)||(maps[i+2][jj+1]==2)))){
+							if((i<198)&&(((maps[i+2][jj].code==2)||((maps[i+2][jj].code==1222)&&(maps[i+2][jj-1].code==2)))&&((maps[i+2][jj-1].code==2)||(maps[i+2][jj-1].code==1222)||(maps[i+2][jj+1].code==1222)||(maps[i+2][jj+1].code==2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+2));
@@ -814,7 +1675,7 @@ function draw(){
  								ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);		
 								sitconnect.col++;
 							}
-							if((i<199)&&(i>3)&&(((maps[i-4][jj]==-2)||((maps[i-4][jj]==1222)&&(maps[i-4][jj-1]==-2)))&&((maps[i-4][jj-1]==-2)||(maps[i-4][jj-1]==1222)||(maps[i-4][jj+1]==1222)||(maps[i-4][jj+1]==-2)))){
+							if((i<199)&&(i>3)&&(((maps[i-4][jj].code==-2)||((maps[i-4][jj].code==1222)&&(maps[i-4][jj-1].code==-2)))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i));
@@ -827,7 +1688,7 @@ function draw(){
 					case -2:
 						imgMaps.src = 'img/connector.png';
 						for (var jj=j;jj<j+2;jj++){
-							if((i<195)&&((maps[i+4][jj]==2)||((maps[i+4][jj]==1222)&&(maps[i+4][jj-1]==2)))){
+							if((i<195)&&((maps[i+4][jj].code==2)||((maps[i+4][jj].code==1222)&&(maps[i+4][jj-1].code==2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+4));
@@ -840,7 +1701,7 @@ function draw(){
 					case 20:
 						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+2;ii++){
-							if((j<195)&&((maps[ii][j+4]==-20)||((maps[ii][j+4]==1222)&&(maps[ii-1][j+4]==-20)))){
+							if((j<195)&&((maps[ii][j+4].code==-20)||((maps[ii][j+4].code==1222)&&(maps[ii-1][j+4].code==-20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
@@ -850,8 +1711,134 @@ function draw(){
 							}
 						}
 						break;
+						
+					case 555:
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMapsStairs, 0-(45+scale)*4, 0, (45+scale)+15, (45+scale)+15);
+						break;
+					case 556:
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMapsStairs, 0+(45+scale)*2, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);
+						break;
+					case 558:
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMapsStairs, 0-(45+scale)*2, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);
+						break;
+					case 557:
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);
+						break;
+
+					case 655:
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+						break;
+					case 656:
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+						break;
+					case 658:
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+						break;
+					case 657:
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+						break;
+
+					case 755:
+						imgMaps.src = 'img/connector.png';
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*i);
+						ctx.rotate(90*Math.PI/180);
+ 						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+					case 756:
+						imgMaps.src = 'img/connector.png';
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j),sizeY*i);
+						ctx.rotate(90*Math.PI/180);
+ 						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+					case 758:
+						imgMaps.src = 'img/connector.png';
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*i);
+						ctx.rotate(180*Math.PI/180);
+ 						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+					case 757:
+						imgMaps.src = 'img/connector.png';
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*(i+1));
+						ctx.rotate(180*Math.PI/180);
+ 						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+
+					case 855:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*i);
+						ctx.rotate(0*Math.PI/180);
+ 						ctx.drawImage(imgMapsRack, 0-sizeX/2, 0, sizeX, sizeY);	
+						break;
+					case 856:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j),sizeY*i);
+						ctx.rotate(180*Math.PI/180);
+ 						ctx.drawImage(imgMapsRack, 0-sizeY/2, 0-sizeY, sizeX, sizeY);	
+						break;
+					case 858:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*i);
+						ctx.rotate(270*Math.PI/180);
+ 						ctx.drawImage(imgMapsRack, 0-sizeY/2, 0-sizeY, sizeX, sizeY);	
+						break;
+					case 857:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*(i+1));
+						ctx.rotate(90*Math.PI/180);
+ 						ctx.drawImage(imgMapsRack, 0-sizeY/2, 0, sizeX, sizeY);	
+						break;
+
+					case 955:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*i);
+						ctx.rotate(90*Math.PI/180);
+ 						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+					case 956:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j),sizeY*i);
+						ctx.rotate(90*Math.PI/180);
+ 						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+					case 958:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*i);
+						ctx.rotate(180*Math.PI/180);
+ 						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+					case 957:
+						ctx.restore();
+						ctx.save();
+						ctx.translate(sizeX*(j+1),sizeY*(i+1));
+						ctx.rotate(180*Math.PI/180);
+ 						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
+						break;
+
 				}
-				if(maps[i][j]!=0){
+				if(maps[i][j].code!=0){
 					ctx.restore();
 				}
 			}
@@ -906,38 +1893,30 @@ function scaleMinusClick(){
 } 
 
 function model1onClick(){  
-	imgMouse.src = 'img/test.png'; 
 	model=1;
 } 
 
-function model2onClick(){
-	imgMouse.src = 'img/test2.png'; 
+function model2onClick(){ 
 	model=2;
 } 
 
 function model3onClick(){
-	imgMouse.src = 'img/test3.png'; 
 	model=3;
 } 
 
 function model4onClick(){
-	imgMouse.src = 'img/test4.png'; 
 	model=4;
-
 } 
 
 function model5onClick(){
-	imgMouse.src = 'img/test5.png'; 
 	model=5;
 } 
 
-function model6onClick(){
-	imgMouse.src = 'img/test6.png'; 
+function model6onClick(){ 
 	model=6;
 } 
 
 function model7onClick(){
-	imgMouse.src = 'img/test7.png'; 
 	model=7;
 } 
 

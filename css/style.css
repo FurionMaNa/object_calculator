@@ -12,6 +12,19 @@
     height: 100%; 
     box-sizing: border-box;
     }
+    .rotate{
+        position:absolute;
+        
+        width:26px;
+        height:24px;
+        text-align:center;
+        border-radius:50%;
+        color:#fff;
+
+        top:80px;
+        background:#fff;
+        z-index:990;
+    }
     #object__changer{
         z-index:1000;
         display:block;
