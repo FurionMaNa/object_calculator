@@ -48,6 +48,8 @@ sitconnect.col = 0;
 var duck = new Object();
 duck.col = 0;
 duck.price = 0;
+var rotateArr=new Array();
+var buffEvt;
 
 function init(){ 
 	workArea = document.getElementById('workArea'); 
@@ -55,6 +57,13 @@ function init(){
 	scrollCanvas=document.getElementById('scrollCanvas');
 	canvas = document.getElementById('main'); 
 	ctx = canvas.getContext('2d'); 
+	rotateArr[0]=0;
+	rotateArr[1]=0;
+	rotateArr[2]=0;
+	rotateArr[3]=0;
+	rotateArr[4]=0;
+	rotateArr[5]=0;
+	rotateArr[6]=0;
 	scale=-10; 
 	ctx.lineWidth = 2;
 	visibleWeb=true; 
@@ -75,14 +84,107 @@ function init(){
 	imgMapsRack.src='img/rack.png';
 	imgMapsDuck.src='img/connector.png';
 	draw(); 
-	canvas.onmousemove = function(evt) {canvasMoveMouse(evt)};
+	canvas.onmousemove = function(evt) {buffEvt=evt;canvasMoveMouse(evt)};
 	canvas.onclick=function(evt){canvasClick(evt)};
-	canvas.onmousewheel=function(evt){
-		if(direction==3) direction=-1;
-		direction++;
-		canvasMoveMouse(evt);
-	};
 } 
+
+
+function model1onClick(){  
+	direction=rotateArr[0];
+	model=1;
+} 
+
+function model2onClick(){ 
+	direction=rotateArr[1];
+	model=2;
+} 
+
+function model3onClick(){
+	direction=rotateArr[2];
+	model=3;
+} 
+
+function model4onClick(){
+	direction=rotateArr[3];
+	model=4;
+} 
+
+function model5onClick(){
+	direction=rotateArr[4];
+	model=5;
+} 
+
+function model6onClick(){ 
+	direction=rotateArr[6];
+	model=6;
+} 
+
+function model7onClick(){
+	direction=rotateArr[5];
+	model=7;
+} 
+
+function onRotate(id){
+	switch (id){
+		case 1:
+			if(model==1){
+				direction=rotateArr[0];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[0]=direction;
+			}
+			break;
+		case 2:
+			if(model==2){
+				direction=rotateArr[1];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[1]=direction;
+			}
+			break;
+		case 3:
+			if(model==3){
+				direction=rotateArr[2];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[2]=direction;
+			}
+			break;
+		case 4:
+			if(model==4){
+				direction=rotateArr[3];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[3]=direction;
+			}
+			break;
+		case 5:
+			if(model==5){
+				direction=rotateArr[4];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[4]=direction;
+			}
+			break;
+		case 6:
+			if(model==7){
+				direction=rotateArr[5];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[5]=direction;
+			}
+			break;
+		case 7:
+			if(model==6){
+				direction=rotateArr[6];
+				if(direction==3) direction=-1;
+					direction++;
+				rotateArr[6]=direction;
+			}
+			break;
+	}
+	canvasMoveMouse(buffEvt);
+}
 
 function change_color(id, colors){
 	adress = "img/pontoon-" + id + ".png";
@@ -1890,34 +1992,6 @@ function scaleMinusClick(){
 		canvas.height=(30+scale)*200; 
 		draw(); 
 	} 
-} 
-
-function model1onClick(){  
-	model=1;
-} 
-
-function model2onClick(){ 
-	model=2;
-} 
-
-function model3onClick(){
-	model=3;
-} 
-
-function model4onClick(){
-	model=4;
-} 
-
-function model5onClick(){
-	model=5;
-} 
-
-function model6onClick(){ 
-	model=6;
-} 
-
-function model7onClick(){
-	model=7;
 } 
 
 document.addEventListener('DOMContentLoaded', init)
