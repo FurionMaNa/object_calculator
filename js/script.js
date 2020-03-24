@@ -1324,12 +1324,18 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)){
 			switch (maps[y][x].code){
 				case 2:
-					maps[y-1][x].code=557;
-					maps[y-1][x+1].code=-557;
+					ctx.save();//557
+					ctx.translate(xx,yy);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgGhost, 0-(45+scale)*2, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 				case 1222:
-					maps[y-1][x-1].code=557;
-					maps[y-1][x].code=-557;
+					ctx.save();//557
+					ctx.translate(xx,yy);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 			}
 		}
@@ -1338,12 +1344,18 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		if((x>0)&&(maps[y][x-1].code==0)){
 			switch (maps[y][x].code){
 				case -20:
-					maps[y][x-1].code=555;
-					maps[y+1][x-1].code=-555;
+					ctx.save();//555
+					ctx.translate(xx,yy);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgGhost,0, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 				case 1222:
-					maps[y-1][x-1].code=555;
-					maps[y][x-1].code=-555;
+					ctx.save();//555
+					ctx.translate(xx,yy);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgGhost,0-(45+scale), 0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 			}
 		}
@@ -1352,12 +1364,18 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:
-					maps[y+1][x].code=558;
-					maps[y+1][x+1].code=-558;
+					ctx.save();//558
+					ctx.translate(xx,yy);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgGhost,0, 0, (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 				case 1222:
-					maps[y+1][x-1].code=558;
-					maps[y+1][x].code=-558;
+					ctx.save();//558
+					ctx.translate(xx,yy);
+					ctx.rotate(0*Math.PI/180);
+					ctx.drawImage(imgGhost,0-(45+scale), 0, (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 			}
 		}
@@ -1366,12 +1384,18 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		if((x<199)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:
-					maps[y][x+1].code=556;
-					maps[y+1][x+1].code=-555;
+					ctx.save();//556
+					ctx.translate(xx,yy);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgGhost,0-(45+scale)*2, 0, (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 				case 1222:
-					maps[y-1][x+1].code=555;
-					maps[y][x+1].code=-555;
+					ctx.save();//556
+					ctx.translate(xx,yy);
+					ctx.rotate(270*Math.PI/180);
+					ctx.drawImage(imgGhost,0-(45+scale), 0, (45+scale)+15, (45+scale)+15);
+					ctx.restore();
 					break;
 			}
 		}
@@ -1531,13 +1555,13 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					maps[y][x+1].code=556;
 					maps[y][x+1].id=maps[y][x].id;
 					maps[y+1][x+1].id=maps[y][x].id;
-					maps[y+1][x+1].code=-555;
+					maps[y+1][x+1].code=-556;
 					break;
 				case 1222:
-					maps[y-1][x+1].code=555;
+					maps[y-1][x+1].code=556;
 					maps[y-1][x+1].id=maps[y][x].id;
 					maps[y][x+1].id=maps[y][x].id;
-					maps[y][x+1].code=-555;
+					maps[y][x+1].code=-556;
 					break;
 			}
 		}
