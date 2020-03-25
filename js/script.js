@@ -289,10 +289,10 @@ function area(){
 
 function quantity(){
 	document.getElementById('shetpon').innerHTML = ponton.col;
-	document.getElementById('connector').innerHTML = connector.col;
+	document.getElementById('connector').innerHTML = connector.col+sitconnect.col;
 	document.getElementById('gangway').innerHTML = gangway.col;
 	document.getElementById('stays').innerHTML = stays.col;
-	document.getElementById('connector').innerHTML = sitconnect.col;
+	//document.getElementById('connector').innerHTML = sitconnect.col;
 	document.getElementById('duck').innerHTML = duck.col;
 	document.getElementById('stairs').innerHTML = stairs.col;
 }
@@ -473,6 +473,7 @@ function canvasClick(evt){
 							case 'white':maps[y][x].code=-104;break;
 							case 'gray':maps[y][x].code=-105;break;
 						}
+						id++;
 						break;
 					case 2:
 						x--;y-=2;
@@ -597,7 +598,7 @@ function canvasClick(evt){
 	sum();
 	area();
 	draw();
-	quantity()
+	quantity();
 }
 
 function canvasMoveMouse(evt){
@@ -1396,7 +1397,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 				ctx.save();//57 58
 				ctx.translate(xx,yy);
 				ctx.rotate(0*Math.PI/180);
-				ctx.drawImage(imgGhost, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+				ctx.drawImage(imgGhost, 0,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
 				ctx.restore();
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
