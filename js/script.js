@@ -127,60 +127,95 @@ function model7onClick(){
 function onRotate(id){
 	switch (id){
 		case 1:
-			//if(model==1){
+			if(model==1){
 				direction=rotateArr[0];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[0]=direction;
-			//}
+			}else{
+				if(rotateArr[0]==3){
+					rotateArr[0]=-1;
+				}
+				rotateArr[0]++;
+			}
 			break;
 		case 2:
-			//if(model==2){
+			if(model==2){
 				direction=rotateArr[1];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[1]=direction;
-			//}
+			}else{
+				if(rotateArr[1]==3){
+					rotateArr[1]=-1;
+				}
+				rotateArr[1]++;
+			}
 			break;
 		case 3:
-			//if(model==3){
+			if(model==3){
 				direction=rotateArr[2];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[2]=direction;
-			//}
+			}else{
+				if(rotateArr[2]==3){
+					rotateArr[2]=-1;
+				}
+				rotateArr[2]++;
+			}
 			break;
 		case 4:
-			//if(model==4){
+			if(model==4){
 				direction=rotateArr[3];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[3]=direction;
-			//}
+			}else{
+				if(rotateArr[3]==3){
+					rotateArr[3]=-1;
+				}
+				rotateArr[3]++;
+			}
 			break;
 		case 5:
-			//if(model==5){
+			if(model==5){
 				direction=rotateArr[4];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[4]=direction;
-			//}
+			}else{
+				if(rotateArr[4]==3){
+					rotateArr[4]=-1;
+				}
+				rotateArr[4]++;
+			}
 			break;
 		case 6:
-			//if(model==7){
+			if(model==7){
 				direction=rotateArr[5];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[5]=direction;
-			//}
+			}else{
+				if(rotateArr[5]==3){
+					rotateArr[5]=-1;
+				}
+				rotateArr[5]++;
+			}
 			break;
 		case 7:
-			//if(model==6){
+			if(model==6){
 				direction=rotateArr[6];
 				if(direction==3) direction=-1;
 					direction++;
 				rotateArr[6]=direction;
-			//}
+			}else{
+				if(rotateArr[6]==3){
+					rotateArr[6]=-1;
+				}
+				rotateArr[6]++;
+			}
 			break;
 	}
 	canvasMoveMouse(buffEvt);
@@ -754,18 +789,32 @@ function canvasMoveMouse(evt){
 				case 'gray':imgMouse.src = 'img/pontoon-gray.png';break;
 			}
 			switch (direction){
-				case 2:case 0:
+				case 0:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(0*Math.PI/180);
 					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
 					ctx.restore();
 					break;
-				case 3:case 1:
+				case 1:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(270*Math.PI/180);
 					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+				case 2:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(180*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.restore();
+					break;
+				case 3:
+					ctx.save();
+					ctx.translate(evt.offsetX,evt.offsetY);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
 					ctx.restore();
 					break;
 			} 
@@ -2233,16 +2282,16 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 
 function rot(id){
 	var getr = document.getElementById(id);
-	if (getr.style.WebkitTransform == "rotate(90deg)")
-		getr.style.WebkitTransform = "rotate(180deg)"
+	if (getr.style.WebkitTransform == "rotate(-90deg)")
+		getr.style.WebkitTransform = "rotate(-180deg)"
 	else
-		if (getr.style.WebkitTransform == "rotate(180deg)")
-			getr.style.WebkitTransform = "rotate(270deg)"
+		if (getr.style.WebkitTransform == "rotate(-180deg)")
+			getr.style.WebkitTransform = "rotate(-270deg)"
 		else
-			if (getr.style.WebkitTransform == "rotate(270deg)")
+			if (getr.style.WebkitTransform == "rotate(-270deg)")
 				getr.style.WebkitTransform = "rotate(0deg)"
 			else
-				getr.style.WebkitTransform = "rotate(90deg)";
+				getr.style.WebkitTransform = "rotate(-90deg)";
 	return false;
 }
 

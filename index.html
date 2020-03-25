@@ -61,7 +61,7 @@
                          <div class="shetpont line" id="shetpon">
                           0
                          </div>
-                         <div class="rotate"><img onclick="onRotate(1)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:141px;" alt=""></div>
+                         <div class="rotate"><img src="img/rotate.jpg" onclick="rot('red');onRotate(1);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:141px;" id="sss" alt=""></div>
                          <div onclick="model1onClick()" class="object line">
                              <span class="t-obj">
                                  Понтон <br> модульный
@@ -83,12 +83,12 @@
                      <div class="shetpont line" id="gangway">
                          0
                     </div>
-                    <div class="rotate" style="left: 305px;"><img onclick="onRotate(2)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
+                    <div class="rotate" style="left: 305px;"><img src="img/rotate.jpg" onclick="rot('gang');onRotate(2);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
                      <div onclick="model2onClick()" class="object line">
                          <span class="t-obj">
                              Сходня <br>с переходником
                          </span>
-                         <input type="image" alt="Сходня на берег с переходником и соединителями" src="img/footer-photo/gangway.png" width="100px" height="100px">
+                         <input type="image" alt="Сходня на берег с переходником и соединителями" src="img/footer-photo/gangway.png" id="gang" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:303px;"  id="ch_c">
                          0 
@@ -105,12 +105,12 @@
                      <div class="shetpont line" id="stairs">
                          0
                     </div>
-                    <div class="rotate" style="left: 469px;"><img onclick="onRotate(3)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
+                    <div class="rotate" style="left: 469px;"><img src="img/rotate.jpg" onclick="rot('st');onRotate(3);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
                      <div onclick="model3onClick()" class="object line">
                          <span class="t-obj">
                              Лестница с соединителями
                          </span>
-                         <input type="image" alt="Лестница для спуска в воду с соединителями"  src="img/footer-photo/stairs.png" width="100px" height="100px">
+                         <input type="image" alt="Лестница для спуска в воду с соединителями"  src="img/footer-photo/stairs.png" id="st" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:467px;" id="ch_c">
                          0 
@@ -127,12 +127,12 @@
                      <div class="shetpont line" id="connector">
                          0
                     </div>
-                    <div class="rotate" style="left: 633px;"><img onclick="onRotate(4)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
+                    <div class="rotate" style="left: 633px;"><img src="img/rotate.jpg" onclick="rot('con');onRotate(4);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
                      <div onclick="model4onClick()" class="object line" >
                          <span class="t-obj">
                              Соединитель<br>понтона
                          </span>
-                         <input type="image" alt="Соединитель понтона"  src="img/footer-photo/connector.png" width="100px" height="100px">
+                         <input type="image" alt="Соединитель понтона"  src="img/footer-photo/connector.png" id="con" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:631px;" id="ch_c">
                          0 
@@ -149,12 +149,12 @@
                      <div class="shetpont line" id="stays">
                          0
                     </div>
-                    <div class="rotate" style="left: 797px;"><img onclick="onRotate(5)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
+                    <div class="rotate" style="left: 797px;"><img src="img/rotate.jpg" onclick="rot('stcon');onRotate(5);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
                      <div onclick="model5onClick()" class="object line">
                          <span class="t-obj">
                              Стойка <br> с соединителями
                          </span>
-                         <input type="image" alt=" Стойка ограждения с соединителями"  src="img/footer-photo/rack.png" width="100px" height="100px">
+                         <input type="image" alt=" Стойка ограждения с соединителями"  src="img/footer-photo/rack.png" id="stcon" width="100px" height="100px">
                      </div>
                      <div class="color_el" style="left:795px;" id="ch_c">
                          0 
@@ -173,12 +173,12 @@
                  <div class="shetpont line" id="duck">
                      0
                 </div>
-                <div class="rotate" style="left: 961px;"><img onclick="onRotate(6)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
+                <div class="rotate" style="left: 961px;"><img src="img/rotate.jpg" onclick="rot('utka');onRotate(6);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
                  <div onclick="model7onClick()" class="object line">
                      <span class="t-obj">
                          Швартовая <br>утка <br>
                      </span> 
-                     <input type="image" alt="Швартовая утка с соединителем"  src="img/footer-photo/connector.png" width="100px" height="100px" >
+                     <input type="image" alt="Швартовая утка с соединителем"  src="img/footer-photo/connector.png" id="utka" width="100px" height="100px" >
                  </div>
                  <div class="color_el" style="left:959px;" id="ch_c">
                      0 
@@ -194,11 +194,11 @@
                  <div class="shetpont">
                      0
                 </div>
-                <div class="rotate" style="left: 1125px;"><img onclick="onRotate(7)" src="img/rotate.jpg" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
+                <div class="rotate" style="left: 1125px;"><img src="img/rotate.jpg" onclick="rot('sit');onRotate(7);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
                 <div onclick="model6onClick()" class="object line">
                     <span class="t-obj">
                         Лавочка с соединителями
-                    </span> <input type="image" alt="Лавочка с соединителями"  src="img/footer-photo/bench.png" width="100px" height="100px">
+                    </span> <input type="image" alt="Лавочка с соединителями"  src="img/footer-photo/bench.png"id="sit" width="100px" height="100px">
                 </div>
              </div>
          </div>
