@@ -7,6 +7,11 @@
     <title>Конструктор</title>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        function onIssue(){
+            window.open('jaja.html?sum='+sum());
+        }
+    </script>
 </head>
 <body>
     <img src="img/fon.jpg" alt="">
@@ -26,7 +31,7 @@
                         </span>
                     </em>
                 </p>
-        	    <input type="button" value="Оформить" id="sell" class="button">
+        	    <input type="button" onclick="onIssue()" value="Оформить" id="sell" class="button">
         	    <input type="button" value="Очистить" id="clear" class="button" onclick="clearCanvas()">
         	    <div class="border_zoom line">
                     <input type="image" src="img/zoom+.png" style="width: 16px; position:relative; top:2px; height:16px;" id="scalePlus" name="scalePlus" onclick="scalePlusClick()" class="button">
@@ -191,7 +196,7 @@
                      </div>
                  </div>
              </div>
-                 <div class="shetpont">
+                 <div class="shetpont" id='bench'>
                      0
                 </div>
                 <div class="rotate" style="left: 1125px;"><img src="img/rotate.jpg" onclick="rot('sit');onRotate(7);" style="position:absolute;z-index:100;width:105%; height:105%; border-radius:50%; left:0;" alt=""></div>
