@@ -77,10 +77,10 @@ function init(){
 	for(var i=0;i<200;i++){ 
         maps[i]=new Array(); 
         for(var j=0;j<200;j++){ 
-        	maps[i][j]=new Object( {code:0, id:-1} );
+        	maps[i][j]=new Object( {code:0, id:-1,color:"none"} );
         }
     } 
-	imgMapsPonton.src = 'img/pontoonbutton.png'; 
+	imgMapsPonton.src = 'img/photo-objects-png/ponton/blue-button.png'; 
 	imgMapsSkhodnya.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
 	imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';
 	imgMapsBench.src='img/bench.png';
@@ -381,7 +381,7 @@ function CutObjMaps(x,y){
 						mapsBuff[ii]=new Array();
 					}
 					f=false;
-					mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j} );
+					mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j,color:maps[i][j].color} );
 					switch(maps[i][j].code){
 						case 555:case 556:case 557:case 558:
 							stairs.col--;
@@ -445,6 +445,7 @@ function PastObjMaps(x,y){
 			if(mapsBuff[i][j].j==s){
 				maps[yy][xx].code=mapsBuff[i][j].code;
 				maps[yy][xx].id=mapsBuff[i][j].id;
+				maps[yy][xx].color=mapsBuff[i][j].color;
 				switch(mapsBuff[i][j].code){
 					case 555:case 556:case 557:case 558:
 						stairs.col++;
@@ -500,11 +501,11 @@ function canvasClick(evt){
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x].code=12;break;
-							case 'blue':maps[y][x].code=1;break;
-							case 'green':maps[y][x].code=13;break;
-							case 'white':maps[y][x].code=14;break;
-							case 'gray':maps[y][x].code=15;break;
+							case 'red':maps[y][x].color='red';maps[y][x].code=1;break;
+							case 'blue':maps[y][x].color='blue';maps[y][x].code=1;break;
+							case 'green':maps[y][x].color='green';maps[y][x].code=1;break;
+							case 'white':maps[y][x].color='white';maps[y][x].code=1;break;
+							case 'gray':maps[y][x].color='gray';maps[y][x].code=1;break;
 						}
 						id++;
 						break;
@@ -517,11 +518,11 @@ function canvasClick(evt){
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x].code=-102;break;
-							case 'blue':maps[y][x].code=-10;break;
-							case 'green':maps[y][x].code=-103;break;
-							case 'white':maps[y][x].code=-104;break;
-							case 'gray':maps[y][x].code=-105;break;
+							case 'red':maps[y][x].color='red';maps[y][x].code=-10;break;
+							case 'blue':maps[y][x].color='blue';maps[y][x].code=-10;break;
+							case 'green':maps[y][x].color='green';maps[y][x].code=-10;break;
+							case 'white':maps[y][x].color='white';maps[y][x].code=-10;break;
+							case 'gray':maps[y][x].color='gray';maps[y][x].code=-10;break;
 						}
 						id++;
 						break;
@@ -534,11 +535,11 @@ function canvasClick(evt){
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x].code=-12;break;
-							case 'blue':maps[y][x].code=-1;break;
-							case 'green':maps[y][x].code=-13;break;
-							case 'white':maps[y][x].code=-14;break;
-							case 'gray':maps[y][x].code=-15;break;
+							case 'red':maps[y][x].color='red';maps[y][x].code=-1;break;
+							case 'blue':maps[y][x].color='blue';maps[y][x].code=-1;break;
+							case 'green':maps[y][x].color='green';maps[y][x].code=-1;break;
+							case 'white':maps[y][x].color='white';maps[y][x].code=-1;break;
+							case 'gray':maps[y][x].color='gray';maps[y][x].code=-1;break;
 						}
 						id++;
 						break;
@@ -551,11 +552,11 @@ function canvasClick(evt){
 							}
 						}
 						switch (color){
-							case 'red':maps[y][x].code=102;break;
-							case 'blue':maps[y][x].code=10;break;
-							case 'green':maps[y][x].code=103;break;
-							case 'white':maps[y][x].code=104;break;
-							case 'gray':maps[y][x].code=105;break;
+							case 'red':maps[y][x].color='red';maps[y][x].code=10;break;
+							case 'blue':maps[y][x].color='blue';maps[y][x].code=10;break;
+							case 'green':maps[y][x].color='green';maps[y][x].code=10;break;
+							case 'white':maps[y][x].color='white';maps[y][x].code=10;break;
+							case 'gray':maps[y][x].color='gray';maps[y][x].code=10;break;
 						}
 
 						id++;
@@ -573,6 +574,13 @@ function canvasClick(evt){
 								maps[i][j].id=id;
 							}
 						}
+						switch (color){
+							case 'red':maps[y][x].color='red';break;
+							case 'blue':maps[y][x].color='blue';break;
+							case 'green':maps[y][x].color='green';break;
+							case 'white':maps[y][x].color='white';break;
+							case 'gray':maps[y][x].color='gray';break;
+						}
 						maps[y][x].code=2;
 						maps[y][x+1].code=1222;
 						id++;
@@ -586,6 +594,13 @@ function canvasClick(evt){
 							}
 						}
 
+						switch (color){
+							case 'red':maps[y][x].color='red';break;
+							case 'blue':maps[y][x].color='blue';break;
+							case 'green':maps[y][x].color='green';break;
+							case 'white':maps[y][x].color='white';break;
+							case 'gray':maps[y][x].color='gray';break;
+						}
 						maps[y+1][x].code=1222;
 						maps[y][x].code=-20;
 
@@ -598,6 +613,14 @@ function canvasClick(evt){
 								maps[i][j].code=22;
 								maps[i][j].id=id;
 							}
+						}
+
+						switch (color){
+							case 'red':maps[y][x].color='red';break;
+							case 'blue':maps[y][x].color='blue';break;
+							case 'green':maps[y][x].color='green';break;
+							case 'white':maps[y][x].color='white';break;
+							case 'gray':maps[y][x].color='gray';break;
 						}
 						maps[y][x+1].code=1222;
 						maps[y][x].code=-2;
@@ -612,6 +635,13 @@ function canvasClick(evt){
 								maps[i][j].id=id;
 							}
 						}
+						switch (color){
+							case 'red':maps[y][x].color='red';break;
+							case 'blue':maps[y][x].color='blue';break;
+							case 'green':maps[y][x].color='green';break;
+							case 'white':maps[y][x].color='white';break;
+							case 'gray':maps[y][x].color='gray';break;
+						}
 						maps[y+1][x].code=1222;
 						maps[y][x].code=20;
 						id++;
@@ -620,26 +650,61 @@ function canvasClick(evt){
 				break;
 			case 3:
 				if(ArrangeStairs(x,y,direction,evt.offsetX,evt.offsetY)){
+					switch (color){
+						case 'red':maps[y][x].color='red';break;
+						case 'blue':maps[y][x].color='blue';break;
+						case 'green':maps[y][x].color='green';break;
+						case 'white':maps[y][x].color='white';break;
+						case 'gray':maps[y][x].color='gray';break;
+					}
 					stairs.col++;
 				}
 				break;
 			case 4:
 				if(ArrangeConnector(x,y,direction,evt.offsetX,evt.offsetY)){
+					switch (color){
+						case 'red':maps[y][x].color='red';break;
+						case 'blue':maps[y][x].color='blue';break;
+						case 'green':maps[y][x].color='green';break;
+						case 'white':maps[y][x].color='white';break;
+						case 'gray':maps[y][x].color='gray';break;
+					}
 					connector.col++;
 				}
 				break;
 			case 5:
 				if(ArrangeRack(x,y,direction,evt.offsetX,evt.offsetY)){
+					switch (color){
+						case 'red':maps[y][x].color='red';break;
+						case 'blue':maps[y][x].color='blue';break;
+						case 'green':maps[y][x].color='green';break;
+						case 'white':maps[y][x].color='white';break;
+						case 'gray':maps[y][x].color='gray';break;
+					}
 					stays.col++;
 				}
 				break;
 			case 6:
 				if(ArrangeBench(x,y,direction,evt.offsetX,evt.offsetY)){
+					switch (color){
+						case 'red':maps[y][x].color='red';break;
+						case 'blue':maps[y][x].color='blue';break;
+						case 'green':maps[y][x].color='green';break;
+						case 'white':maps[y][x].color='white';break;
+						case 'gray':maps[y][x].color='gray';break;
+					}
 					bench.col++;
 				}
 				break;
 			case 7:
 				if(ArrangeDuck(x,y,direction,evt.offsetX,evt.offsetY)){	
+					switch (color){
+						case 'red':maps[y][x].color='red';break;
+						case 'blue':maps[y][x].color='blue';break;
+						case 'green':maps[y][x].color='green';break;
+						case 'white':maps[y][x].color='white';break;
+						case 'gray':maps[y][x].color='gray';break;
+					}
 					duck.col++;
 				}
 				break;
@@ -2573,130 +2638,70 @@ function draw(){
 						break;
 					case 1:case -1: 
 						ctx.rotate(180*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'blue':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'brown':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'white':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'beige':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+						}
 						ctx.drawImage(imgMapsPonton, 0, 0, (45+scale)*2, (45+scale)*4);
-						//if((j>0)&&(maps[i][j-1].code==555)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(90*Math.PI/180);
-						//	ctx.drawImage(imgMapsStairs, 0-(45+scale)*4+(45+scale)/2.5, 0, (45+scale)+15, (45+scale)+15);
-						//}
-						//if((i>0)&&(maps[i-1][j].code==557)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(180*Math.PI/180);
-						//	ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
-						//}
-						//if((j>0)&&(maps[i][j-1].code==655)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(0*Math.PI/180);
-						//	ctx.drawImage(imgMapsBench, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale), (45+scale)*2);
-						//}
-						//if((i>0)&&(maps[i-1][j].code==657)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(90*Math.PI/180);
-						//	ctx.drawImage(imgMapsBench, 0-(45+scale)*4, 0, (45+scale), (45+scale)*2);
-						//}
 						break;
 					case 10:case -10: 
 						ctx.rotate(90*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'blue':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'brown':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'white':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'beige':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+						}
 						ctx.drawImage(imgMapsPonton, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-						//if((j>0)&&(maps[i][j-1].code==555)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(90*Math.PI/180);
-						//	ctx.drawImage(imgMapsStairs, 0-(45+scale)*4+(45+scale)/2.5, 0, (45+scale)+15, (45+scale)+15);
-						//}
-						//if((i>0)&&(maps[i+1][j].code==557)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(180*Math.PI/180);
-						//	ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
-						//}
-						//if((j>0)&&(maps[i][j-1].code==655)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(0*Math.PI/180);
-						//	ctx.drawImage(imgMapsBench, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale), (45+scale)*2);
-						//}
-						//if((i>0)&&(maps[i+1][j].code==657)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(90*Math.PI/180);
-						//	ctx.drawImage(imgMapsBench, 0-(45+scale)*4, 0, (45+scale), (45+scale)*2);
-						//}
 						break;
-					case 12:case -12: imgMaps.src = 'img/pontoon-redbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 102:case -102:imgMaps.src = 'img/pontoon-redbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 13:case -13: imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 103:case -103:imgMaps.src = 'img/pontoon-green.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 14:case -14: imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 104:case -104:imgMaps.src = 'img/pontoonbutton.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
-					case 15:case -15: imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(180*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*4, (45+scale)*8);break;
-					case 105:case -105:imgMaps.src = 'img/pontoon-gray.png'; ctx.rotate(90*Math.PI/180);ctx.drawImage(imgMaps, 0-(45+scale)*4, 0-(45+scale)*6, (45+scale)*4, (45+scale)*8);break;
 					case 2:   
 						ctx.rotate(0*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+						}
 						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
-						//if((i>0)&&(maps[i-1][j].code==557)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(180*Math.PI/180);
-						//	ctx.drawImage(imgMapsStairs, 0, 0+(45+scale)*3, (45+scale)+15, (45+scale)+15);
-						//}
-//
-						//if((i>0)&&(maps[i-1][j].code==657)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(90*Math.PI/180);
-						//	ctx.drawImage(imgMapsBench, 0-(45+scale)*4, 0, (45+scale), (45+scale)*2);
-						//}
 						break;
 					case -2:  
 						ctx.rotate(180*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+						}
 						ctx.drawImage(imgMapsSkhodnya, 0, 0, (45+scale)*2, (45+scale)*4);
 						break;
 					case 20:   
 						ctx.rotate(90*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+						}
 						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-						//if((j>0)&&(maps[i][j-1].code==555)){
-						//	ctx.restore();
-						//	ctx.save();
-						//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-						//	ctx.rotate(90*Math.PI/180);
-						//	ctx.drawImage(imgMapsStairs, 0-(45+scale)*4+(45+scale)/2.5, 0, (45+scale)+15, (45+scale)+15);
-						//}
 						break;
 					case -20: 
 						ctx.rotate(270*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+						}
 						ctx.drawImage(imgMapsSkhodnya, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						break;	
-					case 4:   imgMaps.src = 'img/test4.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case -4:  imgMaps.src = 'img/test4Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case 40:  imgMaps.src = 'img/test4Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case -40: imgMaps.src = 'img/test4Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case 5:   imgMaps.src = 'img/test5.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case -5:  imgMaps.src = 'img/test5Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case 50:  imgMaps.src = 'img/test5Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case -50: imgMaps.src = 'img/test5Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case 6:   imgMaps.src = 'img/test6.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case -6:  imgMaps.src = 'img/test6Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case 60:  imgMaps.src = 'img/test6Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case -60: imgMaps.src = 'img/test6Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case 7:   imgMaps.src = 'img/test7.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case -7:  imgMaps.src = 'img/test7Up.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX, sizeY*2);break;
-					case 70:  imgMaps.src = 'img/test7Right.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
-					case -70: imgMaps.src = 'img/test7Left.png'; ctx.drawImage(imgMaps, sizeX*j, sizeY*i, sizeX*2, sizeY);break;
 				}
 				if(maps[i][j].code!=0){
 					ctx.restore();
@@ -2852,40 +2857,102 @@ function draw(){
 						
 					case 555:
 						ctx.rotate(90*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'blue':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'brown':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'white':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'beige':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+						}
 						ctx.drawImage(imgMapsStairs, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
 						break;
 					case 556:
 						ctx.rotate(270*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'blue':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'brown':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'white':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'beige':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+						}
 						ctx.drawImage(imgMapsStairs, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);
 						break;
 					case 558:
 						ctx.rotate(0*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'blue':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'brown':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'white':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'beige':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+						}
 						ctx.drawImage(imgMapsStairs, 0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);
 						break;
 					case 557:
 						ctx.rotate(180*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'blue':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'brown':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'white':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+							case 'beige':imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';break;
+						}
 						ctx.drawImage(imgMapsStairs, 0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);
 						break;
 
 					case 655:
 						ctx.rotate(0*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
 						ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
 						break;
 					case 656:
 						ctx.rotate(180*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
 						ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
 						break;
 					case 658:
 						ctx.rotate(270*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
 						ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
 						break;
 					case 657:
 						ctx.rotate(90*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
 						ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
 						break;
 
 					case 755:
-						imgMaps.src = 'img/connector.png';
+						switch (maps[i][j].color){
+							case 'green':imgMaps.src = 'img/connector.png';break;
+							case 'blue':imgMaps.src = 'img/connector.png';break;
+							case 'brown':imgMaps.src = 'img/connector.png';break;
+							case 'white':imgMaps.src = 'img/connector.png';break;
+							case 'beige':imgMaps.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*i);
@@ -2893,7 +2960,13 @@ function draw(){
  						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
 						break;
 					case 756:
-						imgMaps.src = 'img/connector.png';
+						switch (maps[i][j].color){
+							case 'green':imgMaps.src = 'img/connector.png';break;
+							case 'blue':imgMaps.src = 'img/connector.png';break;
+							case 'brown':imgMaps.src = 'img/connector.png';break;
+							case 'white':imgMaps.src = 'img/connector.png';break;
+							case 'beige':imgMaps.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j),sizeY*i);
@@ -2901,7 +2974,13 @@ function draw(){
  						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
 						break;
 					case 758:
-						imgMaps.src = 'img/connector.png';
+						switch (maps[i][j].color){
+							case 'green':imgMaps.src = 'img/connector.png';break;
+							case 'blue':imgMaps.src = 'img/connector.png';break;
+							case 'brown':imgMaps.src = 'img/connector.png';break;
+							case 'white':imgMaps.src = 'img/connector.png';break;
+							case 'beige':imgMaps.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*i);
@@ -2909,7 +2988,13 @@ function draw(){
  						ctx.drawImage(imgMaps, 0, 0-sizeY/2, sizeX, sizeY);	
 						break;
 					case 757:
-						imgMaps.src = 'img/connector.png';
+						switch (maps[i][j].color){
+							case 'green':imgMaps.src = 'img/connector.png';break;
+							case 'blue':imgMaps.src = 'img/connector.png';break;
+							case 'brown':imgMaps.src = 'img/connector.png';break;
+							case 'white':imgMaps.src = 'img/connector.png';break;
+							case 'beige':imgMaps.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*(i+1));
@@ -2918,6 +3003,13 @@ function draw(){
 						break;
 
 					case 855:
+						switch (maps[i][j].color){
+							case 'green':imgMapsRack.src = 'img/rack.png';break;
+							case 'blue':imgMapsRack.src = 'img/rack.png';break;
+							case 'brown':imgMapsRack.src = 'img/rack.png';break;
+							case 'white':imgMapsRack.src = 'img/rack.png';break;
+							case 'beige':imgMapsRack.src = 'img/rack.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*i);
@@ -2925,6 +3017,13 @@ function draw(){
  						ctx.drawImage(imgMapsRack, 0-sizeX/2, 0, sizeX, sizeY);	
 						break;
 					case 856:
+						switch (maps[i][j].color){
+							case 'green':imgMapsRack.src = 'img/rack.png';break;
+							case 'blue':imgMapsRack.src = 'img/rack.png';break;
+							case 'brown':imgMapsRack.src = 'img/rack.png';break;
+							case 'white':imgMapsRack.src = 'img/rack.png';break;
+							case 'beige':imgMapsRack.src = 'img/rack.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j),sizeY*i);
@@ -2932,6 +3031,13 @@ function draw(){
  						ctx.drawImage(imgMapsRack, 0-sizeY/2, 0-sizeY, sizeX, sizeY);	
 						break;
 					case 858:
+						switch (maps[i][j].color){
+							case 'green':imgMapsRack.src = 'img/rack.png';break;
+							case 'blue':imgMapsRack.src = 'img/rack.png';break;
+							case 'brown':imgMapsRack.src = 'img/rack.png';break;
+							case 'white':imgMapsRack.src = 'img/rack.png';break;
+							case 'beige':imgMapsRack.src = 'img/rack.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*i);
@@ -2939,6 +3045,13 @@ function draw(){
  						ctx.drawImage(imgMapsRack, 0-sizeY/2, 0-sizeY, sizeX, sizeY);	
 						break;
 					case 857:
+						switch (maps[i][j].color){
+							case 'green':imgMapsRack.src = 'img/rack.png';break;
+							case 'blue':imgMapsRack.src = 'img/rack.png';break;
+							case 'brown':imgMapsRack.src = 'img/rack.png';break;
+							case 'white':imgMapsRack.src = 'img/rack.png';break;
+							case 'beige':imgMapsRack.src = 'img/rack.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*(i+1));
@@ -2947,6 +3060,13 @@ function draw(){
 						break;
 
 					case 955:
+						switch (maps[i][j].color){
+							case 'green':imgMapsDuck.src = 'img/connector.png';break;
+							case 'blue':imgMapsDuck.src = 'img/connector.png';break;
+							case 'brown':imgMapsDuck.src = 'img/connector.png';break;
+							case 'white':imgMapsDuck.src = 'img/connector.png';break;
+							case 'beige':imgMapsDuck.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*i);
@@ -2954,6 +3074,13 @@ function draw(){
  						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
 						break;
 					case 956:
+						switch (maps[i][j].color){
+							case 'green':imgMapsDuck.src = 'img/connector.png';break;
+							case 'blue':imgMapsDuck.src = 'img/connector.png';break;
+							case 'brown':imgMapsDuck.src = 'img/connector.png';break;
+							case 'white':imgMapsDuck.src = 'img/connector.png';break;
+							case 'beige':imgMapsDuck.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j),sizeY*i);
@@ -2961,6 +3088,13 @@ function draw(){
  						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
 						break;
 					case 958:
+						switch (maps[i][j].color){
+							case 'green':imgMapsDuck.src = 'img/connector.png';break;
+							case 'blue':imgMapsDuck.src = 'img/connector.png';break;
+							case 'brown':imgMapsDuck.src = 'img/connector.png';break;
+							case 'white':imgMapsDuck.src = 'img/connector.png';break;
+							case 'beige':imgMapsDuck.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*i);
@@ -2968,6 +3102,13 @@ function draw(){
  						ctx.drawImage(imgMapsDuck, 0, 0-sizeY/2, sizeX, sizeY);	
 						break;
 					case 957:
+						switch (maps[i][j].color){
+							case 'green':imgMapsDuck.src = 'img/connector.png';break;
+							case 'blue':imgMapsDuck.src = 'img/connector.png';break;
+							case 'brown':imgMapsDuck.src = 'img/connector.png';break;
+							case 'white':imgMapsDuck.src = 'img/connector.png';break;
+							case 'beige':imgMapsDuck.src = 'img/connector.png';break;
+						}
 						ctx.restore();
 						ctx.save();
 						ctx.translate(sizeX*(j+1),sizeY*(i+1));
