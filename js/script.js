@@ -309,10 +309,21 @@ function clearCanvas(){
         	maps[i][j].id=0;
         }
 	} 
+	ponton.col = 0;
+	gangway.col = 0;
+	stairs.col = 0;
+	connector.col = 0;
+	stays.col = 0;
+	sitconnect.col = 0;
+	bench.col = 0;
+	duck.price = 0;
 	document.getElementById('summ').innerHTML = '0 руб.';
 	document.getElementById('gabarites').innerHTML =  '0,0 x 0,0 м.'; 
 	document.getElementById('shetpon').innerHTML = 0 ;
+	sum();
+	area();
 	draw();
+	quantity();
 }
 
 function isArrange(x,y,model,direction){
