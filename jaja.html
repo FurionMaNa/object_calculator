@@ -150,6 +150,7 @@
       <img src="img/footer.jpg" style="width:90%; margin-left: 4.5%;" alt="">
     </footer>
 </div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript">
   function getUrlVars() {
     var vars = {};
@@ -158,21 +159,18 @@
     });
     return vars;
   }
- var table = document.getElementsByClassName('tab');
-     var a = document.createElement("tr");
-      a.id = 'show_p';
-      a.innerHTML = '0';
-      a.appendChild(table);
-    var b = document.createElement("td");
-      b.innerHTML = 'Понтон модульный';
-      b.appendChild(table);
-    var c = document.createElement("td");
-    var d = document.createElement("img");
-    d.src="img/img/Photo/понтон вид сверху.jpg";
-    c.appendChild(d);
-
-
-    
+  var table = document.getElementsByClassName('tab');
+  var a = document.createElement("tr");
+  a.id = 'show_p';
+  a.innerHTML = '0';
+  a.appendChild(table);
+  var b = document.createElement("td");
+  b.innerHTML = 'Понтон модульный';
+  b.appendChild(table);
+  var c = document.createElement("td");
+  var d = document.createElement("img");
+  d.src="img/img/Photo/понтон вид сверху.jpg";
+  c.appendChild(d);
   document.getElementById('final_sum').innerHTML= getUrlVars()["sum"];
   document.getElementById('shet_p').innerHTML= getUrlVars()["shetpon"];
   document.getElementById('shet_st').innerHTML= getUrlVars()["stairs"];
@@ -188,7 +186,10 @@
   document.getElementById('shet_sum_u').innerHTML= document.getElementById('shet_u').innerHTML * document.getElementById('col_u').innerHTML;
   document.getElementById('shet_sum_stay').innerHTML= document.getElementById('shet_stay').innerHTML * document.getElementById('col_stay').innerHTML;
   document.getElementById('final_col').innerHTML= +document.getElementById('shet_p').innerHTML + +document.getElementById('shet_s').innerHTML + +document.getElementById('shet_st').innerHTML + +document.getElementById('shet_g').innerHTML + +document.getElementById('shet_sit').innerHTML + +document.getElementById('shet_u').innerHTML + +document.getElementById('shet_stay').innerHTML;
-
+  var doc = new jsPDF();
+  
+  doc.text('Hello world!', 10, 10);
+  doc.save('a4.pdf');
 </script>
 </body>
 </html>
