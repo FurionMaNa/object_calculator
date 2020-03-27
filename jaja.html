@@ -13,9 +13,14 @@
         }
     
         body{
-            background:#fff;
+            background:#3d3d3d;
         }
-  
+  .list_1{
+    width:70%;
+    margin-left: 15%;
+    margin-top:2%;
+    background:white;
+  }
     
     .tab{
         margin-top: 1%;
@@ -27,6 +32,9 @@
     td{
         padding:20px
     }
+    tr{
+     
+    }
     </style>
 </head>
 <body>
@@ -37,48 +45,49 @@
     <div class="middle">
         <table class="tab" border="1">
           
-            <tr>
+         <!-- <tr>
               <th>Наименование продукции</th>
               <th>Фотография</th>
               <th>Цена с ндс, руб.</th>
             </tr>
-            <tr>
+            <tr id="show_p">
               <td>Понтон модульный</td>
               <td><img src="img/Photo/понтон вид сверху.jpg" width="100%" alt=""></td>
               <td>16800</td>
             </tr>
-            <tr>
+            <tr id="show_s">
               <td>Соеденитель понтона</td>
               <td><img src="img/Photo/соединитель вид сверху.jpg" width="100%" alt=""></td>
               <td>280</td>
             </tr>
-            <tr>
+            <tr id="show_st">
                 <td>Лестница с соеденителем</td>
                 <td><img src="img/Photo/лестница вид сверзу.jpg" width="100%" alt=""></td>
                 <td>18560</td>
               </tr>
-              <tr>
+              <tr id="show_g">
                 <td>Сходня с переходником</td>
                 <td><img src="img/Photo/сходня вид сверху.jpg" width="100%" alt=""></td>
                 <td>9400</td>
               </tr>
-              <tr>
+              <tr id="show_sit">
                 <td>Лавочка с соеденителями</td>
                 <td><img src="img/Photo/лавочка вид сверху.jpg" width="100%" alt=""></td>
                 <td>12500</td>
               </tr>
-              <tr>
+              <tr id="show_u">
                 <td>Утка</td>
                 <td><img src="img/Photo/Утка пока такая же фото.jpg" width="100%" alt=""></td>
                 <td>20,00</td>
               </tr>
-              <tr>
+              <tr id="show_stay">
                 <td>Стойка</td>
                 <td><img src="img/Photo/стойка вид сверху.jpg" width="100%" alt=""></td>
                 <td>890</td>
-              </tr>
+              </tr> -->  
           </table>
-
+          <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>
+          <br>
           <table class="summa tab" border="1">
           
             <tr>
@@ -89,56 +98,56 @@
             </tr>
             <tr>
               <td>Понтон модульный</td>
-              <td>16800</td>
-              <td>0</td>
-              <td>0</td>
+              <td id="col_p">16800</td>
+              <td id="shet_p">0</td>
+              <td id="shet_sum_p">0</td>
             </tr>
             <tr>
               <td>Соеденитель понтона</td>
-              <td>280</td>
-              <td>0</td>
-              <td>0</td>
+              <td id="col_s">280</td>
+              <td id="shet_s">0</td>
+              <td id="shet_sum_s">0</td>
             </tr>
             <tr>
                 <td>Лестница с соеденителем</td>
-                <td>18560</td>
-                <td>0</td>
-                <td>0</td>
+                <td id="col_st">18560</td>
+                <td id="shet_st">0</td>
+                <td id="shet_sum_st">0</td>
               </tr>
               <tr>
                 <td>Сходня с переходником</td>
-                <td>9400</td>
-                <td>0</td>
-                <td>0</td>
+                <td id="col_g">9400</td>
+                <td id="shet_g">0</td>
+                <td id="shet_sum_g">0</td>
               </tr>
               <tr>
                 <td>Лавочка с соеденителями</td>
-                <td>12500</td>
-                <td>0</td>
-                <td>0</td>
+                <td id="col_sit">12500</td>
+                <td id="shet_sit">0</td>
+                <td id="shet_sum_sit">0</td>
               </tr>
               <tr>
                 <td>Утка</td>
-                <td>20,00</td>
-                <td>0</td>
-                <td>0</td>
+                <td id="col_u">20</td>
+                <td id="shet_u">0</td>
+                <td id="shet_sum_u">0</td>
               </tr>
               <tr>
                 <td>Стойка</td>
-                <td>890</td>
-                <td>0</td>
-                <td>0</td>
+                <td id="col_stay">890</td>
+                <td id="shet_stay">0</td>
+                <td id="shet_sum_stay">0</td>
               </tr>
               <tr>
                 <td>ИТОГО</td>
                 <td></td>
-                <td>0</td>
+                <td id="final_col">0</td>
                 <td id="final_sum">0</td>
               </tr>
           </table>
     </div>
     <footer>
-
+      <img src="img/footer.jpg" style="width:90%; margin-left: 4.5%;" alt="">
     </footer>
 </div> 
 <script type="text/javascript">
@@ -149,7 +158,36 @@
     });
     return vars;
   }
+ var table = document.getElementsByClassName('tab');
+     var a = document.createElement("tr");
+      a.id = 'show_p';
+      a.innerHTML = '0';
+      a.appendChild(table);
+    var b = document.createElement("td");
+      b.innerHTML = 'Понтон модульный';
+      b.appendChild(table);
+    var c = document.createElement("td");
+    var d = document.createElement("img");
+    d.src="img/img/Photo/понтон вид сверху.jpg";
+    c.appendChild(d);
+
+
+    
   document.getElementById('final_sum').innerHTML= getUrlVars()["sum"];
+  document.getElementById('shet_p').innerHTML= getUrlVars()["shetpon"];
+  document.getElementById('shet_st').innerHTML= getUrlVars()["stairs"];
+  document.getElementById('shet_s').innerHTML= getUrlVars()["connector"];
+  document.getElementById('shet_g').innerHTML= getUrlVars()["gangway"];
+  document.getElementById('shet_u').innerHTML= getUrlVars()["duck"];
+  document.getElementById('shet_stay').innerHTML= getUrlVars()["stays"];
+  document.getElementById('shet_sum_p').innerHTML= document.getElementById('shet_p').innerHTML * document.getElementById('col_p').innerHTML;
+  document.getElementById('shet_sum_s').innerHTML= document.getElementById('shet_s').innerHTML * document.getElementById('col_s').innerHTML;
+  document.getElementById('shet_sum_st').innerHTML= document.getElementById('shet_st').innerHTML * document.getElementById('col_st').innerHTML;
+  document.getElementById('shet_sum_g').innerHTML= document.getElementById('shet_g').innerHTML * document.getElementById('col_g').innerHTML;
+  document.getElementById('shet_sum_sit').innerHTML= document.getElementById('shet_sit').innerHTML * document.getElementById('col_sit').innerHTML;
+  document.getElementById('shet_sum_u').innerHTML= document.getElementById('shet_u').innerHTML * document.getElementById('col_u').innerHTML;
+  document.getElementById('shet_sum_stay').innerHTML= document.getElementById('shet_stay').innerHTML * document.getElementById('col_stay').innerHTML;
+  document.getElementById('final_col').innerHTML= +document.getElementById('shet_p').innerHTML + +document.getElementById('shet_s').innerHTML + +document.getElementById('shet_st').innerHTML + +document.getElementById('shet_g').innerHTML + +document.getElementById('shet_sit').innerHTML + +document.getElementById('shet_u').innerHTML + +document.getElementById('shet_stay').innerHTML;
 
 </script>
 </body>
