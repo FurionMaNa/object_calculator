@@ -9,8 +9,16 @@ var fullScreen=false;
 var imgMouse = new Image();
 var imgMaps=new Image(); 
 var imgGhost=new Image(); 
-var imgMapsPonton=new Image();
-var imgMapsSkhodnya=new Image();
+var imgMapsPontonB=new Image();
+var imgMapsPontonG=new Image();
+var imgMapsPontonGR=new Image();
+var imgMapsPontonW=new Image();
+var imgMapsPontonBE=new Image();
+var imgMapsSkhodnyaB=new Image();
+var imgMapsSkhodnyaG=new Image();
+var imgMapsSkhodnyaGR=new Image();
+var imgMapsSkhodnyaW=new Image();
+var imgMapsSkhodnyaBE=new Image();
 var imgMapsStairs=new Image();
 var imgMapsBench=new Image();
 var imgMapsRack=new Image();
@@ -68,6 +76,11 @@ function init(){
 	rotateArr[4]=0;
 	rotateArr[5]=0;
 	rotateArr[6]=0;
+	colorArr[0]='blue';
+	colorArr[1]='blue';
+	colorArr[2]='blue';
+	colorArr[3]='blue';
+	colorArr[4]='blue';
 	scale=-10; 
 	ctx.lineWidth = 2;
 	visibleWeb=true; 
@@ -81,8 +94,16 @@ function init(){
         	maps[i][j]=new Object( {code:0, id:-1,color:"none"} );
         }
     } 
-	imgMapsPonton.src = 'img/photo-objects-png/ponton/blue-button.png'; 
-	imgMapsSkhodnya.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+	imgMapsPontonB.src = 'img/photo-objects-png/ponton/blue-button.png';
+	imgMapsPontonG.src='img/photo-objects-png/ponton/green-button.png';
+	imgMapsPontonGR.src='img/newimg/ponton_grow2.png';
+	imgMapsPontonW.src='img/newimg/ponton_white.png';
+	imgMapsPontonBE.src='img/newimg/ponton_gr.png'; 
+	imgMapsSkhodnyaB.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+	imgMapsSkhodnyaG.src = 'img/newimg/gangway_green.png'; 
+	imgMapsSkhodnyaGR.src = 'img/newimg/Ganway_grow.png'; 
+	imgMapsSkhodnyaW.src = 'img/newimg/gangway_white.png'; 
+	imgMapsSkhodnyaBE.src = 'img/newimg/gangway_gr.png'; 
 	imgMapsStairs.src='img/photo-objects-png/stairs/stairs-blue.png';
 	imgMapsBench.src='img/bench.png';
 	imgMapsRack.src='img/rack.png';
@@ -96,26 +117,31 @@ function init(){
 function model1onClick(){  
 	direction=rotateArr[0];
 	model=1;
+	color=colorArr[0];
 } 
 
 function model2onClick(){ 
 	direction=rotateArr[1];
 	model=2;
+	color=colorArr[1];
 } 
 
 function model3onClick(){
 	direction=rotateArr[2];
 	model=3;
+	color=colorArr[2];
 } 
 
 function model4onClick(){
 	direction=rotateArr[3];
 	model=4;
+	color=colorArr[3]
 } 
 
 function model5onClick(){
 	direction=rotateArr[4];
 	model=5;
+	color=colorArr[4];
 } 
 
 function model6onClick(){ 
@@ -125,6 +151,7 @@ function model6onClick(){
 
 function model7onClick(){
 	direction=rotateArr[5];
+	color=colorArr[5];
 	model=7;
 } 
 
@@ -227,70 +254,87 @@ function onRotate(id){
 
 function change_color(id, colors,num){
 	colorArr[num-1]=id;
-	color=id;
 	switch(num){
 		case 1:
-			switch (color){
+			switch (colorArr[num-1]){
 				case 'green':document.getElementById('red').src='img/newimg/ponton_green.png';break;
 				case 'blue' :document.getElementById('red').src='img/newimg/ponton_blue.png';break;
 				case 'brown':document.getElementById('red').src='img/newimg/ponton_grow.png';break;
 				case 'white':document.getElementById('red').src='img/newimg/ponton_wh.png';break;
 				case 'beige':document.getElementById('red').src='img/newimg/ponton_gray.png';break;
 			}		
+			if(model==1){
+				color=colorArr[num-1];
+			}
 			document.getElementById('ch_c1').style.background = colors;
 			document.getElementById('ch_c1').style.color = colors;
 			break;
 		case 2:
-			switch (color){
-				case 'green':document.getElementById('gang').src='img/newimg/ponton_green.png';break;
-				case 'blue' :document.getElementById('gang').src='img/newimg/ponton_green.png';break;
-				case 'brown':document.getElementById('gang').src='img/newimg/ponton_green.png';break;
-				case 'white':document.getElementById('gang').src='img/newimg/ponton_green.png';break;
+			switch (colorArr[num-1]){
+				case 'green':document.getElementById('gang').src='img/newimg/gangway_green_obj.png';break;
+				case 'blue' :document.getElementById('gang').src='img/newimg/gangway_blue_obj.png';break;
+				case 'brown':document.getElementById('gang').src='img/newimg/gangway_grow_obj.png';break;
+				case 'white':document.getElementById('gang').src='img/newimg/gangway_white_obj.png';break;
 				case 'beige':document.getElementById('gang').src='img/newimg/gangway_gray.png';break;
+			}
+			if(model==2){
+				color=colorArr[num-1];
 			}
 			document.getElementById('ch_c2').style.background = colors;
 			document.getElementById('ch_c2').style.color = colors;
 			break;
 		case 3:
-			switch (color){
+			switch (colorArr[num-1]){
 				case 'green':document.getElementById('st').src='img/pontoon-redbutton.png';break;
 				case 'blue' :document.getElementById('st').src='img/pontoonbutton.png';break;
 				case 'brown':document.getElementById('st').src='img/pontoon-green.png';break;
 				case 'white':document.getElementById('st').src='img/newimg/ponton_white.png';break;
 				case 'beige':document.getElementById('st').src='img/newimg/ponton_gr.png';break;
 			}
+			if(model==2){
+				color=colorArr[num-1];
+			}
 			document.getElementById('ch_c3').style.background = colors;
 			document.getElementById('ch_c3').style.color = colors;
 			break;
 		case 4:
-			switch (color){
+			switch (colorArr[num-1]){
 				case 'green':document.getElementById('con').src='img/pontoon-redbutton.png';break;
 				case 'blue' :document.getElementById('con').src='img/pontoonbutton.png';break;
 				case 'brown':document.getElementById('con').src='img/pontoon-green.png';break;
 				case 'white':document.getElementById('con').src='img/newimg/ponton_white.png';break;
 				case 'beige':document.getElementById('con').src='img/newimg/ponton_gr.png';break;
 			}		
+			if(model==3){
+				color=colorArr[num-1];
+			}
 			document.getElementById('ch_c4').style.background = colors;
 			document.getElementById('ch_c4').style.color = colors;
 			break;
 		case 5:
-			switch (color){
+			switch (colorArr[num-1]){
 				case 'green':document.getElementById('stcon').src='img/pontoon-redbutton.png';break;
 				case 'blue' :document.getElementById('stcon').src='img/pontoonbutton.png';break;
 				case 'brown':document.getElementById('stcon').src='img/pontoon-green.png';break;
 				case 'white':document.getElementById('stcon').src='img/newimg/ponton_white.png';break;
 				case 'beige':document.getElementById('stcon').src='img/newimg/ponton_gr.png';break;
 			}
+			if(model==4){
+				color=colorArr[num-1];
+			}
 			document.getElementById('ch_c5').style.background = colors;
 			document.getElementById('ch_c5').style.color = colors;
 			break;
 		case 6:
-			switch (color){
+			switch (colorArr[num-1]){
 				case 'green':document.getElementById('utka').src='img/pontoon-redbutton.png';break;
 				case 'blue' :document.getElementById('utka').src='img/pontoonbutton.png';break;
 				case 'brown':document.getElementById('utka').src='img/pontoon-green.png';break;
 				case 'white':document.getElementById('utka').src='img/newimg/ponton_white.png';break;
 				case 'beige':document.getElementById('utka').src='img/newimg/ponton_gr.png';break;
+			}
+			if(model==5){
+				color=colorArr[num-1];
 			}
 			document.getElementById('ch_c6').style.background = colors;
 			document.getElementById('ch_c6').style.color = colors;
@@ -649,7 +693,7 @@ function canvasClick(evt){
 						}
 
 						maps[y][x].color=color;
-						[y][x+1].code=1222;
+						maps[y][x+1].code=1222;
 						maps[y][x].code=-2;
 
 						id++;
@@ -715,11 +759,11 @@ function canvasMoveMouse(evt){
 	switch (model){
 		case 1:
 			switch (color){
-				case 'green':imgGhost.src='img/newimg/ponton_green_shadow.png';imgMouse.src = 'img/photo-objects-png/ponton/green-button.png';break;
+				case 'green':imgGhost.src='img/newimg/ponton_green_shadow.png';           imgMouse.src = 'img/photo-objects-png/ponton/green-button.png';break;
 				case 'blue' :imgGhost.src='img/photo-objects-png/ponton/blue-opacity.png';imgMouse.src = 'img/pontoonbutton.png';break;
-				case 'brown':imgGhost.src='img/newimg/ponton_grow_shadow.png';imgMouse.src = 'img/pontoon-green.png';break;
-				case 'white':imgGhost.src='img/newimg/ponton_white_shadow.png';imgMouse.src = 'img/newimg/ponton_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/ponton_gr_shadow.png';imgMouse.src = 'img/newimg/ponton_gr.png';break;
+				case 'brown':imgGhost.src='img/newimg/ponton_grow_shadow.png';            imgMouse.src = 'img/newimg/ponton_grow2.png';break;
+				case 'white':imgGhost.src='img/newimg/ponton_white_shadow.png';           imgMouse.src = 'img/newimg/ponton_white.png';break;
+				case 'beige':imgGhost.src='img/newimg/ponton_gr_shadow.png';              imgMouse.src = 'img/newimg/ponton_gr.png';break;
 			}
 			switch (direction){
 				case 0:case 2:
@@ -2730,68 +2774,63 @@ function draw(){
 					case 1:case -1: 
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'blue':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'brown':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'white':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'beige':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'blue': ctx.drawImage(imgMapsPontonB , 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
 						}
-						ctx.drawImage(imgMapsPonton, 0, 0, (45+scale)*2, (45+scale)*4);
+						
 						break;
 					case 10:case -10: 
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'blue':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'brown':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'white':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
-							case 'beige':imgMapsPonton.src='img/photo-objects-png/ponton/blue-button.png';break;
+							case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
+							case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 						}
-						ctx.drawImage(imgMapsPonton, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						break;
 					case 2:   
 						ctx.rotate(0*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'blue' :imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
 						}
-						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
 						break;
 					case -2:  
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
+							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
 						}
-						ctx.drawImage(imgMapsSkhodnya, 0, 0, (45+scale)*2, (45+scale)*4);
 						break;
 					case 20:   
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 						}
-						ctx.drawImage(imgMapsSkhodnya, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						break;
 					case -20: 
 						ctx.rotate(270*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'blue':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'brown':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'white':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
-							case 'beige':imgMapsSkhodnya.src='img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 						}
-						ctx.drawImage(imgMapsSkhodnya, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						break;	
 				}
 				if(maps[i][j].code!=0){
