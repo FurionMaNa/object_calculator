@@ -38,18 +38,17 @@
       tr{
      
       }
+      body { font-family: DejaVu Sans, sans-serif; }
     </style>
 </head>
 <body>
    <div class="list_1">
-       <header>
-        <?php 
-        $path = 'img/header.jpg';
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        echo '<img src="'.$base64.'" style="width:100%; height:100%"alt="">';
-        ?>
+      <header>
+       <?php
+       echo $_SERVER["DOCUMENT_ROOT"]."/img/header.jpg";
+       echo "<img src='".$_SERVER["DOCUMENT_ROOT"]."/img/header.jpg' style='width:100%; height:387px'alt=''>"
+       ?>
+        <img src='./img/header.jpg' style="width:100%; height:387px"alt="">
     </header>
     <div class="middle">
       <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>
@@ -146,7 +145,8 @@
 <?php
   require_once "dompdf/dompdf_config.inc.php";
   $dompdf = new DOMPDF();
-  $my_html =  ob_get_clear();
+  $my_html =  ob_get_clean();
+  echo $my_html;
   $dompdf->load_html($my_html);
   $dompdf->render();
   $output = $dompdf->output();
