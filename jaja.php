@@ -1,10 +1,15 @@
-
 <meta charset="UTF-8">
 <!DOCTYPE html>
 <html lang="en">
 <?php
     ob_start();
 ?>
+<?php 
+       $path = 'http://localhost/object_calculator/header.jpg';
+$type = pathinfo($path, PATHINFO_EXTENSION);
+$data = file_get_contents($path);
+$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+       ?>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/script.js"></script>
@@ -44,11 +49,7 @@
 <body>
    <div class="list_1">
       <header>
-       <?php
-       echo $_SERVER["DOCUMENT_ROOT"]."/img/header.jpg";
-       echo "<img src='".$_SERVER["DOCUMENT_ROOT"]."/img/header.jpg' style='width:100%; height:387px'alt=''>"
-       ?>
-        <img src='./img/header.jpg' style="width:100%; height:387px"alt="">
+        <img style="width:100%; height:387px"alt="" src=<?php echo $base64 ?>>
     </header>
     <div class="middle">
       <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>

@@ -1073,6 +1073,402 @@ function canvasMoveMouse(evt){
 					break;
 			} 
 			break;
+		default:
+			if(mapsBuff.length!=0){
+				var maxWidth=0;
+				var startJ=0;
+				for(var i=0;i<mapsBuff.length;i++){
+					if(mapsBuff[i].length>maxWidth){
+						maxWidth=mapsBuff[i].length
+						startJ=mapsBuff[i][0].j;
+					}
+				}
+				var xx=x/(45+scale);
+				var yy=y/(45+scale);
+				for(var i=0;i<mapsBuff.length;i++){
+					var j=0;
+					var xx=x/(45+scale);
+					var s=startJ;
+					while(j<mapsBuff[i].length){
+						if(mapsBuff[i][j].j==s){
+							if(maps[yy][xx].code!=0){
+								return true;
+							}
+							j++;
+						}
+						xx++;
+						s++;
+					}
+					yy++;
+				}
+				var xx=x/(45+scale);
+				var yy=y/(45+scale);
+				var sizeX=(45+scale);
+				var sizeY=(45+scale);
+				for(var i=0;i<mapsBuff.length;i++){
+					var j=0;
+					var xx=x/(45+scale);
+					var s=startJ;
+					while(j<mapsBuff[i].length){
+						if(mapsBuff[i][j].j==s){
+							if(mapsBuff[i][j].code!=0){
+								ctx.save();
+								ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+							}
+							switch(mapsBuff[i][j].code){
+								case 11:break;
+								case 0:
+									if(visibleWeb){
+										ctx.beginPath();
+										ctx.strokeStyle = "#FFFFFF";
+										ctx.strokeRect(sizeX*xx, sizeY*yy, sizeX, sizeY); 
+										ctx.stroke(); 
+									}
+									break;
+								case 1:case -1: 
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'blue': ctx.drawImage(imgMapsPontonB , 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
+									}
+									
+									break;
+								case 10:case -10: 
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
+										case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+									}
+									break;
+								case 2:   
+									ctx.rotate(0*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+									}
+									break;
+								case -2:  
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
+										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
+									}
+									break;
+								case 20:   
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+									}
+									break;
+								case -20: 
+									ctx.rotate(270*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+									}
+									break;	
+							}
+							if(mapsBuff[i][j].code!=0){
+								ctx.restore();
+							}
+							j++;
+						}
+						xx++;
+						s++;
+					}
+					yy++;
+				}
+				var xx=x/(45+scale);
+				var yy=y/(45+scale);
+				var sizeX=(45+scale);
+				var sizeY=(45+scale);
+				for(var i=0;i<mapsBuff.length;i++){
+					var j=0;
+					var xx=x/(45+scale);
+					var s=startJ;
+					while(j<mapsBuff[i].length){
+						if(mapsBuff[i][j].j==s){
+							if(mapsBuff[i][j].code!=0){
+								ctx.save();
+								ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+							}
+							switch(mapsBuff[i][j].code){
+								case 555:
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
+										case 'blue':ctx.drawImage(imgMapsStairsB, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
+										case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);;break;
+										case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
+										case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
+									}
+									break;
+								case 556:
+									ctx.rotate(270*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
+										case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
+										case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
+										case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
+										case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
+									}
+									break;
+								case 558:
+									ctx.rotate(0*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
+										case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
+										case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
+										case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
+										case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
+									}
+									break;
+								case 557:
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
+										case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
+										case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
+										case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
+										case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
+									}
+									break;
+			
+								case 655:
+									ctx.rotate(0*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':imgMapsBench.src='img/bench.png';break;
+										case 'blue':imgMapsBench.src='img/bench.png';break;
+										case 'brown':imgMapsBench.src='img/bench.png';break;
+										case 'white':imgMapsBench.src='img/bench.png';break;
+										case 'beige':imgMapsBench.src='img/bench.png';break;
+									}
+									ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+									break;
+								case 656:
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':imgMapsBench.src='img/bench.png';break;
+										case 'blue':imgMapsBench.src='img/bench.png';break;
+										case 'brown':imgMapsBench.src='img/bench.png';break;
+										case 'white':imgMapsBench.src='img/bench.png';break;
+										case 'beige':imgMapsBench.src='img/bench.png';break;
+									}
+									ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+									break;
+								case 658:
+									ctx.rotate(270*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':imgMapsBench.src='img/bench.png';break;
+										case 'blue':imgMapsBench.src='img/bench.png';break;
+										case 'brown':imgMapsBench.src='img/bench.png';break;
+										case 'white':imgMapsBench.src='img/bench.png';break;
+										case 'beige':imgMapsBench.src='img/bench.png';break;
+									}
+									ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+									break;
+								case 657:
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':imgMapsBench.src='img/bench.png';break;
+										case 'blue':imgMapsBench.src='img/bench.png';break;
+										case 'brown':imgMapsBench.src='img/bench.png';break;
+										case 'white':imgMapsBench.src='img/bench.png';break;
+										case 'beige':imgMapsBench.src='img/bench.png';break;
+									}
+									ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+									break;
+			
+								case 755:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+								case 756:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx),sizeY*yy);
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR,0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE,0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+								case 758:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+								case 757:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+			
+								case 855:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.rotate(0*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/2, 0, sizeX, sizeY);break;
+										case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/2, 0, sizeX, sizeY);break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeX/2, 0, sizeX, sizeY);break;
+										case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/2, 0, sizeX, sizeY);break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeX/2, 0, sizeX, sizeY);break;
+									}
+									break;
+								case 856:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx),sizeY*yy);
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+									}	
+									break;
+								case 858:							
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.rotate(270*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+									}	
+									break;
+								case 857:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0, sizeX, sizeY);	break;
+										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0, sizeX, sizeY);	break;
+									}	
+									break;
+			
+								case 955:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+								case 956:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx),sizeY*yy);
+									ctx.rotate(90*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR,0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE,0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+								case 958:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+								case 957:
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+									ctx.rotate(180*Math.PI/180);
+									switch (mapsBuff[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									}
+									break;
+							}
+							if(mapsBuff[i][j].code!=0){
+								ctx.restore();
+							}
+							j++;
+						}
+						xx++;
+						s++;
+					}
+					yy++;
+				}
+			}
+			break;
 	}
 }
 
