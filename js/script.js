@@ -384,17 +384,19 @@ function onScrollCanvas(){
 
 function sum(){
 	var sum = ponton.price * ponton.col + gangway.price * gangway.col + stairs.price * stairs.col + connector.price * connector.col + stays.price * stays.col + sitconnect.price * sitconnect.col+bench.price*bench.col;
-	document.getElementById('summ').innerHTML = sum ,'руб.';
-	return sum;
+	document.getElementById('summ').innerHTML = sum +' руб.';
+	//return sum;
 }
 
 function area(){
 	var up=0;
+	var f=false;
 	for(var i=0;i<200;i++){
 		for(var j=0;j<200;j++){
 			if(maps[i][j].code!=0){
 				up=i;
 				i=300;
+				f=true;
 				break;
 			}		
 		}
@@ -405,6 +407,7 @@ function area(){
 			if(maps[j][i].code!=0){
 				left=i;
 				i=300;
+				f=true;
 				break;
 			}		
 		}
@@ -415,6 +418,7 @@ function area(){
 			if(maps[i][j].code!=0){
 				bottom=i;
 				i=0;
+				f=true;
 				break;
 			}		
 		}
@@ -425,16 +429,17 @@ function area(){
 			if(maps[i][j].code!=0){
 				right=j;
 				j=0;
+				f=true;
 				break;
 			}		
 		}
 	}
 	console.log("up",up,"left",left,"botton",bottom,"right",right);
-	//var width = ponton.width * ponton.col;
-	//var height = ponton.height *ponton.col;
-	var width = (right/2-left/2)+0.5;
-	var height = ((bottom-up)+1)/2;
-	document.getElementById('gabarites').innerHTML = width + ' x ' + height +' м.';
+	if(f){
+		var width = (right/2-left/2)+0.5;
+		var height = ((bottom-up)+1)/2;
+		document.getElementById('gabarites').innerHTML = width + ' x ' + height +' м.';
+	}
 }
 
 function quantity(){

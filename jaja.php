@@ -1,15 +1,12 @@
-<meta charset="UTF-8">
+<?php
+  $image = 'header.jpg';
+  $imageData = base64_encode(file_get_contents($image));
+  $src = 'data:'.mime_content_type($image).';base64,'.$imageData;
+  $my_html =  '
+  <meta charset="UTF-8">
 <!DOCTYPE html>
 <html lang="en">
-<?php
-    ob_start();
-?>
-<?php 
-       $path = 'http://localhost/object_calculator/header.jpg';
-$type = pathinfo($path, PATHINFO_EXTENSION);
-$data = file_get_contents($path);
-$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-       ?>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/script.js"></script>
@@ -49,7 +46,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 <body>
    <div class="list_1">
       <header>
-        <img style="width:100%; height:387px"alt="" src=<?php echo $base64 ?>>
+        <img style="width:100%; height:387px"alt="" src="' .$src. '">
     </header>
     <div class="middle">
       <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>
@@ -117,41 +114,41 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 </div> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript">
-  var table = document.getElementsByClassName('tab');
+  var table = document.getElementsByClassName("tab");
   var a = document.createElement("tr");
-  a.id = 'show_p';
-  a.innerHTML = '0';
+  a.id = "show_p";
+  a.innerHTML = "0";
   a.appendChild(table);
   var b = document.createElement("td");
-  b.innerHTML = 'Понтон модульный';
+  b.innerHTML = "Понтон модульный";
   b.appendChild(table);
   var c = document.createElement("td");
   var d = document.createElement("img");
   d.src="img/img/Photo/понтон вид сверху.jpg";
   c.appendChild(d);
-  document.getElementById('shet_sum_p').innerHTML= document.getElementById('shet_p').innerHTML * document.getElementById('col_p').innerHTML;
-  document.getElementById('shet_sum_s').innerHTML= document.getElementById('shet_s').innerHTML * document.getElementById('col_s').innerHTML;
-  document.getElementById('shet_sum_st').innerHTML= document.getElementById('shet_st').innerHTML * document.getElementById('col_st').innerHTML;
-  document.getElementById('shet_sum_g').innerHTML= document.getElementById('shet_g').innerHTML * document.getElementById('col_g').innerHTML;
-  document.getElementById('shet_sum_sit').innerHTML= document.getElementById('shet_sit').innerHTML * document.getElementById('col_sit').innerHTML;
-  document.getElementById('shet_sum_u').innerHTML= document.getElementById('shet_u').innerHTML * document.getElementById('col_u').innerHTML;
-  document.getElementById('shet_sum_stay').innerHTML= document.getElementById('shet_stay').innerHTML * document.getElementById('col_stay').innerHTML;
-  document.getElementById('final_col').innerHTML= +document.getElementById('shet_p').innerHTML + +document.getElementById('shet_s').innerHTML + +document.getElementById('shet_st').innerHTML + +document.getElementById('shet_g').innerHTML + +document.getElementById('shet_sit').innerHTML + +document.getElementById('shet_u').innerHTML + +document.getElementById('shet_stay').innerHTML;
-  var doc = new jsPDF();
+  document.getElementById("shet_sum_p").innerHTML= document.getElementById("shet_p").innerHTML * document.getElementById("col_p").innerHTML;
+  document.getElementById("shet_sum_s").innerHTML= document.getElementById("shet_s").innerHTML * document.getElementById("col_s").innerHTML;
+  document.getElementById("shet_sum_st").innerHTML= document.getElementById("shet_st").innerHTML * document.getElementById("col_st").innerHTML;
+  document.getElementById("shet_sum_g").innerHTML= document.getElementById("shet_g").innerHTML * document.getElementById("col_g").innerHTML;
+  document.getElementById("shet_sum_sit").innerHTML= document.getElementById("shet_sit").innerHTML * document.getElementById("col_sit").innerHTML;
+  document.getElementById("shet_sum_u").innerHTML= document.getElementById("shet_u").innerHTML * document.getElementById("col_u").innerHTML;
+  document.getElementById("shet_sum_stay").innerHTML= document.getElementById("shet_stay").innerHTML * document.getElementById("col_stay").innerHTML;
+  document.getElementById("final_col").innerHTML= +document.getElementById("shet_p").innerHTML + +document.getElementById("shet_s").innerHTML + +document.getElementById("shet_st").innerHTML + +document.getElementById("shet_g").innerHTML + +document.getElementById("shet_sit").innerHTML + +document.getElementById("shet_u").innerHTML + +document.getElementById("shet_stay").innerHTML;
   
-  doc.text('Hello world!', 10, 10);
-  doc.save('a4.pdf');
 </script>
 </body>
-<?php
-  require_once "dompdf/dompdf_config.inc.php";
-  $dompdf = new DOMPDF();
-  $my_html =  ob_get_clean();
-  echo $my_html;
-  $dompdf->load_html($my_html);
-  $dompdf->render();
-  $output = $dompdf->output();
-  file_put_contents("file.pdf", $output);
-
-?>
 </html>
+  ';
+  header('Content-language:en-GB');
+  require_once "\dompdf\autoload.inc.php";
+  use Dompdf\Dompdf;
+  $dompdf = new Dompdf(array('enable_remote' => true));
+  $dompdf->load_html($my_html);
+  $dompdf->setPaper( 'A4', 'portrait' );
+  $dompdf->render();
+  //$output = $dompdf->output();
+  //$output = $dompdf->output();
+  //file_put_contents("file.pdf", $output);
+  $dompdf->stream();
+echo $my_html;
+?>
