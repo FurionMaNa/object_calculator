@@ -385,7 +385,7 @@ function onScrollCanvas(){
 function sum(){
 	var sum = ponton.price * ponton.col + gangway.price * gangway.col + stairs.price * stairs.col + connector.price * connector.col + stays.price * stays.col + sitconnect.price * sitconnect.col+bench.price*bench.col;
 	document.getElementById('summ').innerHTML = sum +' руб.';
-	//return sum;
+	return sum;
 }
 
 function area(){
@@ -960,14 +960,14 @@ function canvasMoveMouse(evt){
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 3:case 1:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 			} 
@@ -2185,7 +2185,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 				ctx.save();//57 58
 				ctx.translate(xx,yy);
 				ctx.rotate(0*Math.PI/180);
-				ctx.drawImage(imgGhost, 0,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+				ctx.drawImage(imgGhost, 0+(45+scale)/3,0-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 				ctx.restore();
 
 			}else{
@@ -2193,14 +2193,14 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}else{
 					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						ctx.save();// 55 56
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0+(45+scale)/2, (45+scale), (45+scale));
+						ctx.drawImage(imgGhost, 0-(45+scale)/2, 0+(45+scale)/1.5, (45+scale)/3, (45+scale)/2);
 						ctx.restore();
 					}
 				}
@@ -2211,14 +2211,14 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}
 				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0+(45+scale)/1.5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}
 			}else{
@@ -2226,7 +2226,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 		 			ctx.save();//57 58
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0,0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0+(45+scale)/3,0+(45+scale)-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 		 		}
 			}
@@ -2237,21 +2237,21 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 				ctx.save();//57 58
 				ctx.translate(xx,yy);
 				ctx.rotate(0*Math.PI/180);
-				ctx.drawImage(imgGhost, 0,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+				ctx.drawImage(imgGhost, 0+(45+scale)/3,0-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 				ctx.restore();
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}else{
 					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						ctx.save();// 55 56
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0+(45+scale)/2, (45+scale), (45+scale));
+						ctx.drawImage(imgGhost, 0-(45+scale)/2, 0+(45+scale)/1.5, (45+scale)/3, (45+scale)/2);
 						ctx.restore();
 					}
 				}
@@ -2262,14 +2262,14 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}
 				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0+(45+scale)/1.5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}
 			}else{
@@ -2277,7 +2277,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 		 			ctx.save();//57 58
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0,0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0+(45+scale)/3,0+(45+scale)-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 		 		}
 			}
@@ -2287,17 +2287,17 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)){
 			switch (maps[y][x].code){
 				case 2:
-					ctx.save();//57 
+					ctx.save();//57 58
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0,0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0+(45+scale)/3,0-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
-					ctx.save();//57 
+					ctx.save();//57 58
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0,0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0+(45+scale)/3,0-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -2310,14 +2310,14 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -2330,15 +2330,15 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.save();//57 58
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0,0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0+(45+scale)/3,0+(45+scale)-(45+scale)/3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();//57 58
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0,0+(45+scale)/2, (45+scale), (45+scale));
-					ctx.restore();
+					ctx.drawImage(imgGhost, 0+(45+scale)/3,0+(45+scale)-(45+scale)/3, (45+scale)/3, (45+scale)/2);
+					ctx.restore();				
 					break;
 			}
 		}
@@ -2350,14 +2350,14 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0+(45+scale)/1.5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0+(45+scale)/1.5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -3514,11 +3514,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*i);
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 					case 756:
@@ -3527,11 +3527,11 @@ function draw(){
 						ctx.translate(sizeX*(j),sizeY*i);
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR,0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE,0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 					case 758:
@@ -3540,11 +3540,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*i);
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 					case 757:
@@ -3553,11 +3553,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*(i+1));
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 
@@ -3620,11 +3620,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*i);
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 					case 956:
@@ -3633,11 +3633,11 @@ function draw(){
 						ctx.translate(sizeX*(j),sizeY*i);
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR,0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE,0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 					case 958:
@@ -3646,11 +3646,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*i);
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 					case 957:
@@ -3659,11 +3659,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*(i+1));
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 						}
 						break;
 
