@@ -139,6 +139,15 @@
 </body>
 </html>
   ';
+  function getRandomFileName($path, $extension=''){
+    $extension = $extension ? '.' . $extension : '';
+    $path = $path ? $path . '/' : '';
+    do {
+        $name = md5(microtime() . rand(0, 9999));
+        $file = $path . $name . $extension;
+    } while (file_exists($file));
+    return $name;
+  }
   header('Content-language:en-GB');
   require_once __DIR__."\dompdf\autoload.inc.php";
   use Dompdf\Dompdf;
@@ -146,8 +155,19 @@
   $dompdf->load_html($my_html);
   $dompdf->setPaper( 'A4', 'portrait' );
   $dompdf->render();
-  //$output = $dompdf->output();
-  //file_put_contents("file.pdf", $output);
-  $dompdf->stream();
+  $output = $dompdf->output();
+  $extension = "pdf";
+  $filename = getRandomFileName("/pdf", $extension);
+  file_put_contents("pdf/".$filename.".pdf", $output);
+  require __DIR__.'\PHPMailer\PHPMailerAutoload.php';
+  $mail = new PHPMailer;
+  $mail->setFrom('andreygorlov19995@gmail.com', 'First Last');
+  $mail->addAddress('gorlov.a1b2c4d3@yandex.rum', 'John Doe');
+  $mail->Subject = 'PHPMailer file sender';
+  $mail->msgHTML("My message body");
+    // Attach uploaded files
+  $mail->addAttachment("/pdf/".$filename.".pdf");
+  $r = $mail->send();
+  //$dompdf->stream();
   echo $my_html;
 ?>
