@@ -438,7 +438,7 @@ function area(){
 	if(f){
 		var width = (right/2-left/2)+0.5;
 		var height = ((bottom-up)+1)/2;
-		document.getElementById('gabarites').innerHTML = width + ' x ' + height +' м.';
+		document.getElementById('area').innerHTML = width + ' x ' + height +' м.';
 	}
 }
 
@@ -469,11 +469,12 @@ function clearCanvas(){
 	bench.col = 0;
 	duck.price = 0;
 	document.getElementById('summ').innerHTML = '0 руб.';
-	document.getElementById('gabarites').innerHTML =  '0,0 x 0,0 м.'; 
+	document.getElementById('area').innerHTML =  '0,0 x 0,0 м.'; 
 	document.getElementById('shetpon').innerHTML = 0 ;
-	sum();
-	area();
 	draw();
+
+	sum();
+	area();	
 	quantity();
 }
 
