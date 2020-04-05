@@ -148,8 +148,11 @@
     } while (file_exists($file));
     return $name;
   }
+
+
   header('Content-language:en-GB');
-  require_once __DIR__."\dompdf\autoload.inc.php";
+  $root = $_SERVER['DOCUMENT_ROOT'];
+  require_once($root."/dompdf/autoload.inc.php");
   use Dompdf\Dompdf;
   $dompdf = new Dompdf(array('enable_remote' => true));
   $dompdf->load_html($my_html);
@@ -159,14 +162,14 @@
   $extension = "pdf";
   $filename = getRandomFileName("/pdf", $extension);
   file_put_contents("pdf/".$filename.".pdf", $output);
-  require __DIR__.'\PHPMailer\PHPMailerAutoload.php';
+
+  require($root.'/PHPMailer/PHPMailerAutoload.php');
   $mail = new PHPMailer;
-  $mail->setFrom('andreygorlov19995@gmail.com', 'First Last');
-  $mail->addAddress('gorlov.a1b2c4d3@yandex.rum', 'John Doe');
+  $mail->setFrom('andreygorlov19995@gmail.com');
+  $mail->addAddress('cer-c@mail.ru');
   $mail->Subject = 'PHPMailer file sender';
   $mail->msgHTML("My message body");
-    // Attach uploaded files
-  $mail->addAttachment("/pdf/".$filename.".pdf");
+  $mail->addAttachment($root."/pdf/".$filename.".pdf");
   $r = $mail->send();
   //$dompdf->stream();
   echo $my_html;
