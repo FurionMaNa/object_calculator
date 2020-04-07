@@ -987,28 +987,28 @@ function canvasMoveMouse(evt){
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3,0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 2:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 3:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 			} 
@@ -1067,14 +1067,14 @@ function canvasMoveMouse(evt){
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 3:case 1:
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)+(45+scale)/2,0-(45+scale)+(45+scale)/2, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 					break;
 			} 
@@ -1527,7 +1527,7 @@ function ArrangeDuck(x,y,direction,mX,mY){
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+			if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=957;
 				maps[y-1][x].id=maps[y][x].id;
 				maps[y-1][x].color=color;
@@ -1539,7 +1539,7 @@ function ArrangeDuck(x,y,direction,mX,mY){
 					maps[y][x-1].color=color;
 					return true;
 				}else{
-					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=956;
 						maps[y][x+1].id=maps[y][x].id;
 						maps[y][x+1].color=color;
@@ -1555,7 +1555,7 @@ function ArrangeDuck(x,y,direction,mX,mY){
 					maps[y][x-1].color=color;
 					return true;
 				}
-				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=956;
 					maps[y][x+1].id=maps[y][x].id;
 					maps[y][x+1].color=color;
@@ -1658,21 +1658,21 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 				ctx.save();//857
 				ctx.translate(xx,yy);
 				ctx.rotate(90*Math.PI/180);
-				ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+				ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 				ctx.restore();
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y-1][x].code==1)||(maps[y-1][x].code==-1)||(maps[y-1][x].code==10)||(maps[y-1][x].code==-10))&&(maps[y][x-1].code==0)){
 					ctx.save();//855
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 				}else{
 					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						ctx.save();//856
 						ctx.translate(xx,yy);
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+						ctx.drawImage(imgMouse, 0-(45+scale)*1.3, 0-(45+scale)/1.5, (45+scale)/2, (45+scale)/2);
 						ctx.restore();
 					}
 				}
@@ -1683,14 +1683,14 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					ctx.save();//855
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 				}
 				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					ctx.save();//856
 					ctx.translate(xx,yy);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3, 0-(45+scale)/1.5, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 				}
 			}else{
@@ -1698,32 +1698,32 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 		 			ctx.save();//858
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2,0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3,0+(45+scale)*1.3-(45+scale), (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 		 		}
 			}
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+			if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				ctx.save();//857
 				ctx.translate(xx,yy);
 				ctx.rotate(90*Math.PI/180);
-				ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+				ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 				ctx.restore();
 			}else{
 				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y-1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y][x-1].code==0)){
 					ctx.save();//855
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 				}else{
-					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						ctx.save();//856
 						ctx.translate(xx,yy);
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+						ctx.drawImage(imgMouse, 0-(45+scale)*1.3, 0-(45+scale)/1.5, (45+scale)/2, (45+scale)/2);
 						ctx.restore();
 					}
 				}
@@ -1734,14 +1734,14 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					ctx.save();//855
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 				}
-				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					ctx.save();//856
 					ctx.translate(xx,yy);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3, 0-(45+scale)/1.5, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 				}
 			}else{
@@ -1749,7 +1749,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 		 			ctx.save();//858
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2,0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3,0+(45+scale)*1.3-(45+scale), (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 		 		}
 			}
@@ -1762,14 +1762,14 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					ctx.save();//857
 					ctx.translate(xx,yy);
 					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();//857
 					ctx.translate(xx,yy);
 					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -1782,14 +1782,14 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					ctx.save();//855
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();//855
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0+(45+scale)/3, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -1802,14 +1802,14 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					ctx.save();//858
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2,0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3,0+(45+scale)*1.3-(45+scale), (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();//858
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2,0, (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3,0+(45+scale)*1.3-(45+scale), (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -1822,14 +1822,14 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					ctx.save();//856
 					ctx.translate(xx,yy);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3, 0-(45+scale)/1.5, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 				case 1222:
 					ctx.save();//856
 					ctx.translate(xx,yy);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*2+(45+scale)/2, 0-(45+scale), (45+scale), (45+scale));
+					ctx.drawImage(imgMouse, 0-(45+scale)*1.3, 0-(45+scale)/1.5, (45+scale)/2, (45+scale)/2);
 					ctx.restore();
 					break;
 			}
@@ -1887,7 +1887,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+			if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=857;
 				maps[y-1][x].id=maps[y][x].id;
 				maps[y-1][x].color=color;
@@ -1899,7 +1899,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 					maps[y][x-1].color=color;
 					return true;
 				}else{
-					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=856;
 						maps[y][x+1].id=maps[y][x].id;
 						maps[y][x+1].color=color;
@@ -1915,7 +1915,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 					maps[y][x-1].color=color;
 					return true;
 				}
-				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=856;
 					maps[y][x+1].id=maps[y][x].id;
 					maps[y][x+1].color=color;
@@ -2055,7 +2055,7 @@ function ArrangeConnector(x,y,direction,mX,mY){
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+			if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				maps[y-1][x].code=757;
 				maps[y-1][x].id=maps[y][x].id;
 				maps[y-1][x].color=color;
@@ -2067,7 +2067,7 @@ function ArrangeConnector(x,y,direction,mX,mY){
 					maps[y][x-1].color=color;
 					return true;
 				}else{
-					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						maps[y][x+1].code=756;
 						maps[y][x+1].id=maps[y][x].id;
 						maps[y][x+1].color=color;
@@ -2083,7 +2083,7 @@ function ArrangeConnector(x,y,direction,mX,mY){
 					maps[y][x-1].color=color;
 					return true;
 				}
-				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					maps[y][x+1].code=756;
 					maps[y][x+1].id=maps[y][x].id;
 					maps[y][x+1].color=color;
@@ -2215,7 +2215,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
@@ -2233,8 +2233,8 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 			}
 		}	
 	}else{
-		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if(((maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
+		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){//
+			if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
 				ctx.save();//57 58
 				ctx.translate(xx,yy);
 				ctx.rotate(0*Math.PI/180);
@@ -2248,7 +2248,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}else{
-					if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 						ctx.save();// 55 56
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
@@ -2266,7 +2266,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					ctx.drawImage(imgGhost, 0-(45+scale)/2, 0-(45+scale)+(45+scale)/1.3, (45+scale)/3, (45+scale)/2);
 					ctx.restore();
 				}
-				if(((maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x-1].code==11))&&((maps[y-1][x].code==11)||(maps[y+1][x].code==11))&&(maps[y][x+1].code==0)){
 					ctx.save();// 55 56
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
@@ -3568,11 +3568,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*i);
 						ctx.rotate(0*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/2, 0, sizeX, sizeY);break;
-							case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/2, 0, sizeX, sizeY);break;
-							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeX/2, 0, sizeX, sizeY);break;
-							case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/2, 0, sizeX, sizeY);break;
-							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeX/2, 0, sizeX, sizeY);break;
+							case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3, 0+sizeX/4, sizeX/2, sizeY/2);break;
+							case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3, 0+sizeX/4, sizeX/2, sizeY/2);break;
+							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeX/3, 0+sizeX/4,sizeX/2, sizeY/2);break;
+							case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3, 0+sizeX/4, sizeX/2, sizeY/2);break;
+							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeX/3, 0+sizeX/4,sizeX/2, sizeY/2);break;
 						}
 						break;
 					case 856:
@@ -3581,11 +3581,11 @@ function draw(){
 						ctx.translate(sizeX*(j),sizeY*i);
 						ctx.rotate(180*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+							case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
 						}	
 						break;
 					case 858:							
@@ -3594,11 +3594,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*i);
 						ctx.rotate(270*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+							case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
 						}	
 						break;
 					case 857:
@@ -3607,11 +3607,11 @@ function draw(){
 						ctx.translate(sizeX*(j+1),sizeY*(i+1));
 						ctx.rotate(90*Math.PI/180);
 						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0, sizeX, sizeY);	break;
-							case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0, sizeX, sizeY);	break;
-							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0, sizeX, sizeY);	break;
-							case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0, sizeX, sizeY);	break;
-							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0, sizeX, sizeY);	break;
+							case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+							case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+							case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+							case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+							case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
 						}	
 						break;
 

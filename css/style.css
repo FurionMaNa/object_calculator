@@ -41,12 +41,8 @@
         position: relative;
         top:4px;
         padding:7px;
-        margin-left: 30px;
-        margin-right: 5px;
         border-radius: 5px;
         background: #397dbf;
-        color:#fff;
-        cursor: pointer;
     }
     #clear{
     }
@@ -133,11 +129,11 @@
         visibility: visible;
     }
   .sub{
-      width:160px;
+      width:11%;
       display: inline-block;
       padding:0;
       height:120px;
-      margin-left: 20px;
+      margin-left: 2%;
       
   }
     .colors{
@@ -157,11 +153,11 @@
    display: inline-block;
    text-align:center;
    position:relative; 
-   left:103px;
+   left:78%;
    border:3px solid #b6e0f6;
    z-index:1;
    background:#fff;
-   width: 26px;
+   width: 18%;
    line-height:24px;
    border-radius:50%;
    top:4px;
@@ -169,13 +165,13 @@
 }
 .rotate{
     position:relative;
-    width:26px;
-    height:24px;
+    width:20%;
+    height:20%;
     text-align:center;
     border-radius:50%;
     color:#fff;
-    left:105px;
-    top:45px;
+    left:79%;
+    top:25%;
     background:#fff;
     z-index:990;
     cursor:pointer;
@@ -188,11 +184,11 @@
     z-index:1;
     background:#1a92fb;
     color:#1a92fb;
-    width: 26px;
-    line-height:24px;
+    width: 18%;
+    line-height:200%;
     border-radius:50%;
     top: -80px;
-    left:103px;
+    left:78%;
     font-size:11px;
  }
 #elements{
@@ -316,7 +312,7 @@ input:active{
     .object{ 
         top:-50px;
         position:relative;
-        width: 120px;
+        width: 90%;
         text-align:center;
        display:inline-block;
        background:#b6e0f6;
@@ -331,6 +327,7 @@ input:active{
         padding-top:10px;
         display: block;
         height:40px;
+        
     }
     #footer input{
         margin:0;
@@ -342,7 +339,7 @@ input:active{
     #footer{
         padding-top:1%;
         Background: #397dbf;
-        
+        padding-bottom: 0.1%;
         border-radius: 0 0 15px 15px;
         
     }
@@ -353,8 +350,9 @@ input:active{
 .hell{
     Background: white;
     width:96%;
-    position:relative;
+    margin-left: 2%;
     left:2%;
+    height: auto;
     border-radius: 10px;
     padding-top:10px;
     padding-bottom:10px;
