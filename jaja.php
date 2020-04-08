@@ -57,37 +57,37 @@
             </tr>
             <tr id="show_p">
               <td>Понтон модульный</td>
-              <td><img src="img/Photo/понтон вид сверху.jpg" width="100%" alt=""></td>
+              <td><img src="img/Photo/понтон вид сверху.jpg" width="200px" height="200px" alt=""></td>
               <td>16800</td>
             </tr>
             <tr id="show_s">
               <td>Соеденитель понтона</td>
-              <td><img src="img/Photo/соединитель вид сверху.jpg" width="100%" alt=""></td>
+              <td><img src="img/Photo/соединитель вид сверху.jpg" width="200px" height="200px" alt=""></td>
               <td>280</td>
             </tr>
             <tr id="show_st">
                 <td>Лестница с соеденителем</td>
-                <td><img src="img/Photo/лестница вид сверзу.jpg" width="100%" alt=""></td>
+                <td><img src="img/Photo/лестница вид сверзу.jpg" width="200px" height="200px" alt=""></td>
                 <td>18560</td>
               </tr>
               <tr id="show_g">
                 <td>Сходня с переходником</td>
-                <td><img src="img/Photo/сходня вид сверху.jpg" width="100%" alt=""></td>
+                <td><img src="img/Photo/сходня вид сверху.jpg" width="200px" height="200px" alt=""></td>
                 <td>9400</td>
               </tr>
               <tr id="show_sit">
                 <td>Лавочка с соеденителями</td>
-                <td><img src="img/Photo/лавочка вид сверху.jpg" width="100%" alt=""></td>
+                <td><img src="img/Photo/лавочка вид сверху.jpg" width="200px" height="200px" alt=""></td>
                 <td>12500</td>
               </tr>
               <tr id="show_u">
                 <td>Утка</td>
-                <td><img src="img/Photo/Утка пока такая же фото.jpg" width="100%" alt=""></td>
+                <td><img src="img/Photo/Утка пока такая же фото.jpg" width="200px" height="200px" alt=""></td>
                 <td>20,00</td>
               </tr>
               <tr id="show_stay">
                 <td>Стойка</td>
-                <td><img src="img/Photo/стойка вид сверху.jpg" width="100%" alt=""></td>
+                <td><img src="img/Photo/стойка вид сверху.jpg" width="200px" height="200px" alt=""></td>
                 <td>890</td>
               </tr>  
           </table>
