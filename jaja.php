@@ -198,20 +198,14 @@
     document.getElementById("shet_sum_u").innerHTML= document.getElementById("shet_u").innerHTML * document.getElementById("col_u").innerHTML;
     document.getElementById("shet_sum_stay").innerHTML= document.getElementById("shet_stay").innerHTML * document.getElementById("col_stay").innerHTML;
     document.getElementById("final_col").innerHTML= +document.getElementById("shet_p").innerHTML + +document.getElementById("shet_s").innerHTML + +document.getElementById("shet_st").innerHTML +  +document.getElementById("shet_g").innerHTML + +document.getElementById("shet_sit").innerHTML + +document.getElementById("shet_u").innerHTML + +document.getElementById("shet_stay").innerHTML;
+    
    }
+   document.addEventListener("DOMContentLoaded", alert("Спасибо с вами свяжется менеджер"));
 </script>
 </body>
 </html>
   ';
-  function getRandomFileName($path, $extension=''){
-    $extension = $extension ? '.' . $extension : '';
-    $path = $path ? $path . '/' : '';
-    do {
-        $name = md5(microtime() . rand(0, 9999));
-        $file = $path . $name . $extension;
-    } while (file_exists($file));
-    return $name;
-  }
+  echo $my_html;//Отображение страницы,в переменной код страницы 
   header('Content-language:en-GB');
   $root = $_SERVER['DOCUMENT_ROOT'];
   require_once($root."/dompdf/autoload.inc.php");
@@ -219,11 +213,11 @@
   $dompdf = new Dompdf(array('enable_remote' => true));
   $dompdf->load_html($my_html);
   $dompdf->setPaper( 'A4', 'portrait' );
-  $dompdf->render();
+  $dompdf->render();//генерация pdf
   $output = $dompdf->output();
   $extension = "pdf";
   $filename = getRandomFileName("/pdf", $extension);
-  file_put_contents("pdf/".$filename.".pdf", $output);
+  file_put_contents("pdf/".$filename.".pdf", $output);//сохранение на сервер 
 
   require($root.'/PHPMailer/PHPMailerAutoload.php');
   $mail = new PHPMailer;
@@ -232,7 +226,6 @@
   $mail->Subject = 'PHPMailer file sender';
   $mail->msgHTML("От: ".$_GET['name']."\r\n Телефон: ".$_GET['telephone']."\r\n Коммент: ".$_GET['comment']);
   $mail->addAttachment($root."/pdf/".$filename.".pdf");
-  $r = $mail->send();
-  //$dompdf->stream();
-  echo $my_html;
+  $r = $mail->send();//отправка на почту
+  $dompdf->stream("file.pdf");//Сохранение на пк пользователю
 ?>

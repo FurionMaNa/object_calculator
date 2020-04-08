@@ -11,7 +11,8 @@
         function onIssue(){
             if((document.getElementById('nam').value!="")&&(document.getElementById('telephone').value!="")&&(document.getElementById('email').value!="")&&(document.getElementById('comment').value!="")){
                 window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
-                alert("Спасибо с вами свяжется менеджер");
+
+                
             }else{
                 alert("Заполните все поля!!!!");
             }
@@ -32,6 +33,7 @@
     <style></style>
 </head>
 <body>
+    
       <div id="main1">
         <div id="workArea" name="workArea">
         	<div id="header">
@@ -47,13 +49,14 @@
                     Габариты: 
                   <span id="area">0,0 х 0,0 м.</span>
               </div>
-              <div><img src="img/musor.png" id="musor"  width="33px" height="33px" onclick="deleteObjectFromMouse()" style="background: #397dbf; border-radius: 5px; padding: 0 5px 0 5px"alt=""></div>
+              <div><img src="img/musor.png" id="musor"  width="33px" height="33px" onclick="deleteObjectFromMouse()" style="background: #fff; border-radius: 2px; padding: 0 5px 0 5px"alt=""></div>
               <div id="sell">
-                  <span id="ssss" onclick="visionForm()">
+                  <span id="ssss"  onclick="visionForm()">
                       Оформить
+                      
                   </span>
-                    <form id="send_email" style="display: none;">
-                        <span class="lol">
+                  <form action="send.php" method="post" id="send_email" style="display: none;">
+                          <span class="lol">
                             <b> Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
                         </span>
                         <br>
@@ -85,9 +88,10 @@
               </div>
             </div>
             </div>
-            <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 450px;max-width:100%;overflow: scroll;">
+            <div style="background:#fff; padding-top: 20px; padding-bottom: 20px;">
+            <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 450px;max-width:96%; margin-left:2%;overflow: scroll; ">
                 <canvas id='main' width="3000px" height="3000px"></canvas>
-            </div>
+            </div></div>
             <div id="object__changer">
                 <div style="text-align:center; font-weight:bolder;font-size:15px;background:#b6e0f6;border-radius:10px;vertical-align: middle; padding-top: 5px;padding-bottom: 5px;">Меню</div>
                 <div id="remove" class="menu_object">Убрать</div>
