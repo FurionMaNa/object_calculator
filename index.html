@@ -3,19 +3,19 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="UTF-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конструктор</title>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
         function onIssue(){
-            window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML)
+            window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML)
         }
     </script>
     <style></style>
 </head>
 <body>
-   
+    <img src="img/fon.jpg" alt="">
       <div id="main1">
         <div id="workArea" name="workArea">
         	<div id="header">
@@ -26,33 +26,31 @@
                   </a>
               </div>
               <div id="gabarites">
-                  <span id="summ">
-                    Габариты: 0,0 х 0,0 м.
-                  </span>
-                  <span id="area">
-                    Сумма: 0 руб.
-                  </span>
+                    Сумма:
+                  <span id="summ"> 0 руб.</span>
+                    Габариты: 
+                  <span id="area">0,0 х 0,0 м.</span>
               </div>
               <div><img src="img/musor.png" id="musor"  width="33px" height="33px" onclick="deleteObjectFromMouse()" style="background: #397dbf; border-radius: 5px; padding: 0 5px 0 5px"alt=""></div>
               <div id="sell">
-                  <a href="jaja.html" id="ssss">
+                  <span id="ssss" onclick="onIssue()">
                       Оформить
-                  </a>
+                  </span>
               </div>
-              <div id="clear">
-                  <a href="" id="cccc"> Очистить</a>
-              </div>
-              <div >
-                  <img src="img/zoom+.png" width="45%" height="78%" alt="" id="scale_plus">
+              <div id="clear" onclick="clearCanvas()">
+                  <span id="cccc"> Очистить</span>
               </div>
               <div >
-                  <img src="img/zoom-.png" width="45%" height="78%" alt="" id="scale_minus">
+                  <img src="img/zoom+.png" width="45%" height="78%" alt="" id="scale_plus" onclick="scalePlusClick()" >
               </div>
               <div >
-                <img src="img/set.jpg" width="45%" height="78%" alt="" id="setka">
+                  <img src="img/zoom-.png" width="45%" height="78%" alt="" id="scale_minus" onclick="scaleMinusClick()" >
               </div>
               <div >
-                  <img src="img/fullscr.png" width="45%" height="78%" alt=" " id="full_screen">
+                <img src="img/set.jpg" width="45%" height="78%" alt="" id="setka" onclick="visibleWebClick()"  >
+              </div>
+              <div >
+                  <img src="img/fullscr.png" width="45%" height="78%" alt=" " id="full_screen" onclick="fullScreenClick()" >
               </div>
             </div>
             </div>

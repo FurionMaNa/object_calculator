@@ -3,7 +3,7 @@
   $imageData = base64_encode(file_get_contents($image));
   $src = 'data:'.mime_content_type($image).';base64,'.$imageData;
   $my_html =  '
-  <meta charset="UTF-8">
+  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,35 +11,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/script.js"></script>
     <title>Document</title>
-    
+    <meta charset="UTF-8">
     <style>
-      html, body{
-        box-sizing: border-box;
-        margin:0;
-        padding:0;
-      }
-      body{
-        background:#3d3d3d;
-      }
-      .list_1{
-        width:70%;
-        margin-left: 15%;
-        margin-top:2%;
-        background:white;
-      }
-      .tab{
+        html, body{
+            box-sizing: border-box;
+            margin:0;
+            padding:0;
+        }
+    
+        body{
+          
+        }
+        table{
+          border-collapse: collapse;
+        }
+    .tab{
         margin-top: 1%;
         margin-left: 4.6%;
         width:90%;
         text-align: center;
         font-weight: bolder;
-      }
-      td{
+    }
+    td{
         padding:20px
-      }
-      tr{
+    }
+    tr{
      
-      }
+    }
       body { font-family: DejaVu Sans, sans-serif; }
     </style>
 </head>
@@ -49,8 +47,54 @@
         <img style="width:100%; height:387px"alt="" src="' .$src. '">
     </header>
     <div class="middle">
+    <Center>
+    <table class="tab" border="1">
+          
+      <tr>
+              <th>Наименование продукции</th>
+              <th>Фотография</th>
+              <th>Цена с ндс, руб.</th>
+            </tr>
+            <tr id="show_p">
+              <td>Понтон модульный</td>
+              <td><img src="img/Photo/понтон вид сверху.jpg" width="100%" alt=""></td>
+              <td>16800</td>
+            </tr>
+            <tr id="show_s">
+              <td>Соеденитель понтона</td>
+              <td><img src="img/Photo/соединитель вид сверху.jpg" width="100%" alt=""></td>
+              <td>280</td>
+            </tr>
+            <tr id="show_st">
+                <td>Лестница с соеденителем</td>
+                <td><img src="img/Photo/лестница вид сверзу.jpg" width="100%" alt=""></td>
+                <td>18560</td>
+              </tr>
+              <tr id="show_g">
+                <td>Сходня с переходником</td>
+                <td><img src="img/Photo/сходня вид сверху.jpg" width="100%" alt=""></td>
+                <td>9400</td>
+              </tr>
+              <tr id="show_sit">
+                <td>Лавочка с соеденителями</td>
+                <td><img src="img/Photo/лавочка вид сверху.jpg" width="100%" alt=""></td>
+                <td>12500</td>
+              </tr>
+              <tr id="show_u">
+                <td>Утка</td>
+                <td><img src="img/Photo/Утка пока такая же фото.jpg" width="100%" alt=""></td>
+                <td>20,00</td>
+              </tr>
+              <tr id="show_stay">
+                <td>Стойка</td>
+                <td><img src="img/Photo/стойка вид сверху.jpg" width="100%" alt=""></td>
+                <td>890</td>
+              </tr>  
+          </table>
+          </center>
       <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>
         <br>
+         <center>
         <table class="summa tab" border="1">
           <tr>
             <th>Наименование продукции</th>
@@ -107,6 +151,7 @@
             <td id="final_sum">'. $_GET["sum"].'</td>
           </tr>
         </table>
+         </center>
     </div>
   <footer>
     <img src="img/footer.jpg" style="width:90%; margin-left: 4.5%;" alt="">
@@ -148,8 +193,6 @@
     } while (file_exists($file));
     return $name;
   }
-
-
   header('Content-language:en-GB');
   $root = $_SERVER['DOCUMENT_ROOT'];
   require_once($root."/dompdf/autoload.inc.php");
