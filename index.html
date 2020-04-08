@@ -9,13 +9,29 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
         function onIssue(){
-            window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML)
+            if((document.getElementById('nam').value!="")&&(document.getElementById('telephone').value!="")&&(document.getElementById('email').value!="")&&(document.getElementById('comment').value!="")){
+                window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+                alert("Спасибо с вами свяжется менеджер");
+            }else{
+                alert("Заполните все поля!!!!");
+            }
+        }
+
+        var vision=false;
+
+        function visionForm(){
+            if(vision){
+                document.getElementById('send_email').style.display="none";
+                vision=false;
+            }else{
+                document.getElementById('send_email').style.display="block";
+                vision=true;
+            }
         }
     </script>
     <style></style>
 </head>
 <body>
-    
       <div id="main1">
         <div id="workArea" name="workArea">
         	<div id="header">
@@ -33,9 +49,24 @@
               </div>
               <div><img src="img/musor.png" id="musor"  width="33px" height="33px" onclick="deleteObjectFromMouse()" style="background: #397dbf; border-radius: 5px; padding: 0 5px 0 5px"alt=""></div>
               <div id="sell">
-                  <span id="ssss" onclick="onIssue()">
+                  <span id="ssss" onclick="visionForm()">
                       Оформить
                   </span>
+                    <form id="send_email" style="display: none;">
+                        <span class="lol">
+                            <b> Оставьте ваши контактные данные и получите индивидуальноекоммерческое предложение: </b>
+                        </span>
+                        <br>
+                        <input type="text" name="nam"      id="nam"      placeholder="Имя">
+                        <br>
+                        <input type="text" name="telephone"id="telephone"placeholder="Номер телефона" required>
+                        <br>
+                        <input type="text" name="email"    id="email"    placeholder="Укажите e-mail">
+                        <br>
+                        <input type="text" name="comment"  id="comment"  placeholder="Комментарий">
+                        <br>
+                        <input type="button" onclick="onIssue()" value="Отправить">
+                    </form>
               </div>
               <div id="clear" onclick="clearCanvas()">
                   <span id="cccc"> Очистить</span>

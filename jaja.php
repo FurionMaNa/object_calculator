@@ -152,6 +152,25 @@
           </tr>
         </table>
          </center>
+         <br>
+          <br>
+          <span style="margin-left: 4.6%; font-size: 20px;">
+            <span style="text-decoration: underline;">Срок поставки </span>: 5-7 дней с момента поступления предоплаты на расчетный счет.
+           Продукция в наличии на складепроизводства в г. Владимир.
+           Возможна доставка до Вашего объекта.
+           <br> <br>
+           
+           <span style="text-decoration: underline;margin-left: 4.5%;" >
+            Условия оплаты </span>:  предоплата 100% по безналичному расчету в течение 3 дней с момента получения счета на оплату.
+          </span>
+          <br>
+          <br>
+          <br>
+          <br>
+          <span style="float:right; margin-right: 4.6%; font-size: 20px;">
+            Гаврилов Александр Михайлович <br>
+            Менеджер ООО "ПЛАСТО СПБ"
+          </span>
     </div>
   <footer>
     <img src="img/footer.jpg" style="width:90%; margin-left: 4.5%;" alt="">
@@ -208,10 +227,10 @@
 
   require($root.'/PHPMailer/PHPMailerAutoload.php');
   $mail = new PHPMailer;
-  $mail->setFrom('andreygorlov19995@gmail.com');
+  $mail->setFrom($_GET['email']);
   $mail->addAddress('cer-c@mail.ru');
   $mail->Subject = 'PHPMailer file sender';
-  $mail->msgHTML("My message body");
+  $mail->msgHTML("От: ".$_GET['name']."\r\n Телефон: ".$_GET['telephone']."\r\n Коммент: ".$_GET['comment']);
   $mail->addAttachment($root."/pdf/".$filename.".pdf");
   $r = $mail->send();
   //$dompdf->stream();

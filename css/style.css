@@ -218,11 +218,7 @@
 
 input:active {outline:none;
 border:none;}
-#header{
-   
-    
-   
-}
+
 /* кнопки */
 
 .border_zoom{
@@ -235,7 +231,24 @@ border:none;}
     border-right:1px solid #4a76a8;
     
 }
-
+#send_email{
+    position:absolute;
+    background: #fff;
+    border-radius: 10px;
+    border:1px solid #4a76a8;
+    z-index:200;
+    text-align: center;
+    padding-top: 5px;
+    
+}
+#send_email input{
+    margin:10px;
+}
+.lol{
+    text-align: center;
+    margin:10px;
+    line-height: 15px;
+}
 
 #main1 {
     position:absolute;
@@ -262,6 +275,9 @@ border:none;}
     padding: 7px;
     font-style: italic;
     
+}
+#ssss:target #send_email{
+ visibility:visible;
 }
 #workarea{
     line-height:100%;
