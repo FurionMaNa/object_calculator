@@ -6,7 +6,6 @@
   
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -23,7 +22,6 @@
         }
         table{
           border-collapse: collapse;
-          margin:auto;
         }
     .tab{
         margin-top: 1%;
@@ -47,7 +45,7 @@
         <img style="width:100%; height:387px"alt="" src="' .$src. '">
     </header>
     <div class="middle">
-    <Center>
+   
     <table class="tab" border="1">
           
       <tr>
@@ -91,10 +89,10 @@
                 <td>890</td>
               </tr>  
           </table>
-          </center>
+          
       <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>
         <br>
-         <center>
+         
         <table class="summa tab" border="1">
           <tr>
             <th>Наименование продукции</th>
@@ -151,7 +149,7 @@
             <td id="final_sum">'. $_GET["sum"].'</td>
           </tr>
         </table>
-         </center>
+        
          <br>
           <br>
           <span style="margin-left: 4.6%; font-size: 20px;">
@@ -198,15 +196,43 @@
     document.getElementById("shet_sum_u").innerHTML= document.getElementById("shet_u").innerHTML * document.getElementById("col_u").innerHTML;
     document.getElementById("shet_sum_stay").innerHTML= document.getElementById("shet_stay").innerHTML * document.getElementById("col_stay").innerHTML;
     document.getElementById("final_col").innerHTML= +document.getElementById("shet_p").innerHTML + +document.getElementById("shet_s").innerHTML + +document.getElementById("shet_st").innerHTML +  +document.getElementById("shet_g").innerHTML + +document.getElementById("shet_sit").innerHTML + +document.getElementById("shet_u").innerHTML + +document.getElementById("shet_stay").innerHTML;
-    //window.open("load.php?sum='.$_GET['sum'].'&shetpon='.$_GET['shetpon'].'&gangway='.$_GET['gangway'].'&stairs='.$_GET['stairs'].'&connector='.$_GET['connector'].'&duck='.$_GET['duck'].'&stays='.$_GET['stays'].'&bench='.$_GET['bench'].'&name='.$_GET['name'].'&telephone='.$_GET['telephone'].'&email='.$_GET['email'].'&comment='.$_GET['comment'].'");
+    
    }
    
 </script>
 </body>
 </html>
   ';
-  echo $my_html;//Отображение страницы,в переменной код страницы 
-  //header('Content-language:en-GB');
-  //$root = $_SERVER['DOCUMENT_ROOT'];
-  
+  function getRandomFileName($path, $extension=''){
+    $extension = $extension ? '.' . $extension : '';
+    $path = $path ? $path . '/' : '';
+    do {
+        $name = md5(microtime() . rand(0, 9999));
+        $file = $path . $name . $extension;
+    } while (file_exists($file));
+    return $name;
+  }
+  header('Content-language:en-GB');
+  $root = $_SERVER['DOCUMENT_ROOT'];
+  require_once($root."/dompdf/autoload.inc.php");
+  use Dompdf\Dompdf;
+  $dompdf = new Dompdf(array('enable_remote' => true));
+  $dompdf->load_html($my_html);
+  $dompdf->setPaper( 'A4', 'portrait' );
+  $dompdf->render();//генерация pdf
+  $output = $dompdf->output();
+  $dompdf->stream("file.pdf");//Сохранение на пк пользователю
+  $extension = "pdf";
+  //$filename = getRandomFileName("/pdf", $extension);
+  //file_put_contents("pdf/".$filename.".pdf", $output);//сохранение на сервер 
+
+  //require($root.'/PHPMailer/PHPMailerAutoload.php');
+  //$mail = new PHPMailer;
+  //$mail->setFrom($_GET['email']);
+  //$mail->addAddress('cer-c@mail.ru');//
+  //$mail->CharSet = "utf-8";
+  //$mail->Subject = 'PHPMailer file sender';
+  //$mail->msgHTML("От: ".$_GET['name']."\r\n Телефон: ".$_GET['telephone']."\r\n Коммент: ".$_GET['comment']);
+  //$mail->addAttachment($root."/pdf/".$filename.".pdf");
+  //$r = $mail->send();//отправка на почту
 ?>

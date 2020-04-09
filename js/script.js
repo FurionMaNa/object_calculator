@@ -535,6 +535,12 @@ function CutObjMaps(x,y){
 					f=false;
 					mapsBuff[ii][jj]=new Object( {code:maps[i][j].code, id:maps[i][j].id,i:i,j:j,color:maps[i][j].color} );
 					switch(maps[i][j].code){
+						case 1:case -1:case 10:case -10:
+							ponton.col--;
+							break;
+						case 2:case -2:case 20:	case -20:
+							gangway.col--;
+							break;
 						case 555:case 556:case 557:case 558:
 							stairs.col--;
 							break;
@@ -599,6 +605,12 @@ function PastObjMaps(x,y){
 				maps[yy][xx].id=mapsBuff[i][j].id;
 				maps[yy][xx].color=mapsBuff[i][j].color;
 				switch(mapsBuff[i][j].code){
+					case 1:case -1:case 10:case -10:
+						ponton.col++;
+						break;
+					case 2:case -2:case 20:	case -20:
+						gangway.col++;
+						break;
 					case 555:case 556:case 557:case 558:
 						stairs.col++;
 						break;
@@ -1220,7 +1232,7 @@ function canvasMoveMouse(evt){
 							switch(mapsBuff[i][j].code){
 								case 555:
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
 										case 'blue':ctx.drawImage(imgMapsStairsB, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
 										case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);;break;
@@ -1228,9 +1240,10 @@ function canvasMoveMouse(evt){
 										case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
 									}
 									break;
+
 								case 556:
 									ctx.rotate(270*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
 										case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
 										case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
@@ -1240,7 +1253,7 @@ function canvasMoveMouse(evt){
 									break;
 								case 558:
 									ctx.rotate(0*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
 										case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
 										case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
@@ -1250,7 +1263,7 @@ function canvasMoveMouse(evt){
 									break;
 								case 557:
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
 										case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
 										case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
@@ -1261,7 +1274,7 @@ function canvasMoveMouse(evt){
 			
 								case 655:
 									ctx.rotate(0*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':imgMapsBench.src='img/bench.png';break;
 										case 'blue':imgMapsBench.src='img/bench.png';break;
 										case 'brown':imgMapsBench.src='img/bench.png';break;
@@ -1272,7 +1285,7 @@ function canvasMoveMouse(evt){
 									break;
 								case 656:
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':imgMapsBench.src='img/bench.png';break;
 										case 'blue':imgMapsBench.src='img/bench.png';break;
 										case 'brown':imgMapsBench.src='img/bench.png';break;
@@ -1283,7 +1296,7 @@ function canvasMoveMouse(evt){
 									break;
 								case 658:
 									ctx.rotate(270*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':imgMapsBench.src='img/bench.png';break;
 										case 'blue':imgMapsBench.src='img/bench.png';break;
 										case 'brown':imgMapsBench.src='img/bench.png';break;
@@ -1294,7 +1307,7 @@ function canvasMoveMouse(evt){
 									break;
 								case 657:
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
+									switch (maps[i][j].color){
 										case 'green':imgMapsBench.src='img/bench.png';break;
 										case 'blue':imgMapsBench.src='img/bench.png';break;
 										case 'brown':imgMapsBench.src='img/bench.png';break;
@@ -1303,163 +1316,162 @@ function canvasMoveMouse(evt){
 									}
 									ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
 									break;
-			
 								case 755:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.translate(sizeX*(j+1),sizeY*i);
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 								case 756:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx),sizeY*yy);
+									ctx.translate(sizeX*(j),sizeY*i);
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR,0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE,0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 								case 758:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.translate(sizeX*(j+1),sizeY*i);
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 								case 757:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+									ctx.translate(sizeX*(j+1),sizeY*(i+1));
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 			
 								case 855:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.translate(sizeX*(j+1),sizeY*i);
 									ctx.rotate(0*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/2, 0, sizeX, sizeY);break;
-										case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/2, 0, sizeX, sizeY);break;
-										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeX/2, 0, sizeX, sizeY);break;
-										case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/2, 0, sizeX, sizeY);break;
-										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeX/2, 0, sizeX, sizeY);break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3, 0+sizeX/4, sizeX/2, sizeY/2);break;
+										case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3, 0+sizeX/4, sizeX/2, sizeY/2);break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeX/3, 0+sizeX/4,sizeX/2, sizeY/2);break;
+										case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3, 0+sizeX/4, sizeX/2, sizeY/2);break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeX/3, 0+sizeX/4,sizeX/2, sizeY/2);break;
 									}
 									break;
 								case 856:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx),sizeY*yy);
+									ctx.translate(sizeX*(j),sizeY*i);
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
 									}	
 									break;
 								case 858:							
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.translate(sizeX*(j+1),sizeY*i);
 									ctx.rotate(270*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
-										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0-sizeY, sizeX, sizeY);break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
 									}	
 									break;
 								case 857:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+									ctx.translate(sizeX*(j+1),sizeY*(i+1));
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/2, 0, sizeX, sizeY);	break;
-										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/2, 0, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/2, 0, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/2, 0, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/2, 0, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+										case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3, 0+sizeX/4, sizeX/2, sizeY/2);	break;
 									}	
 									break;
 			
 								case 955:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.translate(sizeX*(j+1),sizeY*i);
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 								case 956:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx),sizeY*yy);
+									ctx.translate(sizeX*(j),sizeY*i);
 									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR,0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE,0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 								case 958:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*yy);
+									ctx.translate(sizeX*(j+1),sizeY*i);
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 								case 957:
 									ctx.restore();
 									ctx.save();
-									ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+									ctx.translate(sizeX*(j+1),sizeY*(i+1));
 									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsConnectorG,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'blue':ctx.drawImage(imgMapsConnectorB,   0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'white':ctx.drawImage(imgMapsConnectorW,  0, 0-sizeY/2, sizeX, sizeY);	break;
-										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0, 0-sizeY/2, sizeX, sizeY);	break;
+									switch (maps[i][j].color){
+										case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+										case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
 									}
 									break;
 							}
@@ -3178,29 +3190,35 @@ function rot(id){
 }
 
 function deleteObjectFromMouse(){
-	if(mapsBuff.length!=0){
-		for(var i=0;i<mapsBuff.length;i++){
-			for(var j=0;j<mapsBuff.length;j++){
-				switch (mapsBuff[i][j].code){
-					case 1:case -1:case 10:case -10:
-
-						break;
-					case 2:case -2:case 20:	case -20:
-						break;
-					case 555:case 556:case 558:case 557:
-						break;
-					case 655:case 656:case 658:case 657:
-						break;
-					case 755:case 756:case 758:case 757:
-						break;
-					case 855:case 856:case 858:case 857:
-						break;
-					case 955:case 956:case 958:case 957:
-						break;
-				}
-			}
-		}	
-	}
+	//if(mapsBuff.length!=0){
+	//	for(var i=0;i<mapsBuff.length;i++){
+	//		for(var j=0;j<mapsBuff[i].length;j++){
+	//			switch (mapsBuff[i][j].code){
+	//				case 1:case -1:case 10:case -10:
+	//					ponton.col--;
+	//					break;
+	//				case 2:case -2:case 20:	case -20:
+	//					gangway.col--;
+	//					break;
+	//				case 555:case 556:case 558:case 557:
+	//					stairs.col--;
+	//					break;
+	//				case 655:case 656:case 658:case 657:
+	//					bench.col--;
+	//					break;
+	//				case 755:case 756:case 758:case 757:
+	//					connector.col--;
+	//					break;
+	//				case 855:case 856:case 858:case 857:
+	//					stays.col--;
+	//					break;
+	//				case 955:case 956:case 958:case 957:
+	//					duck.col--;
+	//					break;
+	//			}
+	//		}
+	//	}	
+	//}
 	mapsBuff=new Array();
 	model=0;
 	draw();

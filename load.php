@@ -221,7 +221,7 @@
   $dompdf->setPaper( 'A4', 'portrait' );
   $dompdf->render();//генерация pdf
   $output = $dompdf->output();
-  $dompdf->stream("file.pdf");//Сохранение на пк пользователю
+  //$dompdf->stream("file.pdf");//Сохранение на пк пользователю
   $extension = "pdf";
   $filename = getRandomFileName("/pdf", $extension);
   file_put_contents("pdf/".$filename.".pdf", $output);//сохранение на сервер 
@@ -229,10 +229,11 @@
   require($root.'/PHPMailer/PHPMailerAutoload.php');
   $mail = new PHPMailer;
   $mail->setFrom($_GET['email']);
-  $mail->addAddress('cer-c@mail.ru');//
+  $mail->addAddress('gorlov.a1b2c4d3@yandex.ru');//cer-c@mail.ru
   $mail->CharSet = "utf-8";
   $mail->Subject = 'PHPMailer file sender';
   $mail->msgHTML("От: ".$_GET['name']."\r\n Телефон: ".$_GET['telephone']."\r\n Коммент: ".$_GET['comment']);
   $mail->addAttachment($root."/pdf/".$filename.".pdf");
   $r = $mail->send();//отправка на почту
+  echo '<script>window.close()</script>'
 ?>

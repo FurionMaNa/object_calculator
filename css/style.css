@@ -47,6 +47,7 @@
     }
     #cccc{
         background:  #da251c;
+        cursor: pointer;
     }
     #clear{
      
@@ -58,6 +59,7 @@
     #ssss{background:#9c3;
         color:#fff;
         line-height: 10px;
+        cursor: pointer;
     }
     #scale_plus,#setka{
         float:right;
@@ -252,10 +254,25 @@ border:none;}
 }
 .lol{
     text-align: center;
-    margin:10px;
-    line-height: 15px;
+    margin:0;
+    padding:0;
+    
 }
-
+.button_form{
+    background: #ccc;
+    font-weight: bold;
+    padding:8px;
+    border:none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.button_form:hover{
+    transition:0.5s;
+    border-radius:0;
+}
+.form_but{
+    border: 5px solid #f8c301; ;
+}
 #main1 {
     position:absolute;
     top:0;
@@ -289,7 +306,7 @@ border:none;}
     line-height:100%;
 }
 #main{
-    background:#99c;
+    background:#9999cc96;
 }
 p{
     font-weight: bold;

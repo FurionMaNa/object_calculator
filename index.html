@@ -10,9 +10,8 @@
     <script type="text/javascript">
         function onIssue(){
             if((document.getElementById('nam').value!="")&&(document.getElementById('telephone').value!="")&&(document.getElementById('email').value!="")&&(document.getElementById('comment').value!="")){
-                window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
-
-                
+                document.getElementById("after_sell").style.display="block";
+                window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
             }else{
                 alert("Заполните все поля!!!!");
             }
@@ -23,11 +22,20 @@
         function visionForm(){
             if(vision){
                 document.getElementById('send_email').style.display="none";
+                document.getElementById("after_sell").style.display="none";
                 vision=false;
             }else{
                 document.getElementById('send_email').style.display="block";
                 vision=true;
             }
+        }
+
+        function downoload(){
+            window.open('downoload.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+        }
+
+        function watch(){
+            window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
         }
     </script>
     <style></style>
@@ -56,19 +64,29 @@
                       
                   </span>
                   <form action="send.php" method="post" id="send_email" style="display: none;">
-                          <span class="lol">
-                            <b> Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
+                          <span class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;">
+                            <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
                         </span>
                         <br>
-                        <input type="text" name="nam"      id="nam"      placeholder="Имя">
+                        <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
                         <br>
-                        <input type="text" name="telephone"id="telephone"placeholder="Номер телефона" required>
+                        <input type="text" name="telephone"id="telephone"placeholder="Номер телефона"  class="form_but"  required>
                         <br>
-                        <input type="text" name="email"    id="email"    placeholder="Укажите e-mail">
+                        <input type="text" name="email"    id="email"    placeholder="Укажите e-mail"  class="form_but" >
                         <br>
-                        <input type="text" name="comment"  id="comment"  placeholder="Комментарий">
+                        <input type="text" name="comment"  id="comment"  placeholder="Комментарий"  class="form_but" >
                         <br>
-                        <input type="button" onclick="onIssue()" value="Отправить">
+                        <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
+                        <br>
+                        <input type="button" onclick="visionForm()" value="Закрыть" class="button_form">
+                        <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
+                            <span style="display:block">
+                               <b>Спасибо, ваша заявка отправлена.</b> 
+                            </span>
+                            <input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">
+                            <br>
+                            <input type="button" onclick="watch()" value="Открыть на странице" class="button_form">
+                        </div>
                     </form>
               </div>
               <div id="clear" onclick="clearCanvas()">
