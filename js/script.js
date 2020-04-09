@@ -3178,6 +3178,29 @@ function rot(id){
 }
 
 function deleteObjectFromMouse(){
+	if(mapsBuff.length!=0){
+		for(var i=0;i<mapsBuff.length;i++){
+			for(var j=0;j<mapsBuff.length;j++){
+				switch (mapsBuff[i][j].code){
+					case 1:case -1:case 10:case -10:
+
+						break;
+					case 2:case -2:case 20:	case -20:
+						break;
+					case 555:case 556:case 558:case 557:
+						break;
+					case 655:case 656:case 658:case 657:
+						break;
+					case 755:case 756:case 758:case 757:
+						break;
+					case 855:case 856:case 858:case 857:
+						break;
+					case 955:case 956:case 958:case 957:
+						break;
+				}
+			}
+		}	
+	}
 	mapsBuff=new Array();
 	model=0;
 	draw();

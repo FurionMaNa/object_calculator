@@ -23,6 +23,7 @@
         }
         table{
           border-collapse: collapse;
+          margin:auto;
         }
     .tab{
         margin-top: 1%;

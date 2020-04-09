@@ -45,7 +45,7 @@
         <img style="width:100%; height:387px"alt="" src="' .$src. '">
     </header>
     <div class="middle">
-    <Center>
+   
     <table class="tab" border="1">
           
       <tr>
@@ -89,10 +89,10 @@
                 <td>890</td>
               </tr>  
           </table>
-          </center>
+          
       <h1 style="margin-left:4.5%">Коммерческие условия поставки:</h1>
         <br>
-         <center>
+         
         <table class="summa tab" border="1">
           <tr>
             <th>Наименование продукции</th>
@@ -149,7 +149,7 @@
             <td id="final_sum">'. $_GET["sum"].'</td>
           </tr>
         </table>
-         </center>
+        
          <br>
           <br>
           <span style="margin-left: 4.6%; font-size: 20px;">
