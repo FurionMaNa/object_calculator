@@ -2413,7 +2413,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					ctx.restore();
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			ctx.save();//558
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
@@ -2465,7 +2465,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					ctx.restore();
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			ctx.save();//558
 					ctx.translate(xx,yy);
 					ctx.rotate(0*Math.PI/180);
@@ -2605,7 +2605,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					return true;
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			maps[y+1][x].code=558;
 					maps[y+1][x].color=color;
 		 			maps[y+1][x].id=maps[y][x].id;
@@ -2662,7 +2662,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					return true;
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			maps[y+1][x].code=558;
 					maps[y+1][x].color=color;
 		 			maps[y+1][x].id=maps[y][x].id;
@@ -2812,7 +2812,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 					return true;
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			maps[y+1][x].code=658;
 					maps[y+1][x].color=color;
 		 			maps[y+1][x+1].code=-658;
@@ -2869,7 +2869,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 					return true;
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			maps[y+1][x].code=658;
 					maps[y+1][x].color=color;
 		 			maps[y+1][x+1].code=-658;
@@ -3019,7 +3019,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 					ctx.restore();
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			ctx.save();//658
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
@@ -3070,7 +3070,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 					ctx.restore();
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
 		 			ctx.save();//658
 					ctx.translate(xx,yy);
 					ctx.rotate(270*Math.PI/180);
