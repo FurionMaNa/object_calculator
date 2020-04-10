@@ -232,7 +232,7 @@
   $mail->addAddress('cer-c@mail.ru');//Почту менять ТУТ
   $mail->CharSet = "utf-8";
   $mail->Subject = 'PHPMailer file sender';
-  $mail->msgHTML("От: ".$_GET['name']."\r\n Телефон: ".$_GET['telephone']."\r\n Коммент: ".$_GET['comment']);
+  $mail->msgHTML("От: ".$_GET['name']."<br> Телефон: ".$_GET['telephone']."\r\n <br> Коммент: ".$_GET['comment']);
   $mail->addAttachment($root."/pdf/".$filename.".pdf");
   $r = $mail->send();//отправка на почту
   echo '<script>window.close()</script>'

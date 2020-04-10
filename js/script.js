@@ -106,9 +106,9 @@ function init(){
 	scrollCanvas.scrollTop=1200; 
 	scrollCanvas.scrollLeft=900;
 	ctx.strokeStyle = 'white';
-	for(var i=0;i<200;i++){ 
+	for(var i=0;i<100;i++){ 
         maps[i]=new Array(); 
-        for(var j=0;j<200;j++){ 
+        for(var j=0;j<100;j++){ 
         	maps[i][j]=new Object( {code:0, id:-1,color:"none"} );
         }
     } 
@@ -118,7 +118,7 @@ function init(){
 	imgMapsPontonGR.src='img/newimg/ponton_grow2.png';
 	imgMapsPontonW.src='img/newimg/ponton_white.png';
 	imgMapsPontonBE.src='img/newimg/ponton_gr.png'; 
-	imgMapsSkhodnyaB.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png'; 
+	imgMapsSkhodnyaB.src = 'img/newimg/gangway_blue.png'; 
 	imgMapsSkhodnyaG.src = 'img/newimg/gangway_green.png'; 
 	imgMapsSkhodnyaGR.src = 'img/newimg/Ganway_grow.png'; 
 	imgMapsSkhodnyaW.src = 'img/newimg/gangway_white.png'; 
@@ -293,7 +293,7 @@ function change_color(id, colors,num){
 		case 1:
 			switch (colorArr[num-1]){
 				case 'green':document.getElementById('red').src='img/newimg/ponton_green.png';break;
-				case 'blue' :document.getElementById('red').src='img/newimg/ponton_blue.png';break;
+				case 'blue' :document.getElementById('red').src='img/footer-photo/pontoon-blue.png';break;
 				case 'brown':document.getElementById('red').src='img/newimg/ponton_grow.png';break;
 				case 'white':document.getElementById('red').src='img/newimg/Ponton_wh.png';break;
 				case 'beige':document.getElementById('red').src='img/newimg/ponton_gray.png';break;
@@ -391,8 +391,8 @@ function sum(){
 function area(){
 	var up=0;
 	var f=false;
-	for(var i=0;i<200;i++){
-		for(var j=0;j<200;j++){
+	for(var i=0;i<100;i++){
+		for(var j=0;j<100;j++){
 			if(maps[i][j].code!=0){
 				up=i;
 				i=300;
@@ -402,8 +402,8 @@ function area(){
 		}
 	}
 	var left=0;
-	for(var i=0;i<200;i++){
-		for(var j=0;j<200;j++){
+	for(var i=0;i<100;i++){
+		for(var j=0;j<100;j++){
 			if(maps[j][i].code!=0){
 				left=i;
 				i=300;
@@ -413,8 +413,8 @@ function area(){
 		}
 	}
 	var bottom=0;
-	for(var i=199;i>=0;i--){
-		for(var j=199;j>=0;j--){
+	for(var i=99;i>=0;i--){
+		for(var j=99;j>=0;j--){
 			if(maps[i][j].code!=0){
 				bottom=i;
 				i=0;
@@ -424,8 +424,8 @@ function area(){
 		}
 	}
 	var right=0;
-	for(var j=199;j>=0;j--){
-		for(var i=0;i<200;i++){
+	for(var j=99;j>=0;j--){
+		for(var i=0;i<100;i++){
 			if(maps[i][j].code!=0){
 				right=j;
 				j=0;
@@ -454,8 +454,8 @@ function quantity(){
 
 
 function clearCanvas(){
-	for(var i=0;i<200;i++){ 
-        for(var j=0;j<200;j++){ 
+	for(var i=0;i<100;i++){ 
+        for(var j=0;j<100;j++){ 
         	maps[i][j].code=0;
         	maps[i][j].id=0;
         }
@@ -523,10 +523,10 @@ function CutObjMaps(x,y){
 		var ii=-1;
 		var idM=maps[y][x].id;
 		console.log(maps[y][x].code,maps[y][x].id);
-		for(var i=0;i<200;i++){
+		for(var i=0;i<100;i++){
 			var f=true;
 			var jj=0;
-			for(var j=0;j<200;j++){
+			for(var j=0;j<100;j++){
 				if(idM==maps[i][j].id){
 					if(f){
 						ii++;
@@ -854,7 +854,7 @@ function canvasMoveMouse(evt){
 			
 			switch (color){
 				case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
-				case 'blue' :imgGhost.src='img/photo-objects-png/skhodnya/skhodnya_blue_ghost.png';imgMouse.src = 'img/photo-objects-png/skhodnya/skhodnya_blue.png';break;
+				case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
 				case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
 				case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
 				case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
@@ -3740,7 +3740,7 @@ function visibleWebClick(){
 
 function scalePlusClick(){ 
 	if(scale<20){ 
-		scale+=10; 
+		scale+=5; 
 		canvas.width=(30+scale)*200; 
 		canvas.height=(30+scale)*200; 
 		draw(); 
@@ -3771,8 +3771,8 @@ function fullScreenClick(){
 } 
 
 function scaleMinusClick(){ 
-	if(scale>-20){ 
-		scale-=10; 
+	if(scale>-25){ 
+		scale-=5; 
 		canvas.width=(30+scale)*200; 
 		canvas.height=(30+scale)*200; 
 		draw(); 
