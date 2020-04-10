@@ -229,7 +229,7 @@
   require($root.'/PHPMailer/PHPMailerAutoload.php');
   $mail = new PHPMailer;
   $mail->setFrom($_GET['email']);
-  $mail->addAddress('gorlov.a1b2c4d3@yandex.ru');//cer-c@mail.ru
+  $mail->addAddress('cer-c@mail.ru');//Почту менять ТУТ
   $mail->CharSet = "utf-8";
   $mail->Subject = 'PHPMailer file sender';
   $mail->msgHTML("От: ".$_GET['name']."\r\n Телефон: ".$_GET['telephone']."\r\n Коммент: ".$_GET['comment']);
