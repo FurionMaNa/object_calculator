@@ -79,6 +79,7 @@ duck.price = 0;
 var rotateArr=new Array();
 var buffEvt;
 var colorArr=new Array();
+var scrollCanvasH;
 
 function init(){ 
 	workArea = document.getElementById('workArea'); 
@@ -105,6 +106,7 @@ function init(){
 	fullScreen=false; 
 	scrollCanvas.scrollTop=1200; 
 	scrollCanvas.scrollLeft=900;
+	scrollCanvasH=scrollCanvas.style.maxHeight;
 	ctx.strokeStyle = 'white';
 	for(var i=0;i<100;i++){ 
         maps[i]=new Array(); 
@@ -3762,10 +3764,11 @@ function fullScreenClick(){
 	if(fullScreen){ 
 		fullScreenStart(workArea); 
 		workArea.style.backgroundColor="#FFF"; 
-		scrollCanvas.style.maxHeight=screen.height-(document.getElementById('footer').clientHeight+document.getElementById('header').clientHeight)+'px';
+		scrollCanvas.style.maxHeight=screen.height-(document.getElementById('footer').clientHeight*2+document.getElementById('header').clientHeight)+'px';
+
 	}else{ 
 		document.exitFullscreen(); 
-		scrollCanvas.style.maxHeight=450+'px';
+		scrollCanvas.style.maxHeight=scrollCanvasH;
 	} 
 	draw(); 
 } 

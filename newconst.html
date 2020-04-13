@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/newstyle.css">
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        function onIssue(){
+            if((document.getElementById('nam').value!="")&&(document.getElementById('telephone').value!="")&&(document.getElementById('email').value!="")&&(document.getElementById('comment').value!="")){
+                document.getElementById("after_sell").style.display="block";
+                window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+            }else{
+                alert("Заполните все поля!!!!");
+            }
+        }
+
+        var vision=false;
+
+        function visionForm(){
+            if(vision){
+                document.getElementById('send_email').style.display="none";
+                document.getElementById("after_sell").style.display="none";
+                vision=false;
+            }else{
+                document.getElementById('send_email').style.display="block";
+                vision=true;
+            }
+        }
+
+        function downoload(){
+            window.open('downoload.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+        }
+
+        function watch(){
+            window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+        }
+
+        var web=true;
+
+    </script>
+</head>
+<body>
+    <div id="workArea" class="main">
+        <div id="header">
+            <div class="main_header">
+                <img src="newimg/logo.png" alt="" class="line logo" width="12%" >
+                <div class="logo_text">
+                    КОНСТРУКТОР МОДУЛЬНЫХ ПОНТОНОВ
+                </div>
+            </div>
+            <div class="header_buttons " class="line">
+                <div class="mashtab line">
+                    <div style="width:100%;text-align: center; color:white;font-size: 40%;font-family: 'Exo2-ExtraBold_3'"; >
+                        Масштаб
+                    </div>
+                    <div style="margin-top: 4px;">
+                    <div id="scale_plus" class="line" onclick="scalePlusClick()" >
+                        <img src="newimg/+.png" alt="" class="line" width="100%">
+                    </div>
+                    <div id="scale_minus" class="line" onclick="scaleMinusClick()">
+                        <img src="newimg/-.png" alt="" class="line" width="100%">
+                    </div>
+                </div>
+                </div>
+                <div class="setka line">
+                    <div style="width:100%;text-align: center; color:white;font-size: 40%; padding-bottom: 11%;font-family: 'Exo2-ExtraBold_3'">
+                        Сетка поля
+                    </div>
+                    <div id="set_on" class="line">
+                        <img id="set_on_i" src="newimg/set_on.png" alt="" class="line" width="100%" onclick="if(!web){visibleWebClick(); web=true;}">
+                    </div>
+                    <div id="set_off" class="line">
+                        <img id="set_off_i" src="newimg/set_off.png" alt=""class="line" width="100%" onclick="if(web){visibleWebClick(); web=false;}">
+                    </div>
+                </div>
+                <div id="full_scr" class="line"  onclick="fullScreenClick()">
+                   Полноэкранный <br> режим
+                </div>
+             <!--   <div class="fon" style="position:absolute;top:20%;z-index:20;background:#fff;">
+                    ffffss
+                </div>-->
+                <div class="line dnv" style="margin-left: 2%;">
+                    <div id="close"class="line" style="background:#da251c;">
+                    <img src="newimg/close.png" alt="" class="line"  width="8%" style="margin-left: 9%;">
+                    <div class="line"  style="text-align: center; color:white;font-size: 53%; background:#da251c;padding-bottom: 5px; "  onclick="clearCanvas()">
+                        Очистить поле
+                    </div>
+                </div>
+            </div>
+            <div class="dns line">
+                <div id="sell" class="line" style="background:#85c226;">
+                    <img src="newimg/yes.png" alt="" class="line"  width="10%"  style="margin-left: 7%;max-height: 10px;">
+                    <div class="line"  style="text-align: center; color:white;font-size: 52%;background:#85c226;padding-bottom: 5px; padding-right: 5px;"   onclick="visionForm()">
+                        Оформить заказ
+                    </div>
+
+                </div>
+                <form action="send.php" method="post" id="send_email" style="display: none;">
+                    <span class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;">
+                        <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
+                    </span>
+                    <br>
+                    <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
+                    <br>
+                    <input type="text" name="telephone"id="telephone"placeholder="Номер телефона"  class="form_but"  required>
+                    <br>
+                    <input type="text" name="email"    id="email"    placeholder="Укажите e-mail"  class="form_but" >
+                    <br>
+                    <input type="text" name="comment"  id="comment"  placeholder="Комментарий"  class="form_but" >
+                    <br>
+                    <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
+                    <br>
+                    <input type="button" onclick="visionForm()" value="Закрыть" class="button_form">
+                    <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
+                        <span style="display:block">
+                           <b>Спасибо, ваша заявка отправлена.</b> 
+                        </span>
+                        <input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">
+                        <br>
+                        <input type="button" onclick="watch()" value="Открыть на странице" class="button_form">
+                    </div>
+                </form>
+            </div>
+            <div class="parametrs line">
+                <div class="gabarites line">
+                    Размер конструкции: <span> 0,0 x 0,0м</span>
+                </div>
+                <div class="weight line">
+                    Вес: <span> 0кг</span>
+                </div>
+                <div class="summ">
+                    Стоимость: <span>0руб. </span>
+                </div>
+              
+            </div>
+            </div>
+
+        </div>
+        <div style="background:#fff; padding-top: 20px; padding-bottom: 20px;">
+            <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 310px;max-width:94%; margin-left:3%;overflow: scroll; ">
+                <canvas id='main' width="3000px" height="3000px"></canvas>
+            </div>
+        <div class="text line">
+            Перетащите требуемые элементы на рабочее поле. Для поворота элементов используйте кнопку
+        </div>
+        <img src="newimg/rotate.png" alt="" width="2%" style="vertical-align:middle;">
+        <div class="text line" style="margin-left: 9%;">
+            Для удаления элементов с рабочего поля воспользуйтесь кнопкой
+        </div>
+        <img src="newimg/delete.png" alt="" width="1.5%" style="vertical-align:middle;border:1px solid black;border-radius: 5px;">
+        </div>
+        <div id="footer">
+            <div class="footer_objects">
+                <div class="object line">
+                   <div class="opis">
+                    Элемент понтона <br>
+                    <span style="text-align: left;">&nbsp 2000х1000х400</span> 
+                   </div>
+                   <img src="img/newimg/ponton_blue.png" width="100%" alt="" style="background:#fff;">
+                   <div id="shetchik">
+                       0
+                   </div>
+                   <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
+                   <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                   
+                </div>
+                <div class="object line">
+                    <div class="opis">
+                     Сходня на берег <br>
+                     <span style="text-align: left;">&nbsp с переходником</span> 
+                    </div>
+                    <img src="img/newimg/gangway_blue_obj.png" width="100%" alt="" style="background:#fff;">
+                    <div id="shetchik">
+                        0
+                    </div>
+                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    
+                 </div>
+                 <div class="object line">
+                    <div class="opis">
+                     Лестница <br>
+                     <span style="text-align: left;">&nbsp для спуска в воду</span> 
+                    </div>
+                    <img src="img/newimg/stairs_blue_obj.png" width="100%" alt="" style="background:#fff;">
+                    <div id="shetchik">
+                        0
+                    </div>
+                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    
+                 </div>
+                 <div class="object line">
+                    <div class="opis">
+                     Стойка <br>
+                     <span style="text-align: left;">&nbsp оградительная</span> 
+                    </div>
+                    <img src="img/newimg/stay_blue_obj.png" width="100%" alt="" style="background:#fff;">
+                    <div id="shetchik">
+                        0
+                    </div>
+                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    
+                 </div>
+                 <div class="object line">
+                    <div class="opis">
+                     Швартовочная утка <br>
+                     <span style="text-align: left;">&nbsp с соеденителем</span> 
+                    </div>
+                    <img src="img/newimg/connector_blue_obj.png" width="100%" alt="" style="background:#fff;">
+                    <div id="shetchik">
+                        0
+                    </div>
+                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    
+                 </div>
+                 <div class="object line">
+                    <div class="opis">
+                     Лавочка для понтона <br>
+                     <span style="text-align: left;">&nbsp с соеденителями</span> 
+                    </div>
+                    <img src="img/footer-photo/bench.png" width="100%" alt="" style="background:#fff;">
+                    <div id="shetchik">
+                        0
+                    </div>
+                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    
+                 </div>
+            <div class="menu">
+                <div class="line" style="margin-left: 2.5%; font-family: 'TacticSansExd-Bld_0';">
+                    КОМПАНИЯ ПЛАСТО 
+                </div>
+                <ul class="adress line">
+                    <li><a href="#">ВЛАДИМИР</a></li>
+                    <li><a href="#">МОСКВА</a></li>
+                    <li><a href="#">САНКТ-ПЕТЕРУРГ</a></li>
+                    <li><a href="#">КРАСНОДАР</a></li>
+                    <li><a href="#">САМАРА</a></li>
+                    <li><a href="#">ЕКАТЕРИНБУРГ</a></li>
+                </ul>
+                <div class="line" style="margin-left: 5%; font-family: 'TacticSansExd-Bld_0';" >
+                    9(9422)222277  &nbsp 1@plasto.ru
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
