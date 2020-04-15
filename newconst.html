@@ -34,15 +34,61 @@
         }
 
         function watch(){
-            window.open('jaja.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+            window.open('printer/index.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
         }
 
         var web=true;
+
+        function onClickPontonColor(){
+            document.getElementById('pod_menu_ponton').style.display="block";
+            document.getElementById('pod_menu_connector').style.display="none";
+            document.getElementById('pod_menu_gangway').style.display="none";
+        }
+
+        function onClickGangwayColor(){
+            document.getElementById('pod_menu_gangway').style.display="block";
+            document.getElementById('pod_menu_connector').style.display="none";
+            document.getElementById('pod_menu_ponton').style.display="none";
+        }
+
+        function onClickConnectorColor(){
+            document.getElementById('pod_menu_connector').style.display="block";
+            document.getElementById('pod_menu_gangway').style.display="none";
+            document.getElementById('pod_menu_ponton').style.display="none";
+        }
 
     </script>
 </head>
 <body>
     <div id="workArea" class="main">
+        <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:15%;margin-left: 30%;">
+            <div class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;font-size: 60%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
+                <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
+            </div>
+            <br>
+            
+            <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
+            <br>
+            <input type="tel" name="telephone"id="telephone"placeholder="Номер телефона"  class="form_but"  required>
+            <br>
+            <input type="email" name="email"    id="email"    placeholder="Укажите e-mail"  class="form_but" >
+            <br>
+            <textarea  name="comment"  id="comment"  rows="5"placeholder="Комментарий"  class="form_but" style="width: 60%;margin-top: 2%;">
+               
+            </textarea>
+            <br>
+            <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
+            <br>
+            <input type="button" onclick="visionForm()" value="Закрыть" class="button_form">
+            <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
+                <span style="display:block">
+                   <b>Спасибо, ваша заявка отправлена.</b> 
+                </span>
+                <input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">
+                <br>
+                <input type="button" onclick="watch()" value="Открыть на странице" class="button_form">
+            </div>
+        </form>
         <div id="header">
             <div class="main_header">
                 <img src="newimg/logo.png" alt="" class="line logo" width="12%" >
@@ -78,9 +124,8 @@
                 <div id="full_scr" class="line"  onclick="fullScreenClick()">
                    Полноэкранный <br> режим
                 </div>
-             <!--   <div class="fon" style="position:absolute;top:20%;z-index:20;background:#fff;">
-                    ffffss
-                </div>-->
+
+              
                 <div class="line dnv" style="margin-left: 2%;">
                     <div id="close"class="line" style="background:#da251c;">
                     <img src="newimg/close.png" alt="" class="line"  width="8%" style="margin-left: 9%;">
@@ -89,58 +134,37 @@
                     </div>
                 </div>
             </div>
-            <div class="dns line">
+            <div class="dns line"  onclick="visionForm()">
                 <div id="sell" class="line" style="background:#85c226;">
                     <img src="newimg/yes.png" alt="" class="line"  width="10%"  style="margin-left: 7%;max-height: 10px;">
-                    <div class="line"  style="text-align: center; color:white;font-size: 52%;background:#85c226;padding-bottom: 5px; padding-right: 5px;"   onclick="visionForm()">
+                    <div class="line"  style="text-align: center; color:white;font-size: 52%;background:#85c226;padding-bottom: 5px; padding-right: 5px;" >
                         Оформить заказ
                     </div>
 
                 </div>
-                <form action="send.php" method="post" id="send_email" style="display: none;">
-                    <span class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;">
-                        <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
-                    </span>
-                    <br>
-                    <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
-                    <br>
-                    <input type="text" name="telephone"id="telephone"placeholder="Номер телефона"  class="form_but"  required>
-                    <br>
-                    <input type="text" name="email"    id="email"    placeholder="Укажите e-mail"  class="form_but" >
-                    <br>
-                    <input type="text" name="comment"  id="comment"  placeholder="Комментарий"  class="form_but" >
-                    <br>
-                    <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
-                    <br>
-                    <input type="button" onclick="visionForm()" value="Закрыть" class="button_form">
-                    <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
-                        <span style="display:block">
-                           <b>Спасибо, ваша заявка отправлена.</b> 
-                        </span>
-                        <input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">
-                        <br>
-                        <input type="button" onclick="watch()" value="Открыть на странице" class="button_form">
-                    </div>
-                </form>
+              
             </div>
             <div class="parametrs line">
                 <div class="gabarites line">
-                    Размер конструкции: <span> 0,0 x 0,0м</span>
+                    Размер конструкции: <span id="area"> 0,0 x 0,0м</span>
                 </div>
                 <div class="weight line">
                     Вес: <span> 0кг</span>
                 </div>
                 <div class="summ">
-                    Стоимость: <span>0руб. </span>
+                    Стоимость: <span id="summ">0руб. </span>
                 </div>
               
             </div>
             </div>
-
+          
         </div>
-        <div style="background:#fff; padding-top: 20px; padding-bottom: 20px;">
-            <div onscroll="onScrollCanvas()" id="scrollCanvas" style="max-height: 310px;max-width:94%; margin-left:3%;overflow: scroll; ">
+        <div style="background:#fff; padding-top: 20px; padding-bottom: 20px;position: relative;z-index: 1;">
+            <img src="newimg/delete.png"  onclick="deleteObjectFromMouse()"  width="4.5%" alt="" style="position:absolute; left:90%;top:67%">
+            <div onscroll="onScrollCanvas()" id="scrollCanvas" style=" max-height: 310px;max-width:94%; margin-left:3%;overflow: scroll; ">
+                
                 <canvas id='main' width="3000px" height="3000px"></canvas>
+                
             </div>
         <div class="text line">
             Перетащите требуемые элементы на рабочее поле. Для поворота элементов используйте кнопку
@@ -153,99 +177,132 @@
         </div>
         <div id="footer">
             <div class="footer_objects">
-                <div class="object line">
+                <div class="object line"  onclick="model1onClick()" >
                    <div class="opis">
-                    Элемент понтона <br>
+                    &nbsp      Элемент понтона <br>
                     <span style="text-align: left;">&nbsp 2000х1000х400</span> 
                    </div>
-                   <img src="img/newimg/ponton_blue.png" width="100%" alt="" style="background:#fff;">
-                   <div id="shetchik">
+                   <div style="width:100%;background:#fff;" >
+                    <img src="newimg/ponton.png" width="100%" alt="" style="background:#fff;">
+                   </div>
+                 
+                   <div class="shetchik" id="shetpon">
                        0
                    </div>
-                   <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
-                   <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
-                   
+                   <img src="newimg/rotate.png" onclick="onRotate(1)" width="14%"alt="" id="rotate" style="position: relative; top:-2.2em;float: right; left:5%">
+                   <img src="newimg/color_change.png"  onclick="onClickPontonColor()" width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:33%">
+                    <div class="pod_menu" id="pod_menu_ponton">
+                        <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',1);document.getElementById('pod_menu_ponton').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',1);document.getElementById('pod_menu_ponton').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',1);document.getElementById('pod_menu_ponton').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',1);document.getElementById('pod_menu_ponton').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',1);document.getElementById('pod_menu_ponton').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
+                    </div>
                 </div>
-                <div class="object line">
+                <div onclick="model2onClick()" class="object line">
                     <div class="opis">
-                     Сходня на берег <br>
+                        &nbsp     Сходня на берег <br>
                      <span style="text-align: left;">&nbsp с переходником</span> 
                     </div>
-                    <img src="img/newimg/gangway_blue_obj.png" width="100%" alt="" style="background:#fff;">
-                    <div id="shetchik">
+                    <img src="newimg/shod.png" width="100%" alt="" style="background:#fff;">
+                    <div class="shetchik" id="gangway">
                         0
                     </div>
-                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
-                    
+                    <img src="newimg/rotate.png" onclick="onRotate(2)" width="14%"alt="" id="rotate" style="position: relative; top:-2.2em;float: right; left:5%">
+                    <img src="newimg/color_change.png"width="14%"   onclick="onClickGangwayColor()"  alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:33%">
+                     <div class="pod_menu" id="pod_menu_gangway">
+                        <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',2);document.getElementById('pod_menu_gangway').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
+                    </div>
                  </div>
-                 <div class="object line">
+                 <div onclick="model4onClick()" class="object line" >
                     <div class="opis">
-                     Лестница <br>
+                        &nbsp    Соеденитель <br>
+                     <span style="text-align: left;">&nbsp для понтона</span> 
+                    </div>
+                    <img src="newimg/soed.png" width="100%" alt="" style="background:#fff;">
+                    <div class="shetchik" id="connector">
+                        0
+                    </div>
+                  
+                    <img src="newimg/color_change.png"width="14%"   onclick="onClickConnectorColor()"  alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
+                    <div class="pod_menu" id="pod_menu_connector">
+                        <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',3);document.getElementById('pod_menu_connector').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',3);document.getElementById('pod_menu_connector').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',3);document.getElementById('pod_menu_connector').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',3);document.getElementById('pod_menu_connector').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',3);document.getElementById('pod_menu_connector').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
+                    </div>
+                 </div>
+                 <div onclick="model3onClick()"  class="object line">
+                    <div class="opis">
+                        &nbsp    Лестница <br>
                      <span style="text-align: left;">&nbsp для спуска в воду</span> 
                     </div>
                     <img src="img/newimg/stairs_blue_obj.png" width="100%" alt="" style="background:#fff;">
-                    <div id="shetchik">
+                    <div class="shetchik" id="stairs">
                         0
                     </div>
-                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
                     
                  </div>
-                 <div class="object line">
+                 <div onclick="model5onClick()"  class="object line">
                     <div class="opis">
-                     Стойка <br>
+                        &nbsp Стойка <br>
                      <span style="text-align: left;">&nbsp оградительная</span> 
                     </div>
-                    <img src="img/newimg/stay_blue_obj.png" width="100%" alt="" style="background:#fff;">
-                    <div id="shetchik">
+                    <img src="newimg/stoika.png" width="100%" alt="" style="background:#fff;">
+                    <div class="shetchik" id="stays">
                         0
                     </div>
-                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
                     
                  </div>
-                 <div class="object line">
+                 <div onclick="model7onClick()"  class="object line">
                     <div class="opis">
-                     Швартовочная утка <br>
+                        &nbsp  Швартовочная утка <br>
                      <span style="text-align: left;">&nbsp с соеденителем</span> 
                     </div>
-                    <img src="img/newimg/connector_blue_obj.png" width="100%" alt="" style="background:#fff;">
-                    <div id="shetchik">
+                    <img src="newimg/shvart.png" width="100%" alt="" style="background:#fff;">
+                    <div class="shetchik" id="duck">
                         0
                     </div>
-                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                     
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
                     
                  </div>
-                 <div class="object line">
+                 <div onclick="model6onClick()"  class="object line" style="margin-right: 1.5%;">
                     <div class="opis">
-                     Лавочка для понтона <br>
+                        &nbsp  Лавочка для понтона <br>
                      <span style="text-align: left;">&nbsp с соеденителями</span> 
                     </div>
-                    <img src="img/footer-photo/bench.png" width="100%" alt="" style="background:#fff;">
-                    <div id="shetchik">
+                    <img src="newimg/plav.png" width="100%" alt="" style="background:#fff;">
+                    <div class="shetchik" id='bench' >
                         0
                     </div>
-                    <img src="newimg/rotate.png" width="14%"alt="" id="rotate" style="position: relative; top:-30px;float: right; left:9%">
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative; top:-30px;float: right; left:37%">
+                  
+                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
                     
                  </div>
-            <div class="menu">
-                <div class="line" style="margin-left: 2.5%; font-family: 'TacticSansExd-Bld_0';">
-                    КОМПАНИЯ ПЛАСТО 
-                </div>
-                <ul class="adress line">
-                    <li><a href="#">ВЛАДИМИР</a></li>
-                    <li><a href="#">МОСКВА</a></li>
-                    <li><a href="#">САНКТ-ПЕТЕРУРГ</a></li>
-                    <li><a href="#">КРАСНОДАР</a></li>
-                    <li><a href="#">САМАРА</a></li>
-                    <li><a href="#">ЕКАТЕРИНБУРГ</a></li>
-                </ul>
-                <div class="line" style="margin-left: 5%; font-family: 'TacticSansExd-Bld_0';" >
-                    9(9422)222277  &nbsp 1@plasto.ru
-                </div>
+            
+        </div>
+        <div class="menu">
+            <div class="line" style="margin-left: 2.5%; font-family: 'TacticSansExd-Bld_0';">
+                КОМПАНИЯ ПЛАСТО 
+            </div>
+            <ul class="adress line">
+                <li><a href="#">ВЛАДИМИР</a></li>
+                <li><a href="#">МОСКВА</a></li>
+                <li><a href="#">САНКТ-ПЕТЕРУРГ</a></li>
+                <li><a href="#">КРАСНОДАР</a></li>
+                <li><a href="#">САМАРА</a></li>
+                <li><a href="#">ЕКАТЕРИНБУРГ</a></li>
+            </ul>
+            <div class="line" style="margin-left: 5%; font-family: 'TacticSansExd-Bld_0';" >
+                9(9422)222277  &nbsp 1@plasto.ru
             </div>
         </div>
     </div>

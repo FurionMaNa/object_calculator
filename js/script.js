@@ -293,88 +293,88 @@ function change_color(id, colors,num){
 	colorArr[num-1]=id;
 	switch(num){
 		case 1:
-			switch (colorArr[num-1]){
-				case 'green':document.getElementById('red').src='img/newimg/ponton_green.png';break;
-				case 'blue' :document.getElementById('red').src='img/footer-photo/pontoon-blue.png';break;
-				case 'brown':document.getElementById('red').src='img/newimg/ponton_grow.png';break;
-				case 'white':document.getElementById('red').src='img/newimg/Ponton_wh.png';break;
-				case 'beige':document.getElementById('red').src='img/newimg/ponton_gray.png';break;
-			}		
+			//switch (colorArr[num-1]){
+			//	case 'green':document.getElementById('red').src='img/newimg/ponton_green.png';break;
+			//	case 'blue' :document.getElementById('red').src='img/footer-photo/pontoon-blue.png';break;
+			//	case 'brown':document.getElementById('red').src='img/newimg/ponton_grow.png';break;
+			//	case 'white':document.getElementById('red').src='img/newimg/Ponton_wh.png';break;
+			//	case 'beige':document.getElementById('red').src='img/newimg/ponton_gray.png';break;
+			//}		
 			if(model==1){
 				color=colorArr[num-1];
 			}
-			document.getElementById('ch_c1').style.background = colors;
-			document.getElementById('ch_c1').style.color = colors;
+			//document.getElementById('ch_c1').style.background = colors;
+			//document.getElementById('ch_c1').style.color = colors;
 			break;
 		case 2:
-			switch (colorArr[num-1]){
-				case 'green':document.getElementById('gang').src='img/newimg/gangway_green_obj.png';break;
-				case 'blue' :document.getElementById('gang').src='img/newimg/gangway_blue_obj.png';break;
-				case 'brown':document.getElementById('gang').src='img/newimg/gangway_grow_obj.png';break;
-				case 'white':document.getElementById('gang').src='img/newimg/gangway_white_obj.png';break;
-				case 'beige':document.getElementById('gang').src='img/newimg/gangway_gray.png';break;
-			}
+			//switch (colorArr[num-1]){
+			//	case 'green':document.getElementById('gang').src='img/newimg/gangway_green_obj.png';break;
+			//	case 'blue' :document.getElementById('gang').src='img/newimg/gangway_blue_obj.png';break;
+			//	case 'brown':document.getElementById('gang').src='img/newimg/gangway_grow_obj.png';break;
+			//	case 'white':document.getElementById('gang').src='img/newimg/gangway_white_obj.png';break;
+			//	case 'beige':document.getElementById('gang').src='img/newimg/gangway_gray.png';break;
+			//}
 			if(model==2){
 				color=colorArr[num-1];
 			}
-			document.getElementById('ch_c2').style.background = colors;
-			document.getElementById('ch_c2').style.color = colors;
+			//document.getElementById('ch_c2').style.background = colors;
+			//document.getElementById('ch_c2').style.color = colors;
 			break;
 		case 3:
-			switch (colorArr[num-1]){
-				case 'green':document.getElementById('st').src='img/newimg/stairs_green_obj.png';break;
-				case 'blue' :document.getElementById('st').src='img/newimg/stairs_blue_obj.png';break;
-				case 'brown':document.getElementById('st').src='img/newimg/stairs_grow_obj.png';break;
-				case 'white':document.getElementById('st').src='img/newimg/stairs_white_obj.png';break;
-				case 'beige':document.getElementById('st').src='img/newimg/stairs_gray_obj.png';break;
-			}
+			//switch (colorArr[num-1]){
+			//	case 'green':document.getElementById('st').src='img/newimg/stairs_green_obj.png';break;
+			//	case 'blue' :document.getElementById('st').src='img/newimg/stairs_blue_obj.png';break;
+			//	case 'brown':document.getElementById('st').src='img/newimg/stairs_grow_obj.png';break;
+			//	case 'white':document.getElementById('st').src='img/newimg/stairs_white_obj.png';break;
+			//	case 'beige':document.getElementById('st').src='img/newimg/stairs_gray_obj.png';break;
+			//}
 			if(model==3){
 				color=colorArr[num-1];
 			}
-			document.getElementById('ch_c3').style.background = colors;
-			document.getElementById('ch_c3').style.color = colors;
+			//document.getElementById('ch_c3').style.background = colors;
+			//document.getElementById('ch_c3').style.color = colors;
 			break;
 		case 4:
-			switch (colorArr[num-1]){
-				case 'green':document.getElementById('con').src='img/newimg/connector_green_obj.png';break;
-				case 'blue' :document.getElementById('con').src='img/newimg/connector_blue_obj.png';break;
-				case 'brown':document.getElementById('con').src='img/newimg/connector_grow_obj.png';break;
-				case 'white':document.getElementById('con').src='img/newimg/connector_white_obj.png';break;
-				case 'beige':document.getElementById('con').src='img/newimg/connector_gray_obj.png';break;
-			}		
+			//switch (colorArr[num-1]){
+			//	case 'green':document.getElementById('con').src='img/newimg/connector_green_obj.png';break;
+			//	case 'blue' :document.getElementById('con').src='img/newimg/connector_blue_obj.png';break;
+			//	case 'brown':document.getElementById('con').src='img/newimg/connector_grow_obj.png';break;
+			//	case 'white':document.getElementById('con').src='img/newimg/connector_white_obj.png';break;
+			//	case 'beige':document.getElementById('con').src='img/newimg/connector_gray_obj.png';break;
+			//}		
 			if(model==4){
 				color=colorArr[num-1];
 			}
-			document.getElementById('ch_c4').style.background = colors;
-			document.getElementById('ch_c4').style.color = colors;
+			//document.getElementById('ch_c4').style.background = colors;
+			//document.getElementById('ch_c4').style.color = colors;
 			break;
 		case 5:
-			switch (colorArr[num-1]){
-				case 'green':document.getElementById('stcon').src='img/newimg/stays_green_obj.png';break;
-				case 'blue' :document.getElementById('stcon').src='img/newimg/stay_blue_obj.png';break;
-				case 'brown':document.getElementById('stcon').src='img/newimg/stays_grow_obj.png';break;
-				case 'white':document.getElementById('stcon').src='img/newimg/stays_white_obj.png';break;
-				case 'beige':document.getElementById('stcon').src='img/newimg/stays_gray_obj.png';break;
-			}
+			//switch (colorArr[num-1]){
+			//	case 'green':document.getElementById('stcon').src='img/newimg/stays_green_obj.png';break;
+			//	case 'blue' :document.getElementById('stcon').src='img/newimg/stay_blue_obj.png';break;
+			//	case 'brown':document.getElementById('stcon').src='img/newimg/stays_grow_obj.png';break;
+			//	case 'white':document.getElementById('stcon').src='img/newimg/stays_white_obj.png';break;
+			//	case 'beige':document.getElementById('stcon').src='img/newimg/stays_gray_obj.png';break;
+			//}
 			if(model==5){
 				color=colorArr[num-1];
 			}
-			document.getElementById('ch_c5').style.background = colors;
-			document.getElementById('ch_c5').style.color = colors;
+			//document.getElementById('ch_c5').style.background = colors;
+			//document.getElementById('ch_c5').style.color = colors;
 			break;
 		case 6:
-			switch (colorArr[num-1]){
-				case 'green':document.getElementById('utka').src='img/newimg/connector_green_obj.png';break;
-				case 'blue' :document.getElementById('utka').src='img/newimg/connector_blue_obj.png';break;
-				case 'brown':document.getElementById('utka').src='img/newimg/connector_grow_obj.png';break;
-				case 'white':document.getElementById('utka').src='img/newimg/connector_white_obj.png';break;
-				case 'beige':document.getElementById('utka').src='img/newimg/connector_gray_obj.png';break;
-			}
+			//switch (colorArr[num-1]){
+			//	case 'green':document.getElementById('utka').src='img/newimg/connector_green_obj.png';break;
+			//	case 'blue' :document.getElementById('utka').src='img/newimg/connector_blue_obj.png';break;
+			//	case 'brown':document.getElementById('utka').src='img/newimg/connector_grow_obj.png';break;
+			//	case 'white':document.getElementById('utka').src='img/newimg/connector_white_obj.png';break;
+			//	case 'beige':document.getElementById('utka').src='img/newimg/connector_gray_obj.png';break;
+			//}
 			if(model==7){
 				color=colorArr[num-1];
 			}
-			document.getElementById('ch_c6').style.background = colors;
-			document.getElementById('ch_c6').style.color = colors;
+			//document.getElementById('ch_c6').style.background = colors;
+			//document.getElementById('ch_c6').style.color = colors;
 			break;
 	}
 	draw();
@@ -3811,6 +3811,65 @@ function draw(){
 						}
 						break;
 
+				}
+				if(maps[i][j].code!=0){
+					ctx.restore();
+				}
+			}
+		}
+	}
+	for(var i=iStart-10;i<iEnd+10;i++){
+		for(var j=jStart-10;j<jEnd+10;j++){
+			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+				if(maps[i][j].code!=0){
+					ctx.save();
+					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+				}
+				switch(maps[i][j].code){
+					case 655:
+						ctx.rotate(0*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
+						ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+						break;
+					case 656:
+						ctx.rotate(180*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
+						ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+						break;
+					case 658:
+						ctx.rotate(270*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
+						ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+						break;
+					case 657:
+						ctx.rotate(90*Math.PI/180);
+						switch (maps[i][j].color){
+							case 'green':imgMapsBench.src='img/bench.png';break;
+							case 'blue':imgMapsBench.src='img/bench.png';break;
+							case 'brown':imgMapsBench.src='img/bench.png';break;
+							case 'white':imgMapsBench.src='img/bench.png';break;
+							case 'beige':imgMapsBench.src='img/bench.png';break;
+						}
+						ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+						break;		
 				}
 				if(maps[i][j].code!=0){
 					ctx.restore();
