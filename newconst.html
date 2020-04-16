@@ -8,11 +8,11 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
         function onIssue(){
-            if((document.getElementById('nam').value!="")&&(document.getElementById('telephone').value!="")&&(document.getElementById('email').value!="")&&(document.getElementById('comment').value!="")){
+            if(document.getElementById('email').value!=""){
                 document.getElementById("after_sell").style.display="block";
                 window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
             }else{
-                alert("Заполните все поля!!!!");
+                alert("Заполните хотя бы email!!!!");
             }
         }
 
@@ -27,10 +27,6 @@
                 document.getElementById('send_email').style.display="block";
                 vision=true;
             }
-        }
-
-        function downoload(){
-            window.open('downoload.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
         }
 
         function watch(){
@@ -61,30 +57,32 @@
 </head>
 <body>
     <div id="workArea" class="main">
-        <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:15%;margin-left: 30%;">
-            <div class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;font-size: 60%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
+        <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:17%;margin-left: 30%;">
+            <img src="newimg/delete.png" width="7%" onclick="visionForm()" style="float: right; margin-right: 2%;">
+            <br>
+            <div class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;font-size: 70%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
                 <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
             </div>
             <br>
             
             <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
             <br>
-            <input type="tel" name="telephone"id="telephone"placeholder="Номер телефона"  class="form_but"  required>
+            <input type="tel" name="telephone"id="telephone"placeholder="Номер телефона *"  class="form_but"  required>
             <br>
             <input type="email" name="email"    id="email"    placeholder="Укажите e-mail"  class="form_but" >
             <br>
-            <textarea  name="comment"  id="comment"  rows="5"placeholder="Комментарий"  class="form_but" style="width: 60%;margin-top: 2%;">
+            <textarea  name="comment"  id="comment"  rows="5"placeholder="Комментарий"  class="form_but" style="width: 75%;margin-top: 2%;">
                
             </textarea>
             <br>
             <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
             <br>
-            <input type="button" onclick="visionForm()" value="Закрыть" class="button_form">
+           
             <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
                 <span style="display:block">
                    <b>Спасибо, ваша заявка отправлена.</b> 
                 </span>
-                <input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">
+                <!--<input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">-->
                 <br>
                 <input type="button" onclick="watch()" value="Открыть на странице" class="button_form">
             </div>
@@ -242,7 +240,7 @@
                         &nbsp    Лестница <br>
                      <span style="text-align: left;">&nbsp для спуска в воду</span> 
                     </div>
-                    <img src="img/newimg/stairs_blue_obj.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/lest2-3.png" width="100%" alt="" style="background:#fff;">
                     <div class="shetchik" id="stairs">
                         0
                     </div>
