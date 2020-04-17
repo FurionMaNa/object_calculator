@@ -53,29 +53,37 @@ ponton.width = 1000;
 ponton.height = 2000;
 ponton.price = 16800;
 ponton.col = 0;
+ponton.weight = 80;
 var gangway = new Object();
 gangway.width = 1000;
 gangway.height = 2000;
 gangway.price = 9460;
 gangway.col = 0;
+gangway.weight = 30;
 var stairs = new Object();
 stairs.price = 18560;
 stairs.col = 0;
+stairs.weight = 15;
 var connector = new Object();
 connector.price = 280;
 connector.col = 0;
+connector.weight=2;
 var stays = new Object();
 stays.price = 890;
 stays.col = 0;
+stays.weight = 2;
 var sitconnect = new Object();
 sitconnect.price = 280;
 sitconnect.col = 0;
+sitconnect.weight=2;
 var bench = new Object();
 bench.price = 12500;
 bench.col = 0;
+bench.weight = 15;
 var duck = new Object();
 duck.col = 0;
 duck.price = 0;
+duck.weight = 2;
 var rotateArr=new Array();
 var buffEvt;
 var colorArr=new Array();
@@ -516,66 +524,82 @@ function isArrange(x,y,model,direction){
 	return true;
 }
 
+function isAddon(m){
+	for(var i=0;i<4;i++){
+		if(m.addons[i].code!=0)
+		return true;
+	}
+	return false;
+}
+
 function CutObjMaps(x,y){
 	if(((Math.abs(maps[y][x].code)<700)&&(Math.abs(maps[y][x].code)>600))||(maps[y][x].code==0)){
 		return 0;
 	}else{
 		if((maps[y][x+1].code>600)&&(maps[y][x+1].code<700)){
 			model=6;
-			maps[y][x+1]=new Object( {code:0, id:-1} );
-			maps[y+1][x+1]=new Object( {code:0, id:-1} );
+			maps[y][x+1].addons[3]=new Object( {code:0, id:-1,color:"none"} );
+			maps[y+1][x+1].addons[3]=new Object( {code:0, id:-1,color:"none"} );
+			maps[y][x+1].addon=isAddon(maps[y][x+1]);
+			maps[y+1][x+1].addon=isAddon(maps[y+1][x+1]);
 			bench.col--;
 			return 0;
 		}else{
 			if((maps[y][x+1].code<-600)&&(maps[y][x+1].code>-700)){
 				model=6;
-				maps[y][x+1]=new Object( {code:0, id:-1} );
-				maps[y-1][x+1]=new Object( {code:0, id:-1} );
+				maps[y][x+1].addons[3]=new Object( {code:0, id:-1,color:"none"} );
+				maps[y-1][x+1].addons[3]=new Object( {code:0, id:-1,color:"none"} );
+				maps[y][x+1].addon=isAddon(maps[y][x+1]);
+				maps[y-1][x+1].addon=isAddon(maps[y-1][x+1]);
 				bench.col--;
 				return 0;
 			}
 		}
 		if((maps[y][x-1].code>600)&&(maps[y][x-1].code<700)){
 			model=6;
-			maps[y][x-1]=new Object( {code:0, id:-1} );
-			maps[y+1][x-1]=new Object( {code:0, id:-1} );
+			maps[y][x-1].addons[1]=new Object( {code:0, id:-1,color:"none"} );
+			maps[y+1][x-1].addons[1]=new Object( {code:0, id:-1,color:"none"} );
+			maps[y][x-1].addon=isAddon(maps[y][x-1]);
+			maps[y+1][x-1].addon=isAddon(maps[y+1][x-1]);
 			bench.col--;
 			return 0;
 		}else{
 			if((maps[y][x-1].code<-600)&&(maps[y][x-1].code>-700)){
 				model=6;
-				maps[y][x-1]=new Object( {code:0, id:-1} );
-				maps[y-1][x-1]=new Object( {code:0, id:-1} );
+				maps[y][x-1].addons[1]=new Object( {code:0, id:-1,color:"none"} );
+				maps[y-1][x-1].addons[1]=new Object( {code:0, id:-1,color:"none"} );
+				maps[y][x-1].addon=isAddon(maps[y][x-1]);
+				maps[y-1][x-1].addon=isAddon(maps[y+1][x-1]);
 				bench.col--;
 				return 0;
 			}
 		}
 		if((maps[y+1][x].code>600)&&(maps[y+1][x].code<700)){
 			model=6;
-			maps[y+1][x]=new Object( {code:0, id:-1} );
-			maps[y+1][x+1]=new Object( {code:0, id:-1} );
+			maps[y+1][x].addons[2]=new Object( {code:0, id:-1,color:"none"} );
+			maps[y+1][x+1].addons[2]=new Object( {code:0, id:-1,color:"none"} );
 			bench.col--;
 			return 0;
 		}else{
 			if((maps[y+1][x].code<-600)&&(maps[y+1][x].code>-700)){
 				model=6;
-				maps[y+1][x]=new Object( {code:0, id:-1} );
-				maps[y+1][x-1]=new Object( {code:0, id:-1} );
+				maps[y+1][x].addons[2]=new Object( {code:0, id:-1,color:"none"} );
+				maps[y+1][x-1].addons[2]=new Object( {code:0, id:-1,color:"none"} );
 				bench.col--;
 				return 0;
 			}
 		}
 		if((maps[y-1][x].code>600)&&(maps[y-1][x].code<700)){
 			model=6;
-			maps[y-1][x]=new Object( {code:0, id:-1} );
-			maps[y-1][x+1]=new Object( {code:0, id:-1} );
+			maps[y-1][x].addons[0]=new Object( {code:0, id:-1,color:"none"} );
+			maps[y-1][x+1].addons[0]=new Object( {code:0, id:-1,color:"none"} );
 			bench.col--;
 			return 0;
 		}else{
 			if((maps[y-1][x].code<-600)&&(maps[y-1][x].code>-700)){
 				model=6;
-				maps[y-1][x]=new Object( {code:0, id:-1} );
-				maps[y-1][x-1]=new Object( {code:0, id:-1} );
+				maps[y-1][x].addons[0]=new Object( {code:0, id:-1,color:"none"} );
+				maps[y-1][x-1].addons[0]=new Object( {code:0, id:-1,color:"none"} );
 				bench.col--;
 				return 0;
 			}
@@ -1592,7 +1616,23 @@ function canvasMoveMouse(evt){
 	}
 }
 
-function isAddons(m,num){return m.addons[num].code==0;}
+function isAddons(m,num,pos=5){
+	switch (pos){
+		case 0:
+			return !((m.addons[num].code>500)&&(m.addons[num].code<700));
+			break;
+		case 1:
+			return !((m.addons[num].code>500)&&(m.addons[num].code<700));
+			break;
+		case 2:
+			return !((Math.abs(m.addons[num].code)>500)&&(Math.abs(m.addons[num].code)<700));
+			break;
+		case 3:
+			return !((Math.abs(m.addons[num].code)>500)&&(Math.abs(m.addons[num].code)<700));
+			break;
+	}
+	return m.addons[num].code==0;
+}
 
 function ArrangeDuck(x,y,direction,mX,mY){
 	if((maps[y][x].code==0)||(Math.abs(maps[y][x].code)>100)){return false;}
@@ -2573,7 +2613,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 	y/=(45+scale);
 	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3))&&(isAddons(maps[y][x-1],1))&&(isAddons(maps[y][x+2],3))){
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
 					ctx.save();//557
 					ctx.translate(xx,yy);
@@ -2582,7 +2622,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					ctx.restore();
 				}
 			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						ctx.save();//555
 						ctx.translate(xx,yy);
@@ -2591,7 +2631,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.restore();
 					}
 				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 							ctx.save();//556
 							ctx.translate(xx,yy);
@@ -2604,7 +2644,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						ctx.save();//555
 						ctx.translate(xx,yy);
@@ -2613,7 +2653,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.restore();
 					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						ctx.save();//556
 						ctx.translate(xx,yy);
@@ -2623,8 +2663,8 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-					if((isAddons(maps[y+1][x],1))&&(isAddons(maps[y+1][x+1],2))){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 						ctx.save();//558
 						ctx.translate(xx,yy);
 						ctx.rotate(0*Math.PI/180);
@@ -2636,7 +2676,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3))&&(isAddons(maps[y][x-1],1))&&(isAddons(maps[y][x+2],3))){
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
 					ctx.save();//557
 					ctx.translate(xx,yy);
@@ -2645,7 +2685,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					ctx.restore();
 				}
 			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						ctx.save();//555
 						ctx.translate(xx,yy);
@@ -2654,7 +2694,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.restore();
 					}
 				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 							ctx.save();//556
 							ctx.translate(xx,yy);
@@ -2667,7 +2707,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						ctx.save();//555
 						ctx.translate(xx,yy);
@@ -2676,7 +2716,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.restore();
 					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						ctx.save();//556
 						ctx.translate(xx,yy);
@@ -2686,8 +2726,8 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-					if((isAddons(maps[y+1][x],1))&&(isAddons(maps[y+1][x+1],2))){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 						ctx.save();//558
 						ctx.translate(xx,yy);
 						ctx.rotate(0*Math.PI/180);
@@ -2799,7 +2839,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 function ArrangeStairs(x,y,direction,mX,mY){
 	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3))&&(isAddons(maps[y][x-1],1))&&(isAddons(maps[y][x+2],3))){
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
 					maps[y-1][x].addons[0].code=557;
 					maps[y-1][x].addons[0].color=color;
@@ -2811,7 +2851,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					return true;
 				}
 			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						maps[y][x-1].addons[1].code=555;
 						maps[y][x-1].addons[1].color=color;
@@ -2823,7 +2863,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 							maps[y][x+1].addons[3].code=556;
 							maps[y][x+1].addons[3].id=maps[y][x].id;
@@ -2839,7 +2879,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						maps[y][x-1].addons[1].code=555;
 						maps[y][x-1].addons[1].color=color;
@@ -2851,7 +2891,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						maps[y][x+1].addons[3].code=556;
 						maps[y][x+1].addons[3].id=maps[y][x].id;
@@ -2864,8 +2904,8 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-		 			if((isAddons(maps[y+1][x],1))&&(isAddons(maps[y+1][x+1],2))){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=558;
 						maps[y+1][x].addons[2].color=color;
 		 				maps[y+1][x].addons[2].id=maps[y][x].id;
@@ -2880,7 +2920,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3))&&(isAddons(maps[y][x-1],1))&&(isAddons(maps[y][x+2],3))){
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
 					maps[y-1][x].addons[0].code=557;
 					maps[y-1][x].addons[0].color=color;
@@ -2892,7 +2932,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					return true;
 				}
 			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						maps[y][x-1].addons[1].code=555;
 						maps[y][x-1].addons[1].color=color;
@@ -2904,7 +2944,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 							maps[y][x+1].addons[3].code=556;
 							maps[y][x+1].addons[3].id=maps[y][x].id;
@@ -2920,7 +2960,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1))&&(isAddons(maps[y][x-1],1))&&((y==0)||(isAddons(maps[y-1][x],1)))&&(isAddons(maps[y+2][x],1))){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						maps[y][x-1].addons[1].code=555;
 						maps[y][x-1].addons[1].color=color;
@@ -2932,7 +2972,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						maps[y][x+1].addons[3].code=556;
 						maps[y][x+1].addons[3].id=maps[y][x].id;
@@ -2945,8 +2985,8 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-		 			if((isAddons(maps[y+1][x],1))&&(isAddons(maps[y+1][x+1],2))){
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=558;
 						maps[y+1][x].addons[2].color=color;
 		 				maps[y+1][x].addons[2].id=maps[y][x].id;
@@ -3000,7 +3040,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:case 1222:
-					if((isAddons(maps[y+1][x],1))&&(isAddons(maps[y+1][x+1],2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=558;
 						maps[y+1][x].addons[2].color=color;
 		 				maps[y+1][x].addons[2].id=maps[y][x].id;
@@ -3038,115 +3078,163 @@ function ArrangeStairs(x,y,direction,mX,mY){
 function ArrangeBench(x,y,direction,mX,mY){
 	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
-				maps[y-1][x].code=657;
-				maps[y-1][x].color=color;
-				maps[y-1][x+1].code=-657;
-				maps[y-1][x].id=maps[y][x].id;
-				maps[y-1][x+1].id=maps[y][x].id;
-				return true;
-			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
-					maps[y][x-1].code=655;
-					maps[y][x-1].color=color;
-					maps[y+1][x-1].code=-655;
-					maps[y][x-1].id=maps[y][x].id;
-					maps[y+1][x-1].id=maps[y][x].id;
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
+				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+					maps[y-1][x].addons[0].code=657;
+					maps[y-1][x].addons[0].color=color;
+					maps[y-1][x].addons[0].id=maps[y][x].id;
+					maps[y-1][x+1].addons[0].id=maps[y][x].id;
+					maps[y-1][x+1].addons[0].code=-657;
+					maps[y-1][x].addon=true;
+					maps[y-1][x+1].addon=true;
 					return true;
-				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-						maps[y][x+1].code=656;
-						maps[y][x+1].color=color;
-						maps[y+1][x+1].code=-656;
-						maps[y][x+1].id=maps[y][x].id;
-						maps[y+1][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y][x-1].addons[1].code=655;
+						maps[y][x-1].addons[1].color=color;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].code=-655;
+						maps[y][x-1].addon=true;
+						maps[y+1][x-1].addon=true;
 						return true;
+					}
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+							maps[y][x+1].addons[3].code=656;
+							maps[y][x+1].addons[3].id=maps[y][x].id;
+							maps[y+1][x+1].addons[3].id=maps[y][x].id;
+							maps[y+1][x+1].addons[3].code=-656;
+							maps[y][x+1].addons[3].color=color;
+							maps[y][x+1].addon=true;
+							maps[y+1][x+1].addon=true;
+							return true;
+						}
 					}
 				}
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==1)||(maps[y][x-1].code==-1))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
-					maps[y][x-1].code=655;
-					maps[y][x-1].color=color;
-					maps[y+1][x-1].code=-655;
-					maps[y][x-1].id=maps[y][x].id;
-					maps[y+1][x-1].id=maps[y][x].id;
-					return true;
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y][x-1].addons[1].code=655;
+						maps[y][x-1].addons[1].color=color;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].code=-655;
+						maps[y][x-1].addon=true;
+						maps[y+1][x-1].addon=true;
+						return true;
+					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-					maps[y][x+1].code=656;
-					maps[y][x+1].color=color;
-					maps[y+1][x+1].code=-656;
-					maps[y][x+1].id=maps[y][x].id;
-					maps[y+1][x+1].id=maps[y][x].id;
-					return true;
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						maps[y][x+1].addons[3].code=656;
+						maps[y][x+1].addons[3].id=maps[y][x].id;
+						maps[y+1][x+1].addons[3].id=maps[y][x].id;
+						maps[y+1][x+1].addons[3].code=-656;
+						maps[y][x+1].addons[3].color=color;
+						maps[y][x+1].addon=true;
+						maps[y+1][x+1].addon=true;
+						return true;
+					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-		 			maps[y+1][x].code=658;
-					maps[y+1][x].color=color;
-		 			maps[y+1][x+1].code=-658;
-		 			maps[y+1][x].id=maps[y][x].id;
-		 			maps[y+1][x+1].id=maps[y][x].id;
-		 			return true;
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				maps[y+1][x].addons[2].code=658;
+						maps[y+1][x].addons[2].color=color;
+		 				maps[y+1][x].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x+1].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x+1].addons[2].code=-658;
+						maps[y+1][x].addon=true;
+						maps[y+1][x+1].addon=true;
+		 				return true;
+		 			}
 		 		}
 			}
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
-				maps[y-1][x].code=657;
-				maps[y-1][x].color=color;
-				maps[y-1][x+1].code=-657;
-				maps[y-1][x].id=maps[y][x].id;
-				maps[y-1][x+1].id=maps[y][x].id;
-				return true;
-			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=657))&&((y==0)||(maps[y-1][x].code!=557))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
-					maps[y][x-1].code=655;
-					maps[y][x-1].color=color;
-					maps[y+1][x-1].code=-655;
-					maps[y][x-1].id=maps[y][x].id;
-					maps[y+1][x-1].id=maps[y][x].id;
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
+				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+					maps[y-1][x].addons[0].code=657;
+					maps[y-1][x].addons[0].color=color;
+					maps[y-1][x].addons[0].id=maps[y][x].id;
+					maps[y-1][x+1].addons[0].id=maps[y][x].id;
+					maps[y-1][x+1].addons[0].code=-657;
+					maps[y-1][x].addon=true;
+					maps[y-1][x+1].addon=true;
 					return true;
-				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-						maps[y][x+1].code=656;
-						maps[y][x+1].color=color;
-						maps[y+1][x+1].code=-656;
-						maps[y][x+1].id=maps[y][x].id;
-						maps[y+1][x+1].id=maps[y][x].id;
+				}
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y][x-1].addons[1].code=655;
+						maps[y][x-1].addons[1].color=color;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].code=-655;
+						maps[y][x-1].addon=true;
+						maps[y+1][x-1].addon=true;
 						return true;
+					}
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+							maps[y][x+1].addons[3].code=656;
+							maps[y][x+1].addons[3].id=maps[y][x].id;
+							maps[y+1][x+1].addons[3].id=maps[y][x].id;
+							maps[y+1][x+1].addons[3].code=-656;
+							maps[y][x+1].addons[3].color=color;
+							maps[y][x+1].addon=true;
+							maps[y+1][x+1].addon=true;
+							return true;
+						}
 					}
 				}
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==10)||(maps[y][x-1].code==-10))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
-					maps[y][x-1].code=655;
-					maps[y][x-1].color=color;
-					maps[y+1][x-1].code=-655;
-					maps[y][x-1].id=maps[y][x].id;
-					maps[y+1][x-1].id=maps[y][x].id;
-					return true;
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y][x-1].addons[1].code=655;
+						maps[y][x-1].addons[1].color=color;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].code=-655;
+						maps[y][x-1].addon=true;
+						maps[y+1][x-1].addon=true;
+						return true;
+					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-					maps[y][x+1].code=656;
-					maps[y][x+1].color=color;
-					maps[y+1][x+1].code=-656;
-					maps[y][x+1].id=maps[y][x].id;
-					maps[y+1][x+1].id=maps[y][x].id;
-					return true;
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						maps[y][x+1].addons[3].code=656;
+						maps[y][x+1].addons[3].id=maps[y][x].id;
+						maps[y+1][x+1].addons[3].id=maps[y][x].id;
+						maps[y+1][x+1].addons[3].code=-656;
+						maps[y][x+1].addons[3].color=color;
+						maps[y][x+1].addon=true;
+						maps[y+1][x+1].addon=true;
+						return true;
+					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-		 			maps[y+1][x].code=658;
-					maps[y+1][x].color=color;
-		 			maps[y+1][x+1].code=-658;
-		 			maps[y+1][x].id=maps[y][x].id;
-		 			maps[y+1][x+1].id=maps[y][x].id;
-		 			return true;
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				maps[y+1][x].addons[2].code=658;
+						maps[y+1][x].addons[2].color=color;
+		 				maps[y+1][x].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x+1].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x+1].addons[2].code=-658;
+						maps[y+1][x].addon=true;
+						maps[y+1][x+1].addon=true;
+		 				return true;
+		 			}
 		 		}
 			}
 		}	
@@ -3154,21 +3242,17 @@ function ArrangeBench(x,y,direction,mX,mY){
 	if((maps[y][x].code==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
 		if((y>0)&&(maps[y-1][x].code==0)){
 			switch (maps[y][x].code){
-				case 2:
-					maps[y-1][x].code=657;
-					maps[y-1][x].color=color;
-					maps[y-1][x+1].code=-657;
-					maps[y-1][x].id=maps[y][x].id;
-					maps[y-1][x+1].id=maps[y][x].id;
-					return true;
-					break;
-				case 1222:
-					maps[y-1][x-1].code=657;
-					maps[y-1][x-1].color=color;
-					maps[y-1][x].code=-657;
-					maps[y-1][x-1].id=maps[y][x].id;
-					maps[y-1][x].id=maps[y][x].id;
-					return true;
+				case 2:	case 1222:
+					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+						maps[y-1][x].addons[0].code=657;
+						maps[y-1][x].addons[0].color=color;
+						maps[y-1][x].addons[0].id=maps[y][x].id;
+						maps[y-1][x+1].addons[0].id=maps[y][x].id;
+						maps[y-1][x+1].addons[0].code=-657;
+						maps[y-1][x].addon=true;
+						maps[y-1][x+1].addon=true;
+						return true;
+					}
 					break;
 			}
 		}
@@ -3176,21 +3260,17 @@ function ArrangeBench(x,y,direction,mX,mY){
 	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
 		if((x>0)&&(maps[y][x-1].code==0)){
 			switch (maps[y][x].code){
-				case -20:
-					maps[y][x-1].code=655;
-					maps[y][x-1].color=color;
-					maps[y+1][x-1].code=-655;
-					maps[y][x-1].id=maps[y][x].id;
-					maps[y+1][x-1].id=maps[y][x].id;
-					return true;
-					break;
-				case 1222:
-					maps[y-1][x-1].code=655;
-					maps[y-1][x-1].color=color;
-					maps[y][x-1].code=-655;
-					maps[y-1][x-1].id=maps[y][x].id;
-					maps[y][x-1].id=maps[y][x].id;
-					return true;
+				case -20:case 1222:
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y][x-1].addons[1].code=655;
+						maps[y][x-1].addons[1].color=color;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].id=maps[y][x].id;
+						maps[y+1][x-1].addons[1].code=-655;
+						maps[y][x-1].addon=true;
+						maps[y+1][x-1].addon=true;
+						return true;
+					}
 					break;
 			}
 		}
@@ -3198,21 +3278,17 @@ function ArrangeBench(x,y,direction,mX,mY){
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
-				case -2:
-					maps[y+1][x].code=658;
-					maps[y+1][x].color=color;
-					maps[y+1][x+1].code=-658;
-					maps[y+1][x].id=maps[y][x].id;
-					maps[y+1][x+1].id=maps[y][x].id;
-					return true;
-					break;
-				case 1222:
-					maps[y+1][x-1].code=658;
-					maps[y+1][x-1].color=color;
-					maps[y+1][x].code=-658;
-					maps[y+1][x-1].id=maps[y][x].id;
-					maps[y+1][x].id=maps[y][x].id;
-					return true;
+				case -2:case 1222:
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				maps[y+1][x].addons[2].code=658;
+						maps[y+1][x].addons[2].color=color;
+		 				maps[y+1][x].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x+1].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x+1].addons[2].code=-658;
+						maps[y+1][x].addon=true;
+						maps[y+1][x+1].addon=true;
+		 				return true;
+		 			}
 					break;
 			}
 		}
@@ -3220,21 +3296,17 @@ function ArrangeBench(x,y,direction,mX,mY){
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
 		if((x<199)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
-				case 20:
-					maps[y][x+1].code=656;
-					maps[y][x+1].color=color;
-					maps[y+1][x+1].code=-655;
-					maps[y][x+1].id=maps[y][x].id;
-					maps[y+1][x+1].id=maps[y][x].id;
-					return true;
-					break;
-				case 1222:
-					maps[y-1][x+1].code=655;
-					maps[y-1][x+1].color=color;
-					maps[y][x+1].code=-655;
-					maps[y-1][x+1].id=maps[y][x].id;
-					maps[y][x+1].id=maps[y][x].id;
-					return true;
+				case 20:case 1222:
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						maps[y][x+1].addons[3].code=656;
+						maps[y][x+1].addons[3].id=maps[y][x].id;
+						maps[y+1][x+1].addons[3].id=maps[y][x].id;
+						maps[y+1][x+1].addons[3].code=-656;
+						maps[y][x+1].addons[3].color=color;
+						maps[y][x+1].addon=true;
+						maps[y+1][x+1].addon=true;
+						return true;
+					}
 					break;
 			}
 		}
@@ -3249,73 +3321,111 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 	var yy=y*(45+scale);
 	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
-				ctx.save();//657
-				ctx.translate(xx,yy);
-				ctx.rotate(90*Math.PI/180);
-				ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-				ctx.restore();
-			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
-					ctx.save();//655
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
+				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+					ctx.save();//657
 					ctx.translate(xx,yy);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale), (45+scale)*2);
 					ctx.restore();
-				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-						ctx.save();//656
+				}
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						ctx.save();//655
 						ctx.translate(xx,yy);
-						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
 						ctx.restore();
-
+					}
+				}else{
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+							ctx.save();//656
+							ctx.translate(xx,yy);
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
+							ctx.restore();
+						}
 					}
 				}
 			}
 		}else{
 			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==1)||(maps[y][x-1].code==-1))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
-					ctx.save();//655
-					ctx.translate(xx,yy);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
-					ctx.restore();
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						ctx.save();//655
+						ctx.translate(xx,yy);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-					ctx.save();//656
-					ctx.translate(xx,yy);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
-					ctx.restore();
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						ctx.save();//656
+						ctx.translate(xx,yy);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-		 			ctx.save();//658
-					ctx.translate(xx,yy);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale),0, (45+scale), (45+scale)*2);
-					ctx.restore();
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				ctx.save();//658
+						ctx.translate(xx,yy);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale),0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 		 		}
 			}
 		}	
 	}else{
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
-			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(maps[y-1][x+1].code==0)&&(maps[y][x-1].code!=555)&&(maps[y][x+2].code!=556)&&(maps[y][x-1].code!=655)&&(maps[y][x+2].code!=656)){
-				ctx.save();//657
-				ctx.translate(xx,yy);
-				ctx.rotate(90*Math.PI/180);
-				ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-				ctx.restore();
-			}else{
-				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=657))&&((y==0)||(maps[y-1][x].code!=557))&&(maps[y+2][x].code!=558)&&(maps[y+2][x].code!=658)){
-					ctx.save();//655
+			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
+				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+					ctx.save();//657
 					ctx.translate(xx,yy);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
+					ctx.rotate(90*Math.PI/180);
+					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale), (45+scale)*2);
 					ctx.restore();
+				}
+			}else{
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						ctx.save();//655
+						ctx.translate(xx,yy);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 				}else{
-					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
+					if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+						if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+							ctx.save();//656
+							ctx.translate(xx,yy);
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
+							ctx.restore();
+						}
+					}
+				}
+			}
+		}else{
+			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
+				if((maps[y][x+1].code==11)&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(isAddons(maps[y+1][x-1],1,1))&&(isAddons(maps[y][x-1],1,1))&&((y==0)||(isAddons(maps[y-1][x],0,1)))&&(isAddons(maps[y+2][x],2,1))){
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						ctx.save();//655
+						ctx.translate(xx,yy);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
+				}
+				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(isAddons(maps[y-1][x],0,3)))&&((y==199)||(isAddons(maps[y+2][x],2,3)))){
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						ctx.save();//656
 						ctx.translate(xx,yy);
 						ctx.rotate(180*Math.PI/180);
@@ -3323,30 +3433,15 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 						ctx.restore();
 					}
 				}
-			}
-		}else{
-			if(((mY-y*(45+scale)>(45+scale)/2)||(maps[y-1][x].code!=0)||(maps[y+1][x].code!=0))&&(maps[y+1][x].code!=0)){
-				if(((maps[y][x+1].code==11)||(maps[y-1][x].code==10)||(maps[y][x-1].code==-10))&&((maps[y+1][x].code==11)||(maps[y+1][x].code==1)||(maps[y+1][x].code==-1)||(maps[y+1][x].code==10)||(maps[y+1][x].code==-10))&&(maps[y+1][x-1].code==0)&&(maps[y][x-1].code==0)&&(maps[y+1][x-1].code==0)&&((y==0)||(maps[y-1][x].code!=557))&&((y==0)||(maps[y-1][x].code!=657))&&((y==199)||(maps[y+2][x].code!=558))&&((y==199)||(maps[y+2][x].code!=658))){
-					ctx.save();//655
-					ctx.translate(xx,yy);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
-					ctx.restore();
-				}
-				if(((maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==11)&&(maps[y][x+1].code==0)&&(maps[y+1][x+1].code==0)&&((y==0)||(maps[y-1][x].code!=-557))&&((y==0)||(maps[y-1][x].code!=-657))&&((y==199)||(maps[y+2][x].code!=-558))&&((y==199)||(maps[y+2][x].code!=-658))){
-					ctx.save();//656
-					ctx.translate(xx,yy);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
-					ctx.restore();
-				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(maps[y+1][x+1].code==0)&&(maps[y+1][x].code==0)&&(maps[y][x-1].code!=-555)&&(maps[y][x-1].code!=-655)&&(maps[y][x+2].code!=-556)&&(maps[y][x+2].code!=-656)){
-		 			ctx.save();//658
-					ctx.translate(xx,yy);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale),0, (45+scale), (45+scale)*2);
-					ctx.restore();
+				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				ctx.save();//658
+						ctx.translate(xx,yy);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale),0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 		 		}
 			}
 		}	
@@ -3355,18 +3450,22 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 		if((y>0)&&(maps[y-1][x].code==0)){
 			switch (maps[y][x].code){
 				case 2:
-					ctx.save();//657
-					ctx.translate(xx,yy);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+						ctx.save();//657
+						ctx.translate(xx,yy);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 				case 1222:
-					ctx.save();//657
-					ctx.translate(xx,yy);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale), (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+						ctx.save();//657
+						ctx.translate(xx,yy);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale), (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 			}
 		}
@@ -3375,18 +3474,22 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 		if((x>0)&&(maps[y][x-1].code==0)){
 			switch (maps[y][x].code){
 				case -20:
-					ctx.save();//655
-					ctx.translate(xx,yy);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						ctx.save();//655
+						ctx.translate(xx,yy);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 				case 1222:
-					ctx.save();//655
-					ctx.translate(xx,yy);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgGhost, 0, 0-(45+scale), (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						ctx.save();//655
+						ctx.translate(xx,yy);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgGhost, 0, 0-(45+scale), (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 			}
 		}
@@ -3395,18 +3498,22 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:
-					ctx.save();//658
-					ctx.translate(xx,yy);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale),0, (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+						ctx.save();//658
+						ctx.translate(xx,yy);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale),0, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 				case 1222:
-					ctx.save();//658
-					ctx.translate(xx,yy);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale),0-(45+scale), (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+						ctx.save();//658
+						ctx.translate(xx,yy);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale),0-(45+scale), (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 			}
 		}
@@ -3415,18 +3522,22 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 		if((x<199)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:
-					ctx.save();//656
-					ctx.translate(xx,yy);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						ctx.save();//656
+						ctx.translate(xx,yy);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 				case 1222:
-					ctx.save();//656
-					ctx.translate(xx,yy);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale), (45+scale), (45+scale)*2);
-					ctx.restore();
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						ctx.save();//656
+						ctx.translate(xx,yy);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale), (45+scale), (45+scale)*2);
+						ctx.restore();
+					}
 					break;
 			}
 		}
