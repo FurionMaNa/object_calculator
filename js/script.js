@@ -526,8 +526,7 @@ function isArrange(x,y,model,direction){
 
 function isAddon(m){
 	for(var i=0;i<4;i++){
-		if(m.addons[i].code!=0)
-		return true;
+		if(m.addons[i].code!=0) return true;
 	}
 	return false;
 }
@@ -875,6 +874,15 @@ function CutObjMaps(x,y,xm,ym){
 	sitconnect.col=0;
 }
 
+function isRepeat(m,n){
+	for(var k=0;k<4;k++){
+		if((n.addons[k].code!=0)&&(m.addons[k]!=0)){
+			return false;
+		}
+	}
+	return true;
+}
+
 function PastObjMaps(x,y){
 	var maxWidth=0;
 	var startJ=0;
@@ -892,7 +900,8 @@ function PastObjMaps(x,y){
 		var s=startJ;
 		while(j<mapsBuff[i].length){
 			if(mapsBuff[i][j].j==s){
-				if(maps[yy][xx].code!=0){
+				if((maps[yy][xx].code!=0)&&(isRepeat(maps[yy][xx],mapsBuff[i][j]))){
+					console.log("No");
 					return true;
 				}
 				j++;
@@ -913,6 +922,14 @@ function PastObjMaps(x,y){
 				maps[yy][xx].code=mapsBuff[i][j].code;
 				maps[yy][xx].id=mapsBuff[i][j].id;
 				maps[yy][xx].color=mapsBuff[i][j].color;
+				for(var k=0;k<4;k++){
+					if(mapsBuff[i][j].map[k].code!=0){
+						maps[yy][xx].addon=true;
+						maps[yy][xx].addons[k].code=mapsBuff[i][j].map[k].code;
+						maps[yy][xx].addons[k].id=mapsBuff[i][j].map[k].id;
+						maps[yy][xx].addons[k].color=mapsBuff[i][j].map[k].color;
+					}
+				}
 				switch(mapsBuff[i][j].code){
 					case 1:case -1:case 10:case -10:
 						ponton.col++;
@@ -920,22 +937,27 @@ function PastObjMaps(x,y){
 					case 2:case -2:case 20:	case -20:
 						gangway.col++;
 						break;
-					case 555:case 556:case 557:case 558:
-						stairs.col++;
-						break;
-					case 655:case 656:case 657:case 658:
-						bench.col++;
-						break;
-					case 755:case 756:case 757:case 758:
-						connector.col++;
-						break;
-					case 855:case 856:case 857:case 858:
-						stays.col++;
-						break;
-					case 955:case 956:case 957:case 958:
-						duck.col++;
-						break;
 				}
+				for(var k=0;k<4;k++){
+					switch(mapsBuff[i][j].code){
+						case 555:case 556:case 557:case 558:
+							stairs.col++;
+							break;
+						case 655:case 656:case 657:case 658:
+							bench.col++;
+							break;
+						case 755:case 756:case 757:case 758:
+							connector.col++;
+							break;
+						case 855:case 856:case 857:case 858:
+							stays.col++;
+							break;
+						case 955:case 956:case 957:case 958:
+							duck.col++;
+							break;
+					}
+				}
+				
 				j++;
 			}
 			xx++;
