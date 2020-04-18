@@ -1266,30 +1266,9 @@ function canvasMoveMouse(evt){
 					ctx.save();
 					ctx.translate(evt.offsetX,evt.offsetY);
 					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
+					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15)/3, (45+scale)+15, (45+scale)/1.5);
 					ctx.restore();
 					ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
-					break;
-				case 2:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
-					ctx.restore();
-					break;
-				case 1:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale)+15, (45+scale)+15);
-					ctx.restore();
-					break;
-				case 3:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale)+15, (45+scale)+15);
-					ctx.restore();
 					break;
 			} 
 			break;
@@ -2828,7 +2807,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					ctx.save();//557
 					ctx.translate(xx,yy);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale)*2+(45+scale)/3.5, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.drawImage(imgGhost, 0-(45+scale)*2+(45+scale)/3.5, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 					ctx.restore();
 				}
 			}else{
@@ -2837,7 +2816,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//555
 						ctx.translate(xx,yy);
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 				}else{
@@ -2846,7 +2825,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 							ctx.save();//556
 							ctx.translate(xx,yy);
 							ctx.rotate(270*Math.PI/180);
-							ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+							ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 							ctx.restore();
 						}
 					}
@@ -2859,7 +2838,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//555
 						ctx.translate(xx,yy);
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 				}
@@ -2868,7 +2847,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//556
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 				}
@@ -2878,7 +2857,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//558
 						ctx.translate(xx,yy);
 						ctx.rotate(0*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 		 		}
@@ -2891,7 +2870,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					ctx.save();//557
 					ctx.translate(xx,yy);
 					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgGhost, 0-(45+scale)*2+(45+scale)/3.5, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+					ctx.drawImage(imgGhost, 0-(45+scale)*2+(45+scale)/3.5, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 					ctx.restore();
 				}
 			}else{
@@ -2900,7 +2879,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//555
 						ctx.translate(xx,yy);
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 				}else{
@@ -2909,7 +2888,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 							ctx.save();//556
 							ctx.translate(xx,yy);
 							ctx.rotate(270*Math.PI/180);
-							ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+							ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 							ctx.restore();
 						}
 					}
@@ -2922,7 +2901,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//555
 						ctx.translate(xx,yy);
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 				}
@@ -2931,7 +2910,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//556
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 				}
@@ -2941,7 +2920,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//558
 						ctx.translate(xx,yy);
 						ctx.rotate(0*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 		 		}
@@ -2956,7 +2935,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//557
 						ctx.translate(xx,yy);
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale)*2+(45+scale)/3.5, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost, 0-(45+scale)*2+(45+scale)/3.5, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -2965,7 +2944,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//557
 						ctx.translate(xx,yy);
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale)+(45+scale)/3.5, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost, 0-(45+scale)+(45+scale)/3.5, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -2980,7 +2959,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//555
 						ctx.translate(xx,yy);
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -2989,7 +2968,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//555
 						ctx.translate(xx,yy);
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3-(45+scale), 0-(45+scale), (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3-(45+scale), 0-(45+scale)/3, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -3004,7 +2983,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//558
 						ctx.translate(xx,yy);
 						ctx.rotate(0*Math.PI/180);
-						ctx.drawImage(imgGhost,0+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -3013,7 +2992,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//558
 						ctx.translate(xx,yy);
 						ctx.rotate(0*Math.PI/180);
-						ctx.drawImage(imgGhost,0-(45+scale)+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0-(45+scale)+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -3028,7 +3007,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//556
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0-(45+scale)*2+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -3037,7 +3016,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 						ctx.save();//556
 						ctx.translate(xx,yy);
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost,0-(45+scale)+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);
+						ctx.drawImage(imgGhost,0-(45+scale)+(45+scale)/3, 0+(45+scale)/1.5, (45+scale)+15, (45+scale)/1.5);
 						ctx.restore();
 					}
 					break;
@@ -4035,41 +4014,41 @@ function draw(){
 						case 555:
 							ctx.rotate(90*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);;break;
-								case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*4+(45+scale)/3, 0, (45+scale)+15, (45+scale)+15);break;
+								case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5-4, 0+(45+scale)/1.5, (45+scale)+20, (45+scale)/1.5);break;
+								case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5-4, 0+(45+scale)/1.5, (45+scale)+20, (45+scale)/1.5);break;
+								case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5-4, 0+(45+scale)/1.5, (45+scale)+20, (45+scale)/1.5);break;
+								case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5-4, 0+(45+scale)/1.5, (45+scale)+20, (45+scale)/1.5);break;
+								case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5-4, 0+(45+scale)/1.5, (45+scale)+20, (45+scale)/1.5);break;
 							}
 							break;
 						case 556:
 							ctx.rotate(270*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
-								case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*3, (45+scale)+15, (45+scale)+15);break;
+								case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*2.5+6, (45+scale)+20, (45+scale)/1.5);break;
+								case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*2.5+6, (45+scale)+20, (45+scale)/1.5);break;
+								case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*2.5+6, (45+scale)+20, (45+scale)/1.5);break;
+								case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*2.5+6, (45+scale)+20, (45+scale)/1.5);break;
+								case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4, 0-(45+scale)*2.5+6, (45+scale)+20, (45+scale)/1.5);break;
 							}
 							break;
 						case 558:
 							ctx.rotate(0*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
-								case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3, 0-(45+scale)*5, (45+scale)+15, (45+scale)+15);break;
+								case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+6, (45+scale)+15, (45+scale)/1.5);break;
 							}
 							break;
 						case 557:
 							ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
-								case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3, 0+(45+scale)*2, (45+scale)+15, (45+scale)+15);break;
+								case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+6, (45+scale)+15, (45+scale)/1.5);break;
+								case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+6, (45+scale)+15, (45+scale)/1.5);break;
 							}
 							break;
 	
@@ -4123,11 +4102,11 @@ function draw(){
 							ctx.translate(sizeX*(j+1),sizeY*i);
 							ctx.rotate(90*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
 							}
 							break;
 						case 756:
@@ -4136,11 +4115,11 @@ function draw(){
 							ctx.translate(sizeX*(j),sizeY*i);
 							ctx.rotate(90*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
 							}
 							break;
 						case 758:
@@ -4149,11 +4128,11 @@ function draw(){
 							ctx.translate(sizeX*(j+1),sizeY*i);
 							ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
 							}
 							break;
 						case 757:
@@ -4162,11 +4141,11 @@ function draw(){
 							ctx.translate(sizeX*(j+1),sizeY*(i+1));
 							ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
 							}
 							break;
 	
@@ -4229,11 +4208,11 @@ function draw(){
 							ctx.translate(sizeX*(j+1),sizeY*i);
 							ctx.rotate(90*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
 							}
 							break;
 						case 956:
@@ -4242,11 +4221,11 @@ function draw(){
 							ctx.translate(sizeX*(j),sizeY*i);
 							ctx.rotate(90*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
 							}
 							break;
 						case 958:
@@ -4255,11 +4234,11 @@ function draw(){
 							ctx.translate(sizeX*(j+1),sizeY*i);
 							ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
 							}
 							break;
 						case 957:
@@ -4268,11 +4247,11 @@ function draw(){
 							ctx.translate(sizeX*(j+1),sizeY*(i+1));
 							ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3, sizeX/3, sizeY/2);	break;
+								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
 							}
 							break;
 	
@@ -4286,59 +4265,61 @@ function draw(){
 	}
 	for(var i=iStart-10;i<iEnd+10;i++){
 		for(var j=jStart-10;j<jEnd+10;j++){
-			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
-				if(maps[i][j].code!=0){
-					ctx.save();
-					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-				}
-				switch(maps[i][j].code){
-					case 655:
-						ctx.rotate(0*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':imgMapsBench.src='img/bench.png';break;
-							case 'blue':imgMapsBench.src='img/bench.png';break;
-							case 'brown':imgMapsBench.src='img/bench.png';break;
-							case 'white':imgMapsBench.src='img/bench.png';break;
-							case 'beige':imgMapsBench.src='img/bench.png';break;
-						}
-						ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
-						break;
-					case 656:
-						ctx.rotate(180*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':imgMapsBench.src='img/bench.png';break;
-							case 'blue':imgMapsBench.src='img/bench.png';break;
-							case 'brown':imgMapsBench.src='img/bench.png';break;
-							case 'white':imgMapsBench.src='img/bench.png';break;
-							case 'beige':imgMapsBench.src='img/bench.png';break;
-						}
-						ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
-						break;
-					case 658:
-						ctx.rotate(270*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':imgMapsBench.src='img/bench.png';break;
-							case 'blue':imgMapsBench.src='img/bench.png';break;
-							case 'brown':imgMapsBench.src='img/bench.png';break;
-							case 'white':imgMapsBench.src='img/bench.png';break;
-							case 'beige':imgMapsBench.src='img/bench.png';break;
-						}
-						ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-						break;
-					case 657:
-						ctx.rotate(90*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':imgMapsBench.src='img/bench.png';break;
-							case 'blue':imgMapsBench.src='img/bench.png';break;
-							case 'brown':imgMapsBench.src='img/bench.png';break;
-							case 'white':imgMapsBench.src='img/bench.png';break;
-							case 'beige':imgMapsBench.src='img/bench.png';break;
-						}
-						ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
-						break;		
-				}
-				if(maps[i][j].code!=0){
-					ctx.restore();
+			for(var k=0;k<4;k++){
+				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+					//if(maps[i][j].code!=0){
+						ctx.save();
+						ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+					//}
+					switch(maps[i][j].addons[k].code){
+						case 655:
+							ctx.rotate(0*Math.PI/180);
+							switch (maps[i][j].addons[k].color){
+								case 'green':imgMapsBench.src='img/bench.png';break;
+								case 'blue':imgMapsBench.src='img/bench.png';break;
+								case 'brown':imgMapsBench.src='img/bench.png';break;
+								case 'white':imgMapsBench.src='img/bench.png';break;
+								case 'beige':imgMapsBench.src='img/bench.png';break;
+							}
+							ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+							break;
+						case 656:
+							ctx.rotate(180*Math.PI/180);
+							switch (maps[i][j].addons[k].color){
+								case 'green':imgMapsBench.src='img/bench.png';break;
+								case 'blue':imgMapsBench.src='img/bench.png';break;
+								case 'brown':imgMapsBench.src='img/bench.png';break;
+								case 'white':imgMapsBench.src='img/bench.png';break;
+								case 'beige':imgMapsBench.src='img/bench.png';break;
+							}
+							ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+							break;
+						case 658:
+							ctx.rotate(270*Math.PI/180);
+							switch (maps[i][j].addons[k].color){
+								case 'green':imgMapsBench.src='img/bench.png';break;
+								case 'blue':imgMapsBench.src='img/bench.png';break;
+								case 'brown':imgMapsBench.src='img/bench.png';break;
+								case 'white':imgMapsBench.src='img/bench.png';break;
+								case 'beige':imgMapsBench.src='img/bench.png';break;
+							}
+							ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+							break;
+						case 657:
+							ctx.rotate(90*Math.PI/180);
+							switch (maps[i][j].addons[k].color){
+								case 'green':imgMapsBench.src='img/bench.png';break;
+								case 'blue':imgMapsBench.src='img/bench.png';break;
+								case 'brown':imgMapsBench.src='img/bench.png';break;
+								case 'white':imgMapsBench.src='img/bench.png';break;
+								case 'beige':imgMapsBench.src='img/bench.png';break;
+							}
+							ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+							break;		
+					}
+					//if(maps[i][j].code!=0){
+						ctx.restore();
+					//}
 				}
 			}
 		}
