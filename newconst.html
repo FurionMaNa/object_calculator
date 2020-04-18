@@ -15,9 +15,12 @@
                 document.getElementById('telephone').value="";
                 document.getElementById('email').value="";
                 document.getElementById('comment').value="";
+
+                document.getElementById('visual').style.display='none';
             }else{
                 alert("Заполните хотя бы email!!!!");
             }
+           
         }
 
         var vision=false;
@@ -70,8 +73,10 @@
 <body>
     <div id="workArea" class="main">
         <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:17%;margin-left: 30%;">
+           
             <img src="newimg/delete.png" width="7%" onclick="visionForm()" style="float: right; margin-right: 2%;">
             <br>
+            <div id="visual">
             <div class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;font-size: 70%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
                 <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
             </div>
@@ -83,15 +88,13 @@
             <br>
             <input type="email" name="email"    id="email"    placeholder="Укажите e-mail"  class="form_but" >
             <br>
-            <textarea  name="comment"  id="comment"  rows="5"placeholder="Комментарий"  class="form_but" style="width: 75%;margin-top: 2%;">
-               
-            </textarea>
+            <textarea  name="comment"  id="comment"  rows="5" placeholder="Комментарий"  class="form_but" style="width: 80%;margin-top: 2%;"></textarea>
             <br>
             <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
             <br>
-           
+            </div>
             <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
-                <span style="display:block">
+                <span style="display:block;color:#fff;">
                    <b>Спасибо, ваша заявка отправлена.</b> 
                 </span>
                 <!--<input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">-->
