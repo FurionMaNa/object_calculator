@@ -82,7 +82,7 @@ bench.col = 0;
 bench.weight = 15;
 var duck = new Object();
 duck.col = 0;
-duck.price = 0;
+duck.price = 1250;
 duck.weight = 2;
 var rotateArr=new Array();
 var buffEvt;
@@ -433,6 +433,12 @@ function quantity(){
 	document.getElementById('stairs').innerHTML = stairs.col;
 }
 
+function weightsumm(){
+  var wsum = ponton.weight * ponton.col + gangway.weight * gangway.col + stairs.weight * stairs.col + connector.weight * connector.col + stays.weight * stays.col + sitconnect.weight* sitconnect.col+bench.weight*bench.col;
+  document.getElementById('weights').innerHTML = wsum +' кг';
+  return wsum;
+
+}
 
 function clearCanvas(){
 	for(var i=0;i<100;i++){ 
@@ -480,6 +486,7 @@ function clearCanvas(){
 	document.getElementById('shetpon').innerHTML = 0 ;
 	draw();
 	sum();
+	weightsumm();
 	area();	
 	quantity();
 }
@@ -1126,6 +1133,7 @@ function canvasClick(evt){
 		}
 	}
 	sum();
+	weightsumm();
 	area();
 	draw();
 	quantity();

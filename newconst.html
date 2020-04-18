@@ -10,7 +10,11 @@
         function onIssue(){
             if(document.getElementById('email').value!=""){
                 document.getElementById("after_sell").style.display="block";
-                window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+                window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm());
+                document.getElementById('nam').value="";
+                document.getElementById('telephone').value="";
+                document.getElementById('email').value="";
+                document.getElementById('comment').value="";
             }else{
                 alert("Заполните хотя бы email!!!!");
             }
@@ -30,7 +34,7 @@
         }
 
         function watch(){
-            window.open('printer/index.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value);
+            window.open('printer/index.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm());
         }
 
         var web=true;
@@ -52,7 +56,15 @@
             document.getElementById('pod_menu_gangway').style.display="none";
             document.getElementById('pod_menu_ponton').style.display="none";
         }
-
+        function changers(){
+            document.getElementById('pont').style.border = "none";
+            document.getElementById('gang').style.border = "none";
+            document.getElementById('stay').style.border = "none";
+            document.getElementById('star').style.border = "none";
+            document.getElementById('utka').style.border = "none";
+            document.getElementById('sits').style.border = "none";
+            document.getElementById('soed').style.border = "none";
+        }
     </script>
 </head>
 <body>
@@ -147,7 +159,7 @@
                     Размер конструкции: <span id="area"> 0,0 x 0,0м</span>
                 </div>
                 <div class="weight line">
-                    Вес: <span> 0кг</span>
+                    Вес: <span id="weights"> 0кг</span>
                 </div>
                 <div class="summ">
                     Стоимость: <span id="summ">0руб. </span>
@@ -181,7 +193,7 @@
                     <span style="text-align: left;">&nbsp 2000х1000х400</span> 
                    </div>
                    <div style="width:100%;background:#fff;" >
-                    <img src="newimg/ponton.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/ponton.png" width="100%" alt="" id="pont" style="background:#fff;" onclick="changers();document.getElementById('pont').style.border = '1px solid black'" >
                    </div>
                  
                    <div class="shetchik" id="shetpon">
@@ -202,7 +214,7 @@
                         &nbsp     Сходня на берег <br>
                      <span style="text-align: left;">&nbsp с переходником</span> 
                     </div>
-                    <img src="newimg/shod.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/shod.png" width="100%" alt="" style="background:#fff;" id="gang" onclick="changers();document.getElementById('gang').style.border = '1px solid black'">
                     <div class="shetchik" id="gangway">
                         0
                     </div>
@@ -221,7 +233,7 @@
                         &nbsp    Соеденитель <br>
                      <span style="text-align: left;">&nbsp для понтона</span> 
                     </div>
-                    <img src="newimg/soed.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/soed.png" width="100%" alt="" style="background:#fff;" id="soed" onclick="changers();document.getElementById('soed').style.border = '1px solid black'">
                     <div class="shetchik" id="connector">
                         0
                     </div>
@@ -240,7 +252,7 @@
                         &nbsp    Лестница <br>
                      <span style="text-align: left;">&nbsp для спуска в воду</span> 
                     </div>
-                    <img src="newimg/lest2-3.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/lest2-3.png" width="100%" alt="" style="background:#fff;" id="star" onclick="changers();document.getElementById('star').style.border = '1px solid black'">
                     <div class="shetchik" id="stairs">
                         0
                     </div>
@@ -252,7 +264,7 @@
                         &nbsp Стойка <br>
                      <span style="text-align: left;">&nbsp оградительная</span> 
                     </div>
-                    <img src="newimg/stoika.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/stoika.png" width="100%" alt="" style="background:#fff;" id="stay" onclick="changers();document.getElementById('stay').style.border = '1px solid black'">
                     <div class="shetchik" id="stays">
                         0
                     </div>
@@ -264,7 +276,7 @@
                         &nbsp  Швартовочная утка <br>
                      <span style="text-align: left;">&nbsp с соеденителем</span> 
                     </div>
-                    <img src="newimg/shvart.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/shvart.png" width="100%" alt="" style="background:#fff;" id="utka" onclick="changers();document.getElementById('utka').style.border = '1px solid black'">
                     <div class="shetchik" id="duck">
                         0
                     </div>
@@ -277,7 +289,7 @@
                         &nbsp  Лавочка для понтона <br>
                      <span style="text-align: left;">&nbsp с соеденителями</span> 
                     </div>
-                    <img src="newimg/plav.png" width="100%" alt="" style="background:#fff;">
+                    <img src="newimg/plav.png" width="100%" alt="" style="background:#fff;" id="sits" onclick="changers();document.getElementById('sits').style.border = '1px solid black'">
                     <div class="shetchik" id='bench' >
                         0
                     </div>

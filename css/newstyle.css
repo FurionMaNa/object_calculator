@@ -205,9 +205,9 @@ html, body{
             font-weight:lighter
         }
         .parametrs{
-            margin-left: 8%;
+            margin-left: 6%;
             vertical-align: top;
-            width:35%;
+            width:37%;
         }
         .colors:hover{
             border:3px solid #f8c301;

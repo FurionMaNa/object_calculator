@@ -69,51 +69,59 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr id="t1">
                     <th scope="row">Понтон модульный 2000х1000х400мм</th>
-                    <td><img class="img-fluid" src="images/gangway.png" alt="ПЛАСТО"></td>
-                    <td><?php echo $_GET['shetpon'];?></td>
+                    <td><img class="img-fluid" src="images/ponton.png" alt="ПЛАСТО"></td>
+                    <td id="pcol"><?php echo $_GET['shetpon'];?></td>
                     <td>13 440,00</td>
                     <td><?php echo (intval($_GET['shetpon'])*13440);?></td>
                 </tr>
 
-                <tr>
+                <tr id="t2">
                     <th scope="row">Сходня к модульному пластиковому понтону</th>
-                    <td><img class="img-fluid" src="images/gangway_blue_obj.png" alt="ПЛАСТО"></td>
-                    <td><?php echo $_GET['gangway'];?></td>
+                    <td><img class="img-fluid" src="images/shod.png" alt="ПЛАСТО"></td>
+                    <td id="pgang"><?php echo $_GET['gangway'];?></td>
                     <td>7 120,00</td>
                     <td><?php echo (intval($_GET['gangway'])*7120);?></td>
                 </tr>
 
-                <tr>
+                <tr id="t3">
                     <th scope="row">Соединитель для понтона (синий)</th>
-                    <td><img class="img-fluid" src="images/connector.png" alt="ПЛАСТО"></td>
-                    <td><?php echo $_GET['connector'];?></td>
+                    <td><img class="img-fluid" src="images/soed.png" alt="ПЛАСТО"></td>
+                    <td id="soed"><?php echo $_GET['connector'];?></td>
                     <td>224,00</td>
                     <td><?php echo (intval($_GET['connector'])*224);?></td>
                 </tr>
 
-                <tr>
+                <tr id="t4">
                     <th scope="row">Лестница</th>
-                    <td><img class="img-fluid" src="images/stairs-blue.png" alt="ПЛАСТО"></td>
-                    <td><?php echo $_GET['stairs'];?></td>
+                    <td><img class="img-fluid" src="images/lest2-3.png" alt="ПЛАСТО"></td>
+                    <td id="pstair"><?php echo $_GET['stairs'];?></td>
                     <td>18 560,00</td>
                     <td><?php echo (intval($_GET['stairs'])*18560);?></td>
                 </tr>
 
-                <tr>
+                <tr id="t5">
                     <th scope="row">Стойка с соединителями</th>
-                    <td><img class="img-fluid" src="images/rack.png" alt="ПЛАСТО"></td>
-                    <td><?php echo $_GET['stays'];?></td>
+                    <td><img class="img-fluid" src="images/stoika.png" alt="ПЛАСТО"></td>
+                    <td id="pstay"><?php echo $_GET['stays'];?></td>
                     <td>890,00</td>
                     <td><?php echo (intval($_GET['stays'])*890);?></td>
                 </tr>
 
-                <tr>
+                <tr id="t6">
                     <th scope="row">Лавочка</th>
-                    <td><img class="img-fluid" src="images/bench.png" alt="ПЛАСТО"></td>
-                    <td><?php echo $_GET['bench'];?></td>
+                    <td><img class="img-fluid" src="images/plav.png" alt="ПЛАСТО"></td>
+                    <td id="pbench"><?php echo $_GET['bench'];?></td>
                     <td>12 500,00</td>
+                    <td><?php echo (intval($_GET['bench'])*12500);?></td>
+                </tr>
+
+                <tr id="t7">
+                    <th scope="row">Утка</th>
+                    <td><img class="img-fluid" src="images/shvart.png" alt="ПЛАСТО"></td>
+                    <td id="putka"><?php echo $_GET['bench'];?></td>
+                    <td>1250,00</td>
                     <td><?php echo (intval($_GET['bench'])*12500);?></td>
                 </tr>
 
@@ -134,7 +142,7 @@
     <p>предоплата 100% по безналичному расчету в течение 3 дней с момента получения счета на оплату.</p>
 
     <h2 class="mt-4">Габаритные размеры груза</h2>
-    <p>Общий вес: <span class="data"> 1000 кг</span>, общий объем: <span class="data"> 3м3 </span>.</p>
+    <p>Общий вес: <span class="data"> <?php echo $_GET['weight']." кг";?></span></p>
 </div>
 
 <hr class="featurette-divider">
@@ -164,6 +172,27 @@
         }, 2000);
 
     });
+    if (document.getElementById("pcol").innerHTML == '0'){
+        document.getElementById("t1").style.display = 'none';
+    }
+    if (document.getElementById("pgang").innerHTML == '0'){
+        document.getElementById("t2").style.display = 'none';
+    }
+    if (document.getElementById("soed").innerHTML == '0'){
+        document.getElementById("t3").style.display = 'none';
+    }
+    if (document.getElementById("pstair").innerHTML == '0'){
+        document.getElementById("t4").style.display = 'none';
+    }
+    if (document.getElementById("pbench").innerHTML == '0'){
+        document.getElementById("t5").style.display = 'none';
+    }
+    if (document.getElementById("pstay").innerHTML == '0'){
+        document.getElementById("t6").style.display = 'none';
+    }
+    if (document.getElementById("putka").innerHTML == '0'){
+        document.getElementById("t7").style.display = 'none';
+    }
 </script>
 
 </body>
