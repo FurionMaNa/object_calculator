@@ -462,7 +462,9 @@ function area(){
 		var width = (right/2-left/2)+0.5;
 		var height = ((bottom-up)+1)/2;
 		document.getElementById('area').innerHTML = width + ' x ' + height +' м.';
+		return width + ' x ' + height +' м.';
 	}
+	return "0,0 x 0,0м"
 }
 
 function quantity(){

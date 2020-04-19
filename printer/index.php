@@ -142,7 +142,7 @@
     <p>предоплата 100% по безналичному расчету в течение 3 дней с момента получения счета на оплату.</p>
 
     <h2 class="mt-4">Габаритные размеры груза</h2>
-    <p>Общий вес: <span class="data"> <?php echo $_GET['weight']." кг";?></span></p>
+    <p>Общий вес: <span class="data"> <?php echo $_GET['weight']." кг";?></span>, общая площадь: <span class="data"> <?php echo $_GET['area']?> </span>.</p>
 </div>
 
 <hr class="featurette-divider">
