@@ -46,19 +46,56 @@
             document.getElementById('pod_menu_ponton').style.display="block";
             document.getElementById('pod_menu_connector').style.display="none";
             document.getElementById('pod_menu_gangway').style.display="none";
+            document.getElementById('pod_menu_stairs').style.display="none";
+            document.getElementById('pod_menu_rack').style.display="none";
+            document.getElementById('pod_menu_duck').style.display="none";
         }
 
         function onClickGangwayColor(){
             document.getElementById('pod_menu_gangway').style.display="block";
             document.getElementById('pod_menu_connector').style.display="none";
             document.getElementById('pod_menu_ponton').style.display="none";
+            document.getElementById('pod_menu_stairs').style.display="none";
+            document.getElementById('pod_menu_rack').style.display="none";
+            document.getElementById('pod_menu_duck').style.display="none";
         }
 
         function onClickConnectorColor(){
             document.getElementById('pod_menu_connector').style.display="block";
             document.getElementById('pod_menu_gangway').style.display="none";
             document.getElementById('pod_menu_ponton').style.display="none";
+            document.getElementById('pod_menu_stairs').style.display="none";
+            document.getElementById('pod_menu_rack').style.display="none";
+            document.getElementById('pod_menu_duck').style.display="none";
         }
+
+        function onClickStairsColor(){
+            document.getElementById('pod_menu_ponton').style.display="none";
+            document.getElementById('pod_menu_connector').style.display="none";
+            document.getElementById('pod_menu_gangway').style.display="none";
+            document.getElementById('pod_menu_stairs').style.display="block";
+            document.getElementById('pod_menu_rack').style.display="none";
+            document.getElementById('pod_menu_duck').style.display="none";
+        }
+
+        function onClickRackColor(){
+            document.getElementById('pod_menu_gangway').style.display="none";
+            document.getElementById('pod_menu_connector').style.display="none";
+            document.getElementById('pod_menu_ponton').style.display="none";
+            document.getElementById('pod_menu_stairs').style.display="none";
+            document.getElementById('pod_menu_rack').style.display="block";
+            document.getElementById('pod_menu_duck').style.display="none";
+        }
+
+        function onClickDuckColor(){
+            document.getElementById('pod_menu_connector').style.display="none";
+            document.getElementById('pod_menu_gangway').style.display="none";
+            document.getElementById('pod_menu_ponton').style.display="none";
+            document.getElementById('pod_menu_stairs').style.display="none";
+            document.getElementById('pod_menu_rack').style.display="none";
+            document.getElementById('pod_menu_duck').style.display="block";
+        }
+
         function changers(){
             document.getElementById('pont').style.border = "none";
             document.getElementById('gang').style.border = "none";
@@ -68,6 +105,7 @@
             document.getElementById('sits').style.border = "none";
             document.getElementById('soed').style.border = "none";
         }
+
     </script>
 </head>
 <body>
@@ -173,7 +211,7 @@
           
         </div>
         <div style="background:#fff; padding-top: 20px; padding-bottom: 20px;position: relative;z-index: 1;">
-            <img src="newimg/delete.png"  onclick="deleteObjectFromMouse()"  width="4.5%" alt="" style="position:absolute; left:90%;top:67%">
+            <img src="newimg/delete.png"  onclick="deleteObjectFromMouse()"  width="4.5%" alt="" style="position:absolute; left:90%;top:67%;cursor:pointer;">
             <div onscroll="onScrollCanvas()" id="scrollCanvas" style=" max-height: 310px;max-width:94%; margin-left:3%;overflow: scroll; ">
                 
                 <canvas id='main' width="3000px" height="3000px"></canvas>
@@ -203,7 +241,7 @@
                        0
                    </div>
                    <img src="newimg/rotate.png" onclick="onRotate(1)" width="14%"alt="" id="rotate" style="position: relative; top:-2.2em;float: right; left:5%">
-                   <img src="newimg/color_change.png"  onclick="onClickPontonColor()" width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:33%">
+                   <img src="newimg/color_change.png"  onclick="onClickPontonColor()" width="14%" alt="" class="change_colors" id="c1" style="position: relative;top:-2.2em;float: right; left:33%">
                     <div class="pod_menu" id="pod_menu_ponton">
                         <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',1);document.getElementById('pod_menu_ponton').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
                         <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',1);document.getElementById('pod_menu_ponton').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
@@ -222,12 +260,12 @@
                         0
                     </div>
                     <img src="newimg/rotate.png" onclick="onRotate(2)" width="14%"alt="" id="rotate" style="position: relative; top:-2.2em;float: right; left:5%">
-                    <img src="newimg/color_change.png"width="14%"   onclick="onClickGangwayColor()"  alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:33%">
+                    <img src="newimg/color_change.png"width="14%"   onclick="onClickGangwayColor()"  alt="" class="change_colors" id="c2" style="position: relative;top:-2.2em;float: right; left:33%">
                      <div class="pod_menu" id="pod_menu_gangway">
                         <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',2);document.getElementById('pod_menu_gangway').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
-                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',2);document.getElementById('pod_menu_gangway').style.display='none';"><span   style="color:#5483fe; cursor:pointer">0</span></div>
                         <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
-                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',2);document.getElementById('pod_menu_gangway').style.display='none';"><span     style="color:#ffffff; cursor:pointer">0</span></div>
                         <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',2);document.getElementById('pod_menu_gangway').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
                     </div>
                  </div>
@@ -241,7 +279,7 @@
                         0
                     </div>
                   
-                    <img src="newimg/color_change.png"width="14%"   onclick="onClickConnectorColor()"  alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
+                    <img src="newimg/color_change.png"width="14%"   onclick="onClickConnectorColor()"  alt="" class="change_colors" id="c3" style="position: relative;top:-2.2em;float: right; left:20%">
                     <div class="pod_menu" id="pod_menu_connector">
                         <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',3);document.getElementById('pod_menu_connector').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
                         <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe',3);document.getElementById('pod_menu_connector').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
@@ -259,8 +297,14 @@
                     <div class="shetchik" id="stairs">
                         0
                     </div>
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
-                    
+                    <img src="newimg/color_change.png"width="14%" alt="" onclick="onClickStairsColor()" class="change_colors"  id="c4" style="position: relative;top:-2.2em;float: right; left:20%">
+                    <div class="pod_menu" id="pod_menu_stairs">
+                        <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',4);document.getElementById('pod_menu_stairs').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe', 4);document.getElementById('pod_menu_stairs').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',4);document.getElementById('pod_menu_stairs').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',   4);document.getElementById('pod_menu_stairs').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',4);document.getElementById('pod_menu_stairs').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
+                    </div>
                  </div>
                  <div onclick="model5onClick()"  class="object line">
                     <div class="opis">
@@ -271,8 +315,14 @@
                     <div class="shetchik" id="stays">
                         0
                     </div>
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
-                    
+                    <img src="newimg/color_change.png"width="14%" alt="" onclick="onClickRackColor()" class="change_colors" id="c5" style="position: relative;top:-2.2em;float: right; left:20%">
+                    <div class="pod_menu" id="pod_menu_rack">
+                        <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',5);document.getElementById('pod_menu_rack').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe', 5);document.getElementById('pod_menu_rack').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',5);document.getElementById('pod_menu_rack').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',   5);document.getElementById('pod_menu_rack').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',5);document.getElementById('pod_menu_rack').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
+                    </div>
                  </div>
                  <div onclick="model7onClick()"  class="object line">
                     <div class="opis">
@@ -284,8 +334,14 @@
                         0
                     </div>
                      
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
-                    
+                    <img src="newimg/color_change.png"width="14%" alt="" class="change_colors"  onclick="onClickDuckColor()" id="c6" style="position: relative;top:-2.2em;float: right; left:20%">
+                    <div class="pod_menu" id="pod_menu_duck">
+                        <div class="colors" style="background: #93cc70; " onclick="change_color('green', '#93cc70',6);document.getElementById('pod_menu_duck').style.display='none';" ><span  style="color:#93cc70; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #5483fe; " onclick="change_color('blue', '#5483fe', 6);document.getElementById('pod_menu_duck').style.display='none';"><span  style="color:#5483fe; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #bf8571; " onclick="change_color('brown', '#bf8571',6);document.getElementById('pod_menu_duck').style.display='none';"><span  style="color:#bf8571; cursor:pointer ">0</span></div>
+                        <div class="colors" style="background: #ffffff; " onclick="change_color('white', '#fff',   6);document.getElementById('pod_menu_duck').style.display='none';"><span  style="color:#ffffff; cursor:pointer">0</span></div>
+                        <div class="colors" style="background: #f0dcaf; " onclick="change_color('beige', '#f0dcaf',6);document.getElementById('pod_menu_duck').style.display='none';"><span  style="color:#f0dcaf; cursor:pointer">0</span></div>
+                    </div>
                  </div>
                  <div onclick="model6onClick()"  class="object line" style="margin-right: 1.5%;">
                     <div class="opis">
@@ -297,7 +353,6 @@
                         0
                     </div>
                   
-                    <img src="newimg/color_change.png"width="14%" alt="" id="change_colors" style="position: relative;top:-2.2em;float: right; left:20%">
                     
                  </div>
             

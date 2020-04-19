@@ -264,7 +264,7 @@ html, body{
             width:22%;
             padding-bottom: 2%;
         }
-        #rotate,#change_colors:hover{
+        #rotate,.change_colors:hover{
             cursor:pointer;
         }
         .footer_objects{
