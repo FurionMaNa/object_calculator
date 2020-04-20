@@ -326,7 +326,6 @@ html, body{
         z-index:200;
         text-align: center;
         padding-top: 5px;
-        
     }
     #send_email input{
         margin:10px;
@@ -334,7 +333,7 @@ html, body{
     .form_but{
         border: none;
        padding: 10px;
-       width: 75%;
+       width: 50%;
        border-radius: 10px;
     }
     .button_form{
