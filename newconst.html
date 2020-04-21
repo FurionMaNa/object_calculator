@@ -5,20 +5,34 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/html2canvas.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
+        var my_screen;
+
+        function screenshot(){
+            
+			html2canvas(document.getElementById("main")).then(function(canvas) {
+			    my_screen = canvas;
+                //return my_screen;
+			    //document.getElementById("workArea").appendChild(my_screen);
+			});
+        }
+
         function onIssue(){
-            if(document.getElementById('email').value!=""){
+            if(document.getElementById('telephone').value!=""){
                 document.getElementById("after_sell").style.display="block";
                 window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm());
                 document.getElementById('nam').value="";
                 document.getElementById('telephone').value="";
                 document.getElementById('email').value="";
                 document.getElementById('comment').value="";
-
+                draw();
+                screenshot();
                 document.getElementById('visual').style.display='none';
+                //screenshot();
             }else{
-                alert("Заполните хотя бы email!!!!");
+                alert("Заполните хотя бы телефон!");
             }
            
         }
@@ -37,7 +51,18 @@
         }
 
         function watch(){
-            window.open('printer/index.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm()+"&area="+area());
+            var dataURL = my_screen.toDataURL("image/jpg");
+            $.ajax({
+                type: "POST",
+                url: "save_scrin.php",
+                data: { 
+                   imgBase64: my_screen.toDataURL("image/jpg")
+                }
+            }).done(function(o) {
+                console.log('saved'); 
+                window.open('printer/index.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm()+"&area="+area()+"&screen="+o);
+            });
+            
         }
 
         var web=true;
@@ -110,16 +135,16 @@
 </head>
 <body>
     <div id="workArea" class="main">
-        <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:40%;margin-left: 30%;">
+        <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:30%;margin-left: 30%;">
            
             <img src="newimg/delete.png" width="3%" onclick="visionForm()" style="float: right; margin-right: 2%;cursor: pointer;">
             <br>
             <div id="visual">
-                <div class="lol" style="display:contents; background: #f8c301;border-radius:10px; padding:10px;font-size: 70%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
+                <div class="lol" style="display:contents; background: #363531;border-radius:10px; padding:10px;font-size: 70%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
                     <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
                 </div>
                 <br>
-                
+                <br>
                 <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
                 <br>
                 <input type="tel" name="telephone"id="telephone"placeholder="Номер телефона *"  class="form_but"  required>
@@ -128,12 +153,14 @@
                 <br>
                 <textarea  name="comment"  id="comment"  rows="5" placeholder="Комментарий"  class="form_but" style="width: 50%;margin-top: 2%;"></textarea>
                 <br>
-                <input type="button" onclick="onIssue()" value="Отправить" class="button_form" >
+                <input type="button" onclick="onIssue();" value="Отправить" class="button_form" >
                 <br>
             </div>
             <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
                 <span style="display:block;color:#fff;">
-                   <b>Спасибо, ваша заявка отправлена.</b> 
+                   <b>Спасибо, ваша заявка отправлена. <br>
+                       Вы можете открыть ваше персональное коммерческое предложение на странице</b> 
+                   
                 </span>
                 <!--<input type="button" onclick="downoload()" value="Скачать PDF" class="button_form">-->
                 <br>
@@ -375,5 +402,14 @@
         </div>
     </div>
 </div>
+<script>
+	//window.onload = function() {
+	//	html2canvas(document.getElementById("main")).then(function(canvas) {
+	//		var my_screen = canvas;
+	//		document.getElementById("workArea").appendChild(my_screen);
+	//	});	
+	//}
+
+</script>
 </body>
 </html>

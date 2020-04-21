@@ -134,7 +134,6 @@
             </table>
         </div>
     </div>
-
     <h2 class="mt-4">Срок поставки</h2>
     <p>5-7 дней с момента поступления предоплаты на расчетный счет. Продукция в наличии на складе производства в г. Владимир. Возможна доставка до Вашего объекта.</p>
 
@@ -143,6 +142,7 @@
 
     <h2 class="mt-4">Габаритные размеры груза</h2>
     <p>Общий вес: <span class="data"> <?php echo $_GET['weight']." кг";?></span>, общая площадь: <span class="data"> <?php echo $_GET['area']?> </span>.</p>
+    <img  width=600px src=<?php echo $_GET['screen'];?>>
 </div>
 
 <hr class="featurette-divider">

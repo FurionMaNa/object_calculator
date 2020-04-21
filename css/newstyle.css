@@ -321,7 +321,6 @@ html, body{
       #send_email{
         position:fixed;
         background: #f8c301;
-        border-radius: 10px;
         border:1px solid #4a76a8;
         z-index:200;
         text-align: center;
