@@ -3881,7 +3881,7 @@ function deleteObjectFromMouse(){
 	draw();
 }
 
-function draw(){ 
+function draw(f=false){ 
 	ctx.clearRect(0, 0, width, height); 
 	var sizeX=45+scale; 
 	var sizeY=45+scale; 
@@ -3890,18 +3890,31 @@ function draw(){
 	var iEnd=Math.trunc((scrollCanvas.clientHeight+scrollCanvas.scrollTop)/(45+scale));
 	var jEnd=Math.trunc((scrollCanvas.clientWidth+scrollCanvas.scrollLeft)/(45+scale));
 	sitconnect.col=0;
-	for(var i=iStart-10;i<iEnd+10;i++){
-		for(var j=jStart-10;j<jEnd+10;j++){
-			if(visibleWeb){
-				ctx.beginPath();
-				ctx.strokeStyle = "#FFFFFF";
-				ctx.strokeRect(sizeX*j, sizeY*i, sizeX, sizeY); 
-				ctx.stroke(); 
+	if(f){
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
+				if(visibleWeb){
+					ctx.beginPath();
+					ctx.strokeStyle = "#FFFFFF";
+					ctx.strokeRect(sizeX*(j), sizeY*(i), sizeX, sizeY); 
+					ctx.stroke(); 
+				}
+			}
+		}
+	}else{
+		for(var i=iStart-10;i<iEnd+10;i++){
+			for(var j=jStart-10;j<jEnd+10;j++){
+				if(visibleWeb){
+					ctx.beginPath();
+					ctx.strokeStyle = "#FFFFFF";
+					ctx.strokeRect(sizeX*j, sizeY*i, sizeX, sizeY); 
+					ctx.stroke(); 
+				}
 			}
 		}
 	}
-	for(var i=iStart-10;i<iEnd+10;i++){
-		for(var j=jStart-10;j<jEnd+10;j++){
+	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 				if(maps[i][j].code!=0){
 					ctx.save();
@@ -3977,8 +3990,8 @@ function draw(){
 			}
 		}
 	}
-	for(var i=iStart-10;i<iEnd+10;i++){
-		for(var j=jStart-10;j<jEnd+10;j++){
+	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 				if(maps[i][j].code!=0){
 					ctx.save();
@@ -4283,8 +4296,8 @@ function draw(){
 			}
 		}
 	}
-	for(var i=iStart-10;i<iEnd+10;i++){
-		for(var j=jStart-10;j<jEnd+10;j++){
+	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			for(var k=0;k<4;k++){
 				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 					//if(maps[i][j].code!=0){
@@ -4544,8 +4557,8 @@ function draw(){
 			}
 		}
 	}
-	for(var i=iStart-10;i<iEnd+10;i++){
-		for(var j=jStart-10;j<jEnd+10;j++){
+	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			for(var k=0;k<4;k++){
 				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 					//if(maps[i][j].code!=0){
