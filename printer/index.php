@@ -73,24 +73,24 @@
                     <th scope="row">Понтон модульный 2000х1000х400мм</th>
                     <td><img class="img-fluid" src="images/ponton.png" alt="ПЛАСТО"></td>
                     <td id="pcol"><?php echo $_GET['shetpon'];?></td>
-                    <td>13 440,00</td>
-                    <td><?php echo (intval($_GET['shetpon'])*13440);?></td>
+                    <td>16 800,00</td>
+                    <td><?php echo (intval($_GET['shetpon'])*16800);?></td>
                 </tr>
 
                 <tr id="t2">
                     <th scope="row">Сходня к модульному пластиковому понтону</th>
                     <td><img class="img-fluid" src="images/shod.png" alt="ПЛАСТО"></td>
                     <td id="pgang"><?php echo $_GET['gangway'];?></td>
-                    <td>7 120,00</td>
-                    <td><?php echo (intval($_GET['gangway'])*7120);?></td>
+                    <td>9 460,00</td>
+                    <td><?php echo (intval($_GET['gangway'])*9460);?></td>
                 </tr>
 
                 <tr id="t3">
                     <th scope="row">Соединитель для понтона (синий)</th>
                     <td><img class="img-fluid" src="images/soed.png" alt="ПЛАСТО"></td>
                     <td id="soed"><?php echo $_GET['connector'];?></td>
-                    <td>224,00</td>
-                    <td><?php echo (intval($_GET['connector'])*224);?></td>
+                    <td>280,00</td>
+                    <td><?php echo (intval($_GET['connector'])*280);?></td>
                 </tr>
 
                 <tr id="t4">
@@ -120,14 +120,14 @@
                 <tr id="t7">
                     <th scope="row">Утка</th>
                     <td><img class="img-fluid" src="images/shvart.png" alt="ПЛАСТО"></td>
-                    <td id="putka"><?php echo $_GET['bench'];?></td>
+                    <td id="putka"><?php echo $_GET['duck'];?></td>
                     <td>1250,00</td>
-                    <td><?php echo (intval($_GET['bench'])*12500);?></td>
+                    <td><?php echo (intval($_GET['duck'])*1250);?></td>
                 </tr>
 
                 <tr class="table-primary">
                     <td class="text-right" colspan="4">Итого:</td>
-                    <td><?php echo (intval($_GET['shetpon'])*13440)+(intval($_GET['gangway'])*7120)+(intval($_GET['connector'])*224)+(intval($_GET['stairs'])*18560)+(intval($_GET['stays'])*890)+(intval($_GET['bench'])*12500);?></td>
+                    <td><?php echo (intval($_GET['shetpon'])*16800)+(intval($_GET['gangway'])*9460)+(intval($_GET['connector'])*280)+(intval($_GET['stairs'])*18560)+(intval($_GET['stays'])*890)+(intval($_GET['bench'])*12500)+(intval($_GET['duck'])*1250);?></td>
                 </tr>
 
                 </tbody>
