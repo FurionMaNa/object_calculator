@@ -61,6 +61,23 @@ html, body{
     #header div{
         background:#f8c301;
     }
+    .info
+        {
+            position:fixed;
+            background: #f8c301;
+            border:1px solid #4a76a8;
+            z-index:200;
+            text-align: center;
+            padding: 10px;
+            font-family: 'TacticSansExd-Bld_0';
+            font-size: 60%;
+            visibility: hidden;
+        }
+        .quest:hover .info{
+            transition: 1s;
+            visibility:visible;
+        }
+    
     .main{
         margin-top:5%;
         width:61%;
