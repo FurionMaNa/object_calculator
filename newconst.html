@@ -11,30 +11,25 @@
         var my_screen;
 
         function screenshot(){
+            
 			html2canvas(document.getElementById("main")).then(function(canvas) {
-			  my_screen = canvas;
+			    my_screen = canvas;
 			});
         }
 
         function onIssue(){
             if(document.getElementById('telephone').value!=""){
-
-                $.ajax({
-                    type: "POST",
-                    url: "save_scrin.php",
-                    data: { 
-                       imgBase64: my_screen.toDataURL("image/jpg")
-                    }
-                }).done(function(o) {
-                    document.getElementById("after_sell").style.display="block";
-                    window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm()+"&img="+o);
-                    document.getElementById('nam').value="";
-                    document.getElementById('telephone').value="";
-                    document.getElementById('email').value="";
-                    document.getElementById('comment').value="";
-                    document.getElementById('visual').style.display='none';
-                    //screenshot();
-                });
+                document.getElementById("after_sell").style.display="block";
+                window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm());
+                document.getElementById('nam').value="";
+                document.getElementById('telephone').value="";
+                document.getElementById('email').value="";
+                document.getElementById('comment').value="";
+                draw(true);
+                screenshot();
+                document.getElementById('visual').style.display='none';
+                draw();
+                //screenshot();
             }else{
                 alert("Заполните хотя бы телефон!");
             }
@@ -44,9 +39,6 @@
         var vision=false;
 
         function visionForm(){
-            draw(true);
-            screenshot();
-            draw();
             if(vision){
                 document.getElementById('send_email').style.display="none";
                 document.getElementById("after_sell").style.display="none";
@@ -59,6 +51,7 @@
         }
 
         function watch(){
+            var dataURL = my_screen.toDataURL("image/jpg");
             $.ajax({
                 type: "POST",
                 url: "save_scrin.php",
@@ -289,10 +282,10 @@
                     &nbsp      Элемент понтона <br>
                     <span style="text-align: left;">&nbsp 2000х1000х400</span> 
                    </div>
-                   <div style="width:100%;background:#fff;" >
+                  
                     <!--Сменить фото понтона-->
                     <img src="newimg/ponton.png" width="100%" alt="" id="pont" style="background:#fff;" onclick="changers();document.getElementById('pont').style.border = '1px solid black'" >
-                   </div>
+                
                  
                    <div class="shetchik" id="shetpon">
                        0

@@ -385,7 +385,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c4').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c4').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c4').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c4').src='newimg/newimg/icon_fff.png';break;
+				case 'white':document.getElementById('c4').src='newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c4').src='newimg/icon_grown.png';break;
 			}			
 			if(model==3){
@@ -397,7 +397,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c5').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c5').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c5').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c5').src='newimg/newimg/icon_fff.png';break;
+				case 'white':document.getElementById('c5').src='newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c5').src='newimg/icon_grown.png';break;
 			}
 			if(model==5){
@@ -409,7 +409,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c6').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c6').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c6').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c6').src='newimg/color_change.png';break;
+				case 'white':document.getElementById('c6').src='newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c6').src='newimg/icon_grown.png';break;
 			}
 			if(model==7){
