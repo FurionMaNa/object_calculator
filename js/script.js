@@ -780,8 +780,23 @@ function CutObjMaps(x,y,xm,ym){
         					color:maps[i][j].addons[3].color,
         				})
         			) } );
-					maps[i][j].code=0;
-					maps[i][j].id=-1;
+
+					switch(maps[i][j].code){
+						case 1:case -1:case 10:case -10:
+							ponton.col--;
+							maps[i][j].code=0;
+							maps[i][j].id=-1;
+							maps[i][j].color="none";	
+							break;
+						case 2:case -2:case 20:	case -20:
+							gangway.col--;
+							maps[i][j].code=0;
+							maps[i][j].id=-1;
+							maps[i][j].color="none";		
+							break;
+					}
+					//maps[i][j].code=0;
+					//maps[i][j].id=-1;
 					for (var k=0;k<4;k++){
 						if(mapsBuff[ii][jj].map[k].id!=idM){
 							mapsBuff[ii][jj].map[k]=new Object( {code:0, id:-1,color:"none"} );
@@ -790,14 +805,6 @@ function CutObjMaps(x,y,xm,ym){
 					for(var k=0;k<4;k++){
 						if(maps[i][j].addons[k].id==idM){
 							switch(maps[i][j].addons[k].code){
-								case 1:case -1:case 10:case -10:
-									ponton.col--;
-									maps[i][j].addons[k]=new Object( {code:0, id:-1,color:"none"} );	
-									break;
-								case 2:case -2:case 20:	case -20:
-									gangway.col--;
-									maps[i][j].addons[k]=new Object( {code:0, id:-1,color:"none"} );	
-									break;
 								case -555:case -556:case -557:case -558:
 									maps[i][j].addons[k]=new Object( {code:0, id:-1,color:"none"} );	
 									break;
@@ -940,6 +947,11 @@ function CutObjMaps(x,y,xm,ym){
 		}
 	}
 	sitconnect.col=0;
+	
+	sum();
+	weightsumm();
+	area();
+	quantity();
 }
 
 function isRepeat(m,n){
