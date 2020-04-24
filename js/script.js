@@ -49,41 +49,58 @@ var color='blue';
 var mouseX=0;
 var mouseY=0;
 var id=0;
-ponton.width = 1000;
-ponton.height = 2000;
-ponton.price = 16800;
+
+// ПАРАМЕТРЫ ПОНТОНА
+ponton.width = 1000; // ШИРИНА
+ponton.height = 2000; // ВЫСОТА
+ponton.price = 16800; // ЦЕНА
 ponton.col = 0;
-ponton.weight = 80;
+ponton.weight = 80;// ВЕС
+
+// ПАРАМЕТРЫ СХОДНИ
 var gangway = new Object();
-gangway.width = 1000;
-gangway.height = 2000;
-gangway.price = 9460;
+gangway.width = 1000;  // ШИРИНА
+gangway.height = 2000; // ВЫСОТА
+gangway.price = 9460; // ЦЕНА
 gangway.col = 0;
-gangway.weight = 30;
+gangway.weight = 30;// ВЕС
+
+// ПАРАМЕТРЫ ЛЕСТНИЦЫ
 var stairs = new Object();
-stairs.price = 18560;
+stairs.price = 18560;// ЦЕНА
 stairs.col = 0;
-stairs.weight = 15;
+stairs.weight = 15;// ВЕС
+
+// ПАРАМЕТРЫ СОЕДЕНИТЕЛЯ
 var connector = new Object();
-connector.price = 280;
+connector.price = 280;// ЦЕНА
 connector.col = 0;
-connector.weight=2;
+connector.weight=2;// ВЕС
+
+// ПАРАМЕТРЫ СТОЙКИ
 var stays = new Object();
-stays.price = 890;
+stays.price = 890;// ЦЕНА
 stays.col = 0;
-stays.weight = 2;
+stays.weight = 2;// ВЕС
+
 var sitconnect = new Object();
-sitconnect.price = 280;
+sitconnect.price = 280;// ЦЕНА
 sitconnect.col = 0;
-sitconnect.weight=2;
+sitconnect.weight=2;// ВЕС
+
+// ПАРАМЕТРЫ ЛАВОЧКИ
 var bench = new Object();
-bench.price = 12500;
+bench.price = 12500;// ЦЕНА
 bench.col = 0;
-bench.weight = 15;
+bench.weight = 15;// ВЕС
+
+// ПАРАМЕТРЫ УТКИ
 var duck = new Object();
 duck.col = 0;
-duck.price = 1250;
-duck.weight = 2;
+duck.price = 1250;// ЦЕНА
+duck.weight = 2;// ВЕС
+
+
 var rotateArr=new Array();
 var buffEvt;
 var colorArr=new Array();
@@ -332,7 +349,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c1').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c1').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c1').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c1').src='newimg/color_change.png';break;
+				case 'white':document.getElementById('c1').src='newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c1').src='newimg/icon_grown.png';break;
 			}
 			if(model==1){
@@ -344,7 +361,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c2').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c2').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c2').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c2').src='newimg/color_change.png';break;
+				case 'white':document.getElementById('c2').src='newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c2').src='newimg/icon_grown.png';break;
 			}
 			if(model==2){
@@ -356,7 +373,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c3').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c3').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c3').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c3').src='newimg/color_change.png';break;
+				case 'white':document.getElementById('c3').src='newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c3').src='newimg/icon_grown.png';break;
 			}
 			if(model==4){
@@ -368,7 +385,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c4').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c4').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c4').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c4').src='newimg/color_change.png';break;
+				case 'white':document.getElementById('c4').src='newimg/newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c4').src='newimg/icon_grown.png';break;
 			}			
 			if(model==3){
@@ -380,7 +397,7 @@ function change_color(id, colors,num){
 				case 'green':document.getElementById('c5').src='newimg/icon_gr.png';break;
 				case 'blue' :document.getElementById('c5').src='newimg/color_change.png';break;
 				case 'brown':document.getElementById('c5').src='newimg/icon_brow.png';break;
-				case 'white':document.getElementById('c5').src='newimg/color_change.png';break;
+				case 'white':document.getElementById('c5').src='newimg/newimg/icon_fff.png';break;
 				case 'beige':document.getElementById('c5').src='newimg/icon_grown.png';break;
 			}
 			if(model==5){
@@ -990,7 +1007,7 @@ function PastObjMaps(x,y){
 						break;
 				}
 				for(var k=0;k<4;k++){
-					switch(mapsBuff[i][j].code){
+					switch(mapsBuff[i][j].map[k].code){
 						case 555:case 556:case 557:case 558:
 							stairs.col++;
 							break;

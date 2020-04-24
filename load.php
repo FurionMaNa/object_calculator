@@ -149,7 +149,7 @@
             <td id="final_sum">'. $_GET["sum"].'</td>
           </tr>
         </table>
-        
+        <img width=600px src="printer/'.$_GET["img"].'">
          <br>
           <br>
           <span style="margin-left: 4.6%; font-size: 20px;">
@@ -229,7 +229,7 @@
   require($root.'/PHPMailer/PHPMailerAutoload.php');
   $mail = new PHPMailer;
   $mail->setFrom($_GET['email']);
-  $mail->addAddress('cer-c@mail.ru');//Почту менять ТУТ
+  $mail->addAddress('cer-c@mail.ru');//Почту менять ТУТ 
   $mail->CharSet = "utf-8";
   $mail->Subject = 'PHPMailer file sender';
   $mail->msgHTML("От: ".$_GET['name']."<br> Телефон: ".$_GET['telephone']."\r\n <br> Коммент: ".$_GET['comment']."\r\n <br> Email отправителя: ".$_GET['email']);

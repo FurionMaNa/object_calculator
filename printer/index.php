@@ -71,57 +71,64 @@
                 <?php setlocale(LC_MONETARY, 'it_IT');?>
                 <tr id="t1">
                     <th scope="row">Понтон модульный 2000х1000х400мм</th>
-                    <td><img class="img-fluid" src="images/ponton.png" alt="ПЛАСТО"></td>
+                    <!--СМЕНИТЬ ФОТО ПОНТОНА -->
+                    <td><img class="img-fluid" src="images/ponton.png" alt="ПЛАСТО"></td> 
                     <td id="pcol"><?php echo $_GET['shetpon'];?></td>
-                    <td>16 800,00</td>
+                    <td>16 800.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['shetpon'])*16800));?></td>
                 </tr>
 
                 <tr id="t2">
                     <th scope="row">Сходня к модульному пластиковому понтону</th>
+                    <!--СМЕНИТЬ ФОТО СХОДНИ -->
                     <td><img class="img-fluid" src="images/shod.png" alt="ПЛАСТО"></td>
                     <td id="pgang"><?php echo $_GET['gangway'];?></td>
-                    <td>9 460,00</td>
+                    <td>9 460.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['gangway'])*9460));?></td>
                 </tr>
 
                 <tr id="t3">
                     <th scope="row">Соединитель для понтона (синий)</th>
+                    <!--СМЕНИТЬ ФОТО СОЕДЕНИТЕЛЯ -->
                     <td><img class="img-fluid" src="images/soed.png" alt="ПЛАСТО"></td>
                     <td id="soed"><?php echo $_GET['connector'];?></td>
-                    <td>280,00</td>
+                    <td>280.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['connector'])*280));?></td>
                 </tr>
 
                 <tr id="t4">
                     <th scope="row">Лестница</th>
+                     <!--СМЕНИТЬ ФОТО  ЛЕСТНИЦЫ-->
                     <td><img class="img-fluid" src="images/lest2-3.png" alt="ПЛАСТО"></td>
                     <td id="pstair"><?php echo $_GET['stairs'];?></td>
-                    <td>18 560,00</td>
+                    <td>18 560.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['stairs'])*18560));?></td>
                 </tr>
 
                 <tr id="t5">
                     <th scope="row">Стойка с соединителями</th>
+                     <!--СМЕНИТЬ ФОТО  СТОЙКИ-->
                     <td><img class="img-fluid" src="images/stoika.png" alt="ПЛАСТО"></td>
                     <td id="pstay"><?php echo $_GET['stays'];?></td>
-                    <td>890,00</td>
+                    <td>890.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['stays'])*890));?></td>
                 </tr>
 
                 <tr id="t6">
                     <th scope="row">Лавочка</th>
+                     <!--СМЕНИТЬ ФОТО  ЛАВОЧОКИ-->
                     <td><img class="img-fluid" src="images/plav.png" alt="ПЛАСТО"></td>
                     <td id="pbench"><?php echo $_GET['bench'];?></td>
-                    <td>12 500,00</td>
+                    <td>12 500.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['bench'])*12500));?></td>
                 </tr>
 
                 <tr id="t7">
                     <th scope="row">Утка</th>
+                     <!--СМЕНИТЬ ФОТО  УТКИ-->
                     <td><img class="img-fluid" src="images/shvart.png" alt="ПЛАСТО"></td>
                     <td id="putka"><?php echo $_GET['duck'];?></td>
-                    <td>1250,00</td>
+                    <td>1250.00</td>
                     <td><?php echo money_format('%.2n',(intval($_GET['duck'])*1250));?></td>
                 </tr>
 
@@ -134,6 +141,7 @@
             </table>
         </div>
     </div>
+     <!-- ИНФОРМАЦИЯ ПОСЛЕ ТАБЛИЦЫ -->
     <h2 class="mt-4">Срок поставки</h2>
     <p>5-7 дней с момента поступления предоплаты на расчетный счет. Продукция в наличии на складе производства в г. Владимир. Возможна доставка до Вашего объекта.</p>
 
@@ -185,10 +193,10 @@
     if (document.getElementById("pstair").innerHTML == '0'){
         document.getElementById("t4").style.display = 'none';
     }
-    if (document.getElementById("pbench").innerHTML == '0'){
+    if (document.getElementById("pstay").innerHTML == '0'){
         document.getElementById("t5").style.display = 'none';
     }
-    if (document.getElementById("pstay").innerHTML == '0'){
+    if (document.getElementById("pbench").innerHTML == '0'){
         document.getElementById("t6").style.display = 'none';
     }
     if (document.getElementById("putka").innerHTML == '0'){

@@ -64,6 +64,7 @@ html, body{
     .info
         {
             position:fixed;
+            top:6em;
             background: #f8c301;
             border:1px solid #4a76a8;
             z-index:200;

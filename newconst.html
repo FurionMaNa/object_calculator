@@ -11,25 +11,30 @@
         var my_screen;
 
         function screenshot(){
-            
 			html2canvas(document.getElementById("main")).then(function(canvas) {
-			    my_screen = canvas;
+			  my_screen = canvas;
 			});
         }
 
         function onIssue(){
             if(document.getElementById('telephone').value!=""){
-                document.getElementById("after_sell").style.display="block";
-                window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm());
-                document.getElementById('nam').value="";
-                document.getElementById('telephone').value="";
-                document.getElementById('email').value="";
-                document.getElementById('comment').value="";
-                draw(true);
-                screenshot();
-                document.getElementById('visual').style.display='none';
-                draw();
-                //screenshot();
+
+                $.ajax({
+                    type: "POST",
+                    url: "save_scrin.php",
+                    data: { 
+                       imgBase64: my_screen.toDataURL("image/jpg")
+                    }
+                }).done(function(o) {
+                    document.getElementById("after_sell").style.display="block";
+                    window.open('load.php?sum='+sum()+'&shetpon='+document.getElementById('shetpon').innerHTML+'&gangway='+document.getElementById('gangway').innerHTML +'&stairs='+document.getElementById('stairs').innerHTML+'&connector='+document.getElementById('connector').innerHTML+'&duck='+document.getElementById('duck').innerHTML+'&stays='+document.getElementById('stays').innerHTML+'&bench='+document.getElementById('bench').innerHTML+'&name='+document.getElementById('nam').value+'&telephone='+document.getElementById('telephone').value+'&email='+document.getElementById('email').value+'&comment='+document.getElementById('comment').value+"&weight="+weightsumm()+"&img="+o);
+                    document.getElementById('nam').value="";
+                    document.getElementById('telephone').value="";
+                    document.getElementById('email').value="";
+                    document.getElementById('comment').value="";
+                    document.getElementById('visual').style.display='none';
+                    //screenshot();
+                });
             }else{
                 alert("Заполните хотя бы телефон!");
             }
@@ -39,6 +44,9 @@
         var vision=false;
 
         function visionForm(){
+            draw(true);
+            screenshot();
+            draw();
             if(vision){
                 document.getElementById('send_email').style.display="none";
                 document.getElementById("after_sell").style.display="none";
@@ -51,7 +59,6 @@
         }
 
         function watch(){
-            var dataURL = my_screen.toDataURL("image/jpg");
             $.ajax({
                 type: "POST",
                 url: "save_scrin.php",
@@ -135,16 +142,19 @@
 </head>
 <body>
     <div id="workArea" class="main">
+        <!--ФОРМА-->
         <form action="send.php" method="post" id="send_email" style="display: none; margin-top: 5.1%;width:30%;margin-left: 30%;">
-           
+           <!--КНОПКА УДАЛЕНИЯ-->
             <img src="newimg/delete.png" width="3%" onclick="visionForm()" style="float: right; margin-right: 2%;cursor: pointer;">
             <br>
             <div id="visual">
                 <div class="lol" style="display:contents; background: #363531;border-radius:10px; padding:10px;font-size: 70%;color:#fff;font-family: 'Exo2-Medium_3';width: 60%;">
+                  <!--ТЕКСТ ФОРМЫ-->
                     <b > Оставьте ваши контактные данные и получите индивидуальное коммерческое предложение: </b>
                 </div>
                 <br>
                 <br>
+                <!--ПОЛЯ ФОРМЫ-->
                 <input type="text" name="nam"      id="nam"   class="form_but"   placeholder="Имя">
                 <br>
                 <input type="tel" name="telephone"id="telephone"placeholder="Номер телефона *"  class="form_but"  required>
@@ -158,6 +168,7 @@
             </div>
             <div id="after_sell" style="display:none; background: #f8c301;border-radius:10px;">
                 <span style="display:block;color:#fff;">
+                    <!--ТЕКСТ ПОСЛЕ ЗАПОЛНЕНИЯ ФОРМЫ-->
                    <b>Спасибо, ваша заявка отправлена. <br>
                        Вы можете открыть ваше персональное коммерческое предложение на странице</b> 
                    
@@ -169,11 +180,14 @@
         </form>
         <div id="header">
             <div class="main_header">
+                <!--ФОТО ЛОГОТИПА ШАПКИ-->
                 <img src="newimg/logo.png" alt="" class="line logo" width="12%" >
+                <!--КНОПКА ВОПРОСА -->
                 &nbsp  &nbsp  &nbsp<a href="#" class="quest"style="font-size: 120%;position: relative;top:-0.3em;font-family: 'Exo2-ExtraBold_3';left: 1em;">?
                 <div class="info">
-                    Версия программы: 1.0
+                    ПЛАСТО - конструктор понтонов v1
                 </div></a>
+                <!--ТЕКСТ ШАПКИ-->
                 <div class="logo_text">
                     КОНСТРУКТОР МОДУЛЬНЫХ ПОНТОНОВ
                 </div>
@@ -186,9 +200,11 @@
                     </div>
                     <div style="margin-top: 4px;">
                     <div id="scale_plus" class="line" onclick="scalePlusClick()" >
+                         <!--КНОПКА МАСШТАБ + -->
                         <img src="newimg/+.png" alt="" class="line" width="100%">
                     </div>
                     <div id="scale_minus" class="line" onclick="scaleMinusClick()">
+                        <!--КНОПКА МАСШТАБ - -->
                         <img src="newimg/-.png" alt="" class="line" width="100%">
                     </div>
                 </div>
@@ -198,16 +214,19 @@
                         Сетка поля
                     </div>
                     <div id="set_on" class="line">
+                         <!--КНОПКА ВКЛЮЧЕННОЙ СЕТКИ-->
                         <img id="set_on_i" src="newimg/set_on.png" alt="" class="line" width="100%" onclick="if(!web){visibleWebClick(); web=true;}">
                     </div>
                     <div id="set_off" class="line">
+                         <!--КНОПКА ВЫКЛЮЧЕННОЙ СЕТКИ-->
                         <img id="set_off_i" src="newimg/set_off.png" alt=""class="line" width="100%" onclick="if(web){visibleWebClick(); web=false;}">
                     </div>
                 </div>
+                <!--КНОПКА ПОЛНОЭКРАННЫЙ РЕЖИМ-->
                 <div id="full_scr" class="line"  onclick="fullScreenClick()">
                    Полноэкранный <br> режим
                 </div>
-
+                 <!--КНОПКА ОЧИСТИТЬ ПОЛЕ-->
               
                 <div class="line dnv" style="margin-left: 2%;">
                     <div id="close"class="line" style="background:#da251c;">
@@ -217,6 +236,7 @@
                     </div>
                 </div>
             </div>
+            <!--КНОПКА ОФОРМИТЬ ЗАКАЗ-->
             <div class="dns line"  onclick="visionForm()">
                 <div id="sell" class="line" style="background:#85c226;">
                     <img src="newimg/yes.png" alt="" class="line"  width="10%"  style="margin-left: 7%;max-height: 10px;">
@@ -227,6 +247,7 @@
                 </div>
               
             </div>
+            <!--ДИНАМИЧЕСКИЕ ПАРАМЕТРЫ: РАЗМЕР, ВЕС, ЦЕНА-->
             <div class="parametrs line">
                 <div class="gabarites line">
                     Размер конструкции: <span id="area"> 0,0 x 0,0м</span>
@@ -249,23 +270,27 @@
                 <canvas id='main' width="3000px" height="3000px"></canvas>
                 
             </div>
+            <!--ТЕКСТ ПЕРЕД КНОПКОЙ ПОВОРОТА-->
         <div class="text line">
             Перетащите требуемые элементы на рабочее поле. Для поворота элементов используйте кнопку
         </div>
         <img src="newimg/rotate.png" alt="" width="2%" style="vertical-align:middle;">
+        <!--ТЕКСТ ПЕРЕД КНОПКОЙ УДАЛЕНИЯ-->
         <div class="text line" style="margin-left: 9%;">
             Для удаления элементов с рабочего поля воспользуйтесь кнопкой
         </div>
         <img src="newimg/delete.png" alt="" width="1.5%" style="vertical-align:middle;border:1px solid black;border-radius: 5px;">
         </div>
+        <!-- ПОДВАЛ -->
         <div id="footer">
             <div class="footer_objects">
                 <div class="object line"  onclick="model1onClick()" >
-                   <div class="opis">
+                   <div class="opis"> <!--ПОНТОН-->
                     &nbsp      Элемент понтона <br>
                     <span style="text-align: left;">&nbsp 2000х1000х400</span> 
                    </div>
                    <div style="width:100%;background:#fff;" >
+                    <!--Сменить фото понтона-->
                     <img src="newimg/ponton.png" width="100%" alt="" id="pont" style="background:#fff;" onclick="changers();document.getElementById('pont').style.border = '1px solid black'" >
                    </div>
                  
@@ -283,10 +308,11 @@
                     </div>
                 </div>
                 <div onclick="model2onClick()" class="object line">
-                    <div class="opis">
+                    <div class="opis"> <!--СХОДНЯ-->
                         &nbsp     Сходня на берег <br>
                      <span style="text-align: left;">&nbsp с переходником</span> 
                     </div>
+                    <!--Сменить фото сходни-->
                     <img src="newimg/shod.png" width="100%" alt="" style="background:#fff;" id="gang" onclick="changers();document.getElementById('gang').style.border = '1px solid black'">
                     <div class="shetchik" id="gangway">
                         0
@@ -302,10 +328,11 @@
                     </div>
                  </div>
                  <div onclick="model4onClick()" class="object line" >
-                    <div class="opis">
+                    <div class="opis"> <!--СОЕДЕНИТЕЛЬ-->
                         &nbsp    Соеденитель <br>
                      <span style="text-align: left;">&nbsp для понтона</span> 
                     </div>
+                    <!--Сменить фото соеденителя-->
                     <img src="newimg/soed.png" width="100%" alt="" style="background:#fff;" id="soed" onclick="changers();document.getElementById('soed').style.border = '1px solid black'">
                     <div class="shetchik" id="connector">
                         0
@@ -321,10 +348,11 @@
                     </div>
                  </div>
                  <div onclick="model3onClick()"  class="object line">
-                    <div class="opis">
+                    <div class="opis"> <!--Лестница-->
                         &nbsp    Лестница <br>
                      <span style="text-align: left;">&nbsp для спуска в воду</span> 
                     </div>
+                    <!--Сменить фото лестницы-->
                     <img src="newimg/lest2-3.png" width="100%" alt="" style="background:#fff;" id="star" onclick="changers();document.getElementById('star').style.border = '1px solid black'">
                     <div class="shetchik" id="stairs">
                         0
@@ -339,10 +367,11 @@
                     </div>
                  </div>
                  <div onclick="model5onClick()"  class="object line">
-                    <div class="opis">
+                    <div class="opis"> <!--СТОЙКА-->
                         &nbsp Стойка <br>
                      <span style="text-align: left;">&nbsp оградительная</span> 
                     </div>
+                    <!--Сменить фото стойки-->
                     <img src="newimg/stoika.png" width="100%" alt="" style="background:#fff;" id="stay" onclick="changers();document.getElementById('stay').style.border = '1px solid black'">
                     <div class="shetchik" id="stays">
                         0
@@ -357,10 +386,11 @@
                     </div>
                  </div>
                  <div onclick="model7onClick()"  class="object line">
-                    <div class="opis">
+                    <div class="opis"> <!--УТКА-->
                         &nbsp  Швартовочная утка <br>
                      <span style="text-align: left;">&nbsp с соеденителем</span> 
                     </div>
+                    <!--Сменить фото утки-->
                     <img src="newimg/shvart.png" width="100%" alt="" style="background:#fff;" id="utka" onclick="changers();document.getElementById('utka').style.border = '1px solid black'">
                     <div class="shetchik" id="duck">
                         0
@@ -376,10 +406,11 @@
                     </div>
                  </div>
                  <div onclick="model6onClick()"  class="object line" style="margin-right: 1.5%;">
-                    <div class="opis">
+                    <div class="opis"> <!--ЛАВОЧКА-->
                         &nbsp  Лавочка для понтона <br>
                      <span style="text-align: left;">&nbsp с соеденителями</span> 
                     </div>
+                    <!--Сменить фото лавочки-->
                     <img src="newimg/plav.png" width="100%" alt="" style="background:#fff;" id="sits" onclick="changers();document.getElementById('sits').style.border = '1px solid black'">
                     <div class="shetchik" id='bench' >
                         0
@@ -389,10 +420,12 @@
                  </div>
             
         </div>
+        <!--ПОДВАЛЬНОЕ МЕНЮ-->
         <div class="menu">
             <div class="line" style="margin-left: 2.5%; font-family: 'TacticSansExd-Bld_0';">
                 КОМПАНИЯ ПЛАСТО 
             </div>
+            <!--НАЗВАНИЯ ГОРОДОВ-->
             <ul class="adress line">
                 <li><a href="#">ВЛАДИМИР</a></li>
                 <li><a href="#">МОСКВА</a></li>
@@ -401,6 +434,7 @@
                 <li><a href="#">САМАРА</a></li>
                 <li><a href="#">ЕКАТЕРИНБУРГ</a></li>
             </ul>
+            <!--РЕКВИЗИТЫ-->
             <div class="line" style="margin-left: 5%; font-family: 'TacticSansExd-Bld_0';" >
                 9(9422)222277  &nbsp 1@plasto.ru 
             </div>
