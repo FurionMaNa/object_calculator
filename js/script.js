@@ -2201,7 +2201,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 	y/=(45+scale);
 	
 	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
-	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((x>98)||(maps[y][x+2].code!=1))&&((x>98)||(maps[y][x+2].code!=-1))&&((x>98)||(maps[y][x+2].code!=-10))&&((x>98)||(maps[y][x+2].code!=10))&&((x>98)||(maps[y][x+2].code!=2))&&((x>98)||(maps[y][x+2].code!=-2))&&((x>98)||(maps[y][x+2].code!=-20))&&((x>98)||(maps[y][x+2].code!=20))&&((x>98)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
@@ -2254,7 +2254,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 		 				ctx.save();//858
 						ctx.translate(xx,yy);
@@ -2317,7 +2317,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 		 				ctx.save();//858
 						ctx.translate(xx,yy);
@@ -2360,7 +2360,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:case 1222:
 					if(isAddons(maps[y+1][x],2)){
@@ -2375,7 +2375,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:case 1222:
 					if(isAddons(maps[y][x+1],3)){
@@ -2395,7 +2395,7 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 function ArrangeRack(x,y,direction,mX,mY){
 	
 	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
-	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((x>98)||(maps[y][x+2].code!=1))&&((x>98)||(maps[y][x+2].code!=-1))&&((x>98)||(maps[y][x+2].code!=-10))&&((x>98)||(maps[y][x+2].code!=10))&&((x>98)||(maps[y][x+2].code!=2))&&((x>98)||(maps[y][x+2].code!=-2))&&((x>98)||(maps[y][x+2].code!=-20))&&((x>98)||(maps[y][x+2].code!=20))&&((x>98)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
@@ -2448,7 +2448,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 						maps[y+1][x].addons[2].code=858;
 						maps[y+1][x].addon=true;
@@ -2511,7 +2511,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==10)||(maps[y-4][x].code==-10)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 						maps[y+1][x].addons[2].code=858;
 						maps[y+1][x].addon=true;
@@ -4718,8 +4718,8 @@ function draw(f=false){
 			}
 		}
 	}
-	for(var i=0;i<100;i++){
-		for(var j=0;j<100;j++){
+	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			for(var k=0;k<4;k++){
 				if((i>=0)&&(j>=0)&&(i<100)&&(j<100)){
 					//if(maps[i][j].code!=0){
