@@ -584,7 +584,7 @@ function isArrange(x,y,model,direction){
 	}
 	for(var i=y;i<countY+y;i++){
 		for(var j=x;j<countX+x;j++){
-			if((maps[i][j].code!=0)||(maps[i][j].addon)){ 
+			if((i<=0)||(i>=100)||(j<=0)||(j>=100)||(maps[i][j].code!=0)||(maps[i][j].addon)){ 
 				return false;
 			}
 		}
@@ -1069,6 +1069,7 @@ function canvasClick(evt){
 				switch (direction){
 					case 0:
 						x--;y-=2;
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
 								maps[i][j].code=11;
@@ -1079,9 +1080,11 @@ function canvasClick(evt){
 						maps[y][x].color=color;
 						maps[y][x].code=1;
 						id++;
+						}
 						break;
 					case 1:
 						x-=2;
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
 								maps[i][j].code=11;
@@ -1092,9 +1095,11 @@ function canvasClick(evt){
 						maps[y][x].color=color;
 						maps[y][x].code=-10;
 						id++;
+						}
 						break;
 					case 2:
 						x--;y-=2;
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
 								maps[i][j].code=11;
@@ -1105,9 +1110,12 @@ function canvasClick(evt){
 						maps[y][x].color=color;
 						maps[y][x].code=-1;
 						id++;
+						}
 						break;
 					case 3:
 						x-=2;
+
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
 								maps[i][j].code=11;
@@ -1119,6 +1127,7 @@ function canvasClick(evt){
 						maps[y][x].color=color;
 						maps[y][x].code=10;
 						id++;
+						}
 						break;
 				}
 				break;
@@ -1127,6 +1136,8 @@ function canvasClick(evt){
 				switch (direction){
 					case 0:
 						x--;y-=2;
+
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
 								maps[i][j].code=22;
@@ -1139,9 +1150,12 @@ function canvasClick(evt){
 						maps[y][x].code=2;
 						maps[y][x+1].code=1222;
 						id++;
+						}
 						break;
 					case 1:
 						x-=2;y--;
+
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
 								maps[i][j].code=22;
@@ -1155,9 +1169,12 @@ function canvasClick(evt){
 						maps[y][x].code=-20;
 
 						id++;
+						}
 						break;
 					case 2:
 						x--;y-=2;
+
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+4;i++){
 							for(var j=x;j<x+2;j++){
 								maps[i][j].code=22;
@@ -1172,9 +1189,12 @@ function canvasClick(evt){
 						maps[i][j].color=color;
 
 						id++;
+						}
 						break;
 					case 3:
 						x-=2;
+
+						if((x>0)&&(x<100)&&(y>0)&&(y<100)){
 						for (var i=y;i<y+2;i++){
 							for(var j=x;j<x+4;j++){
 								maps[i][j].code=22;
@@ -1187,6 +1207,7 @@ function canvasClick(evt){
 						maps[y+1][x].code=1222;
 						maps[y][x].code=20;
 						id++;
+						}
 						break;
 				}
 				break;
@@ -1980,7 +2001,8 @@ function isAddons(m,num,pos=5){
 }
 
 function ArrangeDuck(x,y,direction,mX,mY){
-	if((maps[y][x].code==0)||(Math.abs(maps[y][x].code)>100)){return false;}
+	
+	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
 	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
@@ -2177,7 +2199,8 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 	var yy=y;
 	x/=(45+scale);
 	y/=(45+scale);
-	if((maps[y][x].code==0)||(Math.abs(maps[y][x].code)>100)){return 0;}
+	
+	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
 	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
@@ -2370,7 +2393,8 @@ function ArrangeRackGhost(x,y,direction,mX,mY){
 }
 
 function ArrangeRack(x,y,direction,mX,mY){
-	if((maps[y][x].code==0)||(Math.abs(maps[y][x].code)>100)){return false;}
+	
+	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
 	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
@@ -2563,7 +2587,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 }
 
 function ArrangeConnector(x,y,direction,mX,mY){
-	if((maps[y][x].code==0)||(Math.abs(maps[y][x].code)>100)){return false;}
+	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
 	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
@@ -2760,7 +2784,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 	var yy=y;
 	x/=(45+scale);
 	y/=(45+scale);
-	if((maps[y][x].code==0)||(Math.abs(maps[y][x].code)>100)){return 0;}
+	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return 0;}
 	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
@@ -3348,7 +3372,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 	if((maps[y][x].code==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
 		if((y>0)&&(maps[y-1][x].code==0)){
 			switch (maps[y][x].code){
-				case 2:	case 1222:
+				case 2:
 					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
 						maps[y-1][x].addons[0].code=557;
 						maps[y-1][x].addons[0].color=color;
@@ -3360,13 +3384,25 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 					break;
+				case 1222:
+					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+						maps[y-1][x-1].addons[0].code=557;
+						maps[y-1][x-1].addons[0].color=color;
+						maps[y-1][x-1].addons[0].id=maps[y][x].id;
+						maps[y-1][x].addons[0].id=maps[y][x].id;
+						maps[y-1][x].addons[0].code=-557;
+						maps[y-1][x-1].addon=true;
+						maps[y-1][x].addon=true;
+						return true;
+					}
+					break;
 			}
 		}
 	}
 	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
 		if((x>0)&&(maps[y][x-1].code==0)){
 			switch (maps[y][x].code){
-				case -20:case 1222:
+				case -20:
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						maps[y][x-1].addons[1].code=555;
 						maps[y][x-1].addons[1].color=color;
@@ -3378,13 +3414,25 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 					break;
+				case 1222:
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y-1][x-1].addons[1].code=555;
+						maps[y-1][x-1].addons[1].color=color;
+						maps[y-1][x-1].addons[1].id=maps[y][x].id;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y][x-1].addons[1].code=-555;
+						maps[y-1][x-1].addon=true;
+						maps[y][x-1].addon=true;
+						return true;
+					}
+					break;
 			}
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
-				case -2:case 1222:
+				case -2:
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=558;
 						maps[y+1][x].addons[2].color=color;
@@ -3396,13 +3444,25 @@ function ArrangeStairs(x,y,direction,mX,mY){
 		 				return true;
 		 			}
 					break;
+				case 1222:
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				maps[y+1][x-1].addons[2].code=558;
+						maps[y+1][x-1].addons[2].color=color;
+		 				maps[y+1][x-1].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x].addons[2].code=-558;
+						maps[y+1][x-1].addon=true;
+						maps[y+1][x].addon=true;
+		 				return true;
+		 			}
+					break;	
 			}
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
 		if((x<199)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
-				case 20:case 1222:
+				case 20:
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						maps[y][x+1].addons[3].code=556;
 						maps[y][x+1].addons[3].id=maps[y][x].id;
@@ -3414,6 +3474,18 @@ function ArrangeStairs(x,y,direction,mX,mY){
 						return true;
 					}
 					break;
+				case 1222:
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						maps[y-1][x+1].addons[3].code=556;
+						maps[y-1][x+1].addons[3].id=maps[y][x].id;
+						maps[y][x+1].addons[3].id=maps[y][x].id;
+						maps[y][x+1].addons[3].code=-556;
+						maps[y-1][x+1].addons[3].color=color;
+						maps[y-1][x+1].addon=true;
+						maps[y][x+1].addon=true;
+						return true;
+					}
+					break;	
 			}
 		}
 	}
@@ -3587,7 +3659,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 	if((maps[y][x].code==2)||((maps[y][x].code==1222)&&(maps[y][x-1].code==2))){
 		if((y>0)&&(maps[y-1][x].code==0)){
 			switch (maps[y][x].code){
-				case 2:	case 1222:
+				case 2:
 					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
 						maps[y-1][x].addons[0].code=657;
 						maps[y-1][x].addons[0].color=color;
@@ -3599,13 +3671,26 @@ function ArrangeBench(x,y,direction,mX,mY){
 						return true;
 					}
 					break;
+				case 1222:
+					if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
+						maps[y-1][x-1].addons[0].code=657;
+						maps[y-1][x-1].addons[0].color=color;
+						maps[y-1][x-1].addons[0].id=maps[y][x].id;
+						maps[y-1][x].addons[0].id=maps[y][x].id;
+						maps[y-1][x].addons[0].code=-657;
+						maps[y-1][x-1].addon=true;
+						maps[y-1][x].addon=true;
+						return true;
+					}
+					break;
+
 			}
 		}
 	}
 	if((maps[y][x].code==-20)||((maps[y][x].code==1222)&&(maps[y-1][x].code==-20))){
 		if((x>0)&&(maps[y][x-1].code==0)){
 			switch (maps[y][x].code){
-				case -20:case 1222:
+				case -20:
 					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
 						maps[y][x-1].addons[1].code=655;
 						maps[y][x-1].addons[1].color=color;
@@ -3617,13 +3702,25 @@ function ArrangeBench(x,y,direction,mX,mY){
 						return true;
 					}
 					break;
+				case 1222:
+					if((isAddons(maps[y][x-1],1))&&(isAddons(maps[y+1][x-1],1))){
+						maps[y-1][x-1].addons[1].code=655;
+						maps[y-1][x-1].addons[1].color=color;
+						maps[y-1][x-1].addons[1].id=maps[y][x].id;
+						maps[y][x-1].addons[1].id=maps[y][x].id;
+						maps[y][x-1].addons[1].code=-655;
+						maps[y-1][x-1].addon=true;
+						maps[y][x-1].addon=true;
+						return true;
+					}
+					break;
 			}
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
-				case -2:case 1222:
+				case -2:
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=658;
 						maps[y+1][x].addons[2].color=color;
@@ -3635,13 +3732,25 @@ function ArrangeBench(x,y,direction,mX,mY){
 		 				return true;
 		 			}
 					break;
+				case 1222:
+					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
+		 				maps[y+1][x-1].addons[2].code=658;
+						maps[y+1][x-1].addons[2].color=color;
+		 				maps[y+1][x-1].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x].addons[2].id=maps[y][x].id;
+		 				maps[y+1][x].addons[2].code=-658;
+						maps[y+1][x-1].addon=true;
+						maps[y+1][x].addon=true;
+		 				return true;
+		 			}
+				break;
 			}
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
 		if((x<199)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
-				case 20:case 1222:
+				case 20:
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
 						maps[y][x+1].addons[3].code=656;
 						maps[y][x+1].addons[3].id=maps[y][x].id;
@@ -3650,6 +3759,18 @@ function ArrangeBench(x,y,direction,mX,mY){
 						maps[y][x+1].addons[3].color=color;
 						maps[y][x+1].addon=true;
 						maps[y+1][x+1].addon=true;
+						return true;
+					}
+					break;
+				case 1222:
+					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
+						maps[y-1][x+1].addons[3].code=656;
+						maps[y-1][x+1].addons[3].id=maps[y][x].id;
+						maps[y][x+1].addons[3].id=maps[y][x].id;
+						maps[y][x+1].addons[3].code=-656;
+						maps[y-1][x+1].addons[3].color=color;
+						maps[y-1][x+1].addon=true;
+						maps[y][x+1].addon=true;
 						return true;
 					}
 					break;
@@ -3942,8 +4063,11 @@ function draw(f=false){
 			}
 		}
 	}
-	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+
+	for(var i=0;i<100;i++){
+		for(var j=0;j<100;j++){
+	//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		//for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 				if(maps[i][j].code!=0){
 					ctx.save();
@@ -4019,8 +4143,10 @@ function draw(f=false){
 			}
 		}
 	}
-	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+	for(var i=0;i<100;i++){
+		for(var j=0;j<100;j++){
+	//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+	//	for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++)
 			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 				if(maps[i][j].code!=0){
 					ctx.save();
@@ -4028,8 +4154,9 @@ function draw(f=false){
 				}
 				switch(maps[i][j].code){
 					case 1:case -1:
-						for (var ii=i;ii<i+4;ii++){
-							if(maps[ii][j-1].color==maps[ii][j].color){
+						for (var ii=i;ii<(i+4>100?100:i+4);ii++){
+							//console.log(ii+" "+j);
+							if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4048,7 +4175,7 @@ function draw(f=false){
  								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
 								sitconnect.col++;
 							}
-							if(maps[ii][j-4].color==maps[ii][j].color){
+							if((j-4>=0)&&(maps[ii][j-4].color==maps[ii][j].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4067,7 +4194,7 @@ function draw(f=false){
  								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
 								sitconnect.col++;
 							}
-							if(maps[ii][j+2].color==maps[ii][j].color){
+							if((j<98)&&(maps[ii][j+2].color==maps[ii][j].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4078,7 +4205,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((j<199)&&(((maps[ii][j+2].code==-20)||(maps[ii][j+2].code==1222))&&((maps[ii+2][j+1].code==-20)||(maps[ii+1][j+2].code==1222)||(maps[ii-1][j+2].code==1222)||(maps[ii-1][j+2].code==-20)))){
+							if((j<99)&&(((maps[ii][j+2].code==-20)||(maps[ii][j+2].code==1222))&&((maps[ii+2][j+1].code==-20)||(maps[ii+1][j+2].code==1222)||(maps[ii-1][j+2].code==1222)||(maps[ii-1][j+2].code==-20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+2),sizeY*(i+(ii-i)));
@@ -4089,7 +4216,7 @@ function draw(f=false){
 
 						}
 						for (var jj=j;jj<j+2;jj++){
-							if(maps[i-1][jj].color==maps[i][jj].color){
+							if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4108,7 +4235,7 @@ function draw(f=false){
  								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
 								sitconnect.col++;
 							}
-							if(maps[i-4][jj].color==maps[i][jj].color){
+							if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4127,7 +4254,7 @@ function draw(f=false){
  								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
 								sitconnect.col++;
 							}
-							if(maps[i+4][jj].color==maps[i][jj].color){
+							if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4138,7 +4265,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((i<199)&&(((maps[i+4][jj].code==2)||(maps[i+4][jj].code==1222))&&((maps[i+4][jj-1].code==2)||(maps[i+4][jj-1].code==1222)||(maps[i+4][jj+1].code==1222)||(maps[i+4][jj+1].code==2)))){
+							if((i<99)&&(((maps[i+4][jj].code==2)||(maps[i+4][jj].code==1222))&&((maps[i+4][jj-1].code==2)||(maps[i+4][jj-1].code==1222)||(maps[i+4][jj+1].code==1222)||(maps[i+4][jj+1].code==2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i+4));
@@ -4151,7 +4278,7 @@ function draw(f=false){
 					case 10:case -10: 
 						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+2;ii++){
-							if(maps[ii][j-1].color==maps[ii][j].color){
+							if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4181,7 +4308,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((j<199)&&(((maps[ii][j+4].code==-20)||(maps[ii][j+4].code==1222))&&((maps[ii+2][j+4].code==-20)||(maps[ii+1][j+4].code==1222)||(maps[ii-1][j+4].code==1222)||(maps[ii-1][j+4].code==-20)))){
+							if((j<96)&&(((maps[ii][j+4].code==-20)||(maps[ii][j+4].code==1222))&&((maps[ii+2][j+4].code==-20)||(maps[ii+1][j+4].code==1222)||(maps[ii-1][j+4].code==1222)||(maps[ii-1][j+4].code==-20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
@@ -4189,7 +4316,7 @@ function draw(f=false){
  								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
 								sitconnect.col++;
 							}
-							if(maps[ii][j-4].color==maps[ii][j].color){
+							if((j>3)&&(maps[ii][j-4].color==maps[ii][j].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4200,7 +4327,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((j<199)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
+							if((j<96)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -4210,7 +4337,7 @@ function draw(f=false){
 							}
 						}
 						for (var jj=j;jj<j+4;jj++){
-							if(maps[i-1][jj].color==maps[i][jj].color){
+							if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4230,7 +4357,7 @@ function draw(f=false){
 								sitconnect.col++;
 							}
 
-							if(maps[i+2][jj].color==maps[i][jj].color){
+							if((i<98)&&(maps[i+2][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4241,7 +4368,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((i<198)&&(((maps[i+2][jj].code==2)||((maps[i+2][jj].code==1222)&&(maps[i+2][jj-1].code==2)))&&((maps[i+2][jj-1].code==2)||(maps[i+2][jj-1].code==1222)||(maps[i+2][jj+1].code==1222)||(maps[i+2][jj+1].code==2)))){
+							if((i<98)&&(((maps[i+2][jj].code==2)||((maps[i+2][jj].code==1222)&&(maps[i+2][jj-1].code==2)))&&((maps[i+2][jj-1].code==2)||(maps[i+2][jj-1].code==1222)||(maps[i+2][jj+1].code==1222)||(maps[i+2][jj+1].code==2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+2));
@@ -4249,7 +4376,7 @@ function draw(f=false){
  								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
 								sitconnect.col++;
 							}
-							if(maps[i-4][jj].color==maps[i][jj].color){
+							if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4260,7 +4387,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((i<199)&&(i>3)&&(((maps[i-4][jj].code==-2)||((maps[i-4][jj].code==1222)&&(maps[i-4][jj-1].code==-2)))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
+							if((i>3)&&(((maps[i-4][jj].code==-2)||((maps[i-4][jj].code==1222)&&(maps[i-4][jj-1].code==-2)))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i));
@@ -4273,7 +4400,7 @@ function draw(f=false){
 					case -2:
 						imgMaps.src = 'img/connector.png';
 						for (var jj=j;jj<j+2;jj++){
-							if(maps[i+4][jj].color==maps[i][jj].color){
+							if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4297,7 +4424,7 @@ function draw(f=false){
 					case 20:
 						imgMaps.src = 'img/connector.png';
 						for (var ii=i;ii<i+2;ii++){
-							if(maps[ii][j+4].color==maps[ii][j].color){
+							if((j<96)&&(maps[ii][j+4].color==maps[ii][j].color)){
 								switch (maps[i][j].color){
 									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
 									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
@@ -4308,7 +4435,7 @@ function draw(f=false){
 							}else{
 								imgMaps.src='img/newimg/connector_blue.png';
 							}
-							if((j<195)&&((maps[ii][j+4].code==-20)||((maps[ii][j+4].code==1222)&&(maps[ii-1][j+4].code==-20)))){
+							if((j<96)&&((maps[ii][j+4].code==-20)||((maps[ii][j+4].code==1222)&&(maps[ii-1][j+4].code==-20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
@@ -4325,9 +4452,13 @@ function draw(f=false){
 			}
 		}
 	}
-	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+
+	for(var i=0;i<100;i++){
+		for(var j=0;j<100;j++){
+	//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		//for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
 			for(var k=0;k<4;k++){
+				
 				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 					//if(maps[i][j].code!=0){
 						ctx.save();
@@ -4583,6 +4714,7 @@ function draw(f=false){
 						ctx.restore();
 					//}
 				}
+			
 			}
 		}
 	}
