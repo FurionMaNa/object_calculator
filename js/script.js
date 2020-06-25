@@ -2003,7 +2003,7 @@ function isAddons(m,num,pos=5){
 function ArrangeDuck(x,y,direction,mX,mY){
 	
 	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
-	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
@@ -2056,7 +2056,7 @@ function ArrangeDuck(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 						maps[y+1][x].addons[2].code=958;
 						maps[y+1][x].addon=true;
@@ -2162,7 +2162,7 @@ function ArrangeDuck(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:case 1222:
 					if(isAddons(maps[y+1][x],2)){
@@ -2177,7 +2177,7 @@ function ArrangeDuck(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:case 1222:
 					if(isAddons(maps[y][x+1],3)){
@@ -2588,7 +2588,7 @@ function ArrangeRack(x,y,direction,mX,mY){
 
 function ArrangeConnector(x,y,direction,mX,mY){
 	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return false;}
-	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
@@ -2641,7 +2641,7 @@ function ArrangeConnector(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 						maps[y+1][x].addons[2].code=758;
 						maps[y+1][x].addon=true;
@@ -2747,7 +2747,7 @@ function ArrangeConnector(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:case 1222:
 					if(isAddons(maps[y+1][x],2)){
@@ -2762,7 +2762,7 @@ function ArrangeConnector(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:case 1222:
 					if(isAddons(maps[y][x+1],3)){
@@ -2785,7 +2785,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 	x/=(45+scale);
 	y/=(45+scale);
 	if((maps[y][x].code==0)||((Math.abs(maps[y][x].code)>100)&&(Math.abs(maps[y][x].code)<1000))){return 0;}
-	if(((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&/*((y<1)||(maps[y][x+2].code!=11))&&*/((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
 		console.log(mY-y*(45+scale)<(45+scale)/2);
 		if((y>0)&&((maps[y-1][x].code==0)||(maps[y+1][x].code==0))&&(mY-y*(45+scale)<(45+scale)/2)){
 			if(((maps[y][x-1].code==11)||(maps[y][x-1].code==1)||(maps[y][x-1].code==-1)||(maps[y][x-1].code==10)||(maps[y][x-1].code==-10)||(maps[y][x+1].code==11))&&(maps[y+1][x].code==11)){
@@ -2838,7 +2838,7 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))))&&((maps[y][x+1].code==11)||(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||((maps[y][x].code==11)&&((x<99)&&(maps[y][x+1].code==11)||(x>0)&&(maps[y][x-1].code==11))))&&((x<99)&&(maps[y][x+1].code==11)||(x>0)&&(maps[y][x-1].code==11))&&(maps[y+1][x].code==0)){
 		 			if(isAddons(maps[y+1][x],2)){
 		 				ctx.save();// 58
 						ctx.translate(xx,yy);
@@ -2943,8 +2943,8 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 			}
 		}
 	}
-	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+	if((y<3)||((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2)))){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:case 1222:
 					if(isAddons(maps[y+1][x],2)){
@@ -2958,8 +2958,8 @@ function ArrangeConnectorGhost(x,y,direction,mX,mY){
 			}
 		}
 	}
-	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+	if((x<3)||((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20)))){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:case 1222:
 					if(isAddons(maps[y][x+1],3)){
@@ -2980,7 +2980,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 	var yy=y;
 	x/=(45+scale);
 	y/=(45+scale);
-	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&((x<2)||(maps[y][x+2].code!=11))&&((x>98)||(maps[y][x+2].code!=1))&&((x>98)||(maps[y][x+2].code!=-1))&&((x>98)||(maps[y][x+2].code!=-10))&&((x>98)||(maps[y][x+2].code!=10))&&((x>98)||(maps[y][x+2].code!=2))&&((x>98)||(maps[y][x+2].code!=-2))&&((x>98)||(maps[y][x+2].code!=-20))&&((x>98)||(maps[y][x+2].code!=20))&&((x>98)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
@@ -3032,7 +3032,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 						ctx.save();//558
 						ctx.translate(xx,yy);
@@ -3095,7 +3095,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 						ctx.save();//558
 						ctx.translate(xx,yy);
@@ -3156,7 +3156,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:
 					if((isAddons(maps[y+1][x],1))&&(isAddons(maps[y+1][x+1],2))){
@@ -3180,7 +3180,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
@@ -3206,7 +3206,7 @@ function ArrangeStairsGhost(x,y,mX,mY){
 }
 
 function ArrangeStairs(x,y,direction,mX,mY){
-	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&((x<2)||(maps[y][x+2].code!=11))&&((x>98)||(maps[y][x+2].code!=1))&&((x>98)||(maps[y][x+2].code!=-1))&&((x>98)||(maps[y][x+2].code!=-10))&&((x>98)||(maps[y][x+2].code!=10))&&((x>98)||(maps[y][x+2].code!=2))&&((x>98)||(maps[y][x+2].code!=-2))&&((x>98)||(maps[y][x+2].code!=-20))&&((x>98)||(maps[y][x+2].code!=20))&&((x>98)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
@@ -3273,7 +3273,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=558;
 						maps[y+1][x].addons[2].color=color;
@@ -3354,7 +3354,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=558;
 						maps[y+1][x].addons[2].color=color;
@@ -3429,8 +3429,8 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			}
 		}
 	}
-	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+	if((y>3)&&(maps[y-3][x].code==-2)||((y>3)&&(maps[y-3][x].code==1222)&&(y>3)&&(maps[y-3][x-1].code==-2))){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
@@ -3459,8 +3459,8 @@ function ArrangeStairs(x,y,direction,mX,mY){
 			}
 		}
 	}
-	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+	if((x>2)&&(maps[y][x-3].code==20)||((x>2)&&(maps[y][x-3].code==1222)&&(x>2)&&(maps[y-1][x-3].code==20))){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
@@ -3493,7 +3493,7 @@ function ArrangeStairs(x,y,direction,mX,mY){
 }
 
 function ArrangeBench(x,y,direction,mX,mY){
-	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&((x>98)||(maps[y][x+2].code!=11))&&((x>98)||(maps[y][x+2].code!=1))&&((x>98)||(maps[y][x+2].code!=-1))&&((x>98)||(maps[y][x+2].code!=-10))&&((x>98)||(maps[y][x+2].code!=10))&&((x>98)||(maps[y][x+2].code!=2))&&((x>98)||(maps[y][x+2].code!=-2))&&((x>98)||(maps[y][x+2].code!=-20))&&((x>98)||(maps[y][x+2].code!=20))&&((x>98)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
@@ -3560,7 +3560,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=658;
 						maps[y+1][x].addons[2].color=color;
@@ -3641,7 +3641,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				maps[y+1][x].addons[2].code=658;
 						maps[y+1][x].addons[2].color=color;
@@ -3717,7 +3717,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 			}
 		}
 	}
-	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
+	if((y>3)&&(maps[y-3][x].code==-2)||((y>3)&&(maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
 		if((y<199)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:
@@ -3748,7 +3748,7 @@ function ArrangeBench(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
@@ -3785,7 +3785,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 	y/=(45+scale);
 	var xx=x*(45+scale);
 	var yy=y*(45+scale);
-	if(((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=11))&&((y<1)||(maps[y][x-2].code!=1))&&((y<1)||(maps[y][x-2].code!=-1))&&((y<1)||(maps[y][x-2].code!=-10))&&((y<1)||(maps[y][x-2].code!=10))&&((y<1)||(maps[y][x-2].code!=2))&&((y<1)||(maps[y][x-2].code!=-2))&&((y<1)||(maps[y][x-2].code!=-20))&&((y<1)||(maps[y][x-2].code!=20))&&((y<1)||(maps[y][x-2].code!=22))&&((y<1)||(maps[y][x+2].code!=11))&&((y>198)||(maps[y][x+2].code!=1))&&((y>198)||(maps[y][x+2].code!=-1))&&((y>198)||(maps[y][x+2].code!=-10))&&((y>198)||(maps[y][x+2].code!=10))&&((y>198)||(maps[y][x+2].code!=2))&&((y>198)||(maps[y][x+2].code!=-2))&&((y>198)||(maps[y][x+2].code!=-20))&&((y>198)||(maps[y][x+2].code!=20))&&((y>198)||(maps[y][x+2].code!=22))){
+	if(((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=11))&&((x<2)||(maps[y][x-2].code!=1))&&((x<2)||(maps[y][x-2].code!=-1))&&((x<2)||(maps[y][x-2].code!=-10))&&((x<2)||(maps[y][x-2].code!=10))&&((x<2)||(maps[y][x-2].code!=2))&&((x<2)||(maps[y][x-2].code!=-2))&&((x<2)||(maps[y][x-2].code!=-20))&&((x<2)||(maps[y][x-2].code!=20))&&((x<2)||(maps[y][x-2].code!=22))&&((x>98)||(maps[y][x+2].code!=11))&&((x>98)||(maps[y][x+2].code!=1))&&((x>98)||(maps[y][x+2].code!=-1))&&((x>98)||(maps[y][x+2].code!=-10))&&((x>98)||(maps[y][x+2].code!=10))&&((x>98)||(maps[y][x+2].code!=2))&&((x>98)||(maps[y][x+2].code!=-2))&&((x>98)||(maps[y][x+2].code!=-20))&&((x>98)||(maps[y][x+2].code!=20))&&((x>98)||(maps[y][x+2].code!=22))){
 		if((y>0)&&(maps[y-1][x].code==0)&&(mY-y*(45+scale)<(45+scale)/2)){
 			if((maps[y][x+1].code!=0)&&(maps[y][x].code!=0)&&(maps[y][x+1].code<100)&&(maps[y+1][x].code==11)&&(isAddons(maps[y-1][x+1],3,0))&&(isAddons(maps[y][x-1],1,0))&&(isAddons(maps[y][x+2],3,0))){
 				if((isAddons(maps[y-1][x],0))&&(isAddons(maps[y-1][x+1],0))){
@@ -3837,7 +3837,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				ctx.save();//658
 						ctx.translate(xx,yy);
@@ -3900,7 +3900,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 					}
 				}
 			}else{
-				if(((maps[y-4][x].code==1)||(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
+				if(((y>3)&&(maps[y-4][x].code==1)||(y>3)&&(maps[y-4][x].code==-1)||(maps[y][x+1].code==11))&&(maps[y][x+1].code==11)&&((maps[y][x].code>0)&&(maps[y][x].code<100))&&(isAddons(maps[y+1][x+1],2,2))&&(isAddons(maps[y+1][x],2,2))&&(isAddons(maps[y][x-1],1,2))&&(isAddons(maps[y][x+2],3,2))){
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
 		 				ctx.save();//658
 						ctx.translate(xx,yy);
@@ -3961,7 +3961,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y-3][x].code==-2)||((maps[y-3][x].code==1222)&&(maps[y-3][x-1].code==-2))){
-		if((y<199)&&(maps[y+1][x].code==0)){
+		if((y<99)&&(maps[y+1][x].code==0)){
 			switch (maps[y-3][x].code){
 				case -2:
 					if((isAddons(maps[y+1][x],2))&&(isAddons(maps[y+1][x+1],2))){
@@ -3985,7 +3985,7 @@ function ArrangeBenchGhost(x,y,direction,mX,mY){
 		}
 	}
 	if((maps[y][x-3].code==20)||((maps[y][x-3].code==1222)&&(maps[y-1][x-3].code==20))){
-		if((x<199)&&(maps[y][x+1].code==0)){
+		if((x<99)&&(maps[y][x+1].code==0)){
 			switch (maps[y][x-3].code){
 				case 20:
 					if((isAddons(maps[y][x+1],3))&&(isAddons(maps[y+1][x+1],3))){
@@ -4327,7 +4327,7 @@ function draw(f=false){
 							}else{
 								imgMaps .src='img/newimg/connector_blue.png';
 							}
-							if((j<96)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
+							if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
 								ctx.restore();
 								ctx.save();
 								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
@@ -4718,10 +4718,10 @@ function draw(f=false){
 			}
 		}
 	}
-	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+	for(var i=0;i<100;i++){
+		for(var j=0;j<100;j++){
 			for(var k=0;k<4;k++){
-				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+				if((i>=0)&&(j>=0)&&(i<100)&&(j<100)){
 					//if(maps[i][j].code!=0){
 						ctx.save();
 						ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
