@@ -168,9 +168,14 @@ html, body{
         background: #85c226;
     }
     .mashtab{
-        margin-left: 4.5%;
+        /*margin-left: 4.5%;*/
         margin-top: 1%;
         width:5%;
+    }
+    .d3{
+        margin-left: 1%;
+        margin-top: 1%;
+        width:2%;
     }
     .setka{
         width:7%; 

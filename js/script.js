@@ -10,6 +10,8 @@ var imgMouse = new Image();
 var imgMaps=new Image(); 
 var imgGhost=new Image(); 
 var imgMapsPontonB=new Image();
+var imgMapsPontonBRight=new Image();
+var imgMapsPontonBDown=new Image();
 var imgMapsPontonG=new Image();
 var imgMapsPontonGR=new Image();
 var imgMapsPontonW=new Image();
@@ -106,11 +108,14 @@ var buffEvt;
 var colorArr=new Array();
 var scrollCanvasH;
 
+var d3=false;
+
 function init(){ 
 	workArea = document.getElementById('workArea'); 
 	divCanvas=document.getElementById('divCanvas'); 
 	scrollCanvas=document.getElementById('scrollCanvas');
 	canvas = document.getElementById('main'); 
+	//
 	ctx = canvas.getContext('2d'); 
 	rotateArr[0]=0;
 	rotateArr[1]=0;
@@ -166,6 +171,8 @@ function init(){
         	});
         }
     } 
+    imgMapsPontonBRight.src = 'newimg/ponton_right_blue.png';
+    imgMapsPontonBDown.src = 'newimg/ponton_down_blue.png';
 	imgMapsBench.src= 'img/bench.png';
 	imgMapsPontonB.src = 'img/photo-objects-png/ponton/blue-button.png';
 	imgMapsPontonG.src='img/photo-objects-png/ponton/green-button.png';
@@ -202,6 +209,16 @@ function init(){
 	canvas.onclick=function(evt){canvasClick(evt)};
 } 
 
+function d3Active(){
+	if(d3){
+		canvas.style.transform = 'rotate(' + 0 + 'deg)';
+		d3=false;
+	}else{
+		canvas.style.transform = 'rotate(' + 302 + 'deg)';
+		d3=true;
+	}
+	draw();
+}
 
 function model1onClick(){  
 	direction=rotateArr[0];
@@ -4052,8 +4069,8 @@ function draw(f=false){
 			}
 		}
 	}else{
-		for(var i=iStart-10;i<iEnd+10;i++){
-			for(var j=jStart-10;j<jEnd+10;j++){
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
 				if(visibleWeb){
 					ctx.beginPath();
 					ctx.strokeStyle = "#FFFFFF";
@@ -4063,718 +4080,1431 @@ function draw(f=false){
 			}
 		}
 	}
-
-	for(var i=0;i<100;i++){
-		for(var j=0;j<100;j++){
-	//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		//for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
-			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
-				if(maps[i][j].code!=0){
-					ctx.save();
-					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-				}
-				switch(maps[i][j].code){
-					case 11:break;
-					case 1:case -1: 
-						ctx.rotate(180*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'blue': ctx.drawImage(imgMapsPontonB , 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
-						}
-						
-						break;
-					case 10:case -10: 
-						ctx.rotate(90*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
-							case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-						}
-						break;
-					case 2:   
-						ctx.rotate(0*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-						}
-						break;
-					case -2:  
-						ctx.rotate(180*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
-							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
-						}
-						break;
-					case 20:   
-						ctx.rotate(90*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-						}
-						break;
-					case -20: 
-						ctx.rotate(270*Math.PI/180);
-						switch (maps[i][j].color){
-							case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-							case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-						}
-						break;	
-				}
-				if(maps[i][j].code!=0){
-					ctx.restore();
-				}
-			}
-		}
-	}
-	for(var i=0;i<100;i++){
-		for(var j=0;j<100;j++){
-	//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-	//	for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++)
-			if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
-				if(maps[i][j].code!=0){
-					ctx.save();
-					ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-				}
-				switch(maps[i][j].code){
-					case 1:case -1:
-						for (var ii=i;ii<(i+4>100?100:i+4);ii++){
-							//console.log(ii+" "+j);
-							if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((j>0)&&(maps[ii][j-1].code==11)){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
-								sitconnect.col++;
-							}
-							if((j-4>=0)&&(maps[ii][j-4].color==maps[ii][j].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+1][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
-								sitconnect.col++;
-							}
-							if((j<98)&&(maps[ii][j+2].color==maps[ii][j].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((j<99)&&(((maps[ii][j+2].code==-20)||(maps[ii][j+2].code==1222))&&((maps[ii+2][j+1].code==-20)||(maps[ii+1][j+2].code==1222)||(maps[ii-1][j+2].code==1222)||(maps[ii-1][j+2].code==-20)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+2),sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
-								sitconnect.col++;
-							}
-
-						}
-						for (var jj=j;jj<j+2;jj++){
-							if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i>0)&&(maps[i-1][jj].code==11)){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-							if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i>3)&&(((maps[i-4][jj].code==-2)||(maps[i-4][jj].code==1222))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-							if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i<99)&&(((maps[i+4][jj].code==2)||(maps[i+4][jj].code==1222))&&((maps[i+4][jj-1].code==2)||(maps[i+4][jj-1].code==1222)||(maps[i+4][jj+1].code==1222)||(maps[i+4][jj+1].code==2)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i+4));
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-						}
-						break;
-					case 10:case -10: 
-						imgMaps.src = 'img/connector.png';
-						for (var ii=i;ii<i+2;ii++){
-							if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((j>0)&&(maps[ii][j-1].code==11)){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-							if(maps[ii][j+4].color==maps[ii][j].color){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((j<96)&&(((maps[ii][j+4].code==-20)||(maps[ii][j+4].code==1222))&&((maps[ii+2][j+4].code==-20)||(maps[ii+1][j+4].code==1222)||(maps[ii-1][j+4].code==1222)||(maps[ii-1][j+4].code==-20)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
-								sitconnect.col++;
-							}
-							if((j>3)&&(maps[ii][j-4].color==maps[ii][j].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
-								sitconnect.col++;
-							}
-						}
-						for (var jj=j;jj<j+4;jj++){
-							if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i>0)&&(maps[i-1][jj].code==11)){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
-								sitconnect.col++;
-							}
-
-							if((i<98)&&(maps[i+2][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i<98)&&(((maps[i+2][jj].code==2)||((maps[i+2][jj].code==1222)&&(maps[i+2][jj-1].code==2)))&&((maps[i+2][jj-1].code==2)||(maps[i+2][jj-1].code==1222)||(maps[i+2][jj+1].code==1222)||(maps[i+2][jj+1].code==2)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+2));
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-							if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i>3)&&(((maps[i-4][jj].code==-2)||((maps[i-4][jj].code==1222)&&(maps[i-4][jj-1].code==-2)))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i));
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-						}
-						break;						
-					case -2:
-						imgMaps.src = 'img/connector.png';
-						for (var jj=j;jj<j+2;jj++){
-							if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps .src='img/newimg/connector_blue.png';
-							}
-							if((i<195)&&((maps[i+4][jj].code==2)||((maps[i+4][jj].code==1222)&&(maps[i+4][jj-1].code==2)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+4));
-								ctx.rotate(180*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
-								sitconnect.col++;
-							}
-						}
-						break;						
-					case 20:
-						imgMaps.src = 'img/connector.png';
-						for (var ii=i;ii<i+2;ii++){
-							if((j<96)&&(maps[ii][j+4].color==maps[ii][j].color)){
-								switch (maps[i][j].color){
-									case 'green':imgMaps .src='img/newimg/connector_green.png';break;
-									case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
-									case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
-									case 'white':imgMaps .src='img/newimg/connector_white.png';break;
-									case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
-								}
-							}else{
-								imgMaps.src='img/newimg/connector_blue.png';
-							}
-							if((j<96)&&((maps[ii][j+4].code==-20)||((maps[ii][j+4].code==1222)&&(maps[ii-1][j+4].code==-20)))){
-								ctx.restore();
-								ctx.save();
-								ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
-								ctx.rotate(90*Math.PI/180);
- 								ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
-								sitconnect.col++;
-							}
-						}
-						break;
-				}
-				if(maps[i][j].code!=0){
-					ctx.restore();
-				}
-			}
-		}
-	}
-
-	for(var i=0;i<100;i++){
-		for(var j=0;j<100;j++){
-	//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		//for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
-			for(var k=0;k<4;k++){
-				
+	if(d3){
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
 				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 					//if(maps[i][j].code!=0){
-						ctx.save();
-						ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+					//	ctx.save();
+					//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
 					//}
-					switch(maps[i][j].addons[k].code){
-						case 555:
+					switch(maps[i][j].code){
+						case 11:break;
+						case 1:case -1: 
+							//ctx.rotate(180*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'blue': ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
+							}
+							
+							break;
+						case 10:case -10: 
 							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-								case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
+								case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 							}
 							break;
-						case 556:
-							ctx.rotate(270*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-							}
-							break;
-						case 558:
+						case 2:   
 							ctx.rotate(0*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
 							}
 							break;
-						case 557:
+						case -2:  
 							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-								case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
 							}
 							break;
-	
-						case 655:
-							ctx.rotate(0*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
+						case 20:   
+							ctx.rotate(90*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 							}
-							ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
 							break;
-						case 656:
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
-							}
-							ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
-							break;
-						case 658:
+						case -20: 
 							ctx.rotate(270*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 							}
-							ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-							break;
-						case 657:
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
-							}
-							ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
-							break;
-						case 755:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*i);
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-							}
-							break;
-						case 756:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j),sizeY*i);
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-							}
-							break;
-						case 758:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*i);
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-							}
-							break;
-						case 757:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*(i+1));
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-							}
-							break;
-	
-						case 855:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*i);
-							ctx.rotate(0*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
-								case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
-								case 'brown':ctx.drawImage(imgMapsRackGR,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
-								case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
-								case 'beige':ctx.drawImage(imgMapsRackBE,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
-							}
-							break;
-						case 856:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j),sizeY*i);
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-							}	
-							break;
-						case 858:							
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*i);
-							ctx.rotate(270*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-								case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-							}	
-							break;
-						case 857:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*(i+1));
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-								case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-							}	
-							break;
-	
-						case 955:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*i);
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-							}
-							break;
-						case 956:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j),sizeY*i);
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-							}
-							break;
-						case 958:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*i);
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-							}
-							break;
-						case 957:
-							ctx.restore();
-							ctx.save();
-							ctx.translate(sizeX*(j+1),sizeY*(i+1));
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-								case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-							}
-							break;
-	
+							break;	
 					}
-					//if(maps[i][j].addon){
-						ctx.restore();
+					//if(maps[i][j].code!=0){
+					//	ctx.restore();
 					//}
 				}
-			
 			}
 		}
-	}
-	for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
-		for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
-			for(var k=0;k<4;k++){
-				if((i>=0)&&(j>=0)&&(i<100)&&(j<100)){
-					//if(maps[i][j].code!=0){
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
+		//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		//	for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++)
+				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+					if(maps[i][j].code!=0){
 						ctx.save();
 						ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
-					//}
-					switch(maps[i][j].addons[k].code){
-						case 655:
-							ctx.rotate(0*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
-							}
-							ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
-							break;
-						case 656:
-							ctx.rotate(180*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
-							}
-							ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
-							break;
-						case 658:
-							ctx.rotate(270*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
-							}
-							ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-							break;
-						case 657:
-							ctx.rotate(90*Math.PI/180);
-							switch (maps[i][j].addons[k].color){
-								case 'green':imgMapsBench.src='img/bench.png';break;
-								case 'blue':imgMapsBench.src='img/bench.png';break;
-								case 'brown':imgMapsBench.src='img/bench.png';break;
-								case 'white':imgMapsBench.src='img/bench.png';break;
-								case 'beige':imgMapsBench.src='img/bench.png';break;
-							}
-							ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
-							break;		
 					}
-					//if(maps[i][j].code!=0){
+					switch(maps[i][j].code){
+						case 1:case -1:
+							for (var ii=i;ii<(i+4>100?100:i+4);ii++){
+								//console.log(ii+" "+j);
+								if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>0)&&(maps[ii][j-1].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
+									sitconnect.col++;
+								}
+								if((j-4>=0)&&(maps[ii][j-4].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+1][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
+									sitconnect.col++;
+								}
+								if((j<98)&&(maps[ii][j+2].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j<99)&&(((maps[ii][j+2].code==-20)||(maps[ii][j+2].code==1222))&&((maps[ii+2][j+1].code==-20)||(maps[ii+1][j+2].code==1222)||(maps[ii-1][j+2].code==1222)||(maps[ii-1][j+2].code==-20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+2),sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
+									sitconnect.col++;
+								}
+	
+							}
+							for (var jj=j;jj<j+2;jj++){
+								if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>0)&&(maps[i-1][jj].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>3)&&(((maps[i-4][jj].code==-2)||(maps[i-4][jj].code==1222))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i<99)&&(((maps[i+4][jj].code==2)||(maps[i+4][jj].code==1222))&&((maps[i+4][jj-1].code==2)||(maps[i+4][jj-1].code==1222)||(maps[i+4][jj+1].code==1222)||(maps[i+4][jj+1].code==2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i+4));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+							}
+							break;
+						case 10:case -10: 
+							imgMaps.src = 'img/connector.png';
+							for (var ii=i;ii<i+2;ii++){
+								if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>0)&&(maps[ii][j-1].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if(maps[ii][j+4].color==maps[ii][j].color){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j<96)&&(((maps[ii][j+4].code==-20)||(maps[ii][j+4].code==1222))&&((maps[ii+2][j+4].code==-20)||(maps[ii+1][j+4].code==1222)||(maps[ii-1][j+4].code==1222)||(maps[ii-1][j+4].code==-20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+								if((j>3)&&(maps[ii][j-4].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+							}
+							for (var jj=j;jj<j+4;jj++){
+								if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>0)&&(maps[i-1][jj].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+	
+								if((i<98)&&(maps[i+2][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i<98)&&(((maps[i+2][jj].code==2)||((maps[i+2][jj].code==1222)&&(maps[i+2][jj-1].code==2)))&&((maps[i+2][jj-1].code==2)||(maps[i+2][jj-1].code==1222)||(maps[i+2][jj+1].code==1222)||(maps[i+2][jj+1].code==2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+2));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>3)&&(((maps[i-4][jj].code==-2)||((maps[i-4][jj].code==1222)&&(maps[i-4][jj-1].code==-2)))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+							}
+							break;						
+						case -2:
+							imgMaps.src = 'img/connector.png';
+							for (var jj=j;jj<j+2;jj++){
+								if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i<195)&&((maps[i+4][jj].code==2)||((maps[i+4][jj].code==1222)&&(maps[i+4][jj-1].code==2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+4));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+							}
+							break;						
+						case 20:
+							imgMaps.src = 'img/connector.png';
+							for (var ii=i;ii<i+2;ii++){
+								if((j<96)&&(maps[ii][j+4].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps.src='img/newimg/connector_blue.png';
+								}
+								if((j<96)&&((maps[ii][j+4].code==-20)||((maps[ii][j+4].code==1222)&&(maps[ii-1][j+4].code==-20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+							}
+							break;
+					}
+					if(maps[i][j].code!=0){
 						ctx.restore();
-					//}
+					}
+				}
+			}
+		}
+	
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
+		//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+			//for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+				for(var k=0;k<4;k++){
+					
+					if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+						//if(maps[i][j].code!=0){
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+						//}
+						switch(maps[i][j].addons[k].code){
+							case 555:
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+							case 556:
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+							case 558:
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+							case 557:
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+		
+							case 655:
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+								break;
+							case 656:
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 658:
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 657:
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+								break;
+							case 755:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 756:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 758:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 757:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*(i+1));
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+		
+							case 855:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+									case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+									case 'brown':ctx.drawImage(imgMapsRackGR,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+									case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+									case 'beige':ctx.drawImage(imgMapsRackBE,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+								}
+								break;
+							case 856:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+								}	
+								break;
+							case 858:							
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+								}	
+								break;
+							case 857:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*(i+1));
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+								}	
+								break;
+		
+							case 955:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 956:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 958:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 957:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*(i+1));
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+		
+						}
+						//if(maps[i][j].addon){
+							ctx.restore();
+						//}
+					}
+				
+				}
+			}
+		}
+		for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+			for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+				for(var k=0;k<4;k++){
+					if((i>=0)&&(j>=0)&&(i<100)&&(j<100)){
+						//if(maps[i][j].code!=0){
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+						//}
+						switch(maps[i][j].addons[k].code){
+							case 655:
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+								break;
+							case 656:
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 658:
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 657:
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+								break;		
+						}
+						//if(maps[i][j].code!=0){
+							ctx.restore();
+						//}
+					}
+				}
+			}
+		}
+	}else{
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
+				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+					if(maps[i][j].code!=0){
+						ctx.save();
+						ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+					}
+					switch(maps[i][j].code){
+						case 11:break;
+						case 1:case -1: 
+							ctx.rotate(180*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'blue': ctx.drawImage(imgMapsPontonB , 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
+							}
+							
+							break;
+						case 10:case -10: 
+							ctx.rotate(90*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
+								case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							}
+							break;
+						case 2:   
+							ctx.rotate(0*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+							}
+							break;
+						case -2:  
+							ctx.rotate(180*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
+							}
+							break;
+						case 20:   
+							ctx.rotate(90*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							}
+							break;
+						case -20: 
+							ctx.rotate(270*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+							}
+							break;	
+					}
+					if(maps[i][j].code!=0){
+						ctx.restore();
+					}
+				}
+			}
+		}
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
+		//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+		//	for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++)
+				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+					if(maps[i][j].code!=0){
+						ctx.save();
+						ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+					}
+					switch(maps[i][j].code){
+						case 1:case -1:
+							for (var ii=i;ii<(i+4>100?100:i+4);ii++){
+								//console.log(ii+" "+j);
+								if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>0)&&(maps[ii][j-1].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
+									sitconnect.col++;
+								}
+								if((j-4>=0)&&(maps[ii][j-4].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+1][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
+									sitconnect.col++;
+								}
+								if((j<98)&&(maps[ii][j+2].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j<99)&&(((maps[ii][j+2].code==-20)||(maps[ii][j+2].code==1222))&&((maps[ii+2][j+1].code==-20)||(maps[ii+1][j+2].code==1222)||(maps[ii-1][j+2].code==1222)||(maps[ii-1][j+2].code==-20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+2),sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);
+									sitconnect.col++;
+								}
+	
+							}
+							for (var jj=j;jj<j+2;jj++){
+								if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>0)&&(maps[i-1][jj].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>3)&&(((maps[i-4][jj].code==-2)||(maps[i-4][jj].code==1222))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i<99)&&(((maps[i+4][jj].code==2)||(maps[i+4][jj].code==1222))&&((maps[i+4][jj-1].code==2)||(maps[i+4][jj-1].code==1222)||(maps[i+4][jj+1].code==1222)||(maps[i+4][jj+1].code==2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i+4));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+							}
+							break;
+						case 10:case -10: 
+							imgMaps.src = 'img/connector.png';
+							for (var ii=i;ii<i+2;ii++){
+								if((j>0)&&(maps[ii][j-1].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>0)&&(maps[ii][j-1].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if(maps[ii][j+4].color==maps[ii][j].color){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j<96)&&(((maps[ii][j+4].code==-20)||(maps[ii][j+4].code==1222))&&((maps[ii+2][j+4].code==-20)||(maps[ii+1][j+4].code==1222)||(maps[ii-1][j+4].code==1222)||(maps[ii-1][j+4].code==-20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+								if((j>3)&&(maps[ii][j-4].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((j>3)&&(((maps[ii][j-4].code==20)||(maps[ii][j-4].code==1222))&&((maps[ii+2][j-4].code==20)||(maps[ii+1][j-4].code==1222)||(maps[ii-1][j-4].code==1222)||(maps[ii-1][j-4].code==20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*j,sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+							}
+							for (var jj=j;jj<j+4;jj++){
+								if((i>0)&&(maps[i-1][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>0)&&(maps[i-1][jj].code==11)){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*i);
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+	
+								if((i<98)&&(maps[i+2][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i<98)&&(((maps[i+2][jj].code==2)||((maps[i+2][jj].code==1222)&&(maps[i+2][jj-1].code==2)))&&((maps[i+2][jj-1].code==2)||(maps[i+2][jj-1].code==1222)||(maps[i+2][jj+1].code==1222)||(maps[i+2][jj+1].code==2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+2));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+								if((i>3)&&(maps[i-4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i>3)&&(((maps[i-4][jj].code==-2)||((maps[i-4][jj].code==1222)&&(maps[i-4][jj-1].code==-2)))&&((maps[i-4][jj-1].code==-2)||(maps[i-4][jj-1].code==1222)||(maps[i-4][jj+1].code==1222)||(maps[i-4][jj+1].code==-2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j)+1),sizeY*(i));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+							}
+							break;						
+						case -2:
+							imgMaps.src = 'img/connector.png';
+							for (var jj=j;jj<j+2;jj++){
+								if((i<96)&&(maps[i+4][jj].color==maps[i][jj].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps .src='img/newimg/connector_blue.png';
+								}
+								if((i<195)&&((maps[i+4][jj].code==2)||((maps[i+4][jj].code==1222)&&(maps[i+4][jj-1].code==2)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+(jj-j+1)),sizeY*(i+4));
+									ctx.rotate(180*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);		
+									sitconnect.col++;
+								}
+							}
+							break;						
+						case 20:
+							imgMaps.src = 'img/connector.png';
+							for (var ii=i;ii<i+2;ii++){
+								if((j<96)&&(maps[ii][j+4].color==maps[ii][j].color)){
+									switch (maps[i][j].color){
+										case 'green':imgMaps .src='img/newimg/connector_green.png';break;
+										case 'blue': imgMaps .src='img/newimg/connector_blue.png';break;
+										case 'brown':imgMaps.src='img/newimg/connector_grow.png';break;
+										case 'white':imgMaps .src='img/newimg/connector_white.png';break;
+										case 'beige':imgMaps.src='img/newimg/connector_gr.png';break;
+									}
+								}else{
+									imgMaps.src='img/newimg/connector_blue.png';
+								}
+								if((j<96)&&((maps[ii][j+4].code==-20)||((maps[ii][j+4].code==1222)&&(maps[ii-1][j+4].code==-20)))){
+									ctx.restore();
+									ctx.save();
+									ctx.translate(sizeX*(j+4),sizeY*(i+(ii-i)));
+									ctx.rotate(90*Math.PI/180);
+ 									ctx.drawImage(imgMaps, 0+sizeX/3, 0-sizeY/3+3, sizeX/3, sizeY/2);	
+									sitconnect.col++;
+								}
+							}
+							break;
+					}
+					if(maps[i][j].code!=0){
+						ctx.restore();
+					}
+				}
+			}
+		}
+	
+		for(var i=0;i<100;i++){
+			for(var j=0;j<100;j++){
+		//for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+			//for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+				for(var k=0;k<4;k++){
+					
+					if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+						//if(maps[i][j].code!=0){
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+						//}
+						switch(maps[i][j].addons[k].code){
+							case 555:
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+							case 556:
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+							case 558:
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+							case 557:
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+									case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								}
+								break;
+		
+							case 655:
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+								break;
+							case 656:
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 658:
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 657:
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+								break;
+							case 755:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 756:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 758:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 757:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*(i+1));
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+		
+							case 855:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+									case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+									case 'brown':ctx.drawImage(imgMapsRackGR,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+									case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+									case 'beige':ctx.drawImage(imgMapsRackBE,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+								}
+								break;
+							case 856:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+								}	
+								break;
+							case 858:							
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+									case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+								}	
+								break;
+							case 857:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*(i+1));
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+								}	
+								break;
+		
+							case 955:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 956:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j),sizeY*i);
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 958:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*i);
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+								}
+								break;
+							case 957:
+								ctx.restore();
+								ctx.save();
+								ctx.translate(sizeX*(j+1),sizeY*(i+1));
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+									case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+								}
+								break;
+		
+						}
+						//if(maps[i][j].addon){
+							ctx.restore();
+						//}
+					}
+				
+				}
+			}
+		}
+		for(var i=(iStart-10<0?0:iStart-10);i<(iEnd+10>100?100:iEnd+10);i++){
+			for(var j=(jStart-10<0?0:jStart-10);j<(jEnd+10>100?100:jEnd+10);j++){
+				for(var k=0;k<4;k++){
+					if((i>=0)&&(j>=0)&&(i<100)&&(j<100)){
+						//if(maps[i][j].code!=0){
+							ctx.save();
+							ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+						//}
+						switch(maps[i][j].addons[k].code){
+							case 655:
+								ctx.rotate(0*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+								break;
+							case 656:
+								ctx.rotate(180*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 658:
+								ctx.rotate(270*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+								break;
+							case 657:
+								ctx.rotate(90*Math.PI/180);
+								switch (maps[i][j].addons[k].color){
+									case 'green':imgMapsBench.src='img/bench.png';break;
+									case 'blue':imgMapsBench.src='img/bench.png';break;
+									case 'brown':imgMapsBench.src='img/bench.png';break;
+									case 'white':imgMapsBench.src='img/bench.png';break;
+									case 'beige':imgMapsBench.src='img/bench.png';break;
+								}
+								ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+								break;		
+						}
+						//if(maps[i][j].code!=0){
+							ctx.restore();
+						//}
+					}
 				}
 			}
 		}
