@@ -4094,7 +4094,7 @@ function draw(f=false){
 							//ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].color){
 								case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'blue': ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*2, (45+scale)*4);break;
+								case 'blue': ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
 								case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
 								case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
 								case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
