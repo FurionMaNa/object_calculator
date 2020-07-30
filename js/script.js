@@ -2004,11 +2004,11 @@ function canvasMoveMouse(evt){
 				switch (direction){
 					case 0:case 2:
 						switch (color){
-							case 'green':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
-							case 'blue' :imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
-							case 'brown':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
-							case 'white':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
-							case 'beige':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'green':imgGhost.src='newimg/ponton_down_blue_shadow.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'blue' :imgGhost.src='newimg/ponton_down_blue_shadow.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'brown':imgGhost.src='newimg/ponton_down_blue_shadow.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'white':imgGhost.src='newimg/ponton_down_blue_shadow.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'beige':imgGhost.src='newimg/ponton_down_blue_shadow.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
 							ctx.drawImage(imgGhost, x-(45+scale), y-(45+scale)*2, (45+scale)*3, (45+scale)*5);
@@ -2017,11 +2017,11 @@ function canvasMoveMouse(evt){
 						break;
 					case 1:case 3:
 						switch (color){
-							case 'green':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
-							case 'blue' :imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
-							case 'brown':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
-							case 'white':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
-							case 'beige':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'green':imgGhost.src='newimg/ponton_right_blue_shadow.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'blue' :imgGhost.src='newimg/ponton_right_blue_shadow.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'brown':imgGhost.src='newimg/ponton_right_blue_shadow.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'white':imgGhost.src='newimg/ponton_right_blue_shadow.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'beige':imgGhost.src='newimg/ponton_right_blue_shadow.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
 							ctx.drawImage(imgGhost, x-(45+scale)*2, y-(45+scale), (45+scale)*5, (45+scale)*3);
