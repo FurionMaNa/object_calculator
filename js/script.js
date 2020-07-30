@@ -1267,735 +1267,1459 @@ function canvasMoveMouse(evt){
 	var x,y;
 	x=Math.trunc((evt.offsetX)/(45+scale))*(45+scale);
 	y=Math.trunc((evt.offsetY)/(45+scale))*(45+scale);
-	switch (model){
-		case 1:
-			switch (color){
-				case 'green':imgGhost.src='img/newimg/ponton_green_shadow.png';           imgMouse.src = 'img/photo-objects-png/ponton/green-button.png';break;
-				case 'blue' :imgGhost.src='img/photo-objects-png/ponton/blue-opacity.png';imgMouse.src = 'img/pontoonbutton.png';break;
-				case 'brown':imgGhost.src='img/newimg/ponton_grow_shadow.png';            imgMouse.src = 'img/newimg/ponton_grow2.png';break;
-				case 'white':imgGhost.src='img/newimg/ponton_white_shadow.png';           imgMouse.src = 'img/newimg/ponton_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/ponton_gr_shadow.png';              imgMouse.src = 'img/newimg/ponton_gr.png';break;
-			}
-			switch (direction){
-				case 0:case 2:
-					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+	if(!d3){
+		switch (model){
+			case 1:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/ponton_green_shadow.png';           imgMouse.src = 'img/photo-objects-png/ponton/green-button.png';break;
+					case 'blue' :imgGhost.src='img/photo-objects-png/ponton/blue-opacity.png';imgMouse.src = 'img/pontoonbutton.png';break;
+					case 'brown':imgGhost.src='img/newimg/ponton_grow_shadow.png';            imgMouse.src = 'img/newimg/ponton_grow2.png';break;
+					case 'white':imgGhost.src='img/newimg/ponton_white_shadow.png';           imgMouse.src = 'img/newimg/ponton_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/ponton_gr_shadow.png';              imgMouse.src = 'img/newimg/ponton_gr.png';break;
+				}
+				switch (direction){
+					case 0:case 2:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
 						ctx.save();
-						ctx.translate(x,y);
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						ctx.restore();
-					}
-					ctx.save();
-					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
-					break;
-				case 1:case 3:
-					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						break;
+					case 1:case 3:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
 						ctx.save();
-						ctx.translate(x,y);
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
 						ctx.restore();
-					}
-					ctx.save();
-					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
-					break;
-			} 
-			break;
-		case 2:
-			
-			switch (color){
-				case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
-				case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
-				case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
-				case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
-			}
-			switch (direction){
-				case 0:
-					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						break;
+				} 
+				break;
+			case 2:
+				
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
+					case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
+					case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+				}
+				switch (direction){
+					case 0:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(0*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
 						ctx.save();
-						ctx.translate(x,y);
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 						ctx.rotate(0*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.drawImage(imgMouse, 0-(45+scale)*3, 0-(45+scale)*6, (45+scale)*2, (45+scale)*4);
 						ctx.restore();
-					}
-					ctx.save();
-					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*3, 0-(45+scale)*6, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
-					break;
-				case 2:
-					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						break;
+					case 2:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
 						ctx.save();
-						ctx.translate(x,y);
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
 						ctx.restore();
-					}
-					ctx.save();
-					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
-					break;
-				case 1:
-					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						break;
+					case 1:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(270*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
 						ctx.save();
-						ctx.translate(x,y);
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.drawImage(imgMouse, 0+(45+scale)*3,0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
 						ctx.restore();
-					}
-					ctx.save();
-					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0+(45+scale)*3,0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
-					break;
-				case 3:
-					if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+						break;
+					case 3:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
 						ctx.save();
-						ctx.translate(x,y);
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
 						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
 						ctx.restore();
-					}
-					ctx.save();
-					ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
-					ctx.restore();
-					break;
-			} 
-			break;
-		case 3:
-			switch (color){
-				case 'green':imgGhost.src='img/newimg/stairs_green_shadow.png';imgMouse.src = 'img/newimg/stairs_green.png';break;
-				case 'blue' :imgGhost.src='img/newimg/stairs_blue_shadow.png';imgMouse.src =  'img/newimg/stairs_blue.png' ;break;
-				case 'brown':imgGhost.src='img/newimg/stairs_grow_shadow.png';imgMouse.src =  'img/newimg/stairs_grow.png' ;break;
-				case 'white':imgGhost.src='img/newimg/stairs_white_shadow.png';imgMouse.src = 'img/newimg/stairs_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/stairs_gray_shadow.png';imgMouse.src =  'img/newimg/stairs_gr.png'   ;break;
-			}
-			ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
-			
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15)/3, (45+scale)+15, (45+scale)/1.5);
-					ctx.restore();
-					ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
-					break;
-			
-			break;
-		case 4:
-			switch (color){
-				case 'green':imgGhost.src='img/newimg/connector_green_shadow.png';imgMouse.src = 'img/newimg/connector_green.png';break;
-				case 'blue' :imgGhost.src='img/newimg/connector_blue_shadow.png'; imgMouse.src = 'img/newimg/connector_blue.png' ;break;
-				case 'brown':imgGhost.src='img/newimg/connector_grow_shadow.png'; imgMouse.src = 'img/newimg/connector_grow.png' ;break;
-				case 'white':imgGhost.src='img/newimg/connector_white_shadow.png';imgMouse.src = 'img/newimg/connector_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/connector_gr_shadow.png'; imgMouse.src = 'img/newimg/connector_gr.png' ;break;
-			}
-			ArrangeConnectorGhost(x,y,direction,evt.offsetX,evt.offsetY);
-			switch (direction){
-				case 2:case 0:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
-					ctx.restore();
-					break;
-				case 3:case 1:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
-					ctx.restore();
-					break;
-			} 
-			break;
-		case 5:
-			switch (color){
-				case 'green':imgGhost.src='img/newimg/stays_green_shadow.png';imgMouse.src = 'img/newimg/stays_green.png';break;
-				case 'blue' :imgGhost.src='img/newimg/stays_blue_shadow.png'; imgMouse.src = 'img/newimg/stays_blue.png'; break;
-				case 'brown':imgGhost.src='img/newimg/stays_grow_shadow.png'; imgMouse.src = 'img/newimg/stays_grow.png'; break;
-				case 'white':imgGhost.src='img/newimg/stays_white_shadow.png';imgMouse.src = 'img/newimg/stays_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/stays_gray_shadow.png'; imgMouse.src = 'img/newimg/stays_gray.png'; break;
-			}
-			ArrangeRackGhost(x,y,direction,evt.offsetX,evt.offsetY);
-			switch (direction){
-				case 0:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
-					ctx.restore();
-					break;
-				case 1:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/3,0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
-					ctx.restore();
-					break;
-				case 2:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
-					ctx.restore();
-					break;
-				case 3:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
-					ctx.restore();
-					break;
-			} 
-			break;
-		case 6:
-			switch (color){
-				case 'green':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
-				case 'blue' :imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
-				case 'brown':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
-				case 'white':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
-				case 'beige':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
-			}
-			ArrangeBenchGhost(x,y,direction,evt.offsetX,evt.offsetY);
-			switch (direction){
-				case 0:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
-					ctx.restore();
-					break;
-				case 2:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(180*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
-					ctx.restore();
-					break;
-				case 1:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale), (45+scale)*2);
-					ctx.restore();
-					break;
-				case 3:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(90*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
-					ctx.restore();
-					break;
-			} 
-			break;
-		case 7:
-			switch (color){
-				case 'green':imgGhost.src='img/newimg/connector_green_shadow.png';imgMouse.src = 'img/newimg/connector_green.png';break;
-				case 'blue' :imgGhost.src='img/newimg/connector_blue_shadow.png'; imgMouse.src = 'img/newimg/connector_blue.png' ;break;
-				case 'brown':imgGhost.src='img/newimg/connector_grow_shadow.png'; imgMouse.src = 'img/newimg/connector_grow.png' ;break;
-				case 'white':imgGhost.src='img/newimg/connector_white_shadow.png';imgMouse.src = 'img/newimg/connector_white.png';break;
-				case 'beige':imgGhost.src='img/newimg/connector_gr_shadow.png'; imgMouse.src = 'img/newimg/connector_gr.png' ;break;
-			}
-			ArrangeConnectorGhost(x,y,direction,evt.offsetX,evt.offsetY);
-			switch (direction){
-				case 2:case 0:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(0*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
-					ctx.restore();
-					break;
-				case 3:case 1:
-					ctx.save();
-					ctx.translate(evt.offsetX,evt.offsetY);
-					ctx.rotate(270*Math.PI/180);
-					ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
-					ctx.restore();
-					break;
-			} 
-			break;
-		default:
-			if(mapsBuff.length!=0){
-				var maxWidth=0;
-				var startJ=0;
-				for(var i=0;i<mapsBuff.length;i++){
-					if(mapsBuff[i].length>maxWidth){
-						maxWidth=mapsBuff[i].length
-						startJ=mapsBuff[i][0].j;
-					}
+						break;
+				} 
+				break;
+			case 3:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/stairs_green_shadow.png';imgMouse.src = 'img/newimg/stairs_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/stairs_blue_shadow.png';imgMouse.src =  'img/newimg/stairs_blue.png' ;break;
+					case 'brown':imgGhost.src='img/newimg/stairs_grow_shadow.png';imgMouse.src =  'img/newimg/stairs_grow.png' ;break;
+					case 'white':imgGhost.src='img/newimg/stairs_white_shadow.png';imgMouse.src = 'img/newimg/stairs_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/stairs_gray_shadow.png';imgMouse.src =  'img/newimg/stairs_gr.png'   ;break;
 				}
-				var xx=x/(45+scale);
-				var yy=y/(45+scale);
-				for(var i=0;i<mapsBuff.length;i++){
-					var j=0;
-					var xx=x/(45+scale);
-					var s=startJ;
-					while(j<mapsBuff[i].length){
-						if(mapsBuff[i][j].j==s){
-							if(maps[yy][xx].code!=0){
-								return true;
-							}
-							j++;
+				ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
+				
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15)/3, (45+scale)+15, (45+scale)/1.5);
+						ctx.restore();
+						ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
+						break;
+				
+				break;
+			case 4:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/connector_green_shadow.png';imgMouse.src = 'img/newimg/connector_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/connector_blue_shadow.png'; imgMouse.src = 'img/newimg/connector_blue.png' ;break;
+					case 'brown':imgGhost.src='img/newimg/connector_grow_shadow.png'; imgMouse.src = 'img/newimg/connector_grow.png' ;break;
+					case 'white':imgGhost.src='img/newimg/connector_white_shadow.png';imgMouse.src = 'img/newimg/connector_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/connector_gr_shadow.png'; imgMouse.src = 'img/newimg/connector_gr.png' ;break;
+				}
+				ArrangeConnectorGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 2:case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 3:case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 5:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/stays_green_shadow.png';imgMouse.src = 'img/newimg/stays_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/stays_blue_shadow.png'; imgMouse.src = 'img/newimg/stays_blue.png'; break;
+					case 'brown':imgGhost.src='img/newimg/stays_grow_shadow.png'; imgMouse.src = 'img/newimg/stays_grow.png'; break;
+					case 'white':imgGhost.src='img/newimg/stays_white_shadow.png';imgMouse.src = 'img/newimg/stays_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/stays_gray_shadow.png'; imgMouse.src = 'img/newimg/stays_gray.png'; break;
+				}
+				ArrangeRackGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3,0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 2:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 3:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 6:
+				switch (color){
+					case 'green':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'blue' :imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'brown':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'white':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'beige':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+				}
+				ArrangeBenchGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+					case 2:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+					case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+					case 3:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 7:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/connector_green_shadow.png';imgMouse.src = 'img/newimg/connector_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/connector_blue_shadow.png'; imgMouse.src = 'img/newimg/connector_blue.png' ;break;
+					case 'brown':imgGhost.src='img/newimg/connector_grow_shadow.png'; imgMouse.src = 'img/newimg/connector_grow.png' ;break;
+					case 'white':imgGhost.src='img/newimg/connector_white_shadow.png';imgMouse.src = 'img/newimg/connector_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/connector_gr_shadow.png'; imgMouse.src = 'img/newimg/connector_gr.png' ;break;
+				}
+				ArrangeConnectorGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 2:case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 3:case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			default:
+				if(mapsBuff.length!=0){
+					var maxWidth=0;
+					var startJ=0;
+					for(var i=0;i<mapsBuff.length;i++){
+						if(mapsBuff[i].length>maxWidth){
+							maxWidth=mapsBuff[i].length
+							startJ=mapsBuff[i][0].j;
 						}
-						xx++;
-						s++;
 					}
-					yy++;
-				}
-				var xx=x/(45+scale);
-				var yy=y/(45+scale);
-				var sizeX=(45+scale);
-				var sizeY=(45+scale);
-				for(var i=0;i<mapsBuff.length;i++){
-					var j=0;
 					var xx=x/(45+scale);
-					var s=startJ;
-					while(j<mapsBuff[i].length){
-						if(mapsBuff[i][j].j==s){
-							if(mapsBuff[i][j].code!=0){
-								ctx.save();
-								ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+					var yy=y/(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								if(maps[yy][xx].code!=0){
+									return true;
+								}
+								j++;
 							}
-							switch(mapsBuff[i][j].code){
-								case 11:break;
-								case 0:
-									if(visibleWeb){
-										ctx.beginPath();
-										ctx.strokeStyle = "#FFFFFF";
-										ctx.strokeRect(sizeX*xx, sizeY*yy, sizeX, sizeY); 
-										ctx.stroke(); 
-									}
-									break;
-								case 1:case -1: 
-									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'blue': ctx.drawImage(imgMapsPontonB , 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
-									}
-									
-									break;
-								case 10:case -10: 
-									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
-										case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-									}
-									break;
-								case 2:   
-									ctx.rotate(0*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-									}
-									break;
-								case -2:  
-									ctx.rotate(180*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
-										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
-									}
-									break;
-								case 20:   
-									ctx.rotate(90*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-									}
-									break;
-								case -20: 
-									ctx.rotate(270*Math.PI/180);
-									switch (mapsBuff[i][j].color){
-										case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-										case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-									}
-									break;	
-							}
-							if(mapsBuff[i][j].code!=0){
-								ctx.restore();
-							}
-							j++;
+							xx++;
+							s++;
 						}
-						xx++;
-						s++;
+						yy++;
 					}
-					yy++;
-				}
-				var xx=x/(45+scale);
-				var yy=y/(45+scale);
-				var sizeX=(45+scale);
-				var sizeY=(45+scale);
-				for(var i=0;i<mapsBuff.length;i++){
-					var j=0;
 					var xx=x/(45+scale);
-					var s=startJ;
-					while(j<mapsBuff[i].length){
-						if(mapsBuff[i][j].j==s){
-							for(var k=0;k<4;k++){
-								if(mapsBuff[i][j].map[k].code!=0){
+					var yy=y/(45+scale);
+					var sizeX=(45+scale);
+					var sizeY=(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								if(mapsBuff[i][j].code!=0){
 									ctx.save();
 									ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
 								}
-								switch(mapsBuff[i][j].map[k].code){
-									case 555:
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-											case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-											case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-											case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-											case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
-										}	
-										break;
-									case 556:
-										ctx.rotate(270*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+								switch(mapsBuff[i][j].code){
+									case 11:break;
+									case 0:
+										if(visibleWeb){
+											ctx.beginPath();
+											ctx.strokeStyle = "#FFFFFF";
+											ctx.strokeRect(sizeX*xx, sizeY*yy, sizeX, sizeY); 
+											ctx.stroke(); 
 										}
 										break;
-									case 558:
+									case 1:case -1: 
+										ctx.rotate(180*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsPontonBDown , 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'blue': ctx.drawImage(imgMapsPontonBDown , 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'brown':ctx.drawImage(imgMapsPontonBDown, 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'white':ctx.drawImage(imgMapsPontonBDown , 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'beige':ctx.drawImage(imgMapsPontonBDown, 0, 0, (45+scale)*3, (45+scale)*5);break;
+										}
+										
+										break;
+									case 10:case -10: 
+										ctx.rotate(90*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
+											case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										}
+										break;
+									case 2:   
 										ctx.rotate(0*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
 										}
 										break;
-									case 557:
+									case -2:  
 										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
-											case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
 										}
 										break;
-									case 655:
-										ctx.rotate(0*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
+									case 20:   
+										ctx.rotate(90*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 										}
-										ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
 										break;
-									case 656:
-										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
-										}
-										ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
-										break;
-									case 658:
+									case -20: 
 										ctx.rotate(270*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 										}
-										ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-										break;
-									case 657:
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
-										}
-										ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
-										break;
-				
-									case 755:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*yy);
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-										}
-										break;
-									case 756:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx),sizeY*yy);
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-										}
-										break;
-									case 758:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*yy);
-										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-										}
-										break;
-									case 757:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
-										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-										}
-										break;
-				
-									case 855:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*yy);
-										ctx.rotate(0*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
-											case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
-											case 'brown':ctx.drawImage(imgMapsRackGR,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
-											case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
-											case 'beige':ctx.drawImage(imgMapsRackBE,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
-										}
-										break;
-									case 856:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx),sizeY*yy);
-										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-										}	
-										break;
-									case 858:							
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*yy);
-										ctx.rotate(270*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-											case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
-										}	
-										break;
-									case 857:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-											case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
-										}	
-										break;
-				
-									case 955:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*yy);
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-										}
-										break;
-									case 956:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx),sizeY*yy);
-										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-										}
-										break;
-									case 958:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*yy);
-										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
-										}
-										break;
-									case 957:
-										ctx.restore();
-										ctx.save();
-										ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
-										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-											case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
-										}
-										break;
+										break;	
 								}
-								if(mapsBuff[i][j].map[k].code!=0){
+								if(mapsBuff[i][j].code!=0){
 									ctx.restore();
 								}
+								j++;
 							}
-							j++;
+							xx++;
+							s++;
 						}
-						xx++;
-						s++;
+						yy++;
 					}
-					yy++;
-				}
-				var xx=x/(45+scale);
-				var yy=y/(45+scale);
-				var sizeX=(45+scale);
-				var sizeY=(45+scale);
-				for(var i=0;i<mapsBuff.length;i++){
-					var j=0;
 					var xx=x/(45+scale);
-					var s=startJ;
-					while(j<mapsBuff[i].length){
-						if(mapsBuff[i][j].j==s){
-							for(var k=0;k<4;k++){
-								if(mapsBuff[i][j].map[k].code!=0){
+					var yy=y/(45+scale);
+					var sizeX=(45+scale);
+					var sizeY=(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								for(var k=0;k<4;k++){
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.save();
+										ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+									}
+									switch(mapsBuff[i][j].map[k].code){
+										case 555:
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+											}	
+											break;
+										case 556:
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+											}
+											break;
+										case 558:
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+											}
+											break;
+										case 557:
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+											}
+											break;
+										case 655:
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+											break;
+										case 656:
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 658:
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 657:
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+											break;
+					
+										case 755:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 756:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 758:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 757:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+					
+										case 855:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+												case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+												case 'brown':ctx.drawImage(imgMapsRackGR,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+												case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+												case 'beige':ctx.drawImage(imgMapsRackBE,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+											}
+											break;
+										case 856:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx),sizeY*yy);
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+											}	
+											break;
+										case 858:							
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+											}	
+											break;
+										case 857:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+											}	
+											break;
+					
+										case 955:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 956:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 958:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 957:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+									}
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.restore();
+									}
+								}
+								j++;
+							}
+							xx++;
+							s++;
+						}
+						yy++;
+					}
+					var xx=x/(45+scale);
+					var yy=y/(45+scale);
+					var sizeX=(45+scale);
+					var sizeY=(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								for(var k=0;k<4;k++){
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.save();
+										ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+									}
+									switch(mapsBuff[i][j].map[k].code){
+										case 655:
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+											break;
+										case 656:
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 658:
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 657:
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+											break;
+										
+									}
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.restore();
+									}
+								}
+								j++;
+							}
+							xx++;
+							s++;
+						}
+						yy++;
+					}
+				}						
+				break;
+		}
+	}else{
+		switch (model){
+			case 1:
+				switch (direction){
+					case 0:case 2:
+						switch (color){
+							case 'green':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'blue' :imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'brown':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'white':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+							case 'beige':imgGhost.src='newimg/ponton_down_blue.png';imgMouse.src = 'newimg/ponton_down_blue.png';break;
+						}
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.drawImage(imgGhost, x-(45+scale), y-(45+scale)*2, (45+scale)*3, (45+scale)*5);
+						}
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*2, evt.offsetY-(45+scale)*2, (45+scale)*3, (45+scale)*5);
+						break;
+					case 1:case 3:
+						switch (color){
+							case 'green':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'blue' :imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'brown':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'white':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+							case 'beige':imgGhost.src='newimg/ponton_right_blue.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
+						}
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.drawImage(imgGhost, x-(45+scale)*2, y-(45+scale), (45+scale)*5, (45+scale)*3);
+						}
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*3, evt.offsetY-(45+scale), (45+scale)*5, (45+scale)*3);
+						break;
+				} 
+				break;
+			case 2:
+				
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
+					case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
+					case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+				}
+				switch (direction){
+					case 0:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(0*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
+						ctx.save();
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)*3, 0-(45+scale)*6, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+						break;
+					case 2:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(180*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
+						ctx.save();
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+						break;
+					case 1:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(270*Math.PI/180);
+							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
+						ctx.save();
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0+(45+scale)*3,0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+						break;
+					case 3:
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.save();
+							ctx.translate(x,y);
+							ctx.rotate(90*Math.PI/180);
+							ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
+							ctx.restore();
+						}
+						ctx.save();
+						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 3:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/stairs_green_shadow.png';imgMouse.src = 'img/newimg/stairs_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/stairs_blue_shadow.png';imgMouse.src =  'img/newimg/stairs_blue.png' ;break;
+					case 'brown':imgGhost.src='img/newimg/stairs_grow_shadow.png';imgMouse.src =  'img/newimg/stairs_grow.png' ;break;
+					case 'white':imgGhost.src='img/newimg/stairs_white_shadow.png';imgMouse.src = 'img/newimg/stairs_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/stairs_gray_shadow.png';imgMouse.src =  'img/newimg/stairs_gr.png'   ;break;
+				}
+				ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
+				
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15)/3, (45+scale)+15, (45+scale)/1.5);
+						ctx.restore();
+						ArrangeStairsGhost(x,y,evt.offsetX,evt.offsetY);
+						break;
+				
+				break;
+			case 4:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/connector_green_shadow.png';imgMouse.src = 'img/newimg/connector_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/connector_blue_shadow.png'; imgMouse.src = 'img/newimg/connector_blue.png' ;break;
+					case 'brown':imgGhost.src='img/newimg/connector_grow_shadow.png'; imgMouse.src = 'img/newimg/connector_grow.png' ;break;
+					case 'white':imgGhost.src='img/newimg/connector_white_shadow.png';imgMouse.src = 'img/newimg/connector_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/connector_gr_shadow.png'; imgMouse.src = 'img/newimg/connector_gr.png' ;break;
+				}
+				ArrangeConnectorGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 2:case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 3:case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 5:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/stays_green_shadow.png';imgMouse.src = 'img/newimg/stays_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/stays_blue_shadow.png'; imgMouse.src = 'img/newimg/stays_blue.png'; break;
+					case 'brown':imgGhost.src='img/newimg/stays_grow_shadow.png'; imgMouse.src = 'img/newimg/stays_grow.png'; break;
+					case 'white':imgGhost.src='img/newimg/stays_white_shadow.png';imgMouse.src = 'img/newimg/stays_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/stays_gray_shadow.png'; imgMouse.src = 'img/newimg/stays_gray.png'; break;
+				}
+				ArrangeRackGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3,0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 2:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 3:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/3, 0-(45+scale)/3, (45+scale)/2, (45+scale)/2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 6:
+				switch (color){
+					case 'green':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'blue' :imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'brown':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'white':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+					case 'beige':imgGhost.src='img/bench-ghost.png';imgMouse.src = 'img/bench.png';break;
+				}
+				ArrangeBenchGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale+15)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+					case 2:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(180*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale+15)+(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+					case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale),0-(45+scale), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+					case 3:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(90*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/2, 0-(45+scale+15), (45+scale), (45+scale)*2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			case 7:
+				switch (color){
+					case 'green':imgGhost.src='img/newimg/connector_green_shadow.png';imgMouse.src = 'img/newimg/connector_green.png';break;
+					case 'blue' :imgGhost.src='img/newimg/connector_blue_shadow.png'; imgMouse.src = 'img/newimg/connector_blue.png' ;break;
+					case 'brown':imgGhost.src='img/newimg/connector_grow_shadow.png'; imgMouse.src = 'img/newimg/connector_grow.png' ;break;
+					case 'white':imgGhost.src='img/newimg/connector_white_shadow.png';imgMouse.src = 'img/newimg/connector_white.png';break;
+					case 'beige':imgGhost.src='img/newimg/connector_gr_shadow.png'; imgMouse.src = 'img/newimg/connector_gr.png' ;break;
+				}
+				ArrangeConnectorGhost(x,y,direction,evt.offsetX,evt.offsetY);
+				switch (direction){
+					case 2:case 0:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(0*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5, 0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+					case 3:case 1:
+						ctx.save();
+						ctx.translate(evt.offsetX,evt.offsetY);
+						ctx.rotate(270*Math.PI/180);
+						ctx.drawImage(imgMouse, 0-(45+scale)/5,0-(45+scale)/5, (45+scale)/3, (45+scale)/2);
+						ctx.restore();
+						break;
+				} 
+				break;
+			default:
+				if(mapsBuff.length!=0){
+					var maxWidth=0;
+					var startJ=0;
+					for(var i=0;i<mapsBuff.length;i++){
+						if(mapsBuff[i].length>maxWidth){
+							maxWidth=mapsBuff[i].length
+							startJ=mapsBuff[i][0].j;
+						}
+					}
+					var xx=x/(45+scale);
+					var yy=y/(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								if(maps[yy][xx].code!=0){
+									return true;
+								}
+								j++;
+							}
+							xx++;
+							s++;
+						}
+						yy++;
+					}
+					var xx=x/(45+scale);
+					var yy=y/(45+scale);
+					var sizeX=(45+scale);
+					var sizeY=(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								if(mapsBuff[i][j].code!=0){
 									ctx.save();
 									ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
 								}
-								switch(mapsBuff[i][j].map[k].code){
-									case 655:
-										ctx.rotate(0*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
+								switch(mapsBuff[i][j].code){
+									case 11:break;
+									case 0:
+										if(visibleWeb){
+											ctx.beginPath();
+											ctx.strokeStyle = "#FFFFFF";
+											ctx.strokeRect(sizeX*xx, sizeY*yy, sizeX, sizeY); 
+											ctx.stroke(); 
 										}
-										ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
 										break;
-									case 656:
+									case 1:case -1: 
 										ctx.rotate(180*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsPontonBDown , 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'blue': ctx.drawImage(imgMapsPontonBDown , 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'brown':ctx.drawImage(imgMapsPontonBDown, 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'white':ctx.drawImage(imgMapsPontonBDown , 0, 0, (45+scale)*3, (45+scale)*5);break;
+											case 'beige':ctx.drawImage(imgMapsPontonBDown, 0, 0, (45+scale)*3, (45+scale)*5);break;
 										}
-										ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+										
 										break;
-									case 658:
-										ctx.rotate(270*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
-										}
-										ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
-										break;
-									case 657:
+									case 10:case -10: 
 										ctx.rotate(90*Math.PI/180);
-										switch (mapsBuff[i][j].map[k].color){
-											case 'green':imgMapsBench.src='img/bench.png';break;
-											case 'blue':imgMapsBench.src='img/bench.png';break;
-											case 'brown':imgMapsBench.src='img/bench.png';break;
-											case 'white':imgMapsBench.src='img/bench.png';break;
-											case 'beige':imgMapsBench.src='img/bench.png';break;
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
+											case 'blue': ctx.drawImage(imgMapsPontonB , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 										}
-										ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
 										break;
-									
+									case 2:   
+										ctx.rotate(0*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
+										}
+										break;
+									case -2:  
+										ctx.rotate(180*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
+										}
+										break;
+									case 20:   
+										ctx.rotate(90*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										}
+										break;
+									case -20: 
+										ctx.rotate(270*Math.PI/180);
+										switch (mapsBuff[i][j].color){
+											case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+											case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+										}
+										break;	
 								}
-								if(mapsBuff[i][j].map[k].code!=0){
+								if(mapsBuff[i][j].code!=0){
 									ctx.restore();
 								}
+								j++;
 							}
-							j++;
+							xx++;
+							s++;
 						}
-						xx++;
-						s++;
+						yy++;
 					}
-					yy++;
-				}
-			}						
-			break;
+					var xx=x/(45+scale);
+					var yy=y/(45+scale);
+					var sizeX=(45+scale);
+					var sizeY=(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								for(var k=0;k<4;k++){
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.save();
+										ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+									}
+									switch(mapsBuff[i][j].map[k].code){
+										case 555:
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,  0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW, 0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE,0-(45+scale)*4+(45+scale)/3.5, 0+(45+scale)/1.5-2, (45+scale)+15, (45+scale)/1.5);break;
+											}	
+											break;
+										case 556:
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)*2+(45+scale)/4+2, 0-(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+											}
+											break;
+										case 558:
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,   0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW,  0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE, 0-(45+scale)*2+(45+scale)/3-2, 0-(45+scale)*4.5+4, (45+scale)+15, (45+scale)/1.5);break;
+											}
+											break;
+										case 557:
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsStairsG,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'blue':ctx.drawImage(imgMapsStairsB,   0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'brown':ctx.drawImage(imgMapsStairsGR, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'white':ctx.drawImage(imgMapsStairsW,  0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+												case 'beige':ctx.drawImage(imgMapsStairsBE, 0+(45+scale)/3-2, 0+(45+scale)*2.5+4, (45+scale)+15, (45+scale)/1.5);break;
+											}
+											break;
+										case 655:
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+											break;
+										case 656:
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 658:
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 657:
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+											break;
+					
+										case 755:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 756:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 758:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 757:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+					
+										case 855:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+												case 'blue': ctx.drawImage(imgMapsRackB, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+												case 'brown':ctx.drawImage(imgMapsRackGR,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+												case 'white':ctx.drawImage(imgMapsRackW, 0-sizeX/3+1, 0+sizeX/4, sizeX/2, sizeY/2);break;
+												case 'beige':ctx.drawImage(imgMapsRackBE,0-sizeX/3+1, 0+sizeX/4,sizeX/2, sizeY/2);break;
+											}
+											break;
+										case 856:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx),sizeY*yy);
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+											}	
+											break;
+										case 858:							
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+												case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeY/4-sizeY, sizeX/2, sizeY/2);break;
+											}	
+											break;
+										case 857:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsRackG,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'blue': ctx.drawImage(imgMapsRackB,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsRackGR, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsRackW,  0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsRackBE, 0-sizeY/3+2, 0+sizeX/4, sizeX/2, sizeY/2);	break;
+											}	
+											break;
+					
+										case 955:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 956:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx),sizeY*yy);
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE,0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 958:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*yy);
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3 ,0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+1, sizeX/3, sizeY/2);	break;
+											}
+											break;
+										case 957:
+											ctx.restore();
+											ctx.save();
+											ctx.translate(sizeX*(xx+1),sizeY*(yy+1));
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':ctx.drawImage(imgMapsConnectorG,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'blue':ctx.drawImage(imgMapsConnectorB,   0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'brown':ctx.drawImage(imgMapsConnectorGR, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'white':ctx.drawImage(imgMapsConnectorW,  0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+												case 'beige':ctx.drawImage(imgMapsConnectorBE, 0+sizeX/3, 0-sizeY/3+4, sizeX/3, sizeY/2);	break;
+											}
+											break;
+									}
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.restore();
+									}
+								}
+								j++;
+							}
+							xx++;
+							s++;
+						}
+						yy++;
+					}
+					var xx=x/(45+scale);
+					var yy=y/(45+scale);
+					var sizeX=(45+scale);
+					var sizeY=(45+scale);
+					for(var i=0;i<mapsBuff.length;i++){
+						var j=0;
+						var xx=x/(45+scale);
+						var s=startJ;
+						while(j<mapsBuff[i].length){
+							if(mapsBuff[i][j].j==s){
+								for(var k=0;k<4;k++){
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.save();
+										ctx.translate(sizeX*xx+((45+scale)*4/2),sizeY*yy+((45+scale)*8/2));
+									}
+									switch(mapsBuff[i][j].map[k].code){
+										case 655:
+											ctx.rotate(0*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale), 0-(45+scale)*4, (45+scale), (45+scale)*2);
+											break;
+										case 656:
+											ctx.rotate(180*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*2, 0+(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 658:
+											ctx.rotate(270*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0+(45+scale)*4, 0-(45+scale)*2, (45+scale), (45+scale)*2);
+											break;
+										case 657:
+											ctx.rotate(90*Math.PI/180);
+											switch (mapsBuff[i][j].map[k].color){
+												case 'green':imgMapsBench.src='img/bench.png';break;
+												case 'blue':imgMapsBench.src='img/bench.png';break;
+												case 'brown':imgMapsBench.src='img/bench.png';break;
+												case 'white':imgMapsBench.src='img/bench.png';break;
+												case 'beige':imgMapsBench.src='img/bench.png';break;
+											}
+											ctx.drawImage(imgMapsBench, 0-(45+scale)*3, 0, (45+scale), (45+scale)*2);
+											break;
+										
+									}
+									if(mapsBuff[i][j].map[k].code!=0){
+										ctx.restore();
+									}
+								}
+								j++;
+							}
+							xx++;
+							s++;
+						}
+						yy++;
+					}
+				}						
+				break;
+		}
 	}
 }
 
@@ -4082,7 +4806,7 @@ function draw(f=false){
 	}
 	if(d3){
 		for(var i=0;i<100;i++){
-			for(var j=0;j<100;j++){
+			for(var j=99;j>=0;j--){
 				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
 					//if(maps[i][j].code!=0){
 					//	ctx.save();
@@ -4093,21 +4817,21 @@ function draw(f=false){
 						case 1:case -1: 
 							//ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].color){
-								case 'green':ctx.drawImage(imgMapsPontonG , 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'green':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
 								case 'blue': ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
-								case 'brown':ctx.drawImage(imgMapsPontonGR, 0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'white':ctx.drawImage(imgMapsPontonW , 0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'beige':ctx.drawImage(imgMapsPontonBE, 0, 0, (45+scale)*2, (45+scale)*4);break;
+								case 'brown':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'white':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
 							}
 							
 							break;
 						case 10:case -10: 
 							switch (maps[i][j].color){
-								case 'green':ctx.drawImage(imgMapsPontonG , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);;break;
-								case 'blue': ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*4, (45+scale)*2);break;
-								case 'brown':ctx.drawImage(imgMapsPontonGR, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'white':ctx.drawImage(imgMapsPontonW , 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'beige':ctx.drawImage(imgMapsPontonBE, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'green':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'blue': ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'brown':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'white':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
 							}
 							break;
 						case 2:   
