@@ -2024,9 +2024,9 @@ function canvasMoveMouse(evt){
 							case 'beige':imgGhost.src='newimg/ponton_right_blue_shadow.png';imgMouse.src = 'newimg/ponton_right_blue.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
-							ctx.drawImage(imgGhost, x-(45+scale)*2, y-(45+scale), (45+scale)*5, (45+scale)*3);
+							ctx.drawImage(imgGhost, x-(45+scale)*2, y, (45+scale)*5, (45+scale)*3);
 						}
-						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*3, evt.offsetY-(45+scale), (45+scale)*5, (45+scale)*3);
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*2, evt.offsetY-(45+scale), (45+scale)*5, (45+scale)*3);
 						break;
 				} 
 				break;
