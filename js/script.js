@@ -16,7 +16,10 @@ var imgMapsPontonG=new Image();
 var imgMapsPontonGR=new Image();
 var imgMapsPontonW=new Image();
 var imgMapsPontonBE=new Image();
+var imgMapsSkhodnyaBLeft=new Image();
+var imgMapsSkhodnyaBDown=new Image();
 var imgMapsSkhodnyaBRight=new Image();
+var imgMapsSkhodnyaBUp=new Image();
 var imgMapsSkhodnyaB=new Image();
 var imgMapsSkhodnyaG=new Image();
 var imgMapsSkhodnyaGR=new Image();
@@ -172,6 +175,9 @@ function init(){
         	});
         }
     } 
+    imgMapsSkhodnyaBLeft.src='newimg/gangway_blue_left.png';
+    imgMapsSkhodnyaBDown.src='newimg/gangway_blue_down.png';
+    imgMapsSkhodnyaBUp.src='newimg/gangway_blue_up.png';
     imgMapsSkhodnyaBRight.src='newimg/gangway_blue_right.png';
     imgMapsPontonBRight.src = 'newimg/ponton_right_blue.png';
     imgMapsPontonBDown.src = 'newimg/ponton_down_blue.png';
@@ -2038,74 +2044,50 @@ function canvasMoveMouse(evt){
 				switch (direction){
 					case 0:
 						switch (color){
-							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
-							case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
-							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
-							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
-							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+							case 'green':imgGhost.src='newimg/gangway_blue_up_shadow.png';imgMouse.src = 'newimg/gangway_blue_up.png';break;
+							case 'blue' :imgGhost.src='newimg/gangway_blue_up_shadow.png';imgMouse.src = 'newimg/gangway_blue_up.png';break;
+							case 'brown':imgGhost.src='newimg/gangway_blue_up_shadow.png';imgMouse.src = 'newimg/gangway_blue_up.png';break;
+							case 'white':imgGhost.src='newimg/gangway_blue_up_shadow.png';imgMouse.src = 'newimg/gangway_blue_up.png';break;
+							case 'beige':imgGhost.src='newimg/gangway_blue_up_shadow.png';imgMouse.src = 'newimg/gangway_blue_up.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
-							ctx.save();
-							ctx.translate(x,y);
-							ctx.rotate(0*Math.PI/180);
-							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-							ctx.restore();
+							ctx.drawImage(imgGhost, x-(45+scale), y-(45+scale)*2, (45+scale)*3, (45+scale)*5);
 						}
-						ctx.save();
-						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-						ctx.rotate(0*Math.PI/180);
-						ctx.drawImage(imgMouse, 0-(45+scale)*3, 0-(45+scale)*6, (45+scale)*2, (45+scale)*4);
-						ctx.restore();
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*2, evt.offsetY-(45+scale)*2, (45+scale)*3, (45+scale)*5);
 						break;
 					case 2:
 						switch (color){
-							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
-							case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
-							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
-							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
-							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+							case 'green':imgGhost.src='newimg/gangway_blue_down_shadow.png';imgMouse.src = 'newimg/gangway_blue_down.png';break;
+							case 'blue' :imgGhost.src='newimg/gangway_blue_down_shadow.png';imgMouse.src = 'newimg/gangway_blue_down.png';break;
+							case 'brown':imgGhost.src='newimg/gangway_blue_down_shadow.png';imgMouse.src = 'newimg/gangway_blue_down.png';break;
+							case 'white':imgGhost.src='newimg/gangway_blue_down_shadow.png';imgMouse.src = 'newimg/gangway_blue_down.png';break;
+							case 'beige':imgGhost.src='newimg/gangway_blue_down_shadow.png';imgMouse.src = 'newimg/gangway_blue_down.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
-							ctx.save();
-							ctx.translate(x,y);
-							ctx.rotate(180*Math.PI/180);
-							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-							ctx.restore();
+							ctx.drawImage(imgGhost, x-(45+scale), y-(45+scale)*2, (45+scale)*3, (45+scale)*5);
 						}
-						ctx.save();
-						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-						ctx.rotate(180*Math.PI/180);
-						ctx.drawImage(imgMouse, 0+(45+scale), 0+(45+scale)*2, (45+scale)*2, (45+scale)*4);
-						ctx.restore();
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*2, evt.offsetY-(45+scale)*2, (45+scale)*3, (45+scale)*5);
 						break;
 					case 1:
 						switch (color){
-							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
-							case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
-							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
-							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
-							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+							case 'green':imgGhost.src='newimg/gangway_blue_left_shadow.png';imgMouse.src = 'newimg/gangway_blue_left.png';break;
+							case 'blue' :imgGhost.src='newimg/gangway_blue_left_shadow.png';imgMouse.src = 'newimg/gangway_blue_left.png';break;
+							case 'brown':imgGhost.src='newimg/gangway_blue_left_shadow.png';imgMouse.src = 'newimg/gangway_blue_left.png';break;
+							case 'white':imgGhost.src='newimg/gangway_blue_left_shadow.png';imgMouse.src = 'newimg/gangway_blue_left.png';break;
+							case 'beige':imgGhost.src='newimg/gangway_blue_left_shadow.png';imgMouse.src =  'newimg/gangway_blue_left.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
-							ctx.save();
-							ctx.translate(x,y);
-							ctx.rotate(270*Math.PI/180);
-							ctx.drawImage(imgGhost, 0-(45+scale), 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-							ctx.restore();
+							ctx.drawImage(imgGhost, x-(45+scale)*2, y-(45+scale), (45+scale)*5, (45+scale)*3);
 						}
-						ctx.save();
-						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-						ctx.rotate(270*Math.PI/180);
-						ctx.drawImage(imgMouse, 0+(45+scale)*3,0-(45+scale)*4, (45+scale)*2, (45+scale)*4);
-						ctx.restore();
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*2, evt.offsetY-(45+scale), (45+scale)*5, (45+scale)*3);
 						break;
 					case 3:
 						switch (color){
-							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+							case 'green':imgGhost.src='newimg/gangway_blue_right_shadow.png';imgMouse.src = 'newimg/gangway_blue_right.png';break;
 							case 'blue' :imgGhost.src='newimg/gangway_blue_right_shadow.png';imgMouse.src = 'newimg/gangway_blue_right.png';break;
-							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
-							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
-							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+							case 'brown':imgGhost.src='newimg/gangway_blue_right_shadow.png';imgMouse.src = 'newimg/gangway_blue_right.png';break;
+							case 'white':imgGhost.src='newimg/gangway_blue_right_shadow.png';imgMouse.src = 'newimg/gangway_blue_right.png';break;
+							case 'beige':imgGhost.src='newimg/gangway_blue_right_shadow.png';imgMouse.src = 'newimg/gangway_blue_right.png';break;
 						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
 							ctx.drawImage(imgGhost, x-(45+scale)*2, y, (45+scale)*5, (45+scale)*3);
@@ -4850,49 +4832,81 @@ function draw(f=false){
 								case 'beige':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
 							}
 							break;
-						case 2:   
-							ctx.rotate(0*Math.PI/180);
-							switch (maps[i][j].color){
-								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE, 0-(45+scale)*2, 0-(45+scale)*4, (45+scale)*2, (45+scale)*4);break;
-							}
-							break;
 						case -2:  
-							ctx.rotate(180*Math.PI/180);
 							switch (maps[i][j].color){
-								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0, 0, (45+scale)*2, (45+scale)*4);break;
-								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0, 0, (45+scale)*2, (45+scale)*4);break;
-							}
-							break;
-						case 20:   
-							switch (maps[i][j].color){
-								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'blue' :ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
-								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'green':ctx.drawImage(imgMapsSkhodnyaBDown, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaBDown, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaBDown, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaBDown, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBDown, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
 							}
 							break;
 						case -20: 
-							ctx.rotate(270*Math.PI/180);
 							switch (maps[i][j].color){
-								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0+(45+scale)*2, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'green':ctx.drawImage(imgMapsSkhodnyaBLeft, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaBLeft, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaBLeft, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaBLeft, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBLeft, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
 							}
 							break;	
 					}
 					//if(maps[i][j].code!=0){
 					//	ctx.restore();
 					//}
+				}
+			}
+		}
+		for(var i=0;i<100;i++){
+			for(var j=99;j>=0;j--){
+				if((i>=0)&&(j>=0)&&(i<200)&&(j<200)){
+					//if(maps[i][j].code!=0){
+					//	ctx.save();
+					//	ctx.translate(sizeX*j+((45+scale)*4/2),sizeY*i+((45+scale)*8/2));
+					//}
+					switch(maps[i][j].code){
+						case 11:break;
+						case 1:case -1: 
+							//ctx.rotate(180*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'blue': ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'brown':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'white':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBDown , sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+							}
+							
+							break;
+						case 10:case -10: 
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'blue': ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'brown':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'white':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'beige':ctx.drawImage(imgMapsPontonBRight ,sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+							}
+							break;
+
+						case 2:   
+							ctx.rotate(0*Math.PI/180);
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaBUp, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaBUp, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaBUp, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaBUp, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBUp, sizeX*j, sizeY*i, (45+scale)*3, (45+scale)*5);break;
+							}
+							break;
+						case 20:   
+							switch (maps[i][j].color){
+								case 'green':ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'brown':ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'white':ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+								case 'beige':ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
+							}
+							break;
+					}
 				}
 			}
 		}
