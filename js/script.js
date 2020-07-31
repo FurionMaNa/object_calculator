@@ -16,6 +16,7 @@ var imgMapsPontonG=new Image();
 var imgMapsPontonGR=new Image();
 var imgMapsPontonW=new Image();
 var imgMapsPontonBE=new Image();
+var imgMapsSkhodnyaBRight=new Image();
 var imgMapsSkhodnyaB=new Image();
 var imgMapsSkhodnyaG=new Image();
 var imgMapsSkhodnyaGR=new Image();
@@ -171,6 +172,7 @@ function init(){
         	});
         }
     } 
+    imgMapsSkhodnyaBRight.src='newimg/gangway_blue_right.png';
     imgMapsPontonBRight.src = 'newimg/ponton_right_blue.png';
     imgMapsPontonBDown.src = 'newimg/ponton_down_blue.png';
 	imgMapsBench.src= 'img/bench.png';
@@ -2032,15 +2034,16 @@ function canvasMoveMouse(evt){
 				break;
 			case 2:
 				
-				switch (color){
-					case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
-					case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
-					case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
-					case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
-					case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
-				}
+				
 				switch (direction){
 					case 0:
+						switch (color){
+							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+							case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
+							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
+							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
+							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
 							ctx.save();
 							ctx.translate(x,y);
@@ -2055,6 +2058,13 @@ function canvasMoveMouse(evt){
 						ctx.restore();
 						break;
 					case 2:
+						switch (color){
+							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+							case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
+							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
+							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
+							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
 							ctx.save();
 							ctx.translate(x,y);
@@ -2069,6 +2079,13 @@ function canvasMoveMouse(evt){
 						ctx.restore();
 						break;
 					case 1:
+						switch (color){
+							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+							case 'blue' :imgGhost.src='img/newimg/gangway_blue_shadow.png';imgMouse.src = 'img/newimg/gangway_blue.png';break;
+							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
+							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
+							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
+						}
 						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
 							ctx.save();
 							ctx.translate(x,y);
@@ -2083,18 +2100,17 @@ function canvasMoveMouse(evt){
 						ctx.restore();
 						break;
 					case 3:
-						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
-							ctx.save();
-							ctx.translate(x,y);
-							ctx.rotate(90*Math.PI/180);
-							ctx.drawImage(imgGhost, 0, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);
-							ctx.restore();
+						switch (color){
+							case 'green':imgGhost.src='img/newimg/gangway_green_shadow.png';imgMouse.src = 'img/newimg/gangway_green.png';break;
+							case 'blue' :imgGhost.src='newimg/gangway_blue_right_shadow.png';imgMouse.src = 'newimg/gangway_blue_right.png';break;
+							case 'brown':imgGhost.src='img/newimg/gangway_grow_shadow.png';imgMouse.src = 'img/newimg/ganway_grow.png';break;
+							case 'white':imgGhost.src='img/newimg/gangway_white_shadow.png';imgMouse.src = 'img/newimg/gangway_white.png';break;
+							case 'beige':imgGhost.src='img/newimg/gangway_gray_shadow.png';imgMouse.src = 'img/newimg/gangway_gr.png';break;
 						}
-						ctx.save();
-						ctx.translate(evt.offsetX+((45+scale)*4/2),evt.offsetY+((45+scale)*8/2));
-						ctx.rotate(90*Math.PI/180);
-						ctx.drawImage(imgMouse, 0-(45+scale)*5, 0, (45+scale)*2, (45+scale)*4);
-						ctx.restore();
+						if(isArrange(x/(45+scale),y/(45+scale),model,direction)){
+							ctx.drawImage(imgGhost, x-(45+scale)*2, y, (45+scale)*5, (45+scale)*3);
+						}
+						ctx.drawImage(imgMouse, evt.offsetX-(45+scale)*2, evt.offsetY-(45+scale), (45+scale)*5, (45+scale)*3);
 						break;
 				} 
 				break;
@@ -4855,10 +4871,9 @@ function draw(f=false){
 							}
 							break;
 						case 20:   
-							ctx.rotate(90*Math.PI/180);
 							switch (maps[i][j].color){
 								case 'green':ctx.drawImage(imgMapsSkhodnyaG, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
-								case 'blue' :ctx.drawImage(imgMapsSkhodnyaB, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
+								case 'blue' :ctx.drawImage(imgMapsSkhodnyaBRight, sizeX*j, sizeY*i, (45+scale)*5, (45+scale)*3);break;
 								case 'brown':ctx.drawImage(imgMapsSkhodnyaGR,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 								case 'white':ctx.drawImage(imgMapsSkhodnyaW, 0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
 								case 'beige':ctx.drawImage(imgMapsSkhodnyaBE,0-(45+scale)*4, 0-(45+scale)*2, (45+scale)*2, (45+scale)*4);break;
