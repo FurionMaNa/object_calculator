@@ -4784,7 +4784,7 @@ function draw(f=false){
 			for(var j=0;j<100;j++){
 				if(visibleWeb){
 					ctx.beginPath();
-					ctx.strokeStyle = "#FFFFFF";
+					ctx.strokeStyle = "#87CEFA";
 					ctx.strokeRect(sizeX*(j), sizeY*(i), sizeX, sizeY); 
 					ctx.stroke(); 
 				}
@@ -4795,7 +4795,7 @@ function draw(f=false){
 			for(var j=0;j<100;j++){
 				if(visibleWeb){
 					ctx.beginPath();
-					ctx.strokeStyle = "#FFFFFF";
+					ctx.strokeStyle = "#87CEFA";
 					ctx.strokeRect(sizeX*j, sizeY*i, sizeX, sizeY); 
 					ctx.stroke(); 
 				}

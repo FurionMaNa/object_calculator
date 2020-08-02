@@ -185,7 +185,9 @@ html, body{
     
          
     #main{
-        background:#97aebe;
+        background-image: url('background.jpg');
+        background-size: cover;
+        /*background:#97aebe;*/
     }
     ::-webkit-scrollbar-button {
         background-image:url('');
